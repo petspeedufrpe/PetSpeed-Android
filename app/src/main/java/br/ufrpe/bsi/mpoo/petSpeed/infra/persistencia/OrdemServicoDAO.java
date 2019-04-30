@@ -1,9 +1,10 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.persistencia;
 
-import com.bsi.mpoo.petspeed.dominio.OrdemServico;
-import com.bsi.mpoo.petspeed.infra.DBHelper;
 
 import java.util.List;
+
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.OrdemServico;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.DBHelper;
 
 public class OrdemServicoDAO {
 

@@ -1,11 +1,12 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.persistencia;
 
-import com.bsi.mpoo.petspeed.dominio.Animal;
-import com.bsi.mpoo.petspeed.dominio.Cliente;
-import com.bsi.mpoo.petspeed.dominio.Endereco;
-import com.bsi.mpoo.petspeed.infra.DBHelper;
 
 import java.util.List;
+
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Animal;
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Cliente;
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Endereco;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.DBHelper;
 
 public class ClienteDAO {
 

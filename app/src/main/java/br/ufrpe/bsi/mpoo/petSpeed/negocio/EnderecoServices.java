@@ -1,7 +1,7 @@
 package br.ufrpe.bsi.mpoo.petSpeed.negocio;
 
-import com.bsi.mpoo.petspeed.dominio.Endereco;
-import com.bsi.mpoo.petspeed.infra.persistencia.EnderecoDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Endereco;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.persistencia.EnderecoDAO;
 
 public class EnderecoServices {
 

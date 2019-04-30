@@ -1,11 +1,12 @@
 package br.ufrpe.bsi.mpoo.petSpeed.negocio;
 
-import com.bsi.mpoo.petspeed.dominio.Medico;
-import com.bsi.mpoo.petspeed.infra.persistencia.ClinicaDAO;
-import com.bsi.mpoo.petspeed.infra.persistencia.EnderecoDAO;
-import com.bsi.mpoo.petspeed.infra.persistencia.MedicoDAO;
 
 import java.util.List;
+
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Medico;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.persistencia.ClinicaDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.persistencia.EnderecoDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.persistencia.MedicoDAO;
 
 public class ClinicaServices {
 

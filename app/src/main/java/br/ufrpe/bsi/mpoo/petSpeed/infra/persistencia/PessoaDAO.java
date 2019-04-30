@@ -1,6 +1,6 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.persistencia;
 
-import com.bsi.mpoo.petspeed.infra.DBHelper;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.DBHelper;
 
 public class PessoaDAO {
 

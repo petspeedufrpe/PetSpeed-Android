@@ -1,16 +1,17 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.persistencia;
 
-import com.bsi.mpoo.petspeed.dominio.Animal;
-import com.bsi.mpoo.petspeed.dominio.OrdemServico;
-import com.bsi.mpoo.petspeed.infra.DBHelper;
 
 import java.util.List;
+
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Animal;
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.OrdemServico;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.DBHelper;
 
 public class AnimalDAO {
 
 	private DBHelper db;
 
-	public void cadastraAnimal() {
+	public void cadastraAnimal(Animal animal) {
 
 	}
 
