@@ -16,6 +16,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_ID_ANIMAL = "ID";
     public static final String COL_NOME_ANIMAL = "NOME";
     public static final String COL_RACA_ANIMAL = "RACA";
+    public static final String COL_FOTO_ANIMAL = "FOTO";
     public static final String COL_HISTORICO = "HISTORICO";
     // TABELA MEDICO:
     public static final String TABELA_MEDICO = "TB_MEDICO";
@@ -65,13 +66,18 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_ANIMAL_OS = "ANIMAL";
     public static final String COL_DESCRICAO_OS = "DESCRICAO";
     public static final String COL_PRIORIDADE_OS = "PRIORIDADE";
+    // TABELA TRIAGEM:
+    public static final String TABELA_TRIAGEM = "TB_TRIAGEM";
+    public static final String COL_ID_TRIAGEM = "ID";
+    public static final String COL_SINTOMAS_TRIAGEM = "SINTOMAS";
+    public static final String COL_OUTROS_TRIAGEM = "OUTROS";
 
 
 
 
     private static final String[] TABELAS = {
             TABELA_ANIMAL, TABELA_CLIENTE, TABELA_CLINICA,
-            TABELA_ENDERECO, TABELA_MEDICO, TABELA_OS, TABELA_PESSOA
+            TABELA_ENDERECO, TABELA_MEDICO, TABELA_OS, TABELA_PESSOA, TABELA_TRIAGEM
     };
 
     @Override
@@ -83,6 +89,7 @@ public class DBHelper extends SQLiteOpenHelper {
         createTabelaEndereco(db);
         createTabelaCliente(db);
         createTabelaOS(db);
+        createTabelaTriagem(db);
 
     }
 
@@ -93,10 +100,11 @@ public class DBHelper extends SQLiteOpenHelper {
                         "  %3$s TEXT NOT NULL, " +
                         "  %4$s TEXT NOT NULL " +
                         " %5$s TEXT NOT NULL" +
-                        "  %6$s TEXT NOT NULL " +
+                        "  %6$s BLOB NOT NULL " +
+                        "  %7$s TEXT NOT NULL " +
                         ");";
         sqlTbAnimal = String.format(sqlTbAnimal,
-                TABELA_ANIMAL, COL_ID_ANIMAL, COL_NOME_ANIMAL, COL_RACA_ANIMAL,COL_HISTORICO);
+                TABELA_ANIMAL, COL_ID_ANIMAL, COL_NOME_ANIMAL, COL_RACA_ANIMAL, COL_FOTO_ANIMAL,COL_HISTORICO);
         db.execSQL(sqlTbAnimal);
     }
 
@@ -198,6 +206,18 @@ public class DBHelper extends SQLiteOpenHelper {
                 TABELA_OS, COL_ID_OS, COL_MEDICO_OS, COL_TIRAGEM_OS, COL_CLIENTE_OS, COL_ANIMAL_OS,
                 COL_DESCRICAO_OS, COL_PRIORIDADE_OS);
         db.execSQL(sqlTbOS);
+    }
+
+    private void createTabelaTriagem(SQLiteDatabase db) {
+        String sqlTbTriagem =
+                "CREATE TABLE %1$s ( "  +
+                        "  %2$s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "  %3$s TEXT NOT NULL, " +
+                        "  %4$s TEXT NOT NULL " +
+                        ");";
+        sqlTbTriagem = String.format(sqlTbTriagem,
+                TABELA_PESSOA, COL_SINTOMAS_TRIAGEM, COL_OUTROS_TRIAGEM);
+        db.execSQL(sqlTbTriagem);
     }
 
 
