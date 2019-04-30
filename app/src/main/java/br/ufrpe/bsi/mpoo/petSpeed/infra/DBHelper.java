@@ -5,9 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
-    DBHelper(Context context) {
-        super(context, "/mnt/sdcard/petspeed.db", null, 0);
-    }
     private static final String NOME_DB = "petspeed.db";
     private static final int VERSAO = 1;
 
@@ -72,7 +69,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_SINTOMAS_TRIAGEM = "SINTOMAS";
     public static final String COL_OUTROS_TRIAGEM = "OUTROS";
 
-
+    public DBHelper(Context context) {
+        super(context, "mnt/sdcard/petspeed.db", null, 0);
+    }
 
 
     private static final String[] TABELAS = {
@@ -238,4 +237,15 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.execSQL(dropTables.toString());
     }
+
+    protected SQLiteDatabase getReadable(){
+        return this.getReadableDatabase();
+    }
+
+    protected SQLiteDatabase getWritable() {
+        return this.getWritableDatabase();
+    }
+
+
+
 }

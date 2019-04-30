@@ -4,6 +4,6 @@ public enum Prioridade{
 
 	ALTA,
 
-	BAIXA;
+	BAIXA
 
 }

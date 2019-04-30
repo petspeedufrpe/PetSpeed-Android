@@ -1,6 +1,8 @@
 package br.ufrpe.bsi.mpoo.petSpeed.negocio;
 
 import br.ufrpe.bsi.mpoo.petSpeed.dominio.Endereco;
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Medico;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.persistencia.ClinicaDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.persistencia.EnderecoDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.persistencia.MedicoDAO;
 
@@ -10,7 +12,12 @@ public class MedicoServices {
 
 	private EnderecoDAO enderecoDAO;
 
-	public void cadastraMedico() {
+	private ClinicaDAO clinicaDAO;
+
+
+	public void cadastraMedico(Medico medico) {
+
+		
 
 	}
 
