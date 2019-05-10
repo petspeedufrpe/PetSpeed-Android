@@ -19,13 +19,10 @@ public class MedicoDAO {
 	public long cadastraMedico(Medico medico, String idEndereco, String idDadosPessoais, String clinicas) {
 		SQLiteDatabase dbWrite = db.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put(DBHelper.COL_MEDICO_EMAIL, medico.getEmail());
-		values.put(DBHelper.COL_MEDICO_SENHA, medico.getSenha());
 		values.put(DBHelper.COL_MEDICO_AVALIACAO, medico.getAvaliacao());
 		values.put(DBHelper.COL_MEDICO_CRMV,medico.getCrmv());
 		values.put(DBHelper.COL_MEDICO_ENDERECO, idEndereco);
 		values.put(DBHelper.COL_MEDICO_DADOS_PESSOAIS, idDadosPessoais);
-		values.put(DBHelper.COL_MEDICO_CLINICAS, clinicas);
 		long res = dbWrite.insert(DBHelper.TABELA_MEDICO, null, values);
 		db.close();
 		return res;
