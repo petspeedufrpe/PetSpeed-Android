@@ -12,21 +12,18 @@ public class MedicoDAO {
 
 	private DBHelper db;
 
-	public MedicoDAO(DBHelper db) {
-		this.db = db;
-	}
 
-	public long cadastraMedico(Medico medico, String idEndereco, String idDadosPessoais, String clinicas) {
+	public void cadastraMedico(Medico medico, long idUsuario, long idClinica) {
 		SQLiteDatabase dbWrite = db.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(DBHelper.COL_MEDICO_AVALIACAO, medico.getAvaliacao());
 		values.put(DBHelper.COL_MEDICO_CRMV,medico.getCrmv());
-		values.put(DBHelper.COL_MEDICO_ENDERECO, idEndereco);
-		values.put(DBHelper.COL_MEDICO_DADOS_PESSOAIS, idDadosPessoais);
-		long res = dbWrite.insert(DBHelper.TABELA_MEDICO, null, values);
+		values.put(DBHelper.COL_MEDICO_ENDERECO,medico.getDadosPessoais().getEndereco().getId());
+		values.put(DBHelper.COL_MEDICO_DADOS_PESSOAIS, medico.getDadosPessoais().getId());
+		values.put(DBHelper.COL_MEDICO_FK_USUARIO, idUsuario);
+		values.put(DBHelper.COL_MEDICO_FK_CLINICA, idClinica);
+		dbWrite.insert(DBHelper.TABELA_MEDICO, null, values);
 		db.close();
-		return res;
-
 	}
 
 	public void deletaMedico() {

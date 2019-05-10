@@ -4,7 +4,6 @@ import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petSpeed.clinica.dominio.Clinica;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 
 public class Medico {
 
@@ -18,12 +17,11 @@ public class Medico {
 
 	private String crmv;
 
-	private Endereco endereco;
+	private Usuario usuario;
 
 	private Pessoa dadosPessoais;
 
 	private List<Clinica> clinicas;
-
 
 
 	public long getId() {
@@ -66,12 +64,13 @@ public class Medico {
 		this.crmv = crmv;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+
+	public long getUsuario() {
+		return usuario;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public Pessoa getDadosPessoais() {
