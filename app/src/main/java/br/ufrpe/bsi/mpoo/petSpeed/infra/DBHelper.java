@@ -6,79 +6,79 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String NOME_DB = "petspeed.db";
-    private static final int VERSAO = 1;
+    private static final int VERSAO = 5;
 
     // TABELA ANIMAL:
     public static final String TABELA_ANIMAL = "TB_ANIMAL";
-    public static final String COL_ID_ANIMAL = "ID";
-    public static final String COL_NOME_ANIMAL = "NOME";
-    public static final String COL_RACA_ANIMAL = "RACA";
-	public static final String COL_PESO_ANIMAL = "PESO";
-	public static final String COL_IDADE_ANIMAL = "IDADE";
-	public static final String COL_FOTO_ANIMAL = "FOTO";
-    public static final String COL_HISTORICO_ANIMAL = "HISTORICO";
+    public static final String COL_ANIMAL_ID = "ID";
+    public static final String COL_ANIMAL_NOME = "NOME";
+    public static final String COL_ANIMAL_RACA = "RACA";
+	public static final String COL_ANIMAL_PESO = "PESO";
+	public static final String COL_ANIMAL_IDADE = "IDADE";
+	public static final String COL_ANIMAL_FOTO = "FOTO";
     // TABELA MEDICO:
     public static final String TABELA_MEDICO = "TB_MEDICO";
-    public static final String COL_ID_MEDICO = "ID";
-    public static final String COL_EMAIL_MEDICO = "EMAIL";
-    public static final String COL_SENHA_MEDICO = "SENHA";
-    public static final String COL_AVALIACAO_MEDICO = "AVALIACAO";
-    public static final String COL_CRMV_MEDICO = "CRMV";
-    public static final String COL_ENDERECO_MEDICO = "ENDERECO";
-    public static final String COL_DADOS_PESSOAIS_MEDICO = "DADOS_PESSOAIS";
-    public static final String COL_CLINICAS_MEDICO = "CLINICAS";
+    public static final String COL_MEDICO_ID = "ID";
+    public static final String COL_MEDICO_AVALIACAO = "AVALIACAO";
+    public static final String COL_MEDICO_CRMV = "CRMV";
+    public static final String COL_MEDICO_ENDERECO = "ENDERECO";
+    public static final String COL_MEDICO_DADOS_PESSOAIS = "DADOS_PESSOAIS";
+    public static final String COL_MEDICO_FK_USUARIO = "FK_USUARIO";
+    public static final String COL_MEDICO_FK_CLINICA = "FK_CLINICA";
     // TABELA CLINICA:
     public static final String TABELA_CLINICA = "TB_CLINICA";
-    public static final String COL_ID_CLINICA = "ID";
-    public static final String COL_EMAIL_CLINICA = "EMAIL";
-    public static final String COL_SENHA_CLINICA = "SENHA";
-    public static final String COL_AVALIACAO_CLINICA = "AVALIACAO";
-    public static final String COL_CRMV_CLINICA = "CRMV";
-    public static final String COL_ENDERECO_CLINICA = "ENDERECO";
-    public static final String COL_MEDICOS_CLINICA = "MEDICOS_CREDENCIADOS";
+    public static final String COL_CLINICA_ID = "ID";
+    public static final String COL_CLINICA_AVALIACAO = "AVALIACAO";
+    public static final String COL_CLINICA_CRMV = "CRMV";
+    public static final String COL_CLINICA_FK_USUARIO = "FK_USUARIO";
+    public static final String COL_CLINICA_FK_MEDICO = "FK_USUARIO";
     // TABELA PESSOA:
     public static final String TABELA_PESSOA = "TB_PESSOA";
-    public static final String COL_ID_PESSOA = "ID";
-    public static final String COL_NOME_PESSOA = "NOME";
-    public static final String COL_CPF_PESSOA = "CPF";
+    public static final String COL_PESSOA_ID = "ID";
+    public static final String COL_PESSOA_NOME = "NOME";
+    public static final String COL_PESSOA_CPF = "CPF";
     // TABELA ENDERECO:
     public static final String TABELA_ENDERECO = "TB_ENDERECO";
-    public static final String COL_ID_ENDERECO = "ID";
-    public static final String COL_CEP_ENDERECO = "CEP";
-    public static final String COL_NUMERO_ENDERECO = "NUMERO";
-    public static final String COL_COMPLEMENTO_ENDERECO = "COMPLEMENTO";
+    public static final String COL_ENDERECO_ID = "ID";
+    public static final String COL_ENDERECO_CEP = "CEP";
+    public static final String COL_ENDERECO_NUMERO = "NUMERO";
+    public static final String COL_ENDERECO_COMPLEMENTO = "COMPLEMENTO";
+    public static final String COL_ENDERECO_FK_OWNER = "FK_OWNER";
     // TABELA CLIENTE:
     public static final String TABELA_CLIENTE = "TB_CLIENTE";
-    public static final String COL_ID_CLIENTE= "ID";
-    public static final String COL_EMAIL_CLIENTE = "EMAIL";
-    public static final String COL_SENHA_CLIENTE = "SENHA";
-    public static final String COL_AVALIACAO_CLIENTE = "AVALIACAO";
-    public static final String COL_ENDERECO_CLIENTE = "ENDERECO";
-    public static final String COL_DADOS_PESSOAIS_CLIENTE = "DADOS_PESSOAIS";
-    public static final String COL_ANIMAIS_CLIENTE= "ANIMAIS";
+    public static final String COL_CLIENTE_ID = "ID";
+    public static final String COL_CLIENTE_AVALIACAO = "AVALIACAO";
+    public static final String COL_CLIENTE_ENDERECO = "ENDERECO";
+    public static final String COL_CLIENTE_DADOS_ESSOAIS = "DADOS_PESSOAIS";
+    public static final String COL_CLIENTE_FK_USUARIO = "FK_USUARIO";
     // TABELA OS:
     public static final String TABELA_OS = "TB_OS";
-    public static final String COL_ID_OS= "ID";
-    public static final String COL_MEDICO_OS = "MEDICO";
-    public static final String COL_TIRAGEM_OS = "TRIAGEM";
-    public static final String COL_CLIENTE_OS = "CLIENTE";
-    public static final String COL_ANIMAL_OS = "ANIMAL";
-    public static final String COL_DESCRICAO_OS = "DESCRICAO";
-    public static final String COL_PRIORIDADE_OS = "PRIORIDADE";
+    public static final String COL_OS_ID = "ID";
+    public static final String COL_OS_MEDICO = "MEDICO";
+    public static final String COL_OS_TRIAGEM = "TRIAGEM";
+    public static final String COL_OS_CLIENTE = "CLIENTE";
+    public static final String COL_OS_ANIMAL = "ANIMAL";
+    public static final String COL_OS_DESCICAO = "DESCRICAO";
+    public static final String COL_OS_PRIORIDADE = "PRIORIDADE";
+    //TABELA USUARIO:
+    public static final String TABELA_USUARIO = "TB_USUARIO";
+    public static final String COL_USUARIO_ID = "ID";
+    public static final String COL_USUARIO_EMAIL = "EMAIL";
+    public static final String COL_USUARIO_SENHA = "SENHA";
     // TABELA TRIAGEM:
     public static final String TABELA_TRIAGEM = "TB_TRIAGEM";
-    public static final String COL_ID_TRIAGEM = "ID";
-    public static final String COL_SINTOMAS_TRIAGEM = "SINTOMAS";
-    public static final String COL_OUTROS_TRIAGEM = "OUTROS";
+    public static final String COL_TRIAGEM_ID = "ID";
+    public static final String COL_TRIAGEM_SINTOMAS = "SINTOMAS";
+    public static final String COL_TRIAGEM_OUTROS = "OUTROS";
 
     public DBHelper(Context context) {
-        super(context, "mnt/sdcard/petspeed.db", null, 0);
+        super(context, "petspeed.db", null, 0);
     }
 
 
     private static final String[] TABELAS = {
-            TABELA_ANIMAL, TABELA_CLIENTE, TABELA_CLINICA,
-            TABELA_ENDERECO, TABELA_MEDICO, TABELA_OS, TABELA_PESSOA, TABELA_TRIAGEM
+            TABELA_ANIMAL, TABELA_CLIENTE, TABELA_CLINICA, TABELA_ENDERECO,
+            TABELA_MEDICO, TABELA_OS, TABELA_PESSOA, TABELA_TRIAGEM, TABELA_USUARIO
     };
 
     @Override
@@ -91,6 +91,7 @@ public class DBHelper extends SQLiteOpenHelper {
         createTabelaCliente(db);
         createTabelaOS(db);
         createTabelaTriagem(db);
+        createTabelaUsuario(db);
 
     }
 
@@ -101,15 +102,13 @@ public class DBHelper extends SQLiteOpenHelper {
                         "  %3$s TEXT NOT NULL, " +
                         "  %4$s TEXT NOT NULL " +
                         " %5$s TEXT NOT NULL" +
-                        "  %6$s BLOB NOT NULL " +
+                        "  %6$s TEXT NOT NULL " +
                         "  %7$s TEXT NOT NULL " +
-						"  %8$s TEXT NOT NULL " +
-						"  %9$s TEXT NOT NULL " +
+
 
 						");";
         sqlTbAnimal = String.format(sqlTbAnimal,
-                TABELA_ANIMAL, COL_ID_ANIMAL, COL_NOME_ANIMAL, COL_RACA_ANIMAL, COL_FOTO_ANIMAL,
-				COL_HISTORICO_ANIMAL,COL_IDADE_ANIMAL,COL_PESO_ANIMAL);
+                TABELA_ANIMAL, COL_ANIMAL_ID, COL_ANIMAL_NOME, COL_ANIMAL_RACA, COL_ANIMAL_FOTO,COL_ANIMAL_IDADE,COL_ANIMAL_PESO);
         db.execSQL(sqlTbAnimal);
     }
 
@@ -120,15 +119,13 @@ public class DBHelper extends SQLiteOpenHelper {
                         "  %3$s TEXT NOT NULL, " +
                         "  %4$s TEXT NOT NULL " +
                         " %5$s TEXT NOT NULL" +
-                        " %6$s REAL NOT NULL" +
+                        " %6$s TEXT NOT NULL" +
                         " %7$s TEXT NOT NULL" +
                         " %8$s TEXT NOT NULL" +
-                        " %9$s TEXT NOT NULL" +
-                        " %10$s TEXT NOT NULL" +
                         ");";
         sqlTbMedico = String.format(sqlTbMedico,
-                TABELA_MEDICO, COL_ID_MEDICO, COL_EMAIL_MEDICO, COL_SENHA_MEDICO, COL_AVALIACAO_MEDICO,
-                COL_CRMV_MEDICO, COL_ENDERECO_MEDICO, COL_DADOS_PESSOAIS_MEDICO, COL_CLINICAS_MEDICO);
+                TABELA_MEDICO, COL_MEDICO_ID, COL_MEDICO_AVALIACAO, COL_MEDICO_CRMV,
+                COL_MEDICO_ENDERECO, COL_MEDICO_DADOS_PESSOAIS,COL_MEDICO_FK_CLINICA,COL_MEDICO_FK_USUARIO);
         db.execSQL(sqlTbMedico);
     }
 
@@ -139,14 +136,11 @@ public class DBHelper extends SQLiteOpenHelper {
                         "  %3$s TEXT NOT NULL, " +
                         "  %4$s TEXT NOT NULL " +
                         " %5$s TEXT NOT NULL" +
-                        " %6$s REAL NOT NULL" +
-                        " %7$s TEXT NOT NULL" +
-                        " %8$s TEXT NOT NULL" +
-                        " %9$s TEXT NOT NULL" +
+                        " %6$s TEXT NOT NULL" +
                         ");";
         sqlTbClinica = String.format(sqlTbClinica,
-                TABELA_CLINICA, COL_ID_CLINICA, COL_EMAIL_CLINICA, COL_SENHA_CLINICA, COL_AVALIACAO_CLINICA,
-                COL_CRMV_CLINICA, COL_ENDERECO_CLINICA, COL_MEDICOS_CLINICA);
+                TABELA_CLINICA, COL_CLINICA_ID, COL_CLINICA_AVALIACAO,
+                COL_CLINICA_CRMV,COL_CLINICA_FK_USUARIO,COL_CLINICA_FK_MEDICO);
         db.execSQL(sqlTbClinica);
     }
 
@@ -156,10 +150,9 @@ public class DBHelper extends SQLiteOpenHelper {
                         "  %2$s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "  %3$s TEXT NOT NULL, " +
                         "  %4$s TEXT NOT NULL " +
-                        "  %5$s TEXT NOT NULL " +
                         ");";
         sqlTbPessoa = String.format(sqlTbPessoa,
-                TABELA_PESSOA, COL_ID_PESSOA, COL_NOME_PESSOA, COL_CPF_PESSOA);
+                TABELA_PESSOA, COL_PESSOA_ID, COL_PESSOA_NOME, COL_PESSOA_CPF);
         db.execSQL(sqlTbPessoa);
     }
 
@@ -169,11 +162,12 @@ public class DBHelper extends SQLiteOpenHelper {
                         "  %2$s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "  %3$s TEXT NOT NULL, " +
                         "  %4$s TEXT NOT NULL " +
-                        " %5$s INTEGER NOT NULL" +
+                        " %5$s TEXT NOT NULL" +
                         " %6$s TEXT NOT NULL" +
                         ");";
         sqlTbEndereco = String.format(sqlTbEndereco,
-                TABELA_ENDERECO, COL_ID_ENDERECO, COL_CEP_ENDERECO, COL_NUMERO_ENDERECO, COL_COMPLEMENTO_ENDERECO);
+                TABELA_ENDERECO, COL_ENDERECO_ID, COL_ENDERECO_CEP, COL_ENDERECO_NUMERO,
+                COL_ENDERECO_COMPLEMENTO, COL_ENDERECO_FK_OWNER);
         db.execSQL(sqlTbEndereco);
     }
 
@@ -184,15 +178,24 @@ public class DBHelper extends SQLiteOpenHelper {
                         "  %3$s TEXT NOT NULL, " +
                         "  %4$s TEXT NOT NULL " +
                         " %5$s TEXT NOT NULL" +
-                        " %6$s REAL NOT NULL" +
-                        " %7$s TEXT NOT NULL" +
-                        " %8$s TEXT NOT NULL" +
-                        " %9$s TEXT NOT NULL" +
+                        " %6$s TEXT NOT NULL" +
                         ");";
         sqlTbCliente = String.format(sqlTbCliente,
-                TABELA_CLIENTE, COL_ID_CLIENTE, COL_EMAIL_CLIENTE, COL_SENHA_CLIENTE, COL_AVALIACAO_CLIENTE,
-                COL_ENDERECO_CLIENTE, COL_DADOS_PESSOAIS_CLIENTE, COL_ANIMAIS_CLIENTE);
+                TABELA_CLIENTE, COL_CLIENTE_ID, COL_CLIENTE_AVALIACAO,
+                COL_CLIENTE_ENDERECO, COL_CLIENTE_DADOS_ESSOAIS, COL_CLIENTE_FK_USUARIO);
         db.execSQL(sqlTbCliente);
+    }
+
+    private void createTabelaUsuario(SQLiteDatabase db) {
+        String sqlTbUsuario =
+                "CREATE TABLE %1$s ( "  +
+                        "  %2$s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "  %3$s TEXT NOT NULL, " +
+                        "  %4$s TEXT NOT NULL " +
+                        ");";
+        sqlTbUsuario = String.format(sqlTbUsuario,
+                TABELA_USUARIO, COL_USUARIO_ID, COL_USUARIO_EMAIL,COL_USUARIO_SENHA);
+        db.execSQL(sqlTbUsuario);
     }
 
     private void createTabelaOS(SQLiteDatabase db) {
@@ -205,11 +208,10 @@ public class DBHelper extends SQLiteOpenHelper {
                         " %6$s TEXT NOT NULL" +
                         " %7$s TEXT NOT NULL" +
                         " %8$s TEXT NOT NULL" +
-                        " %9$s TEXT NOT NULL" +
                         ");";
         sqlTbOS = String.format(sqlTbOS,
-                TABELA_OS, COL_ID_OS, COL_MEDICO_OS, COL_TIRAGEM_OS, COL_CLIENTE_OS, COL_ANIMAL_OS,
-                COL_DESCRICAO_OS, COL_PRIORIDADE_OS);
+                TABELA_OS, COL_OS_ID, COL_OS_MEDICO, COL_OS_TRIAGEM, COL_OS_CLIENTE,
+                COL_OS_ANIMAL, COL_OS_DESCICAO, COL_OS_PRIORIDADE);
         db.execSQL(sqlTbOS);
     }
 
@@ -219,10 +221,9 @@ public class DBHelper extends SQLiteOpenHelper {
                         "  %2$s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "  %3$s TEXT NOT NULL, " +
                         "  %4$s TEXT NOT NULL " +
-						"  %6$s TEXT NOT NULL " +
                         ");";
         sqlTbTriagem = String.format(sqlTbTriagem,
-                TABELA_PESSOA, COL_ID_TRIAGEM, COL_SINTOMAS_TRIAGEM, COL_OUTROS_TRIAGEM);
+                TABELA_TRIAGEM, COL_TRIAGEM_ID, COL_TRIAGEM_SINTOMAS, COL_TRIAGEM_OUTROS);
         db.execSQL(sqlTbTriagem);
     }
 
@@ -252,7 +253,5 @@ public class DBHelper extends SQLiteOpenHelper {
     protected SQLiteDatabase getWritable() {
         return this.getWritableDatabase();
     }
-
-
 
 }

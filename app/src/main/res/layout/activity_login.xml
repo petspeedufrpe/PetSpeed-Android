@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_activity_background_gradient"
-    tools:context=".gui.LoginActivity">
+    tools:context=".infra.gui.LoginActivity">
 
     <Button
         android:id="@+id/loginActloginBtn"
