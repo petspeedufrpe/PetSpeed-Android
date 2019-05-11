@@ -1,4 +1,6 @@
-package br.ufrpe.bsi.mpoo.petSpeed.dominio;
+package br.ufrpe.bsi.mpoo.petSpeed.dominio.Pessoa;
+
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Endereco.Endereco;
 
 public class Pessoa {
 
@@ -8,6 +10,7 @@ public class Pessoa {
 
 	private String cpf;
 
+	private Endereco endereco;
 
 
 	public long getId() {
@@ -33,4 +36,8 @@ public class Pessoa {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+
+	public Endereco getEndereco(){ return this.endereco; }
+
+	public void setEndereco(Endereco endereco){ this.endereco = endereco; }
 }

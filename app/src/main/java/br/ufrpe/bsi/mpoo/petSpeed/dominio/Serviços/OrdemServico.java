@@ -1,4 +1,8 @@
-package br.ufrpe.bsi.mpoo.petSpeed.dominio;
+package br.ufrpe.bsi.mpoo.petSpeed.dominio.Serviços;
+
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Cliente.Animal;
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Cliente.Cliente;
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Medico.Medico;
 
 public class OrdemServico {
 

@@ -1,6 +1,9 @@
-package br.ufrpe.bsi.mpoo.petSpeed.dominio;
+package br.ufrpe.bsi.mpoo.petSpeed.dominio.Clinica;
 
 import java.util.List;
+
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Endereco.Endereco;
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Medico.Medico;
 
 public class Clinica {
     private long id;

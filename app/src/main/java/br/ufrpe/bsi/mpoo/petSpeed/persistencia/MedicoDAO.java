@@ -1,12 +1,12 @@
-package br.ufrpe.bsi.mpoo.petSpeed.infra.persistencia;
+package br.ufrpe.bsi.mpoo.petSpeed.persistencia;
 
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
-import br.ufrpe.bsi.mpoo.petSpeed.dominio.Endereco;
-import br.ufrpe.bsi.mpoo.petSpeed.dominio.Medico;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.DBHelper;
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Endereco.Endereco;
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Medico.Medico;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
 
 public class MedicoDAO {
 
@@ -19,8 +19,6 @@ public class MedicoDAO {
 	public long cadastraMedico(Medico medico, String idEndereco, String idDadosPessoais, String clinicas) {
 		SQLiteDatabase dbWrite = db.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put(DBHelper.COL_EMAIL_MEDICO, medico.getEmail());
-		values.put(DBHelper.COL_SENHA_MEDICO, medico.getSenha());
 		values.put(DBHelper.COL_AVALIACAO_MEDICO, medico.getAvaliacao());
 		values.put(DBHelper.COL_CRMV_MEDICO,medico.getCrmv());
 		values.put(DBHelper.COL_ENDERECO_MEDICO, idEndereco);

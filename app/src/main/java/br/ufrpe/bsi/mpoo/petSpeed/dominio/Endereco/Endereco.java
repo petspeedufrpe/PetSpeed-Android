@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.dominio;
+package br.ufrpe.bsi.mpoo.petSpeed.dominio.Endereco;
 
 public class Endereco {
 

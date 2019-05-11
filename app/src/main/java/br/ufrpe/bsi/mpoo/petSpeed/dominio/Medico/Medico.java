@@ -1,8 +1,12 @@
-package br.ufrpe.bsi.mpoo.petSpeed.dominio;
+package br.ufrpe.bsi.mpoo.petSpeed.dominio.Medico;
 
 import java.util.List;
 
-public class Cliente {
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Clinica.Clinica;
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Endereco.Endereco;
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Pessoa.Pessoa;
+
+public class Medico {
 
 	private long id;
 
@@ -12,11 +16,13 @@ public class Cliente {
 
 	private double avaliacao;
 
+	private String crmv;
+
 	private Endereco endereco;
 
 	private Pessoa dadosPessoais;
 
-	private List<Animal> animais;
+	private List<Clinica> clinicas;
 
 
 
@@ -52,6 +58,14 @@ public class Cliente {
 		this.avaliacao = avaliacao;
 	}
 
+	public String getCrmv() {
+		return crmv;
+	}
+
+	public void setCrmv(String crmv) {
+		this.crmv = crmv;
+	}
+
 	public Endereco getEndereco() {
 		return endereco;
 	}
@@ -68,11 +82,11 @@ public class Cliente {
 		this.dadosPessoais = dadosPessoais;
 	}
 
-	public List<Animal> getAnimais() {
-		return animais;
+	public List<Clinica> getClinicas() {
+		return clinicas;
 	}
 
-	public void setAnimais(List<Animal> animais) {
-		this.animais = animais;
+	public void setClinicas(List<Clinica> clinicas) {
+		this.clinicas = clinicas;
 	}
 }

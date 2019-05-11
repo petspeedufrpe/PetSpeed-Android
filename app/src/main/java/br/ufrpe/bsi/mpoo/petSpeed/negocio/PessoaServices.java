@@ -1,7 +1,8 @@
 package br.ufrpe.bsi.mpoo.petSpeed.negocio;
 
 
-import br.ufrpe.bsi.mpoo.petSpeed.infra.persistencia.PessoaDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.dominio.Pessoa.Pessoa;
+import br.ufrpe.bsi.mpoo.petSpeed.persistencia.PessoaDAO;
 
 public class PessoaServices {
 
@@ -11,8 +12,8 @@ public class PessoaServices {
 		return false;
 	}
 
-	public void cadastraPessoa() {
-
+	public void cadastraPessoa(Pessoa pessoa) {
+	//	if (pessoaDAO.getPessoa(pessoa.getId())
 	}
 
 	public void deletaPessoa() {
