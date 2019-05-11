@@ -1,8 +1,9 @@
-package br.ufrpe.bsi.mpoo.petSpeed.infra;
-
-import android.content.Context;
+package br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import br.ufrpe.bsi.mpoo.petSpeed.infra.App.PetSpeedApp;
+
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String NOME_DB = "petspeed.db";
@@ -227,7 +228,16 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(sqlTbTriagem);
     }
 
-
+    private void createTabelaUsuario(SQLiteDatabase db){
+        String sqlTbUsuario =
+                "CREATE TABLE %1$s ( "  +
+                        "  %2$s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "  %3$s TEXT NOT NULL, " +
+                        "  %4$s TEXT NOT NULL " +
+                        ");";
+        sqlTbUsuario = String.format(sqlTbUsuario,TABELA_USUARIO,COL_ID_USUARIO,COL_EMAIL_USUARIO,COL_SENHA_USUARIO);
+        db.execSQL(sqlTbUsuario);
+    }
 
 
     @Override

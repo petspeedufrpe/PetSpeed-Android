@@ -11,8 +11,8 @@ public class PessoaServices {
 		return false;
 	}
 
-	public void cadastraPessoa() {
-
+	public void cadastraPessoa(Pessoa pessoa) {
+	//	if (pessoaDAO.getPessoa(pessoa.getId())
 	}
 
 	public void deletaPessoa() {
