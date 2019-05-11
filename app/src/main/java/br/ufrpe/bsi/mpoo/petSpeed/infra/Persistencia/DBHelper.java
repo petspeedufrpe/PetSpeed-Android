@@ -1,8 +1,9 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import br.ufrpe.bsi.mpoo.petSpeed.infra.App.PetSpeedApp;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
 
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -72,8 +73,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_TRIAGEM_SINTOMAS = "SINTOMAS";
     public static final String COL_TRIAGEM_OUTROS = "OUTROS";
 
-    public DBHelper(Context context) {
-        super(context, "petspeed.db", null, 0);
+    public DBHelper() {
+        super(PetSpeedApp.getContext() , "petspeed.db", null, VERSAO);
     }
 
 
@@ -226,17 +227,6 @@ public class DBHelper extends SQLiteOpenHelper {
         sqlTbTriagem = String.format(sqlTbTriagem,
                 TABELA_TRIAGEM, COL_TRIAGEM_ID, COL_TRIAGEM_SINTOMAS, COL_TRIAGEM_OUTROS);
         db.execSQL(sqlTbTriagem);
-    }
-
-    private void createTabelaUsuario(SQLiteDatabase db){
-        String sqlTbUsuario =
-                "CREATE TABLE %1$s ( "  +
-                        "  %2$s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        "  %3$s TEXT NOT NULL, " +
-                        "  %4$s TEXT NOT NULL " +
-                        ");";
-        sqlTbUsuario = String.format(sqlTbUsuario,TABELA_USUARIO,COL_ID_USUARIO,COL_EMAIL_USUARIO,COL_SENHA_USUARIO);
-        db.execSQL(sqlTbUsuario);
     }
 
 

@@ -12,9 +12,37 @@ public class Animal {
 
 	private String raca;
 
+	private float peso;
+
+	private int idade;
+
+
+	public int getIdade() {
+		return idade;
+	}
+
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+
+
+
 	//private BufferedImage foto;
 
 	private List<OrdemServico> historico;
+
+	public float getPeso() {
+		return peso;
+	}
+
+	public void setPeso(float peso) {
+		this.peso = peso;
+	}
+
+
+
+
+
 
 
 

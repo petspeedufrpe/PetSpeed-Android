@@ -3,10 +3,10 @@ package br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.animal.persistencia.AnimalDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
 
 public class ClienteServices {

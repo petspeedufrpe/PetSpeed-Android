@@ -4,10 +4,9 @@ package br.ufrpe.bsi.mpoo.petSpeed.medico.persistencia;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
+import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.DBHelper;
-
 public class MedicoDAO {
 
 	private DBHelper db;

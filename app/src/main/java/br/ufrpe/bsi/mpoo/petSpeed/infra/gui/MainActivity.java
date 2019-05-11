@@ -1,22 +1,15 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 
-import android.app.ActivityManager;
-import android.service.autofill.UserData;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
-import br.ufrpe.bsi.mpoo.petSpeed.dominio.Cliente.Animal;
-import br.ufrpe.bsi.mpoo.petSpeed.dominio.Cliente.Cliente;
-import br.ufrpe.bsi.mpoo.petSpeed.dominio.Endereco.Endereco;
-import br.ufrpe.bsi.mpoo.petSpeed.dominio.Pessoa.Pessoa;
-import br.ufrpe.bsi.mpoo.petSpeed.dominio.Usuario;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
-import br.ufrpe.bsi.mpoo.petSpeed.persistencia.ClienteDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.persistencia.EnderecoDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.persistencia.PessoaDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.persistencia.UsuarioDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
+import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
 
 public class MainActivity extends AppCompatActivity {
 	private DBHelper dbHelper = new DBHelper();
@@ -66,6 +59,6 @@ public class MainActivity extends AppCompatActivity {
 		ClienteDAO clienteDAO = new ClienteDAO();
 		cliente = clienteDAO.getClienteById((long) 5);
 		//cliente.setDadosUsuario(usuarioDAO.getUsuario("teste@gmail.com"));
-		Toast.makeText(MainActivity.this, String.valueOf(cliente.getDadosUsuario().getId()),Toast.LENGTH_LONG).show();
+		Toast.makeText(MainActivity.this, String.valueOf(cliente.getUsuario().getId()),Toast.LENGTH_LONG).show();
 	}
 }

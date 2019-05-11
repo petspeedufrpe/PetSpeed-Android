@@ -3,8 +3,8 @@ package br.ufrpe.bsi.mpoo.petSpeed.clinica.persistencia;
 
 import java.util.List;
 
+import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.DBHelper;
 
 public class ClinicaDAO {
 
