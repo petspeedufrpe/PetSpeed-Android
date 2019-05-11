@@ -7,6 +7,8 @@ import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.persistencia.MedicoDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
+import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
 
 public class MedicoServices {
 
@@ -22,7 +24,7 @@ public class MedicoServices {
 	public void cadastraMedico(Medico medico, Usuario usuario, Clinica clinica) {
 
 
-		if (usuarioDAO.getUsuario(usuario.getEmail()) != null) {
+		if (usuarioDAO.getUsuarioByEmail(usuario.getEmail()) != null) {
 			throw new AppException("Usuário já possui uma conta de Medico");
 		}
 		medicoDAO.cadastraMedico(medico, usuario.getId(), clinica.getId());
