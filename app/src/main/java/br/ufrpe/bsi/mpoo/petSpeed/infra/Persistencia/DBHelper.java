@@ -8,7 +8,7 @@ import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String NOME_DB = "petspeed.db";
-    private static final int VERSAO = 5;
+    private static final int VERSAO = 6;
 
     // TABELA ANIMAL:
     public static final String TABELA_ANIMAL = "TB_ANIMAL";
@@ -43,6 +43,10 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String TABELA_ENDERECO = "TB_ENDERECO";
     public static final String COL_ENDERECO_ID = "ID";
     public static final String COL_ENDERECO_CEP = "CEP";
+    public static final String COL_ENDERECO_UF = "UF";
+    public static final String COL_ENDERECO_CIDADE = "CIDADE";
+    public static final String COL_ENDERECO_BAIRRO = "BAIRRO";
+    public static final String COL_ENDERECO_LOGRADOURO = "LOGRADOURO";
     public static final String COL_ENDERECO_NUMERO = "NUMERO";
     public static final String COL_ENDERECO_COMPLEMENTO = "COMPLEMENTO";
     public static final String COL_ENDERECO_FK_OWNER = "FK_OWNER";
@@ -56,6 +60,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // TABELA OS:
     public static final String TABELA_OS = "TB_OS";
     public static final String COL_OS_ID = "ID";
+    public static final String COL_OS_PENDENTE = "PENDENTE";
     public static final String COL_OS_MEDICO = "MEDICO";
     public static final String COL_OS_TRIAGEM = "TRIAGEM";
     public static final String COL_OS_CLIENTE = "CLIENTE";
@@ -74,7 +79,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_TRIAGEM_OUTROS = "OUTROS";
 
     public DBHelper() {
-        super(PetSpeedApp.getContext() , "petspeed.db", null, VERSAO);
+        super(PetSpeedApp.getContext() , NOME_DB, null, VERSAO);
     }
 
 
@@ -166,10 +171,15 @@ public class DBHelper extends SQLiteOpenHelper {
                         "  %4$s TEXT NOT NULL " +
                         " %5$s TEXT NOT NULL" +
                         " %6$s TEXT NOT NULL" +
+                        " %7$s TEXT NOT NULL" +
+                        " %8$s TEXT NOT NULL" +
+                        " %9$s TEXT NOT NULL" +
+                        " %10$s TEXT NOT NULL" +
                         ");";
         sqlTbEndereco = String.format(sqlTbEndereco,
                 TABELA_ENDERECO, COL_ENDERECO_ID, COL_ENDERECO_CEP, COL_ENDERECO_NUMERO,
-                COL_ENDERECO_COMPLEMENTO, COL_ENDERECO_FK_OWNER);
+                COL_ENDERECO_COMPLEMENTO,COL_ENDERECO_UF,COL_ENDERECO_BAIRRO,
+                COL_ENDERECO_LOGRADOURO,COL_ENDERECO_CIDADE, COL_ENDERECO_FK_OWNER);
         db.execSQL(sqlTbEndereco);
     }
 
@@ -210,10 +220,11 @@ public class DBHelper extends SQLiteOpenHelper {
                         " %6$s TEXT NOT NULL" +
                         " %7$s TEXT NOT NULL" +
                         " %8$s TEXT NOT NULL" +
+                        " %9$s TEXT NOT NULL" +
                         ");";
         sqlTbOS = String.format(sqlTbOS,
                 TABELA_OS, COL_OS_ID, COL_OS_MEDICO, COL_OS_TRIAGEM, COL_OS_CLIENTE,
-                COL_OS_ANIMAL, COL_OS_DESCICAO, COL_OS_PRIORIDADE);
+                COL_OS_ANIMAL, COL_OS_DESCICAO,COL_OS_PENDENTE, COL_OS_PRIORIDADE);
         db.execSQL(sqlTbOS);
     }
 
