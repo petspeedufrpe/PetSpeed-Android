@@ -1,8 +1,7 @@
-package br.ufrpe.bsi.mpoo.petSpeed.negocio;
+package br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio;
 
 
-import br.ufrpe.bsi.mpoo.petSpeed.dominio.Pessoa.Pessoa;
-import br.ufrpe.bsi.mpoo.petSpeed.persistencia.PessoaDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.PessoaDAO;
 
 public class PessoaServices {
 

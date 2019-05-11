@@ -1,10 +1,10 @@
-package br.ufrpe.bsi.mpoo.petSpeed.negocio;
+package br.ufrpe.bsi.mpoo.petSpeed.medico.negocio;
 
-import br.ufrpe.bsi.mpoo.petSpeed.dominio.Endereco.Endereco;
-import br.ufrpe.bsi.mpoo.petSpeed.dominio.Medico.Medico;
-import br.ufrpe.bsi.mpoo.petSpeed.persistencia.ClinicaDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.persistencia.EnderecoDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.persistencia.MedicoDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
+import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
+import br.ufrpe.bsi.mpoo.petSpeed.clinica.persistencia.ClinicaDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.medico.persistencia.MedicoDAO;
 
 public class MedicoServices {
 

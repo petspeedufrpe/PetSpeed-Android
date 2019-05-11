@@ -1,21 +1,16 @@
-package br.ufrpe.bsi.mpoo.petSpeed.negocio;
+package br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia;
+
 
 import java.util.List;
 
-import br.ufrpe.bsi.mpoo.petSpeed.dominio.Cliente.Animal;
-import br.ufrpe.bsi.mpoo.petSpeed.dominio.Cliente.Cliente;
-import br.ufrpe.bsi.mpoo.petSpeed.dominio.Endereco.Endereco;
-import br.ufrpe.bsi.mpoo.petSpeed.persistencia.AnimalDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.persistencia.ClienteDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.persistencia.EnderecoDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
+import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.DBHelper;
 
-public class ClienteServices {
+public class ClienteDAO {
 
-	private ClienteDAO clienteDAO;
-
-	private EnderecoDAO enderecoDAO;
-
-	private AnimalDAO animalDAO;
+	private DBHelper db;
 
 	public void cadastraCliente() {
 

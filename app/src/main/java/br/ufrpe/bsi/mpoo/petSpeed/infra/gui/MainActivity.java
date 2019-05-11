@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.gui;
+package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 
 import android.app.ActivityManager;
 import android.service.autofill.UserData;

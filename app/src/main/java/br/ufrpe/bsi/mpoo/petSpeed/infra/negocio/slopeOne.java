@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.negocio;
+package br.ufrpe.bsi.mpoo.petSpeed.infra.negocio;
 
 public class slopeOne {
 
