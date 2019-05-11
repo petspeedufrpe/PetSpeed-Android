@@ -14,7 +14,6 @@ public class PessoaDAO {
 		ContentValues values = new ContentValues();
 		values.put(DBHelper.COL_PESSOA_NOME,pessoa.getNome());
 		values.put(DBHelper.COL_PESSOA_CPF, pessoa.getCpf());
-		values.put(DBHelper.COL_PESSOA_CPF,pessoa.getEndereco().getId());
 		res = db.insert(DBHelper.TABELA_PESSOA,null,values);
 		db.close();
 

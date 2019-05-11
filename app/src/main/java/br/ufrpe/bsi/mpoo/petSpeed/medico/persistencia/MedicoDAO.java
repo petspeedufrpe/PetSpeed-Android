@@ -12,7 +12,7 @@ public class MedicoDAO {
 	private DBHelper db;
 
 
-	public void cadastraMedico(Medico medico, long idUsuario, long idClinica) {
+	public long cadastraMedico(Medico medico, long idUsuario, long idClinica) {
 		SQLiteDatabase dbWrite = db.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(DBHelper.COL_MEDICO_AVALIACAO, medico.getAvaliacao());
@@ -21,8 +21,9 @@ public class MedicoDAO {
 		values.put(DBHelper.COL_MEDICO_DADOS_PESSOAIS, medico.getDadosPessoais().getId());
 		values.put(DBHelper.COL_MEDICO_FK_USUARIO, idUsuario);
 		values.put(DBHelper.COL_MEDICO_FK_CLINICA, idClinica);
-		dbWrite.insert(DBHelper.TABELA_MEDICO, null, values);
+		long res = dbWrite.insert(DBHelper.TABELA_MEDICO, null, values);
 		db.close();
+		return res;
 	}
 
 	public void deletaMedico() {
@@ -45,8 +46,4 @@ public class MedicoDAO {
 
 	}
 
-	public Endereco getEnderecoById() {
-		return null;
-	}
 
-}
