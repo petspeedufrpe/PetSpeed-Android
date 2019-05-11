@@ -8,6 +8,8 @@ public class OrdemServico {
 
 	private long id;
 
+	private boolean pendente;
+
 	private Medico medico;
 
 	private Triagem triagem;
@@ -20,7 +22,13 @@ public class OrdemServico {
 
 	private Prioridade prioridade;
 
+	public boolean isPendente() {
+		return pendente;
+	}
 
+	public void setPendente(boolean pendente) {
+		this.pendente = pendente;
+	}
 
 	public long getId() {
 		return id;
