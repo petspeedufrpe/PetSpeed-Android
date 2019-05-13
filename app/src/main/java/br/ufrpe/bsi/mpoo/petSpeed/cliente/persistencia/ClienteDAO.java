@@ -1,30 +1,92 @@
 package br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia;
 
 
+import android.animation.ValueAnimator;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import java.util.List;
-
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.DBHelper;
+import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
+import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
 
 public class ClienteDAO {
 
-	private DBHelper db;
+	private DBHelper dbHelper = new DBHelper();
+	//está faltando adicionar os animais no cadastro.
+	public long cadastraCliente(Cliente cliente) {
+		long res;
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		values.put(DBHelper.COL_CLIENTE_AVALIACAO,cliente.getAvaliacao());
+		values.put(DBHelper.COL_CLIENTE_DADOS_ESSOAIS,cliente.getDadosPessoais().getId());
+		values.put(DBHelper.COL_CLIENTE_FK_USUARIO,cliente.getUsuario().getId());
+		res = db.insert(DBHelper.TABELA_CLIENTE,null,values);
+		db.close();
+		return  res;
+	}
 
-	public void cadastraCliente() {
+	public void deletaCliente(Cliente cliente) {
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		db.delete(DBHelper.TABELA_CLIENTE,DBHelper.COL_CLIENTE_ID + " = ?",new String[]{String.valueOf(cliente.getId())});
+		db.close();
+	}
+
+	private Cliente createCliente(Cursor cursor){
+		int indexId = cursor.getColumnIndex(DBHelper.COL_CLIENTE_ID);
+		int indexAvaliacao = cursor.getColumnIndex(DBHelper.COL_CLIENTE_AVALIACAO);
+		long id = cursor.getLong(indexId);
+		long avaliacao = cursor.getLong(indexAvaliacao);
+		Cliente cliente = new Cliente();
+		cliente.setId(id);
+		cliente.setAvaliacao(avaliacao);
+		return cliente;
+	}
+
+	public Cliente loadCliente(String query , String[] args){
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		Cursor cursor = db.rawQuery(query,args);
+		Cliente cliente = null;
+		if (cursor.moveToNext()){
+			cliente = createCliente(cursor);
+		}
+		cursor.close();
+		db.close();
+
+		return cliente;
+	}
+
+	public Cliente getClienteById(Long id){
+		String query = "SELECT * FROM " + DBHelper.TABELA_CLIENTE+" WHERE "+DBHelper.COL_CLIENTE_ID+ " LIKE ?;";
+		String[] args = {String.valueOf(id)};
+		return this.loadCliente(query,args);
+	}
+	public Cliente getClienteByIdUsuario(Long id){
+		String query = "SELECT * FROM " + DBHelper.TABELA_CLIENTE+ " WHERE " + DBHelper.COL_CLIENTE_FK_USUARIO+ " LIKE ?;";
+		String[] args = {String.valueOf(id)};
+		return this.loadCliente(query,args);
+	}
+
+	public Cursor getIdObjectByCliente(Long idCliente){
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		String query = "SELECT * FROM "+DBHelper.TABELA_CLIENTE+" WHERE "+
+				DBHelper.COL_CLIENTE_ID+ " LIKE ?;";
+		String[] args = {String.valueOf(idCliente)};
+		return db.rawQuery(query,args);
 
 	}
 
-	public void deletaCliente() {
 
-	}
-
-	public Endereco getEnderecoById() {
+		public Endereco getEnderecoById(Long id) {
 		return null;
 	}
 
-	public Animal getAnimalById() {
+	public Animal getAnimalById(long id) {
+
 		return null;
 	}
 
@@ -44,19 +106,52 @@ public class ClienteDAO {
 
 	}
 
-	public void adicionaEndereco() {
 
+	public Cursor getIdUsuarioByCliente(long idCliente){
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		String query = "SELECT * FROM "+DBHelper.TABELA_CLIENTE+" WHERE "+DBHelper.COL_CLIENTE_FK_USUARIO+
+				" LIKE ?;";
+		String[] args = {String.valueOf(idCliente)};
+		return db.rawQuery(query,args);
+	}
+	/**
+	public Cursor getIdPessoaByCliente(long idCliente){
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		String query = "SELECT * FROM "+DBHelper.TABELA_CLIENTE+" WHERE "+ DBHelper.COL_CLIENTE_DADOS_ESSOAIS
+				+ " = ?";
+		String[] args = {String.valueOf(idCliente)};
+		return db.rawQuery(query,args);
+	}
+	public Cursor getIdUsuarioByCliente(Long idCliente){
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		String query = "SELECT * FROM "+DBHelper.TABELA_CLIENTE+ " WHERE "+DBHelper.COL_CLIENTE_FK_USUARIO
+				+ " = ?";
+		String[] args = {String.valueOf(idCliente)};
+		return db.rawQuery(query,args);
+	}**/
+
+	public void adicionaEndereco(Endereco endereco) {
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		EnderecoDAO enderecoDAO = new EnderecoDAO();
+		enderecoDAO.cadastraEndereco(endereco);
+		ContentValues values = new ContentValues();
+		//values.put(DBHelper.COL_CLIENTE_ENDEREclienteDAO.getClienteByIdUsuario(usuario.getId());CO, endereco.getId());
+		db.insert(DBHelper.TABELA_CLIENTE,null,values);
+		db.close();
 	}
 
-	public Cliente getClienteById() {
-		return null;
-	}
-
-	public Cliente getClienteByEmail() {
-		return null;
-	}
-
-	public void alteraEmail() {
+	public void alteraEmail(String email) {
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		Usuario usuario;
+		UsuarioDAO usuarioDAO= new UsuarioDAO();
+		usuario = usuarioDAO.getUsuario(email);
+		Cliente cliente;
+		ClienteDAO clienteDAO = new ClienteDAO();
+		cliente = clienteDAO.getClienteByIdUsuario(usuario.getId());
+		ContentValues values = new ContentValues();
+		values.put(DBHelper.COL_USUARIO_EMAIL,usuario.getEmail());
+		db.update(DBHelper.TABELA_USUARIO,values,DBHelper.COL_USUARIO_EMAIL + " = ?;",new String[] {email});
+		db.close();
 
 	}
 
