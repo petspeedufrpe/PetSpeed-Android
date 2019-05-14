@@ -11,13 +11,12 @@ public class UsuarioDAO {
     private DBHelper dbHelper = new DBHelper();
 
     public long cadastrarUsuario(Usuario usuario){
-        long res;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DBHelper.COL_USUARIO_EMAIL,usuario.getEmail());
         values.put(DBHelper.COL_USUARIO_SENHA,usuario.getSenha());
 
-        res = db.insert(DBHelper.TABELA_USUARIO,null,values);
+        long res = db.insert(DBHelper.TABELA_USUARIO,null,values);
         db.close();
         return res;
 

@@ -18,6 +18,25 @@ public class Endereco {
 
 	private String complemento;
 
+	private long fkClinica;
+
+	private long fkPessoa;
+
+	public long getFkPessoa() {
+		return fkPessoa;
+	}
+
+	public void setFkPessoa(long fkPessoa) {
+		this.fkPessoa = fkPessoa;
+	}
+
+	public long getFkClinica() {
+		return fkClinica;
+	}
+
+	public void setFkClinica(long fkClinica) {
+		this.fkClinica = fkClinica;
+	}
 
 	public String getCidade() {
 		return cidade;

@@ -10,6 +10,10 @@ public class Clinica {
 
     private long id;
 
+    private String nome;
+
+    private String razaoSocial;
+
     private double avaliacao;
 
     private String crmv;
@@ -19,6 +23,22 @@ public class Clinica {
     private List<Endereco> enderecos;
 
     private List<Medico> medicosCredenciados;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getRazaoSocial() {
+        return razaoSocial;
+    }
+
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
+    }
 
     public Usuario getUsuario() {
         return usuario;

@@ -9,8 +9,8 @@ public class PetSpeedApp extends Application {
 
     @Override
     public void onCreate() {
-        mContext = getApplicationContext();
         super.onCreate();
+        mContext = this;
     }
 
     public static Context getContext(){

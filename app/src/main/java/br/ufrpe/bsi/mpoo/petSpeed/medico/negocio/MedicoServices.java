@@ -27,7 +27,7 @@ public class MedicoServices {
 		if (usuarioDAO.getUsuario(usuario.getEmail()) != null) {
 			//throw new AppException("Usuário já possui uma conta de Medico");
 		}
-		medicoDAO.cadastraMedico(medico, usuario.getId(), clinica.getId());
+		medicoDAO.cadastraMedico(medico);
 
 
 	}

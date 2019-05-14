@@ -18,10 +18,9 @@ public class ClienteDAO {
 		long res;
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		//values.put(DBHelper.COL_ANIMAIS_CLIENTE,cliente.getAnimal().getId());
 		values.put(DBHelper.COL_CLIENTE_AVALIACAO,cliente.getAvaliacao());
-		values.put(DBHelper.COL_CLIENTE_DADOS_ESSOAIS,cliente.getDadosPessoais().getId());
 		values.put(DBHelper.COL_CLIENTE_FK_USUARIO,cliente.getUsuario().getId());
+		values.put(DBHelper.COL_CLIENTE_FK_PESSOA,cliente.getDadosPessoais().getId());
 		res = db.insert(DBHelper.TABELA_CLIENTE,null,values);
 		db.close();
 		return  res;

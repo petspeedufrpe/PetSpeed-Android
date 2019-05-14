@@ -13,14 +13,32 @@ public class Cliente {
 
 	private double avaliacao;
 
-	private Endereco endereco;
-
 	private Pessoa dadosPessoais;
 
 	private List<Animal> animais;
 
 	private Usuario usuario;
 
+	private long idUsuario;
+
+	private long idPessoa;
+
+
+	public long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public long getIdPessoa() {
+		return idPessoa;
+	}
+
+	public void setIdPessoa(long idPessoa) {
+		this.idPessoa = idPessoa;
+	}
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -44,14 +62,6 @@ public class Cliente {
 
 	public void setAvaliacao(double avaliacao) {
 		this.avaliacao = avaliacao;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
 	}
 
 	public Pessoa getDadosPessoais() {

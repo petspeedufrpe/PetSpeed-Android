@@ -11,7 +11,7 @@ public class EnderecoDAO {
 
 	private DBHelper dbHelper = new DBHelper();
 
-	public long cadastraEndereco(Endereco endereco, long idOwner) {
+	public long cadastraEndereco(Endereco endereco) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		long res;
 		ContentValues values = new ContentValues();
@@ -22,7 +22,8 @@ public class EnderecoDAO {
 		values.put(DBHelper.COL_ENDERECO_LOGRADOURO, endereco.getLogradouro());
 		values.put(DBHelper.COL_ENDERECO_NUMERO, endereco.getNumero());
 		values.put(DBHelper.COL_ENDERECO_COMPLEMENTO, endereco.getComplemento());
-		values.put(DBHelper.COL_ENDERECO_FK_OWNER, idOwner);
+		values.put(DBHelper.COL_ENDERECO_FK_CLINICA, endereco.getFkClinica());
+		values.put(DBHelper.COL_ENDERECO_FK_PESSOA, endereco.getFkPessoa());
 		res = db.insert(DBHelper.TABELA_ENDERECO,null,values);
 		db.close();
 
