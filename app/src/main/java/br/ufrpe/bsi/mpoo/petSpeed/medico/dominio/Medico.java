@@ -9,7 +9,8 @@ import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 public class Medico {
 
 	private long id;
-
+aaaaaa
+	asasfa
 	private double avaliacao;
 
 	private String crmv;
