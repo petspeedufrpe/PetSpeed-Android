@@ -21,14 +21,12 @@ public class MedicoServices {
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 
-	public void cadastraMedico(Medico medico) {
+	public void cadastraMedico(Medico medico) throws AppException {
 
 
-		try{
 		if (usuarioDAO.getUsuario(medico.getUsuario().getEmail()) != null) {
+		throw new AppException("Usuario já possui conta de médico.");
 		}
-		medicoDAO.cadastraMedico(medico);
-
 
 	}
 
