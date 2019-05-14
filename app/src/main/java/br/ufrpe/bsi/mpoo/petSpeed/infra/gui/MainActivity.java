@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             services.cadastraMedico(medico);
         }catch(AppException e){
-            Toast.makeText(MainActivity.this, String.valueOf(e).show();
+            Toast.makeText(MainActivity.this, String.valueOf(e)).show();
 
         }
 
