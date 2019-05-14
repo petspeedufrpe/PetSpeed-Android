@@ -101,7 +101,12 @@ public class MainActivity extends AppCompatActivity {
 		medico.setUsuario(usuario);
 
         MedicoServices services = new MedicoServices();
+        try {
             services.cadastraMedico(medico);
+        }catch(AppException e){
+            Toast.makeText(MainActivity.this, String.valueOf(e).show();
+
+        }
 
 	}
 }
