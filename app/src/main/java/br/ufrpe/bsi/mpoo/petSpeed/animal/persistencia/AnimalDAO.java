@@ -1,5 +1,7 @@
 package br.ufrpe.bsi.mpoo.petSpeed.animal.persistencia;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 
 import java.util.List;
 
@@ -10,6 +12,18 @@ import br.ufrpe.bsi.mpoo.petSpeed.infra.DBHelper;
 public class AnimalDAO {
 
 	private DBHelper db;
+
+	public long cadastraAnimal(Animal animal) {
+		SQLiteDatabase dbWrite = db.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		values.put(DBHelper.COL_ANIMAL_NOME, animal.getNome());
+		values.put(DBHelper.COL_ANIMAL_RACA, animal.getRaca());
+		values.put(DBHelper.COL_ANIMAL_PESO, animal.getPeso());
+		values.put(DBHelper.COL_ANIMAL_IDADE, animal.getIdade());
+		long res = dbWrite.insert(DBHelper.TABELA_ANIMAL, null, values);
+		db.close();
+		return res;
+	}
 
 	public void cadastraAnimal(Animal animal) {
 
