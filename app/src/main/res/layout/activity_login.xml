@@ -46,6 +46,7 @@
         android:id="@+id/LoginEmailTxBx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
@@ -54,13 +55,14 @@
         app:layout_constraintBottom_toTopOf="@+id/LoginPswrdTxBx"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginActivityLogo"
-        app:layout_constraintVertical_bias="0.732" />
+        app:layout_constraintVertical_bias="0.429" />
 
     <EditText
         android:id="@+id/LoginPswrdTxBx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="404dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="356dp"
         android:ems="10"
         android:hint="Senha"
         android:inputType="textPassword"
@@ -70,8 +72,8 @@
 
     <ImageView
         android:id="@+id/loginActivityLogo"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="114dp"
+        android:layout_height="121dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="8dp"
