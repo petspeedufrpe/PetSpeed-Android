@@ -54,7 +54,7 @@ public class UsuarioDAO {
         int indexID = cursor.getColumnIndex(DBHelper.COL_USUARIO_ID);
         int indexEmail = cursor.getColumnIndex(DBHelper.COL_USUARIO_EMAIL);
         int indexSenha = cursor.getColumnIndex(DBHelper.COL_USUARIO_SENHA);
-        usuario.setId(cursor.getInt(indexID));
+        usuario.setId(cursor.getLong(indexID));
         usuario.setEmail(cursor.getString(indexEmail));
         usuario.setSenha(cursor.getString(indexSenha));
         return usuario;
@@ -65,6 +65,21 @@ public class UsuarioDAO {
         Usuario usuario = null;
         String sql = "SELECT * FROM " + DBHelper.TABELA_USUARIO+ " WHERE " + DBHelper.COL_USUARIO_EMAIL + " LIKE ?;";
         Cursor cursor = db.rawQuery(sql,new String[]{email});
+        if(cursor.moveToFirst()){
+            usuario = createUsuario(cursor);
+        }
+        cursor.close();
+        db.close();
+
+        return usuario;
+
+    }
+
+    public Usuario getUsuarioById(long id){
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Usuario usuario = null;
+        String sql = "SELECT * FROM " + DBHelper.TABELA_USUARIO+ " WHERE " + DBHelper.COL_USUARIO_ID + " LIKE ?;";
+        Cursor cursor = db.rawQuery(sql,new String[]{String.valueOf(id)});
         if(cursor.moveToFirst()){
             usuario = createUsuario(cursor);
         }

@@ -1,6 +1,5 @@
 package br.ufrpe.bsi.mpoo.petSpeed.medico.negocio;
 
-import br.ufrpe.bsi.mpoo.petSpeed.clinica.dominio.Clinica;
 import br.ufrpe.bsi.mpoo.petSpeed.clinica.persistencia.ClinicaDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
@@ -12,46 +11,88 @@ import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
 
 public class MedicoServices {
 
-	private MedicoDAO medicoDAO = new MedicoDAO();
+    private MedicoDAO medicoDAO = new MedicoDAO();
 
-	private EnderecoDAO enderecoDAO = new EnderecoDAO();
+    private EnderecoDAO enderecoDAO = new EnderecoDAO();
 
-	private ClinicaDAO clinicaDAO = new ClinicaDAO();
+    private ClinicaDAO clinicaDAO = new ClinicaDAO();
 
-	private UsuarioDAO usuarioDAO = new UsuarioDAO();
-
-
-	public void cadastraMedico(Medico medico) throws AppException {
+    private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 
-		if (usuarioDAO.getUsuario(medico.getUsuario().getEmail()) != null) {
-		throw new AppException("Usuario já possui conta de médico.");
-		}
+    public long cadastraMedico(Medico medico) throws AppException {
+        try {
+            this.checkNull(medico);
+        } catch (AppException e) {
+            throw new AppException(String.valueOf(e));
+        }
+        if (this.usuarioPossuiMedico(medico)) {
+            throw new AppException("UsuarioPossuiMedico");
+        } else {
+            long id = medicoDAO.cadastraMedico(medico);
+            return id;
+        }
+    }
 
-	}
+    private void checkNull(Medico medico) throws AppException {
+        if (medico.getUsuario() == null) {
+            throw new AppException("Null attribute");
+        }
+        if (medico.getUsuario().getId() == 0) {
+            throw new AppException("usuario medico sem id");
+        }
+        if (medico.getDadosPessoais() == null) {
+            throw new AppException("dados pessoais null");
+        }
+        if (medico.getDadosPessoais().getId() == 0) {
+            throw new AppException("dados pessoais sem id");
+        }
+        if (medico.getDadosPessoais().getEndereco() == null) {
+            throw new AppException("endereco dados pessoais null");
+        }
+        if (medico.getDadosPessoais().getEndereco().getId() == 0) {
+            throw new AppException("endereco sem id");
+        }
+        if (medico.getAvaliacao() > 5) {
+            throw new AppException("avaliacao maior q 5");
+        }
+    }
 
-	public void deletaMedico() {
+    private boolean usuarioPossuiMedico(Medico medico) throws AppException {
+        try {
+            Medico medicoReferencia = medicoDAO.getMedicoByFkUsuario(medico.getUsuario().getId());
+            medicoReferencia.getId();
+            if (medicoReferencia.getUsuario().getId() == medico.getUsuario().getId()) {
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return false;
+    }
 
-	}
+    public void deletaMedico() {
 
-	public void alteraAvaliacao() {
+    }
 
-	}
+    public void alteraAvaliacao() {
 
-	public void alteraClinica() {
+    }
 
-	}
+    public void alteraClinica() {
 
-	public void alteraEndereco() {
+    }
 
-	}
+    public void alteraEndereco() {
 
-	public void alteraCrmv() {
+    }
 
-	}
+    public void alteraCrmv() {
 
-	public Endereco getEnderecoById() {
-		return null;
-	}
+    }
+
+    public Endereco getEnderecoById() {
+        return null;
+    }
 
 }

@@ -16,6 +16,7 @@ import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.PessoaDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
+import br.ufrpe.bsi.mpoo.petSpeed.usuario.negocio.UsuarioServices;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
 
 public class MainActivity extends AppCompatActivity {
@@ -69,17 +70,24 @@ public class MainActivity extends AppCompatActivity {
 		Toast.makeText(MainActivity.this, String.valueOf(cliente.getUsuario().getId()),Toast.LENGTH_LONG).show();*/
 
 		Usuario usuario = new Usuario();
-		usuario.setEmail("teste@gmail.com");
-		usuario.setSenha("12345");
-		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		long codUs = usuarioDAO.cadastrarUsuario(usuario);
-		usuario.setId(codUs);
+		usuario.setEmail("asgsdfsdfasdgagregebr");
+		usuario.setSenha("WEasdasdGWEG");
+		UsuarioServices uServices = new UsuarioServices();
+		try {
+			long codUs = uServices.cadastrarUsuario(usuario);
+			usuario.setId(codUs);
+			Toast.makeText(MainActivity.this, "Cadastro usuario bem sucedido",Toast.LENGTH_LONG).show();
+		}catch (AppException e){
+			Toast.makeText(MainActivity.this, "Email já cadastrado",Toast.LENGTH_LONG).show();
+		}
 
 		Pessoa pessoa = new Pessoa();
 		pessoa.setCpf("012213124");
-		pessoa.setNome("testenome");
+		pessoa.setNome("MEDICO SERVICE");
 		PessoaDAO pessoaDAO = new PessoaDAO();
 		long codPessoa =pessoaDAO.cadastraPessoa(pessoa);
+
+		pessoa.setId(codPessoa);
 
 		Endereco end = new Endereco();
 		end.setUf("teste");
@@ -94,19 +102,22 @@ public class MainActivity extends AppCompatActivity {
 		long codCurr =enderecoDAO.cadastraEndereco(end);
 		end.setId(codCurr);
 
+		pessoa.setEndereco(end);
+
 		Medico medico = new Medico();
-		medico.setAvaliacao(5.0);
+		medico.setAvaliacao(4);
 		medico.setCrmv("teste");
 		medico.setDadosPessoais(pessoa);
 		medico.setUsuario(usuario);
 
-        MedicoServices services = new MedicoServices();
+		
+       	MedicoServices mservices = new MedicoServices();
         try {
-            services.cadastraMedico(medico);
-        }catch(AppException e){
-            Toast.makeText(MainActivity.this, String.valueOf(e)).show();
-
+            long id = mservices.cadastraMedico(medico);
+            medico.setId(id);
+			Toast.makeText(MainActivity.this, "Cadastro medico bem sucedido",Toast.LENGTH_LONG).show();
+		}catch(AppException e){
+			Toast.makeText(MainActivity.this, String.valueOf(e),Toast.LENGTH_LONG).show();
         }
-
 	}
 }

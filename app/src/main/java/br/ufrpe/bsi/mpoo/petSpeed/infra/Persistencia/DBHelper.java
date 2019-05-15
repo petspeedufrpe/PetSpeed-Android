@@ -7,7 +7,7 @@ import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String NOME_DB = "petspeed.db";
-    private static final int VERSAO = 7;
+    private static final int VERSAO = 15;
 
     // TABELA ANIMAL:
     public static final String TABELA_ANIMAL = "TB_ANIMAL";
@@ -17,6 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	public static final String COL_ANIMAL_PESO = "PESO";
 	public static final String COL_ANIMAL_IDADE = "IDADE";
 	public static final String COL_ANIMAL_FOTO = "FOTO";
+	public static final String COL_ANIMAL_FK_CLIENTE = "FK_CLIENTE";
     // TABELA MEDICO:
     public static final String TABELA_MEDICO = "TB_MEDICO";
     public static final String COL_MEDICO_ID = "ID";
@@ -86,9 +87,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     private static final String[] TABELAS = {
-            TABELA_ANIMAL, TABELA_CLIENTE, TABELA_CLINICA, TABELA_ENDERECO,
-            TABELA_MEDICO, TABELA_OS, TABELA_PESSOA, TABELA_TRIAGEM, TABELA_USUARIO
+            TABELA_MEDICO, TABELA_ANIMAL, TABELA_CLIENTE, TABELA_CLINICA,
+            TABELA_ENDERECO, TABELA_OS, TABELA_PESSOA, TABELA_TRIAGEM, TABELA_USUARIO
     };
+
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -101,8 +104,8 @@ public class DBHelper extends SQLiteOpenHelper {
         createTabelaOS(db);
         createTabelaTriagem(db);
         createTabelaUsuario(db);
-
     }
+
 
     private void createTabelaAnimal(SQLiteDatabase db) {
         String sqlTbAnimal=
@@ -112,13 +115,13 @@ public class DBHelper extends SQLiteOpenHelper {
                         "  %4$s TEXT NOT NULL, " +
                         " %5$s TEXT, " +
                         "  %6$s TEXT NOT NULL, " +
-                        "  %7$s TEXT NOT NULL " +
-
+                        "  %7$s TEXT NOT NULL, " +
+                        "  %8$s TEXT NOT NULL " +
 
 						");";
         sqlTbAnimal = String.format(sqlTbAnimal,
                 TABELA_ANIMAL, COL_ANIMAL_ID, COL_ANIMAL_NOME, COL_ANIMAL_RACA,
-                COL_ANIMAL_FOTO, COL_ANIMAL_IDADE, COL_ANIMAL_PESO);
+                COL_ANIMAL_FOTO, COL_ANIMAL_IDADE, COL_ANIMAL_PESO, COL_ANIMAL_FK_CLIENTE);
         db.execSQL(sqlTbAnimal);
     }
 
@@ -126,7 +129,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String sqlTbMedico=
                 "CREATE TABLE %1$s ( "  +
                         "  %2$s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        "  %3$s TEXT NOT NULL, " +
+                        "  %3$s REAL NOT NULL, " +
                         "  %4$s TEXT NOT NULL, " +
                         " %5$s TEXT NOT NULL, " +
                         " %6$s TEXT NOT NULL, " +
@@ -146,7 +149,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         "  %2$s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "  %3$s TEXT NOT NULL, " +
                         "  %4$s TEXT NOT NULL, " +
-                        " %5$s TEXT NOT NULL, " +
+                        " %5$s REAL NOT NULL, " +
                         " %6$s TEXT NOT NULL, " +
                         " %7$s TEXT NOT NULL, " +
                         " %8$s TEXT NOT NULL " +
@@ -194,7 +197,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String sqlTbCliente =
                 "CREATE TABLE %1$s ( "  +
                         "  %2$s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        "  %3$s TEXT NOT NULL, " +
+                        "  %3$s REAL NOT NULL, " +
                         "  %4$s TEXT NOT NULL, " +
                         "  %5$s TEXT NOT NULL " +
                         ");";
@@ -246,19 +249,18 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
+    public void dropTables(SQLiteDatabase db) {
+        for (String tabela : TABELAS) {
+            StringBuilder dropTable = new StringBuilder();
+            dropTable.append(" DROP TABLE IF EXISTS ");
+            dropTable.append(tabela);
+            db.execSQL(dropTable.toString());
+        }
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         dropTables(db);
         onCreate(db);
-    }
-
-    private void dropTables(SQLiteDatabase db) {
-        StringBuilder dropTables = new StringBuilder();
-        for (String tabela : TABELAS) {
-            dropTables.append(" DROP TABLE IF EXISTS ");
-            dropTables.append(tabela);
-            dropTables.append("; ");
-        }
-        db.execSQL(dropTables.toString());
     }
 }
