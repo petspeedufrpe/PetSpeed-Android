@@ -1,4 +1,5 @@
 package br.ufrpe.bsi.mpoo.petSpeed.animal.dominio;
+
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petSpeed.os.dominio.OrdemServico;
@@ -14,9 +15,29 @@ public class Animal {
 
 	//private BufferedImage foto;
 
+	private float peso;
+
+	private int idade;
+
+	private long idCliente;
+
 	private List<OrdemServico> historico;
 
+	public int getIdade() {
+		return idade;
+	}
 
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+
+	public float getPeso() {
+		return peso;
+	}
+
+	public void setPeso(float peso) {
+		this.peso = peso;
+	}
 
 	public long getId() {
 		return id;
@@ -48,5 +69,13 @@ public class Animal {
 
 	public void setHistorico(List<OrdemServico> historico) {
 		this.historico = historico;
+	}
+
+	public long getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(long idCliente) {
+		this.idCliente = idCliente;
 	}
 }

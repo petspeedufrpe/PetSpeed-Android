@@ -8,6 +8,17 @@ public class Pessoa {
 
 	private String cpf;
 
+	private Endereco endereco;
+
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
 
 
 	public long getId() {

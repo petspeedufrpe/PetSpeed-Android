@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.infra.App;
+package br.ufrpe.bsi.mpoo.petSpeed.infra.app;
 
 import android.app.Application;
 import android.content.Context;
@@ -9,8 +9,8 @@ public class PetSpeedApp extends Application {
 
     @Override
     public void onCreate() {
-        mContext = getApplicationContext();
         super.onCreate();
+        mContext = this;
     }
 
     public static Context getContext(){

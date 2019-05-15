@@ -4,6 +4,7 @@ package br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 
@@ -22,6 +23,8 @@ public class EnderecoDAO {
 		values.put(DBHelper.COL_ENDERECO_LOGRADOURO, endereco.getLogradouro());
 		values.put(DBHelper.COL_ENDERECO_NUMERO, endereco.getNumero());
 		values.put(DBHelper.COL_ENDERECO_COMPLEMENTO, endereco.getComplemento());
+		values.put(DBHelper.COL_ENDERECO_FK_CLINICA, endereco.getFkClinica());
+		values.put(DBHelper.COL_ENDERECO_FK_PESSOA, endereco.getFkPessoa());
 		res = db.insert(DBHelper.TABELA_ENDERECO,null,values);
 		db.close();
 
@@ -40,8 +43,8 @@ public class EnderecoDAO {
 	public void alteraCep(Endereco endereco) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put(DBHelper.COL_ENDERECO_CEP, endereco.getNumero());
-		db.update(DBHelper.TABELA_ENDERECO, values, DBHelper.COL_ENDERECO_ID+ " = ?", new String[]{String.valueOf(endereco.getId())});
+		values.put(DBHelper.COL_PESSOA_CPF, endereco.getNumero());
+		db.update(DBHelper.TABELA_ENDERECO, values, DBHelper.COL_ENDERECO_CEP+ " = ?", new String[]{String.valueOf(endereco.getId())});
 		db.close();
 
 
@@ -50,39 +53,43 @@ public class EnderecoDAO {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(DBHelper.COL_ENDERECO_UF,endereco.getComplemento());
-		db.update(DBHelper.TABELA_ENDERECO,values,DBHelper.COL_ENDERECO_ID + " = ?",new String[]{String.valueOf(endereco.getId())});
+		db.update(DBHelper.TABELA_ENDERECO,values, DBHelper.COL_ENDERECO_ID + " = ?",new String[]{String.valueOf(endereco.getId())});
 		db.close();
 
 	}
+
 	public void alteraCidade(Endereco endereco) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(DBHelper.COL_ENDERECO_CIDADE,endereco.getComplemento());
-		db.update(DBHelper.TABELA_ENDERECO,values,DBHelper.COL_ENDERECO_ID + " = ?",new String[]{String.valueOf(endereco.getId())});
+		db.update(DBHelper.TABELA_ENDERECO,values, DBHelper.COL_ENDERECO_ID + " = ?",new String[]{String.valueOf(endereco.getId())});
 		db.close();
 
 	}
+
 	public void alteraBairro(Endereco endereco) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(DBHelper.COL_ENDERECO_BAIRRO,endereco.getComplemento());
-		db.update(DBHelper.TABELA_ENDERECO,values,DBHelper.COL_ENDERECO_ID + " = ?",new String[]{String.valueOf(endereco.getId())});
+		db.update(DBHelper.TABELA_ENDERECO,values, DBHelper.COL_ENDERECO_ID + " = ?",new String[]{String.valueOf(endereco.getId())});
 		db.close();
 
 	}
+
 	public void alteraLogradouro(Endereco endereco) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(DBHelper.COL_ENDERECO_LOGRADOURO,endereco.getComplemento());
-		db.update(DBHelper.TABELA_ENDERECO,values,DBHelper.COL_ENDERECO_ID + " = ?",new String[]{String.valueOf(endereco.getId())});
+		db.update(DBHelper.TABELA_ENDERECO,values, DBHelper.COL_ENDERECO_ID + " = ?",new String[]{String.valueOf(endereco.getId())});
 		db.close();
 
 	}
+
 	public void alteraNumero(Endereco endereco) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(DBHelper.COL_ENDERECO_NUMERO, endereco.getNumero());
-		db.update(DBHelper.TABELA_ENDERECO, values, "id = ?", new String[]{String.valueOf(endereco.getId())});
+		db.update(DBHelper.TABELA_ENDERECO, values, DBHelper.COL_ENDERECO_NUMERO+ " = ?", new String[]{String.valueOf(endereco.getId())});
 		db.close();
 
 	}
@@ -91,17 +98,19 @@ public class EnderecoDAO {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(DBHelper.COL_ENDERECO_COMPLEMENTO,endereco.getComplemento());
-		db.update(DBHelper.TABELA_ENDERECO,values,DBHelper.COL_ENDERECO_ID + " = ?",new String[]{String.valueOf(endereco.getId())});
+		db.update(DBHelper.TABELA_ENDERECO,values, DBHelper.COL_ENDERECO_ID + " = ?",new String[]{String.valueOf(endereco.getId())});
 		db.close();
 
 	}
 
-	public Endereco getEnderecoById(Integer id) {
-		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		Endereco endereco = null;
+	public Endereco getEnderecoById(Long id) {
 		String sql = "SELECT * FROM " + DBHelper.TABELA_ENDERECO + " WHERE " + DBHelper.COL_ENDERECO_ID + " LIKE ?;";
 		String[] args = {String.valueOf(id)};
 		return this.loadEndereco(sql,args);
+	}
+
+	public Cursor getIdPessoaByEndereco(Long idEndereco){
+		return null;
 	}
 
 	private Endereco createEndereco(Cursor cursor) {
@@ -114,18 +123,15 @@ public class EnderecoDAO {
 		int indexLogradouro = cursor.getColumnIndex(DBHelper.COL_ENDERECO_LOGRADOURO);
 		int indexNumero = cursor.getColumnIndex(DBHelper.COL_ENDERECO_NUMERO);
 		int indexComplemento = cursor.getColumnIndex(DBHelper.COL_ENDERECO_COMPLEMENTO);
-
 		endereco.setId(cursor.getInt(indexId));
 		endereco.setCep(cursor.getString(indexCep));
+		endereco.setUf(cursor.getString(indexUF));
+		endereco.setCidade(cursor.getString(indexCidade));
+		endereco.setBairro(cursor.getString(indexBairro));
+		endereco.setLogradouro(cursor.getString(indexLogradouro));
 		endereco.setNumero(cursor.getInt(indexNumero));
 		endereco.setComplemento(cursor.getString(indexComplemento));
-		endereco.setUf(cursor.getString(indexUF));
-		endereco.setBairro(cursor.getString(indexBairro));
-		endereco.setCidade(cursor.getString(indexCidade));
-		endereco.setLogradouro(cursor.getString(indexLogradouro));
 		return endereco;
-
-
 	}
 
 	private Endereco loadEndereco(String sql, String [] args){

@@ -10,27 +10,10 @@ import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.PessoaDAO;
 
 public class PessoaServices {
 
-	private PessoaDAO pessoaDAO;
+	private PessoaDAO pessoaDAO = new PessoaDAO();
 
 	private boolean validaCpf() {
 		return false;
-	}
-
-	public Pessoa getPessoaCompleta(long idPessoa){
-		Pessoa pessoa;
-		PessoaDAO pessoaDAO = new PessoaDAO();
-		EnderecoDAO enderecoDAO = new EnderecoDAO();
-		pessoa = pessoaDAO.getPessoaById(idPessoa);
-		Cursor data = pessoaDAO.getIdEnderecoByPessoa(idPessoa);
-		if (data != null && data.moveToFirst()) {
-			int indexEnd = data.getColumnIndex(DBHelper.COL_PESSOA_ENDERECO);
-			long idEnd = data.getLong(indexEnd);
-			data.close();
-			pessoa.setEndereco(enderecoDAO.getEnderecoById((int)idEnd));
-
-			return pessoa;
-		}
-		return null;
 	}
 
 	public void cadastraPessoa(Pessoa pessoa) {
@@ -45,5 +28,20 @@ public class PessoaServices {
 
 	}
 
+	public Pessoa getPessoaCompleta(long idPessoa){
+		Pessoa pessoa;
+		EnderecoDAO enderecoDAO = new EnderecoDAO();
+		pessoa = pessoaDAO.getPessoaById(idPessoa);
+		Cursor data = pessoaDAO.getIdEnderecoByPessoa(idPessoa);
+		if(data!=null && data.moveToFirst()){
+			int indexEndereco = data.getColumnIndex(DBHelper.COL_ENDERECO_FK_PESSOA);
+			long idEndereco = data.getLong(indexEndereco);
+			data.close();
+			pessoa.setEndereco(enderecoDAO.getEnderecoById(idEndereco));
+
+			return pessoa;
+		}
+		return null;
+	}
 
 }

@@ -1,25 +1,15 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 
-import android.database.Cursor;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
-
-
-import java.util.ArrayList;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.PessoaDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
-import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
 
 public class MainActivity extends AppCompatActivity {
 	private DBHelper dbHelper = new DBHelper();
@@ -33,87 +23,175 @@ public class MainActivity extends AppCompatActivity {
 		long codCurr;
 		long codPessoa;
 		Endereco endereco = new Endereco();
-		endereco.setCep("5001230");
-		endereco.setNumero(126);
-		endereco.setComplemento("Rua 4");
-		endereco.setLogradouro("logradoro 2");
-		endereco.setCidade("Recife");
-		endereco.setUf("PE");
-		endereco.setBairro("Espinheiro");
+		endereco.setCep("123456");
+		endereco.setNumero(121);
+		endereco.setComplemento("Rua 2");
 		EnderecoDAO enderecoDAO= new EnderecoDAO();
 		codCurr =enderecoDAO.cadastraEndereco(endereco);
 		endereco.setId(codCurr);
-
 		Pessoa pessoa = new Pessoa();
-		pessoa.setCpf("8890128421908");
-		pessoa.setNome("Gabriel Alves");
+		pessoa.setCpf("012213124");
+		pessoa.setNome("Caio castro");
 		pessoa.setEndereco(endereco);
 		PessoaDAO pessoaDAO = new PessoaDAO();
 		codPessoa =pessoaDAO.cadastraPessoa(pessoa);
 		pessoa.setId(codPessoa);
 		Usuario usuario = new Usuario();
-		usuario.setEmail("teste2@gmail.com");
-		usuario.setSenha("1234567");
+		usuario.setEmail("teste@gmail.com");
+		usuario.setSenha("12345");
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		long codUs = usuarioDAO.cadastrarUsuario(usuario);
 		usuario.setId(codUs);
 		Cliente cliente = new Cliente();
 		cliente.setDadosPessoais(pessoa);
-		cliente.setUsuario(usuario);
-		cliente.setAvaliacao(5);
+		cliente.setDadosUsuario(usuario);
+		cliente.setAvaliacao(10);
 		ClienteDAO clienteDAO = new ClienteDAO();
 		long codCl = clienteDAO.cadastraCliente(cliente);
+		cliente.setId(codCl);
+		cliente = clienteDAO.getClienteById((long) 1);
+		Toast.makeText(MainActivity.this,String.valueOf(cliente.getAvaliacao()),Toast.LENGTH_LONG).show();;
+		 **/
 
-		Cliente cliente;
+		/*Cliente cliente;
 		Usuario usuario;
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		ClienteDAO clienteDAO = new ClienteDAO();
 		cliente = clienteDAO.getClienteById((long) 5);
 		//cliente.setDadosUsuario(usuarioDAO.getUsuario("teste@gmail.com"));
-		Toast.makeText(MainActivity.this, String.valueOf(cliente.getUsuario().getId()),Toast.LENGTH_LONG).show();
-		 **/
+		Toast.makeText(MainActivity.this, String.valueOf(cliente.getUsuario().getId()),Toast.LENGTH_LONG).show();*/
+		/**
+		Usuario usuario = new Usuario();
+		usuario.setEmail("teste@gmail.com");
+		usuario.setSenha("12345");
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		long codUs = usuarioDAO.cadastrarUsuario(usuario);
+		usuario.setId(codUs);
 
-		Cliente cliente1 = getClienteCompleto(2);
+		Pessoa pessoa = new Pessoa();
+		pessoa.setCpf("012213124");
+		pessoa.setNome("testenome");
+		PessoaDAO pessoaDAO = new PessoaDAO();
+		long codPessoa =pessoaDAO.cadastraPessoa(pessoa);
 
-		Toast.makeText(MainActivity.this,cliente1.getDadosPessoais().getEndereco().getBairro(),Toast.LENGTH_LONG).show();
-	}
-	// esse metodo fica no service
-	public Pessoa getPessoaCompleta(long idPessoa){
+		Endereco end = new Endereco();
+		end.setUf("teste");
+		end.setCep("123456");
+		end.setNumero(121);
+		end.setComplemento("Rua 2");
+		end.setBairro("teste");
+		end.setLogradouro("teste");
+		end.setCidade("teste");
+		end.setFkPessoa(codPessoa);
+		EnderecoDAO enderecoDAO= new EnderecoDAO();
+		long codCurr =enderecoDAO.cadastraEndereco(end);
+		end.setId(codCurr);
+
+		Medico medico = new Medico();
+		medico.setAvaliacao(5.0);
+		medico.setCrmv("teste");
+		medico.setDadosPessoais(pessoa);
+		medico.setUsuario(usuario);
+
+        MedicoServices services = new MedicoServices();
+        try {
+            services.cadastraMedico(medico);
+        }catch(AppException e){
+            Toast.makeText(MainActivity.this, String.valueOf(e)).show();
+
+        }**/
+		/**UsuarioDAO usuarioDAO = new UsuarioDAO();
+		Usuario usuario = new Usuario();
+		usuario.setEmail("caio.farias@gmail.com");
+		usuario.setSenha("123456");
+		usuario.setId(usuarioDAO.cadastrarUsuario(usuario));
+
+		PessoaDAO pessoaDAO = new PessoaDAO();
+		Pessoa pessoa = new Pessoa();
+		pessoa.setNome("Caio Farias");
+		pessoa.setCpf("123827382");
+		Long codPessoa = pessoaDAO.cadastraPessoa(pessoa);
+		pessoa.setId(codPessoa);
+
+		Endereco end = new Endereco();
+		end.setUf("teste");
+		end.setCep("123456");
+		end.setNumero(121);
+		end.setComplemento("Rua 2");
+		end.setBairro("teste");
+		end.setLogradouro("teste");
+		end.setCidade("teste");
+		end.setFkPessoa(codPessoa);
+		EnderecoDAO enderecoDAO= new EnderecoDAO();
+		long codCurr =enderecoDAO.cadastraEndereco(end);
+		end.setId(codCurr);
+
+		Endereco endereco;
+		EnderecoDAO enderecoDAO = new EnderecoDAO();
+		endereco = enderecoDAO.getEnderecoById((long)1);
+		//Toast.makeText(MainActivity.this,endereco.getCidade(),Toast.LENGTH_LONG).show();
+
 		Pessoa pessoa;
 		PessoaDAO pessoaDAO = new PessoaDAO();
-		EnderecoDAO enderecoDAO = new EnderecoDAO();
-		pessoa = pessoaDAO.getPessoaById(idPessoa);
-		Cursor data = pessoaDAO.getIdEnderecoByPessoa(idPessoa);
-		if (data != null && data.moveToFirst()) {
-			int indexEnd = data.getColumnIndex(DBHelper.COL_PESSOA_ENDERECO);
-			long idEnd = data.getLong(indexEnd);
-			data.close();
-			pessoa.setEndereco(enderecoDAO.getEnderecoById((int)idEnd));
+		pessoa = pessoaDAO.getPessoaById((long)1);
+		//Toast.makeText(MainActivity.this,pessoa.getNome(),Toast.LENGTH_LONG).show();
 
-			return pessoa;
-		}
-		return null;
-	}
-	//esse metodo fica no service!!!!
-	public Cliente getClienteCompleto(long idCliente){
-		Cliente cliente;
-		ClienteDAO clienteDAO = new ClienteDAO();
+		Usuario usuario;
+		UsuarioDAO usuarioDAO= new UsuarioDAO();
+
+		usuario = usuarioDAO.getUsuario("caio.farias@gmail.com");
+		Toast.makeText(MainActivity.this,String.valueOf(usuario.getId()),Toast.LENGTH_LONG).show();
+
+
+
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		PessoaDAO pessoaDAO = new PessoaDAO();
-		cliente = clienteDAO.getClienteById(idCliente);
-		Cursor data = clienteDAO.getIdObjectByCliente(idCliente);//metodo para recuperar os do cliente com o id n no banco
-		if(data!= null && data.moveToFirst()){
-			int indexPessoa = data.getColumnIndex(DBHelper.COL_CLIENTE_DADOS_ESSOAIS);//get o indice do id da pessoa
-			int indexUsuario = data.getColumnIndex(DBHelper.COL_CLIENTE_FK_USUARIO); //get o indice do id do usuario
-			long idPessoa = data.getLong(indexPessoa);
-			long idusuario = data.getLong(indexUsuario);
-			data.close();
-			Pessoa pessoa = getPessoaCompleta(idPessoa);
-			cliente.setDadosPessoais(pessoa);
-			cliente.setUsuario(usuarioDAO.getUsuario(idusuario));
-			return cliente;
+		Usuario usuario = new Usuario();
+		usuario.setEmail("gabriel.alves@gmail.com");
+		usuario.setSenha("1234567");
+		Long idUser= usuarioDAO.cadastrarUsuario(usuario);
+		usuario.setId(idUser);
 
-		}
-		return null;
+		PessoaDAO pessoaDAO = new PessoaDAO();
+		Pessoa pessoa = new Pessoa();
+		pessoa.setNome("Gabriel Alves");
+		pessoa.setCpf("123827890");
+		Long codPessoa = pessoaDAO.cadastraPessoa(pessoa);
+		pessoa.setId(codPessoa);
+
+		Endereco end = new Endereco();
+		end.setUf("PE");
+		end.setCep("12345");
+		end.setNumero(11);
+		end.setComplemento("Rua 3");
+		end.setBairro("Ali");
+		end.setLogradouro("Aquele");
+		end.setCidade("Recife");
+		end.setFkPessoa(codPessoa);
+		EnderecoDAO enderecoDAO= new EnderecoDAO();
+		long codCurr =enderecoDAO.cadastraEndereco(end);
+		end.setId(codCurr);
+
+
+		Cliente cliente = new Cliente();
+		ClienteDAO clienteDAO = new ClienteDAO();
+		cliente.setUsuario(usuario);
+		cliente.setAvaliacao(10);
+		cliente.setDadosPessoais(pessoa);
+		cliente.setIdPessoa(codPessoa);
+		cliente.setIdUsuario(idUser);
+		long codCliente = clienteDAO.cadastraCliente(cliente);
+		cliente.setId(codCliente);
+
+
+		**/
+		Pessoa pessoa;
+		PessoaDAO p = new PessoaDAO();
+		pessoa=p.getPessoaById((long)1);
+		Cliente cliente;
+		ClienteDAO clienteDAO= new ClienteDAO();
+		cliente = clienteDAO.getClienteByEmail("gabriel.alves@gmail.com");
+		Toast.makeText(MainActivity.this,pessoa.getNome(),Toast
+		.LENGTH_LONG).show();
+
 	}
 }

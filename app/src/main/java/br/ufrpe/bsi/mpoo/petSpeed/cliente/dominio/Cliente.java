@@ -3,16 +3,12 @@ package br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
+import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
 public class Cliente {
 
 	private long id;
-
-	private String email;
-
-	private String senha;
 
 	private double avaliacao;
 
@@ -20,7 +16,36 @@ public class Cliente {
 
 	private List<Animal> animais;
 
+	private Usuario usuario;
 
+	private long idUsuario;
+
+	private long idPessoa;
+
+
+	public long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public long getIdPessoa() {
+		return idPessoa;
+	}
+
+	public void setIdPessoa(long idPessoa) {
+		this.idPessoa = idPessoa;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	public long getId() {
 		return id;
@@ -28,22 +53,6 @@ public class Cliente {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 
 	public double getAvaliacao() {

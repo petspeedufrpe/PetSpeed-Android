@@ -2,25 +2,59 @@ package br.ufrpe.bsi.mpoo.petSpeed.clinica.dominio;
 
 import java.util.List;
 
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
+import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
+import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
 public class Clinica {
+
     private long id;
 
-    private String email;
+    private String nome;
 
-    private String senha;
+    private String razaoSocial;
 
     private double avaliacao;
 
     private String crmv;
 
-    private Endereco endereco;
+    private Usuario usuario;
+
+    private List<Endereco> enderecos;
 
     private List<Medico> medicosCredenciados;
 
+    public String getNome() {
+        return nome;
+    }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getRazaoSocial() {
+        return razaoSocial;
+    }
+
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
 
     public long getId() {
         return id;
@@ -28,22 +62,6 @@ public class Clinica {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public double getAvaliacao() {
@@ -60,14 +78,6 @@ public class Clinica {
 
     public void setCrmv(String crmv) {
         this.crmv = crmv;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
     }
 
     public List<Medico> getMedicosCredenciados() {
