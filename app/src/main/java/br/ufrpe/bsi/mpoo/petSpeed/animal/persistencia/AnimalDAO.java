@@ -13,13 +13,14 @@ public class AnimalDAO {
 
 	private DBHelper db;
 
-	public long cadastraAnimal(Animal animal) {
+	public long cadastraAnimal(Animal animal, long idCliente) {
 		SQLiteDatabase dbWrite = db.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(DBHelper.COL_ANIMAL_NOME, animal.getNome());
 		values.put(DBHelper.COL_ANIMAL_RACA, animal.getRaca());
 		values.put(DBHelper.COL_ANIMAL_PESO, animal.getPeso());
 		values.put(DBHelper.COL_ANIMAL_IDADE, animal.getIdade());
+		values.put(DBHelper.COL_ANIMAL_FK_CLIENTE, idCliente);
 		long res = dbWrite.insert(DBHelper.TABELA_ANIMAL, null, values);
 		db.close();
 		return res;
