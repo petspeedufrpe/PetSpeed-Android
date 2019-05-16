@@ -9,14 +9,13 @@ import java.util.List;
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petSpeed.os.dominio.OrdemServico;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.DBHelper;
 
 public class AnimalDAO {
 
-	private DBHelper db;
+	private DBHelper dbHelper = new DBHelper();
 
 	public long cadastraAnimal(Animal animal, long idCliente) {
-		SQLiteDatabase dbWrite = db.getWritableDatabase();
+		SQLiteDatabase dbWrite = dbHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(DBHelper.COL_ANIMAL_NOME, animal.getNome());
 		values.put(DBHelper.COL_ANIMAL_RACA, animal.getRaca());
@@ -24,7 +23,7 @@ public class AnimalDAO {
 		values.put(DBHelper.COL_ANIMAL_IDADE, animal.getIdade());
 		values.put(DBHelper.COL_ANIMAL_FK_CLIENTE, idCliente);
 		long res = dbWrite.insert(DBHelper.TABELA_ANIMAL, null, values);
-		db.close();
+		dbWrite.close();
 		return res;
 	}
 
