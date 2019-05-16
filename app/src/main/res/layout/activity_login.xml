@@ -12,63 +12,82 @@
         android:id="@+id/loginActloginBtn"
         android:layout_width="193dp"
         android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:backgroundTint="#00A759"
         android:text="ENTRAR"
         android:textColor="#FFFFFFFF"
-        tools:layout_editor_absoluteX="105dp"
-        tools:layout_editor_absoluteY="458dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="453dp" />
 
     <Button
         android:id="@+id/loginActLoginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:backgroundTint="#00A759"
         android:text="Cadastre-se"
         android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="148dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="514dp" />
 
     <EditText
         android:id="@+id/LoginEmailTxBx"
         android:layout_width="304dp"
         android:layout_height="48dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="#00A759"
         android:ems="10"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
         android:textColor="#FF00A759"
-        app:layout_constraintBottom_toTopOf="@+id/LoginPswrdTxBx"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginActivityLogo"
-        app:layout_constraintVertical_bias="0.768" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.373" />
 
     <EditText
         android:id="@+id/LoginPswrdTxBx"
         android:layout_width="304dp"
         android:layout_height="42dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="384dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="#00A759"
         android:ems="10"
         android:hint="Senha"
         android:inputType="textPassword"
         android:textColor="#00DA1C1C"
+        app:layout_constraintBottom_toTopOf="@+id/loginActloginBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.878" />
 
     <ImageView
         android:id="@+id/loginActivityLogo"
-        android:layout_width="137dp"
+        android:layout_width="0dp"
         android:layout_height="149dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="w,1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.060000002"
         app:srcCompat="@drawable/logo" />
 
 </android.support.constraint.ConstraintLayout>

@@ -8,11 +8,20 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="271dp"
-        android:layout_height="325dp"
-        app:srcCompat="@mipmap/ic_launcher_foreground"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="95dp" />
+        android:layout_width="0dp"
+        android:layout_height="221dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.135"
+        app:srcCompat="@drawable/logo" />
 
     <Button
         android:id="@+id/buttonClinica"
@@ -22,8 +31,10 @@
         android:onClick="login"
         android:text="Clínica"
         android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="474dp" />
+        app:layout_constraintEnd_toStartOf="@+id/buttonVeterinrario"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="524dp" />
 
     <Button
         android:id="@+id/buttonVeterinrario"
@@ -33,8 +44,12 @@
         android:onClick="login"
         android:text="Veterinário"
         android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="149dp"
-        tools:layout_editor_absoluteY="474dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/buttonClinica"
+        app:layout_constraintEnd_toStartOf="@+id/buttonCliente"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonClinica"
+        app:layout_constraintTop_toTopOf="@+id/buttonClinica"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonCliente"
@@ -44,6 +59,10 @@
         android:onClick="login"
         android:text="Cliente"
         android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="288dp"
-        tools:layout_editor_absoluteY="474dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/buttonVeterinrario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonVeterinrario"
+        app:layout_constraintTop_toTopOf="@+id/buttonVeterinrario"
+        app:layout_constraintVertical_bias="0.0" />
 </android.support.constraint.ConstraintLayout>
