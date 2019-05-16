@@ -1,6 +1,8 @@
 package br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio;
 
-public class Pessoa {
+import java.io.Serializable;
+
+public class Pessoa implements Serializable {
 
 	private long id;
 

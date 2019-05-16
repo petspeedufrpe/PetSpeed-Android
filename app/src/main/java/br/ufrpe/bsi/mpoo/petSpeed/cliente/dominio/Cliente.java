@@ -1,5 +1,6 @@
 package br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio;
 
+import java.io.Serializable;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
@@ -7,7 +8,7 @@ import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
-public class Cliente {
+public class Cliente implements Serializable {
 
 	private long id;
 

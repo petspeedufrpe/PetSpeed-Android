@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 		medico.setDadosPessoais(pessoa);
 		medico.setUsuario(usuario);
 
-		
+
        	MedicoServices mservices = new MedicoServices();
         try {
             long id = mservices.cadastraMedico(medico);
