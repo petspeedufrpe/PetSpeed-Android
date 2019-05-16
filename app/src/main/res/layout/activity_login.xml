@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="Sair"
+        android:text="Cadastrar"
         app:layout_constraintBottom_toBottomOf="@+id/group"
         app:layout_constraintEnd_toEndOf="@+id/group"
         app:layout_constraintTop_toTopOf="@+id/group" />

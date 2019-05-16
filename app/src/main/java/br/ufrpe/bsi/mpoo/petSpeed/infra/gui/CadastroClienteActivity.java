@@ -1,31 +1,23 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Parcelable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.Serializable;
-
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
-public class activity_register_cliente extends AppCompatActivity {
+public class CadastroClienteActivity extends AppCompatActivity {
 
     EditText mNome,mCpf,mEmail,mSenha,mcmfSenha;
     String nome,cpf,email,senha,cmfSenha;
@@ -35,7 +27,7 @@ public class activity_register_cliente extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_cliente);
+        setContentView(R.layout.activity_cadastro_cliente);
 
         mButtoRegister = findViewById(R.id.register);
 
@@ -57,13 +49,13 @@ public class activity_register_cliente extends AppCompatActivity {
         cliente.setUsuario(criarUsuario());
         cliente.setDadosPessoais(criarPessoa());
             res = clienteServices.isEmailClienteNaoCadastrado(cliente.getUsuario().getEmail());
-            Toast.makeText(activity_register_cliente.this,Boolean.toString(res),Toast.LENGTH_LONG).show();
+            Toast.makeText(CadastroClienteActivity.this,Boolean.toString(res),Toast.LENGTH_LONG).show();
         if (res == true){//cliente nao esta no banco
-            Intent registerEnd = new Intent(activity_register_cliente.this,activity_register_endereco.class);
+            Intent registerEnd = new Intent(CadastroClienteActivity.this, CadastroEnderecoActivity.class);
             registerEnd.putExtra("cliente",cliente);
             startActivity(registerEnd);
         }else{
-            Toast.makeText(activity_register_cliente.this,message,Toast.LENGTH_SHORT).show();
+            Toast.makeText(CadastroClienteActivity.this,message,Toast.LENGTH_SHORT).show();
             limparCampos();
 
         }

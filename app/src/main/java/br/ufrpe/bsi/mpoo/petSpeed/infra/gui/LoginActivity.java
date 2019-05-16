@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 		sairbtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent registerIntent = new Intent(LoginActivity.this,activity_register_cliente.class);
+				Intent registerIntent = new Intent(LoginActivity.this, CadastroClienteActivity.class);
 				startActivity(registerIntent);
 
 			}

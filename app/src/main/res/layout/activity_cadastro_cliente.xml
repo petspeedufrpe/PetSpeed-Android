@@ -7,7 +7,7 @@
     android:layout_gravity="center_horizontal"
     android:baselineAligned="false"
     android:orientation="vertical"
-    tools:context=".infra.gui.activity_register_cliente">
+    tools:context=".infra.gui.CadastroClienteActivity">
 
     <EditText
         android:id="@+id/username"

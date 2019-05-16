@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".infra.gui.activity_register_endereco">
+    tools:context=".infra.gui.CadastroEnderecoActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_activity_register_endereco" />
+    <include layout="@layout/content_activity_cadastro_endereco" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

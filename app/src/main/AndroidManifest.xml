@@ -12,9 +12,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".infra.gui.FinalizaCadastroActivity"></activity>
         <activity
-            android:name=".infra.gui.activity_register_endereco"
+            android:name=".infra.gui.CadastroEnderecoActivity"
             android:label="endereco"></activity>
-        <activity android:name=".infra.gui.activity_register_cliente"></activity>
+        <activity android:name=".infra.gui.CadastroClienteActivity"></activity>
         <activity android:name=".cliente.gui.ListaClinicasActivity" />
         <activity android:name=".infra.gui.LoginActivity">
             <intent-filter>

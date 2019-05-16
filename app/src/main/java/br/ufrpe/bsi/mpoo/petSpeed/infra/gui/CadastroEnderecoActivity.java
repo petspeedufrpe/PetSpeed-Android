@@ -3,27 +3,18 @@ package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.ListaClinicasActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.PessoaDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
-public class activity_register_endereco extends AppCompatActivity {
+public class CadastroEnderecoActivity extends AppCompatActivity {
     private final PessoaServices pessoaServices = new PessoaServices();
     private final ClienteServices clienteServices = new ClienteServices();
     private EditText mLogradouro,mNumero,mCep,mUf,mBairro,mCidade,mComplemento;
@@ -32,7 +23,7 @@ public class activity_register_endereco extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_endereco);
+        setContentView(R.layout.activity_cadastro_endereco);
         mBtnCadastro = (Button) findViewById(R.id.cad_end);
         mBtnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +49,7 @@ public class activity_register_endereco extends AppCompatActivity {
             res = false;
         }
         Endereco endereco = criarEndereco();
-        Intent finalIntent = new Intent(activity_register_endereco.this,FinalizaCadastroActivity.class);
+        Intent finalIntent = new Intent(CadastroEnderecoActivity.this,FinalizaCadastroActivity.class);
         finalIntent.putExtra("cliente", cliente);
         finalIntent.putExtra("endereco",endereco);
         startActivity(finalIntent);
