@@ -57,7 +57,7 @@
         android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:hint="Register"
+        android:hint="Cadastrar endereço"
         android:layout_marginTop="15dp"
         android:layout_gravity="center_horizontal"/>
 

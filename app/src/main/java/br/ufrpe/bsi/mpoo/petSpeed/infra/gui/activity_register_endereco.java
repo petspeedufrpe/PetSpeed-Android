@@ -2,8 +2,6 @@ package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -20,16 +18,16 @@ import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
+import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.PessoaDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
 public class activity_register_endereco extends AppCompatActivity {
-
-    ClienteServices clienteServices = new ClienteServices();
-
-    EditText mLogradouro,mNumero,mCep,mUf,mBairro,mCidade,mComplemento;
-    String logradouro,numero,cep,uf,bairro,cidade,complemento;
+    private final PessoaServices pessoaServices = new PessoaServices();
+    private final ClienteServices clienteServices = new ClienteServices();
+    private EditText mLogradouro,mNumero,mCep,mUf,mBairro,mCidade,mComplemento;
+    private String logradouro,numero,cep,uf,bairro,cidade,complemento;
     Button mBtnCadastro;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,32 +43,43 @@ public class activity_register_endereco extends AppCompatActivity {
     }
 
 
+
     public Cliente getClienteByAct(){
         Intent registerEnd = getIntent();
         Cliente cliente = (Cliente) registerEnd.getExtras().getSerializable("cliente");
         return cliente;
     }
 
-    public boolean cadastrar(){
-        EnderecoDAO enderecoDAO = new EnderecoDAO();
-        String message = new String();
+    public Usuario getUsuarioByAct(){
+        Intent registerEnd = getIntent();
+        Usuario usuario = (Usuario) registerEnd.getExtras().getSerializable("usuario");
+        return usuario;
+    }
+
+    public Pessoa getPessoaByAct(){
+        Intent registerEnd = getIntent();
+        Pessoa pessoa = (Pessoa) registerEnd.getExtras().getSerializable("pessoa");
+        return pessoa;
+    }
+
+    public void cadastrar(){
         boolean res = false;
         capturaTextos();
-        Cliente cliente = getClienteByAct();;
+        Cliente cliente = getClienteByAct();
+        Pessoa pessoa = getPessoaByAct();
+        Usuario usuario = getUsuarioByAct();
         if (!isCamposValidos()){
             res = false;
-            return res;
         }
         Endereco endereco = criarEndereco();
-        endereco.setFkPessoa(cliente.getDadosPessoais().getId());
-        cliente.getDadosPessoais().setEndereco(endereco);
         try {
-            clienteServices.cadastraCliente(cliente, cliente.getUsuario(), cliente.getDadosPessoais());
-            enderecoDAO.cadastraEndereco(endereco);
+            long idPessoa = pessoaServices.cadastraPessoa(pessoa,endereco);
+            pessoa.setId(idPessoa);
+            cliente.setDadosPessoais(pessoa);
+            clienteServices.cadastraCliente(cliente, usuario);
             res = true;
         } catch (AppException e) {
             e.printStackTrace();
-            message = e.getMessage();
             res = false;
         }
 
@@ -79,11 +88,13 @@ public class activity_register_endereco extends AppCompatActivity {
             Intent intent = new Intent(activity_register_endereco.this,ListaClinicasActivity.class);
             startActivity(intent);
         }else {
-            Toast.makeText(activity_register_endereco.this,message,Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity_register_endereco.this,"Erro ao cdastrar.",Toast.LENGTH_SHORT).show();
 
         }
-        return res;
     }
+
+
+
     public void findEditTexts(){
 
         mLogradouro = (EditText) findViewById(R.id.logradouro);
@@ -117,8 +128,6 @@ public class activity_register_endereco extends AppCompatActivity {
         mBairro.setError(null);
         mCidade.setError(null);
         mComplemento.setError(null);
-
-
 
         if (isCampoVazio(logradouro)){
             mLogradouro.setError("Campo vazio");
@@ -168,6 +177,7 @@ public class activity_register_endereco extends AppCompatActivity {
         endereco.setUf(uf);
         endereco.setBairro(bairro);
         endereco.setCidade(cidade);
+        endereco.setComplemento(complemento);
         return endereco;
     }
 

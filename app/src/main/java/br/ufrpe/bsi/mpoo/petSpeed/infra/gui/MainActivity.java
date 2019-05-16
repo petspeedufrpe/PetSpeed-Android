@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 		pessoa.setCpf("012213124");
 		pessoa.setNome("MEDICO SERVICE");
 		PessoaDAO pessoaDAO = new PessoaDAO();
-		long codPessoa =pessoaDAO.cadastraPessoa(pessoa);
+		long codPessoa = pessoaDAO.cadastraPessoa(pessoa);
 
 		pessoa.setId(codPessoa);
 

@@ -31,19 +31,17 @@ public class ClienteServices {
 
 	private AnimalDAO animalDAO;
 
-	public Cliente cadastraCliente(Cliente cliente,Usuario usuario,Pessoa pessoa) throws AppException {
+	public Cliente cadastraCliente(Cliente cliente,Usuario usuario) throws AppException {
 		if (usuarioDAO.getUsuario(cliente.getUsuario().getEmail()) != null) {
 			throw new AppException("Usuário já possui conta de Cliente.");
 		} else {
 
 			Long idUser = usuarioDAO.cadastrarUsuario(usuario);
 			usuario.setId(idUser);
-			Long idPessoa = pessoaDAO.cadastraPessoa(pessoa);
-			pessoa.setId(idPessoa);
+			cliente.setUsuario(usuario);
 			Long idCliente = clienteDAO.cadastraCliente(cliente);
 			cliente.setId(idCliente);
 		}
-
 		return cliente;
 	}
 	public void deletaCliente(Cliente cliente) throws AppException {

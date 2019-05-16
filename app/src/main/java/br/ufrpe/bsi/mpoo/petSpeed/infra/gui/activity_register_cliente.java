@@ -56,13 +56,13 @@ public class activity_register_cliente extends AppCompatActivity {
         Cliente cliente = criarCliente();
         Usuario usuario = criarUsuario();
         Pessoa pessoa = criarPessoa();
-        cliente.setUsuario(usuario);
-        cliente.setDadosPessoais(pessoa);
             res = clienteServices.isEmailClienteNaoCadastrado(usuario.getEmail());
             Toast.makeText(activity_register_cliente.this,Boolean.toString(res),Toast.LENGTH_LONG).show();
         if (res == true){//cliente nao esta no banco
             Intent registerEnd = new Intent(activity_register_cliente.this,activity_register_endereco.class);
             registerEnd.putExtra("cliente",cliente);
+            registerEnd.putExtra("usuario",usuario);
+            registerEnd.putExtra("pessoa",pessoa);
             startActivity(registerEnd);
         }else{
             Toast.makeText(activity_register_cliente.this,message,Toast.LENGTH_SHORT).show();

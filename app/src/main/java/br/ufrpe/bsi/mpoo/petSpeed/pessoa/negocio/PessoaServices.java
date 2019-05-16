@@ -4,20 +4,24 @@ package br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio;
 import android.database.Cursor;
 
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.PessoaDAO;
 
 public class PessoaServices {
-
+	private EnderecoDAO enderecoDAO = new EnderecoDAO();
 	private PessoaDAO pessoaDAO = new PessoaDAO();
 
 	private boolean validaCpf() {
 		return false;
 	}
 
-	public void cadastraPessoa(Pessoa pessoa) {
-	//	if (pessoaDAO.getPessoa(pessoa.getId())
+	public long cadastraPessoa(Pessoa pessoa, Endereco endereco) {
+		long idPessoa = pessoaDAO.cadastraPessoa(pessoa);
+		endereco.setFkPessoa(idPessoa);
+		enderecoDAO.cadastraEndereco(endereco);
+		return idPessoa;
 	}
 
 	public void deletaPessoa() {

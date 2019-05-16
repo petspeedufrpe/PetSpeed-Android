@@ -12,17 +12,18 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".infra.gui.activity_register_endereco"
-            android:label="@string/title_activity_register_endereco"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".infra.gui.activity_register_cliente" />
+            android:label="endereco">
+
+        </activity>
+        <activity android:name=".infra.gui.activity_register_cliente" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter> </activity>
         <activity android:name=".cliente.gui.ListaClinicasActivity" />
         <activity android:name=".infra.gui.LoginActivity" />
         <activity android:name=".infra.gui.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
