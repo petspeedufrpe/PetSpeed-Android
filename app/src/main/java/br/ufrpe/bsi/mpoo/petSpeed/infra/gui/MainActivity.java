@@ -102,7 +102,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 	}
-	public void login(View view){
+	public void loginClinica(View view){
 
     }
+
+	public void loginMedico(View view){
+
+	}
+	public void loginCliente(View view){
+
+	}
 }
