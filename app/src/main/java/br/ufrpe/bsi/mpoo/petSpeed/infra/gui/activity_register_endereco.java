@@ -50,47 +50,19 @@ public class activity_register_endereco extends AppCompatActivity {
         return cliente;
     }
 
-    public Usuario getUsuarioByAct(){
-        Intent registerEnd = getIntent();
-        Usuario usuario = (Usuario) registerEnd.getExtras().getSerializable("usuario");
-        return usuario;
-    }
-
-    public Pessoa getPessoaByAct(){
-        Intent registerEnd = getIntent();
-        Pessoa pessoa = (Pessoa) registerEnd.getExtras().getSerializable("pessoa");
-        return pessoa;
-    }
-
     public void cadastrar(){
         boolean res = false;
         capturaTextos();
         Cliente cliente = getClienteByAct();
-        Pessoa pessoa = getPessoaByAct();
-        Usuario usuario = getUsuarioByAct();
         if (!isCamposValidos()){
             res = false;
         }
         Endereco endereco = criarEndereco();
-        try {
-            long idPessoa = pessoaServices.cadastraPessoa(pessoa,endereco);
-            pessoa.setId(idPessoa);
-            cliente.setDadosPessoais(pessoa);
-            clienteServices.cadastraCliente(cliente, usuario);
-            res = true;
-        } catch (AppException e) {
-            e.printStackTrace();
-            res = false;
-        }
+        Intent finalIntent = new Intent(activity_register_endereco.this,FinalizaCadastroActivity.class);
+        finalIntent.putExtra("cliente", cliente);
+        finalIntent.putExtra("endereco",endereco);
+        startActivity(finalIntent);
 
-        if(res){
-            Toast.makeText(activity_register_endereco.this,"Usuario Cadastrado Com sucesso",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(activity_register_endereco.this,ListaClinicasActivity.class);
-            startActivity(intent);
-        }else {
-            Toast.makeText(activity_register_endereco.this,"Erro ao cdastrar.",Toast.LENGTH_SHORT).show();
-
-        }
     }
 
 

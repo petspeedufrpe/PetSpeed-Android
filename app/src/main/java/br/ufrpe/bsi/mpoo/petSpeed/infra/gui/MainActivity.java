@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 		//cliente.setDadosUsuario(usuarioDAO.getUsuario("teste@gmail.com"));
 		Toast.makeText(MainActivity.this, String.valueOf(cliente.getUsuario().getId()),Toast.LENGTH_LONG).show();*/
 
-		Usuario usuario = new Usuario();
+		/*Usuario usuario = new Usuario();
 		usuario.setEmail("asgsdfsdfasdgagregebr");
 		usuario.setSenha("WEasdasdGWEG");
 		UsuarioServices uServices = new UsuarioServices();
@@ -118,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
 			Toast.makeText(MainActivity.this, "Cadastro medico bem sucedido",Toast.LENGTH_LONG).show();
 		}catch(AppException e){
 			Toast.makeText(MainActivity.this, String.valueOf(e),Toast.LENGTH_LONG).show();
-        }
+        }*/
+		Toast.makeText(MainActivity.this,"BEM VINDO",Toast.LENGTH_LONG).show();
+
 	}
 }
