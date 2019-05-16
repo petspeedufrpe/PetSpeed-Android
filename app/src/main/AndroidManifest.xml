@@ -10,11 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".infra.gui.FinalizaCadastroActivity"></activity>
+        <activity android:name=".infra.gui.TesteActivity"></activity>
+        <activity android:name=".infra.gui.FinalizaCadastroActivity" />
         <activity
             android:name=".infra.gui.CadastroEnderecoActivity"
-            android:label="endereco"></activity>
-        <activity android:name=".infra.gui.CadastroClienteActivity"></activity>
+            android:label="endereco" />
+        <activity android:name=".infra.gui.CadastroClienteActivity" />
         <activity android:name=".cliente.gui.ListaClinicasActivity" />
         <activity android:name=".infra.gui.LoginActivity">
             <intent-filter>
@@ -23,8 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".infra.gui.MainActivity"></activity>
+        <activity android:name=".infra.gui.MainActivity" />
     </application>
 
 </manifest>
