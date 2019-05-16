@@ -5,64 +5,53 @@
     android:id="@+id/loginLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_activity_background_gradient"
+    android:background="@android:color/background_light"
     tools:context=".infra.gui.LoginActivity">
 
     <Button
         android:id="@+id/loginActloginBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LOGIN"
-        app:layout_constraintBottom_toBottomOf="@+id/group"
-        app:layout_constraintStart_toStartOf="@+id/group"
-        app:layout_constraintTop_toTopOf="@+id/group" />
+        android:layout_width="193dp"
+        android:layout_height="46dp"
+        android:backgroundTint="#00A759"
+        android:text="ENTRAR"
+        android:textColor="#FFFFFFFF"
+        tools:layout_editor_absoluteX="105dp"
+        tools:layout_editor_absoluteY="458dp" />
 
     <Button
         android:id="@+id/loginActLoginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="Sair"
-        app:layout_constraintBottom_toBottomOf="@+id/group"
-        app:layout_constraintEnd_toEndOf="@+id/group"
-        app:layout_constraintTop_toTopOf="@+id/group" />
-
-    <android.support.constraint.Group
-        android:id="@+id/group"
-        android:layout_width="218dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:constraint_referenced_ids="loginActLoginBtn,loginActloginBtn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.886" />
+        android:backgroundTint="#00A759"
+        android:text="Cadastre-se"
+        android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteX="137dp"
+        tools:layout_editor_absoluteY="522dp" />
 
     <EditText
         android:id="@+id/LoginEmailTxBx"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
+        android:layout_width="304dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="#00A759"
         android:ems="10"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
+        android:textColor="#FF00A759"
         app:layout_constraintBottom_toTopOf="@+id/LoginPswrdTxBx"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginActivityLogo"
-        app:layout_constraintVertical_bias="0.429" />
+        app:layout_constraintVertical_bias="0.768" />
 
     <EditText
         android:id="@+id/LoginPswrdTxBx"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="356dp"
+        android:layout_width="304dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="384dp"
+        android:backgroundTint="#00A759"
         android:ems="10"
         android:hint="Senha"
         android:inputType="textPassword"
@@ -72,14 +61,14 @@
 
     <ImageView
         android:id="@+id/loginActivityLogo"
-        android:layout_width="114dp"
-        android:layout_height="121dp"
+        android:layout_width="137dp"
+        android:layout_height="149dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@drawable/logo" />
 
 </android.support.constraint.ConstraintLayout>
