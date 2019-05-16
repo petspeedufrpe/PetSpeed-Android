@@ -1,6 +1,7 @@
 package br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio;
 
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import java.util.List;
 
@@ -30,14 +31,21 @@ public class ClienteServices {
 
 	private AnimalDAO animalDAO;
 
-	public void cadastraCliente(Cliente cliente) throws AppException {
-		if (usuarioDAO.getUsuario(cliente.getUsuario().getEmail())!=null){
+	public Cliente cadastraCliente(Cliente cliente,Usuario usuario,Pessoa pessoa) throws AppException {
+		if (usuarioDAO.getUsuario(cliente.getUsuario().getEmail()) != null) {
 			throw new AppException("Usuário já possui conta de Cliente.");
+		} else {
+
+			Long idUser = usuarioDAO.cadastrarUsuario(usuario);
+			usuario.setId(idUser);
+			Long idPessoa = pessoaDAO.cadastraPessoa(pessoa);
+			pessoa.setId(idPessoa);
+			Long idCliente = clienteDAO.cadastraCliente(cliente);
+			cliente.setId(idCliente);
 		}
-		clienteDAO.cadastraCliente(cliente);
 
+		return cliente;
 	}
-
 	public void deletaCliente(Cliente cliente) throws AppException {
 		if (clienteDAO.getClienteById(cliente.getId())!=null){
 			clienteDAO.deletaCliente(cliente);
@@ -129,7 +137,8 @@ public class ClienteServices {
 
 	}
 
-	public void adicionaEndereco() {
+	public void adicionaEndereco(Endereco endereco) {
+
 
 	}
 

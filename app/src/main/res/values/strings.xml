@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PetSpeed</string>
+    <string name="title_activity_register_endereco">activity_register_endereco</string>
 </resources>

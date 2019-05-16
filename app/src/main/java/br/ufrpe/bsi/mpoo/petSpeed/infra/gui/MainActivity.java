@@ -1,11 +1,14 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 
+import android.content.Intent;
+import android.hardware.camera2.TotalCaptureResult;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
@@ -183,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
 		cliente.setId(codCliente);
 
 
-		**/
+
 		Pessoa pessoa;
 		PessoaDAO p = new PessoaDAO();
 		pessoa=p.getPessoaById((long)1);
@@ -193,5 +196,10 @@ public class MainActivity extends AppCompatActivity {
 		Toast.makeText(MainActivity.this,pessoa.getNome(),Toast
 		.LENGTH_LONG).show();
 
+		**/
+		startActivity(new Intent(MainActivity.this,LoginActivity.class));
+		//ClienteServices clienteServices = new ClienteServices();
+
+		//Toast.makeText(MainActivity.this,Boolean.toString(clienteServices.isEmailClienteCadastrado("teste@gmail.com")),Toast.LENGTH_LONG).show();
 	}
 }

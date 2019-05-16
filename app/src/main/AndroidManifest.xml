@@ -10,8 +10,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".cliente.gui.ListaClinicasActivity"></activity>
-        <activity android:name=".infra.gui.LoginActivity"></activity>
+        <activity
+            android:name=".infra.gui.activity_register_endereco"
+            android:label="@string/title_activity_register_endereco"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".infra.gui.activity_register_cliente" />
+        <activity android:name=".cliente.gui.ListaClinicasActivity" />
+        <activity android:name=".infra.gui.LoginActivity" />
         <activity android:name=".infra.gui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

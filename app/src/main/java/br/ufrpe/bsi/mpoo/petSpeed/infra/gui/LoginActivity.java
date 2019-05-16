@@ -27,11 +27,21 @@ public class LoginActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		sairbtn = (Button) findViewById(R.id.loginActLoginBtn);
+		sairbtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent registerIntent = new Intent(LoginActivity.this,activity_register_cliente.class);
+				startActivity(registerIntent);
+
+			}
+		});
+
 
 		mEmail = (EditText) findViewById(R.id.LoginEmailTxBx);
 		mSenha = (EditText) findViewById(R.id.LoginPswrdTxBx);
 		loginbtn = (Button) findViewById(R.id.loginActloginBtn);
-		sairbtn = (Button) findViewById(R.id.loginActLoginBtn);
+
 		logar();
 		loginbtn.setOnClickListener(new View.OnClickListener() {
 			@Override
