@@ -4,11 +4,15 @@ package br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import java.util.List;
+
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
+import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
+import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
 
 public class ClienteDAO {
 
@@ -24,8 +28,6 @@ public class ClienteDAO {
 		res = db.insert(DBHelper.TABELA_CLIENTE,null,values);
 		db.close();
 		return  res;
-
-
 
 	}
 
@@ -66,11 +68,32 @@ public class ClienteDAO {
 		return this.loadCliente(query,args);
 	}
 
-		public Endereco getEnderecoById(Long id) {
-		return null;
+	public Cursor getIdObjectByCliente(Long idCliente){
+		SQLiteDatabase db= dbHelper.getReadableDatabase();
+		String query = "SELECT * FROM "+DBHelper.TABELA_CLIENTE+ " WHERE "+DBHelper.COL_CLIENTE_ID+
+				" LIKE ?;";
+		String[] args = {String.valueOf(idCliente)};
+
+		return db.rawQuery(query,args); //Metodo para ser usado na classe de negocio, que usa o id do cliente
+										// para recuperar o objeto inteiro(todas as outras classes
+										// ex.(pessoa,usuario e endereco podem ser acessadas).
 	}
 
-	public Animal getAnimalById(long id) {
+	public Cliente getIdClienteByUsuario(long idUsuario){
+		String query = " SELECT * FROM "+DBHelper.TABELA_CLIENTE+" WHERE "+DBHelper.COL_CLIENTE_FK_USUARIO+
+				" LIKE ?;";
+		String[] args = {String.valueOf(idUsuario)};
+		return this.loadCliente(query,args);
+	}
+	public Cliente getClienteByEmail(String email){//Passando um email como parametro, recupera o cliente
+		UsuarioDAO usuarioDAO = new UsuarioDAO();  // que está atribuido a este email de um usuario(classe)
+		Usuario usuario = usuarioDAO.getUsuario(email);//retorna o usuario que tem este email
+		Cliente cliente= getIdClienteByUsuario(usuario.getId());//retorna o cliente que tem este usuario
+		return cliente;
+	}
+
+
+	public Animal getAnimalById(long idCliente) {
 
 		return null;
 	}
@@ -97,13 +120,20 @@ public class ClienteDAO {
 
 	public void alteraEmail() {
 
+
 	}
 
 	public void alteraSenha() {
 
 	}
 
-	public void alteraAvaliacao() {
+	public void alteraAvaliacao(Cliente cliente) {
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		values.put(DBHelper.COL_CLIENTE_AVALIACAO,cliente.getAvaliacao());
+		db.update(DBHelper.TABELA_CLIENTE,values,DBHelper.COL_CLIENTE_ID+ " = ?",
+				new String[]{String.valueOf(cliente.getId())});
+		db.close();
 
 	}
 

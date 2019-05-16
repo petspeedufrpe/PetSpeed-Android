@@ -3,11 +3,12 @@ package br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
 
 public class PessoaDAO {
-	private  DBHelper dbHelper = new DBHelper();
+	private DBHelper dbHelper = new DBHelper();
 	public long cadastraPessoa(Pessoa pessoa){ // Retorna o id da pessoa cadastrada
 		long res;
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -23,7 +24,7 @@ public class PessoaDAO {
 	public void deletaPessoa(Pessoa pessoa) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-		db.delete(DBHelper.TABELA_PESSOA,DBHelper.COL_PESSOA_ID + " = ?",new String[]{String.valueOf(pessoa.getId())});
+		db.delete(DBHelper.TABELA_PESSOA, DBHelper.COL_PESSOA_ID + " = ?",new String[]{String.valueOf(pessoa.getId())});
 		db.close();
 	}
 
@@ -31,7 +32,7 @@ public class PessoaDAO {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(DBHelper.COL_PESSOA_NOME,pessoa.getNome());
-		db.update(DBHelper.TABELA_PESSOA,values,DBHelper.COL_PESSOA_ID + " = ?", new String[]{String.valueOf(pessoa.getId())});
+		db.update(DBHelper.TABELA_PESSOA,values, DBHelper.COL_PESSOA_ID + " = ?", new String[]{String.valueOf(pessoa.getId())});
 		db.close();//recupera a pessoa pelo ID_pessoa
 	}
 
@@ -39,11 +40,11 @@ public class PessoaDAO {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(DBHelper.COL_PESSOA_CPF,pessoa.getCpf());
-		db.update(DBHelper.TABELA_PESSOA,values,DBHelper.COL_PESSOA_ID + " = ?", new String[]{String.valueOf(pessoa.getId())});
+		db.update(DBHelper.TABELA_PESSOA,values, DBHelper.COL_PESSOA_ID + " = ?", new String[]{String.valueOf(pessoa.getId())});
 		db.close();//recupera a pessoa pelo ID_pessoa
 	}
 
-	private  Pessoa createPessoa(Cursor cursor){ //usa o cursor para recuperar os valores das colunas;
+	private Pessoa createPessoa(Cursor cursor){ //usa o cursor para recuperar os valores das colunas;
 		Pessoa pessoa = new Pessoa();
 		int indexId = cursor.getColumnIndex(DBHelper.COL_PESSOA_ID);
 		int indexNome = cursor.getColumnIndex(DBHelper.COL_PESSOA_NOME);
@@ -57,15 +58,21 @@ public class PessoaDAO {
 	}
 
 	public Pessoa getPessoaById(Long id){
-		Pessoa pessoa = null;
-		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		String sql = "SELECT * FROM " + DBHelper.TABELA_PESSOA+ " WHERE " + DBHelper.COL_PESSOA_ID + " LIKE ?;";
 		String[] args = {String.valueOf(id)};
 		return this.loadObject(sql,args); /** pega o object da pessoa pelo id dela. usa a func loadObject
 		 									  para criar a pessoa e assim retorna-la nessa funcao**/
 	}
 
-	private Pessoa loadObject(String sql, String [] args){
+	public Cursor getIdEnderecoByPessoa(Long idPessoa){
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		String query = "SELECT * FROM "+ DBHelper.TABELA_ENDERECO+ " WHERE "+
+				DBHelper.COL_ENDERECO_FK_PESSOA+ " LIKE ?;";
+		String[] args = {String.valueOf(idPessoa)};
+		return db.rawQuery(query,args);
+	}
+
+	private Pessoa loadObject(String sql, String[] args){
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cursor = db.rawQuery(sql,args);
 		Pessoa pessoa = null;

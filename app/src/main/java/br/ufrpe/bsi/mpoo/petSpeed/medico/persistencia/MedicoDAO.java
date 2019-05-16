@@ -41,7 +41,7 @@ public class MedicoDAO {
         medico.setAvaliacao(cursor.getDouble(indexAvaliacao));
         int indexfkUsuario = cursor.getColumnIndex(DBHelper.COL_MEDICO_FK_USUARIO);
         long fkUsuario = cursor.getLong(indexfkUsuario);
-        Usuario usuario = usuarioDAO.getUsuarioById(fkUsuario);
+        Usuario usuario = usuarioDAO.getUsuario(fkUsuario);
         usuario.setId(fkUsuario);
         medico.setUsuario(usuario);
 
