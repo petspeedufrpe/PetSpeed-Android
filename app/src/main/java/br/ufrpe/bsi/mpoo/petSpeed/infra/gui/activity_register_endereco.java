@@ -52,6 +52,7 @@ public class activity_register_endereco extends AppCompatActivity {
     }
 
     public boolean cadastrar(){
+        EnderecoDAO enderecoDAO = new EnderecoDAO();
         String message = new String();
         boolean res = false;
         capturaTextos();
@@ -65,6 +66,7 @@ public class activity_register_endereco extends AppCompatActivity {
         cliente.getDadosPessoais().setEndereco(endereco);
         try {
             clienteServices.cadastraCliente(cliente, cliente.getUsuario(), cliente.getDadosPessoais());
+            enderecoDAO.cadastraEndereco(endereco);
             res = true;
         } catch (AppException e) {
             e.printStackTrace();

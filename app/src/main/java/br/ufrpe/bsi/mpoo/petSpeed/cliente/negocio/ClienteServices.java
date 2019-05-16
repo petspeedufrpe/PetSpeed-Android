@@ -52,16 +52,23 @@ public class ClienteServices {
 		}
 
 	}
-	public void login(String email, String senha) throws AppException {
+	public Cliente login(String email, String senha) throws AppException {
 		Usuario usuario = usuarioDAO.getUsuario(email,senha);
+		Cliente cliente = new Cliente();
 		if (usuario == null){
-			throw new AppException("Usuário não cadastrado.");
+			cliente = null;
+			throw new AppException("Usuário ou senha inválida.");
 		}
+		PessoaServices pessoaServices = new PessoaServices();
+		cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
+		cliente = getClienteCompleto(cliente.getId());
+
+		return cliente;
 	}
 
-	public boolean isEmailClienteCadastrado(String email){
+	public boolean isEmailClienteNaoCadastrado(String email){//retorna true se nao estiver no banco
 		Usuario usuario = usuarioDAO.getUsuario(email);
-		return ((usuario!= null && usuario.getEmail().length() >0));
+		return (!(usuario!= null && usuario.getEmail().length() >0));
 	}
 
 	public String getEmailByCliente(Long idCliente){
@@ -79,7 +86,6 @@ public class ClienteServices {
 	public Cliente getClienteCompleto(long idCliente){
 		Cliente cliente;
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		PessoaDAO pessoaDAO = new PessoaDAO();
 		cliente = clienteDAO.getClienteById(idCliente);
 		Cursor data = clienteDAO.getIdObjectByCliente(idCliente);
 
