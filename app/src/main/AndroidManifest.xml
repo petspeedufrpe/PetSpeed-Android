@@ -10,6 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".infra.gui.LoginMedicoActivity"></activity>
+        <activity android:name=".infra.gui.CrudAnimalActivity" />
+        <activity android:name=".infra.gui.SplashScreenActivity" />
+        <activity android:name=".infra.gui.LoginClinicaActivity" />
+        <activity android:name=".infra.gui.MainActivity">
         <activity android:name=".infra.gui.TesteActivity"></activity>
         <activity android:name=".infra.gui.FinalizaCadastroActivity" />
         <activity
@@ -24,7 +29,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".infra.gui.MainActivity" />
     </application>
 
 </manifest>

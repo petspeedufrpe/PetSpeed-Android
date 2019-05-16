@@ -1,7 +1,9 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 
-import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,7 +14,7 @@ import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginClinicaActivity extends AppCompatActivity {
 
 	private EditText mEmail;
 	private EditText mSenha;
@@ -27,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+
 		sairbtn = (Button) findViewById(R.id.loginActLoginBtn);
 		sairbtn.setOnClickListener(new View.OnClickListener() {
 			@Override
