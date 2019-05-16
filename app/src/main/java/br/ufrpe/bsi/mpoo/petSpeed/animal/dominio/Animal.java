@@ -13,6 +13,10 @@ public class Animal {
 
 	private String raca;
 
+	private int peso;
+
+	private int idade;
+
 	//private BufferedImage foto;
 
 	private float peso;
@@ -61,6 +65,14 @@ public class Animal {
 		this.raca = raca;
 	}
 
+	public int getPeso() {return peso; }
+
+	public void setPeso(int peso) { this.peso = peso; }
+
+	public int getIdade() { return idade; }
+
+	public void setIdade(int idade) { this.idade = idade; }
+
 	public List<OrdemServico> getHistorico() {
 		return historico;
 	}
@@ -68,4 +80,5 @@ public class Animal {
 	public void setHistorico(List<OrdemServico> historico) {
 		this.historico = historico;
 	}
+
 }

@@ -9,24 +9,28 @@ import java.util.List;
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petSpeed.os.dominio.OrdemServico;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.DBHelper;
 
 public class AnimalDAO {
 
-	private DBHelper dbHelper= new DBHelper();
+	private DBHelper db;
 
-	public long cadastraAnimal(Animal animal) {
-        long res;
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(DBHelper.COL_ANIMAL_IDADE, animal.getIdade());
-        values.put(DBHelper.COL_ANIMAL_NOME, animal.getNome());
-        values.put(DBHelper.COL_ANIMAL_PESO, animal.getPeso());
-        values.put(DBHelper.COL_ANIMAL_RACA, animal.getRaca());
-        res = db.insert(DBHelper.TABELA_ANIMAL, null, values);
-        db.close();
+	public long cadastraAnimal(Animal animal, long idCliente) {
+		SQLiteDatabase dbWrite = db.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		values.put(DBHelper.COL_ANIMAL_NOME, animal.getNome());
+		values.put(DBHelper.COL_ANIMAL_RACA, animal.getRaca());
+		values.put(DBHelper.COL_ANIMAL_PESO, animal.getPeso());
+		values.put(DBHelper.COL_ANIMAL_IDADE, animal.getIdade());
+		values.put(DBHelper.COL_ANIMAL_FK_CLIENTE, idCliente);
+		long res = dbWrite.insert(DBHelper.TABELA_ANIMAL, null, values);
+		db.close();
+		return res;
+	}
 
-        return res;
-    }
+	public void cadastraAnimal(Animal animal) {
+
+	}
 
 	public void deletaAnimal(Animal animal) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
