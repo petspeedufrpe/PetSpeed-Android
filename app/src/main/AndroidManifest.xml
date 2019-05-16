@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".infra.gui.SplashScreenActivity"></activity>
+        <activity android:name=".infra.gui.CrudAnimalActivity"></activity>
+        <activity android:name=".infra.gui.SplashScreenActivity" />
         <activity android:name=".infra.gui.LoginActivity" />
         <activity android:name=".infra.gui.MainActivity">
             <intent-filter>

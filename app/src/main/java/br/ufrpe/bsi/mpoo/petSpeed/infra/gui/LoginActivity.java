@@ -8,7 +8,7 @@ import android.widget.Spinner;
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 
 public class LoginActivity extends AppCompatActivity {
-	private String[] tipoUsuario = new String[]{"Clínica", "Veterinário", "Cliente"};
+	//private String[] tipoUsuario = new String[]{"Clínica", "Veterinário", "Cliente"};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

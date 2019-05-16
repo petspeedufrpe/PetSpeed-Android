@@ -6,13 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".infra.gui.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="271dp"
+        android:layout_height="325dp"
+        app:srcCompat="@mipmap/ic_launcher_foreground"
+        tools:layout_editor_absoluteX="70dp"
+        tools:layout_editor_absoluteY="95dp" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="111dp"
+        android:layout_height="49dp"
+        android:background="#00A759"
+        android:text="Clínica"
+        android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="474dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="111dp"
+        android:layout_height="49dp"
+        android:background="#00A759"
+        android:text="Veterinário"
+        android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteX="149dp"
+        tools:layout_editor_absoluteY="474dp" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="111dp"
+        android:layout_height="49dp"
+        android:background="#00A759"
+        android:text="Cliente"
+        android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteX="288dp"
+        tools:layout_editor_absoluteY="474dp" />
 </android.support.constraint.ConstraintLayout>
