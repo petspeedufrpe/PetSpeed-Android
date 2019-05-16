@@ -25,8 +25,8 @@
         android:backgroundTint="#00A759"
         android:text="Cadastre-se"
         android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="137dp"
-        tools:layout_editor_absoluteY="517dp" />
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="514dp" />
 
     <EditText
         android:id="@+id/LoginEmailTxBx"

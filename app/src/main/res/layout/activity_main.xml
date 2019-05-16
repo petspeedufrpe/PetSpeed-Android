@@ -15,30 +15,33 @@
         tools:layout_editor_absoluteY="95dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonClinica"
         android:layout_width="111dp"
         android:layout_height="49dp"
         android:background="#00A759"
+        android:onClick="login"
         android:text="Clínica"
         android:textColor="#FFFFFF"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="474dp" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonVeterinrario"
         android:layout_width="111dp"
         android:layout_height="49dp"
         android:background="#00A759"
+        android:onClick="login"
         android:text="Veterinário"
         android:textColor="#FFFFFF"
         tools:layout_editor_absoluteX="149dp"
         tools:layout_editor_absoluteY="474dp" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/buttonCliente"
         android:layout_width="111dp"
         android:layout_height="49dp"
         android:background="#00A759"
+        android:onClick="login"
         android:text="Cliente"
         android:textColor="#FFFFFF"
         tools:layout_editor_absoluteX="288dp"

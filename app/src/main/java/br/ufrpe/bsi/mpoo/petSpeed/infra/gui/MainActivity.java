@@ -2,6 +2,7 @@ package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 		ClienteDAO clienteDAO = new ClienteDAO();
 		cliente = clienteDAO.getClienteById((long) 5);
 		//cliente.setDadosUsuario(usuarioDAO.getUsuario("teste@gmail.com"));
-		Toast.makeText(MainActivity.this, String.valueOf(cliente.getUsuario().getId()),Toast.LENGTH_LONG).show();*/
+		Toast.makeText(MainActivity.this, String.valueOf(cliente.getUsuario().getId()),Toast.LENGTH_LONG).show();
 
 		Usuario usuario = new Usuario();
 		usuario.setEmail("teste@gmail.com");
@@ -96,7 +97,12 @@ public class MainActivity extends AppCompatActivity {
 		medico.setAvaliacao(5.0);
 		medico.setCrmv("teste");
 		medico.setDadosPessoais(pessoa);
-		medico.setUsuario(usuario);
+		medico.setUsuario(usuario);*/
+
+
 
 	}
+	public void login(View view){
+
+    }
 }
