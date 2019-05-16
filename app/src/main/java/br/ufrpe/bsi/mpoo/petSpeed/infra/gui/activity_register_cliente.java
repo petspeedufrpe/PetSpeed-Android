@@ -58,9 +58,9 @@ public class activity_register_cliente extends AppCompatActivity {
         Pessoa pessoa = criarPessoa();
         cliente.setUsuario(usuario);
         cliente.setDadosPessoais(pessoa);
-            res = clienteServices.isEmailClienteCadastrado(usuario.getEmail());
+            res = clienteServices.isEmailClienteNaoCadastrado(usuario.getEmail());
             Toast.makeText(activity_register_cliente.this,Boolean.toString(res),Toast.LENGTH_LONG).show();
-        if (res == false){
+        if (res == true){//cliente nao esta no banco
             Intent registerEnd = new Intent(activity_register_cliente.this,activity_register_endereco.class);
             registerEnd.putExtra("cliente",cliente);
             startActivity(registerEnd);
