@@ -1,78 +1,94 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Parcelable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
-public class activity_register_cliente extends AppCompatActivity {
+public class CadastroClienteActivity extends AppCompatActivity {
 
-    EditText mNome,mCpf,mEmail,mSenha,mcmfSenha;
-    String nome,cpf,email,senha,cmfSenha;
+    EditText mNome, mCpf, mEmail, mSenha, mcmfSenha;
+    String nome, cpf, email, senha, cmfSenha;
     Button mButtoRegister;
-    TextView mTextLogin;
+    TextView mTextBkHome;
+    private final Map<String,Object> values = new HashMap<>();
+
     ClienteServices clienteServices = new ClienteServices();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_cliente);
+        setContentView(R.layout.activity_cadastro_cliente);
+
+        mTextBkHome = findViewById(R.id.ActCadastroTxVwBackHome);
+
+        mTextBkHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                limparCampos();
+                Intent homeIntent = new Intent(CadastroClienteActivity.this, LoginActivity.class);
+                startActivity(homeIntent);
+
+            }
+        });
 
         mButtoRegister = findViewById(R.id.register);
 
         mButtoRegister.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { cadastrar(); }
+            public void onClick(View v) {
+                cadastrar();
+            }
 
         });
     }
 
-    public Cliente cadastrar(){
+    public Cliente cadastrar() {
         boolean res = false;
         String message = new String();
         capturaTextos();
-        if(!isCamposValidos()){
+        if (!isCamposValidos()) {
             res = false;
         }
         Cliente cliente = criarCliente();
         cliente.setUsuario(criarUsuario());
         cliente.setDadosPessoais(criarPessoa());
-            res = clienteServices.isEmailClienteNaoCadastrado(cliente.getUsuario().getEmail());
-            Toast.makeText(activity_register_cliente.this,Boolean.toString(res),Toast.LENGTH_LONG).show();
-        if (res == true){//cliente nao esta no banco
-            Intent registerEnd = new Intent(activity_register_cliente.this,activity_register_endereco.class);
-            registerEnd.putExtra("cliente",cliente);
-            startActivity(registerEnd);
-        }else{
-            Toast.makeText(activity_register_cliente.this,message,Toast.LENGTH_SHORT).show();
+        res = clienteServices.isEmailClienteNaoCadastrado(cliente.getUsuario().getEmail());
+        if (res == true) {//cliente nao esta no banco
+            if (isCamposValidos()){
+                Intent registerEnd = new Intent(CadastroClienteActivity.this, CadastroEnderecoActivity.class);
+                Bundle accountBundle = new Bundle();
+                accountBundle.putSerializable("cliente", cliente);
+                accountBundle.putString("tipo", "cliente");
+                registerEnd.putExtra("bundle", accountBundle);
+                startActivity(registerEnd);
+            }
+        } else {
+            Toast.makeText(CadastroClienteActivity.this, "Por favor, verifique os campos.", Toast.LENGTH_SHORT).show();
             limparCampos();
 
         }
 
-     return cliente;
+        return cliente;
 
     }
 
-    public void capturaTextos(){
+    public void capturaTextos() {
         findEditTexts();
         nome = mNome.getText().toString().trim();
         cpf = mCpf.getText().toString().trim();
@@ -81,14 +97,14 @@ public class activity_register_cliente extends AppCompatActivity {
         cmfSenha = mcmfSenha.getText().toString().trim();
     }
 
-    public void findEditTexts(){
+    public void findEditTexts() {
 
         mNome = (EditText) findViewById(R.id.username);
         mCpf = (EditText) findViewById(R.id.cpf);
         mEmail = (EditText) findViewById(R.id.email);
         mSenha = (EditText) findViewById(R.id.passwd);
-        mcmfSenha = (EditText)findViewById(R.id.cnfpasswd);
-        mTextLogin = (TextView) findViewById(R.id.login);
+        mcmfSenha = (EditText) findViewById(R.id.cnfpasswd);
+        mTextBkHome = (TextView) findViewById(R.id.ActCadastroTxVwBackHome);
 
     }
 
@@ -102,11 +118,11 @@ public class activity_register_cliente extends AppCompatActivity {
         mEmail.setError(null);
         mcmfSenha.setError(null);
 
-        if (isCampoVazio(nome)){
+        if (isCampoVazio(nome)) {
             mNome.setError("Campo vazio");
             focusView = mNome;
             res = false;
-        }  else if (isCampoVazio(cpf)) {
+        } else if (isCampoVazio(cpf)) {
             mCpf.setError("Campo vazio");
             focusView = mCpf;
             res = false;
@@ -114,7 +130,7 @@ public class activity_register_cliente extends AppCompatActivity {
             mEmail.setError("Email inválido");
             focusView = mEmail;
             res = false;
-        } else if (isCampoVazio(senha)){
+        } else if (isCampoVazio(senha)) {
             mSenha.setError("Campo vazio");
             focusView = mSenha;
             res = false;
@@ -122,40 +138,41 @@ public class activity_register_cliente extends AppCompatActivity {
             focusView = mcmfSenha;
             mcmfSenha.setError("Campo vazio");
             res = false;
-        } if(!isSenhasIguais(senha, cmfSenha) ){
+        }
+        if (!isSenhasIguais(senha, cmfSenha)) {
             Toast.makeText(this, "Senhas Devem ser iguais", Toast.LENGTH_SHORT).show();
             focusView = mcmfSenha;
             res = false;
         }
-        if(!res){
+        if (!res) {
             focusView.requestFocus();
         }
 
-      return res;
+        return res;
     }
 
 
-    private boolean isCampoVazio(String valor){
+    private boolean isCampoVazio(String valor) {
         boolean resultado = TextUtils.isEmpty(valor) || valor.trim().isEmpty();
         return resultado;
     }
 
-    private boolean isEmailValido(String email){
-        boolean resultado = (!isCampoVazio(email)&& Patterns.EMAIL_ADDRESS.matcher(email).matches());
+    private boolean isEmailValido(String email) {
+        boolean resultado = (!isCampoVazio(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
         return resultado;
     }
 
-    private boolean isSenhasIguais(String senha,String cmfSenha){
+    private boolean isSenhasIguais(String senha, String cmfSenha) {
         return ((senha.equals(cmfSenha)));
     }
 
-    private Cliente criarCliente(){
+    private Cliente criarCliente() {
         Cliente cliente = new Cliente();
         cliente.setAvaliacao(5);
         return cliente;
     }
 
-    private Usuario criarUsuario(){
+    private Usuario criarUsuario() {
         Usuario usuario = new Usuario();
         usuario.setSenha(senha);
         usuario.setEmail(email);
@@ -163,7 +180,7 @@ public class activity_register_cliente extends AppCompatActivity {
         return usuario;
     }
 
-    private Pessoa criarPessoa(){
+    private Pessoa criarPessoa() {
         Pessoa pessoa = new Pessoa();
         pessoa.setCpf(cpf);
         pessoa.setNome(nome);
@@ -171,14 +188,13 @@ public class activity_register_cliente extends AppCompatActivity {
         return pessoa;
     }
 
-    private void limparCampos(){
+    private void limparCampos() {
         mNome.setText("");
         mSenha.setText("");
         mcmfSenha.setText("");
         mEmail.setText("");
         mCpf.setText("");
 
-        }
+    }
 
 }
-

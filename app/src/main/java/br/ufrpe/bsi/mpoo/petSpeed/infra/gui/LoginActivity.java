@@ -1,113 +1,167 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
 
 public class LoginActivity extends AppCompatActivity {
 
-	private EditText mEmail;
-	private EditText mSenha;
-	private Button loginbtn;
-	private Button sairbtn;
-	private String email;
-	private String senha;
-
-	private ClienteServices clienteServices = new ClienteServices();
-	private PessoaServices pessoaServices = new PessoaServices();
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
-		sairbtn = (Button) findViewById(R.id.loginActLoginBtn);
-		sairbtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent registerIntent = new Intent(LoginActivity.this,activity_register_cliente.class);
-				startActivity(registerIntent);
-
-			}
-		});
+    private EditText mEmail;
+    private EditText mSenha;
+    private Button loginbtn;
+    private Button cadastrarBtn;
+    private String email;
+    private String senha;
+    private ContasDeUsuario contaDeUsuario;
+    private boolean contaSetada = false;
 
 
-		mEmail = (EditText) findViewById(R.id.LoginEmailTxBx);
-		mSenha = (EditText) findViewById(R.id.LoginPswrdTxBx);
-		loginbtn = (Button) findViewById(R.id.loginActloginBtn);
+    private ClienteServices clienteServices = new ClienteServices();
 
-		logar();
-		loginbtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent it = new Intent(LoginActivity.this,MainActivity.class);
-				startActivity(it);
-			}
-		});
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
 
-	private void logar(){
-		capturaTextos();
-		if(!camposValidos()){
-			return;
-		}
+        mEmail = (EditText) findViewById(R.id.LoginEmailTxBx);
+        mSenha = (EditText) findViewById(R.id.LoginPswrdTxBx);
+        loginbtn = (Button) findViewById(R.id.loginActLoginBtn);
+        cadastrarBtn = (Button) findViewById(R.id.LoginActCadastrarBtn);
 
-		boolean result = false;
-		try {
-			clienteServices.login(email,senha);
-			if (result){
-				startActivity(new Intent(LoginActivity.this,MainActivity.class));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
-	}
+        loginbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //do-nothing
+            }
+        });
 
-	private void capturaTextos(){
-		email = mEmail.getText().toString().trim();
-		senha = mSenha.getText().toString().trim();
-	}
 
-	private boolean camposValidos(){
-		boolean result = true;
-		String email = mEmail.getText().toString();
-		String senha = mSenha.getText().toString();
-		View focusView = null;
-		//validando senha
-		if (TextUtils.isEmpty(senha) ||!validaSenha(senha) ){
-			mSenha.setError("Senha inválida");
-			focusView = mSenha;
-			result = false;
-		}
+        cadastrarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (contaSetada) {
+                    if (contaDeUsuario.getDescricao().equals("Medico")) {
+                        Intent registerIntent = new Intent(LoginActivity.this, CadastroMedicoActivity.class);
+                        startActivity(registerIntent);
+                    } else if (contaDeUsuario.getDescricao().equals("Cliente")) {
+                        Intent registerIntent = new Intent(LoginActivity.this, CadastroClienteActivity.class);
+                        startActivity(registerIntent);
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Selecione o tipo de conta a cadastrar.", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
 
-		if (TextUtils.isEmpty(email)){
-			mEmail.setError("Campo Obrigatório");
-			focusView = mEmail;
-			result = false;
-		}else if (!validaEmail(email)){
-			mEmail.setError("Email inválido");
-			focusView = mEmail;
-			result = false;
-		}
+        Spinner contaSpinner = findViewById(R.id.usuario_login);
+        ArrayAdapter spinnerAdapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item,
+                ContasDeUsuario.values());
+        contaSpinner.setAdapter(spinnerAdapter);
+        contaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-		if (!result){
-			focusView.requestFocus();
-		}
-		return result;
-	}
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                contaDeUsuario = ContasDeUsuario.values()[position];
+                StringBuilder tipoConta = new StringBuilder();
+                tipoConta.append("Fazer login como: ");
+                tipoConta.append(contaDeUsuario.getDescricao());
+                Toast.makeText(LoginActivity.this, tipoConta, Toast.LENGTH_LONG).show();
+                contaSetada = true;
+            }
 
-	private boolean validaSenha(String senha){
-		return senha.length() >2;
-	}
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                contaSetada = false;
+            }
+        });
 
-	private boolean validaEmail(String email){
-		return email.contains("@");
-	}
+        loginbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(LoginActivity.this, AccountSelectionActivity.class);
+                startActivity(it);
+            }
+        });
+    }
+
+    private void logar() {
+        capturaTextos();
+        if (!camposValidos()) {
+            return;
+        }
+
+        boolean result = false;
+        try {
+            clienteServices.login(email, senha);
+            if (result) {
+                startActivity(new Intent(LoginActivity.this, AccountSelectionActivity.class));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void capturaTextos() {
+        email = mEmail.getText().toString().trim();
+        senha = mSenha.getText().toString().trim();
+    }
+
+    private boolean camposValidos() {
+        boolean result = true;
+        String email = mEmail.getText().toString();
+        String senha = mSenha.getText().toString();
+        View focusView = null;
+        //validando senha
+        if (TextUtils.isEmpty(senha) || !validaSenha(senha)) {
+            mSenha.setError("Senha inválida");
+            focusView = mSenha;
+            result = false;
+        }
+
+        if (TextUtils.isEmpty(email)) {
+            mEmail.setError("Campo Obrigatório");
+            focusView = mEmail;
+            result = false;
+        } else if (!validaEmail(email)) {
+            mEmail.setError("Email inválido");
+            focusView = mEmail;
+            result = false;
+        }
+
+        if (!result) {
+            focusView.requestFocus();
+        }
+        return result;
+    }
+
+    private boolean validaSenha(String senha) {
+        return senha.length() > 3;
+    }
+
+    private boolean isCampoVazio(String valor) {
+        boolean resultado = TextUtils.isEmpty(valor) || valor.trim().isEmpty();
+        return resultado;
+    }
+
+
+    private boolean validaEmail(String email) {
+        boolean resultado = (!isCampoVazio(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+        return resultado;
+    }
 }

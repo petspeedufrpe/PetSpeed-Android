@@ -7,7 +7,7 @@
     android:layout_gravity="center_horizontal"
     android:baselineAligned="false"
     android:orientation="vertical"
-    tools:context=".infra.gui.activity_register_cliente">
+    tools:context=".infra.gui.CadastroClienteActivity">
 
     <EditText
         android:id="@+id/username"
@@ -16,6 +16,9 @@
         android:layout_gravity="center_horizontal"
         android:inputType="text"
         android:layout_marginTop="40dp"
+        android:textColorHint="@color/hintColor"
+        android:textColor="#FF00A759"
+
         android:hint="nome" />
 
     <EditText
@@ -25,6 +28,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:inputType="number"
+        android:textColorHint="@color/hintColor"
+        android:textColor="#FF00A759"
         android:hint="cpf" />
 
     <EditText
@@ -33,6 +38,8 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:layout_gravity="center_horizontal"
+        android:textColorHint="@color/hintColor"
+        android:textColor="#FF00A759"
         android:layout_marginTop="30dp"
         android:hint="email" />
 
@@ -43,6 +50,8 @@
         android:inputType="textPassword"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
+        android:textColorHint="@color/hintColor"
+        android:textColor="#FF00A759"
         android:hint="senha" />
     <EditText
         android:id="@+id/cnfpasswd"
@@ -51,13 +60,17 @@
         android:inputType="textPassword"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
+        android:textColorHint="@color/hintColor"
+        android:textColor="#FF00A759"
         android:hint="Confirme a senha" />
 
     <Button
         android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:hint="Cadastrar endereço"
+        android:hint="CADASTRAR ENDEREÇO"
+        android:backgroundTint="@color/hintColor"
+        android:textColorHint="#ffffff"
         android:layout_marginTop="15dp"
         android:layout_gravity="center_horizontal"/>
 
@@ -68,18 +81,14 @@
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:text="Already Registered?"/>
 
         <TextView
-            android:id="@+id/login"
+            android:id="@+id/ActCadastroTxVwBackHome"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:paddingLeft="10dp"
             android:textStyle="bold"
-            android:text="Login"/>
+            android:text="Voltar à tela inical"/>
     </LinearLayout>
 
 
