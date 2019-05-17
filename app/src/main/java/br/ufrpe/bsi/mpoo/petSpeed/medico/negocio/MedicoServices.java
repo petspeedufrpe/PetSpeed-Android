@@ -20,6 +20,16 @@ public class MedicoServices {
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 
+
+
+    public long cadastraMedico(Medico medico,Usuario usuario){
+        Long idUser = usuarioDAO.cadastrarUsuario(usuario);
+        usuario.setId(idUser);
+        medico.setUsuario(usuario);
+        Long idMedico = medicoDAO.cadastraMedico(medico);
+        medico.setId(idMedico);
+        return idMedico;
+    }
     public long cadastraMedico(Medico medico) throws AppException {
         try {
             this.checkNull(medico);

@@ -20,17 +20,16 @@ public class UsuarioDAO {
         long res = db.insert(DBHelper.TABELA_USUARIO,null,values);
         db.close();
         return res;
-
-
     }
+
 
     public void deletarUsuario(Usuario usuario){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         db.delete(DBHelper.TABELA_USUARIO, DBHelper.COL_USUARIO_ID + " = ?",new String[]{String.valueOf(usuario.getId())});
         db.close();
-
     }
+
 
     public void alterarEmail(Usuario usuario){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -38,7 +37,6 @@ public class UsuarioDAO {
         values.put(DBHelper.COL_USUARIO_EMAIL,usuario.getEmail());
         db.update(DBHelper.TABELA_USUARIO,values, DBHelper.COL_USUARIO_ID+ " = ?",new String[]{String.valueOf(usuario.getId())});
         db.close();
-
     }
 
     public void alterarSenha(Usuario usuario){
@@ -47,8 +45,8 @@ public class UsuarioDAO {
         values.put(DBHelper.COL_USUARIO_SENHA,usuario.getSenha());
         db.update(DBHelper.TABELA_USUARIO,values, DBHelper.COL_USUARIO_ID+ " = ?",new String[]{String.valueOf(usuario.getId())});
         db.close();
-
     }
+
 
     private Usuario createUsuario(Cursor cursor){
         Usuario usuario = new Usuario();
@@ -61,12 +59,14 @@ public class UsuarioDAO {
         return usuario;
     }
 
+
     public Usuario getUsuario(String email){
         String query = "SELECT * FROM " + DBHelper.TABELA_USUARIO+ " WHERE " + DBHelper.COL_USUARIO_EMAIL + " LIKE ?;";
         String[] args = {email};
 
         return this.loadObject(query,args);
     }
+
 
     public Usuario getUsuario(String email, String senha){
         Usuario usuario = getUsuario(email);
@@ -77,12 +77,14 @@ public class UsuarioDAO {
         return usuario;
     }
 
+
     public Usuario getUsuario(long idUsuario){
         String query = "SELECT * FROM "+ DBHelper.TABELA_USUARIO+" WHERE "+
                 DBHelper.COL_USUARIO_ID+ " LIKE ?;";
         String[] args = {String.valueOf(idUsuario)};
         return this.loadObject(query,args);
     }
+
 
     private Usuario loadObject(String query,String[] args){
         SQLiteDatabase db = dbHelper.getReadableDatabase();

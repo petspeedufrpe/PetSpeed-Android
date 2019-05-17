@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".infra.gui.activity_register_endereco">
+    tools:context=".cliente.gui.activity_register_endereco">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

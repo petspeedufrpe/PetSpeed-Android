@@ -1,81 +1,81 @@
-package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
+package br.ufrpe.bsi.mpoo.petSpeed.cliente.gui;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Parcelable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.Serializable;
-
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
+import br.ufrpe.bsi.mpoo.petSpeed.clinica.dominio.Clinica;
+import br.ufrpe.bsi.mpoo.petSpeed.clinica.negocio.ClinicaServices;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
-public class activity_register_cliente extends AppCompatActivity {
+public class activity_register_clinica extends AppCompatActivity {
 
-    EditText mNome,mCpf,mEmail,mSenha,mcmfSenha;
-    String nome,cpf,email,senha,cmfSenha;
-    Button mButtoRegister;
+    EditText mNome,mCrmv,mCnpj,mEmail,mSenha,mcmfSenha;
+    String nome,crmv,cnpj,email,senha,cmfSenha;
+    Button mButtonRegister;
     TextView mTextLogin;
-    ClienteServices clienteServices = new ClienteServices();
+    ClinicaServices clinicaServices = new ClinicaServices();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_cliente);
+        setContentView(R.layout.activity_register_clinica);
 
-        mButtoRegister = findViewById(R.id.register);
+        mButtonRegister = (Button) findViewById(R.id.registerClinica);
 
-        mButtoRegister.setOnClickListener(new View.OnClickListener() {
+        mButtonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { cadastrar(); }
-
+            public void onClick(View v) {
+                cadastrar();
+            }
         });
+
     }
 
-    public Cliente cadastrar(){
+
+    public Clinica cadastrar(){
         boolean res = false;
         String message = new String();
         capturaTextos();
         if(!isCamposValidos()){
-            res = false;
-        }
-        Cliente cliente = criarCliente();
-        cliente.setUsuario(criarUsuario());
-        cliente.setDadosPessoais(criarPessoa());
-            res = clienteServices.isEmailClienteNaoCadastrado(cliente.getUsuario().getEmail());
-            Toast.makeText(activity_register_cliente.this,Boolean.toString(res),Toast.LENGTH_LONG).show();
-        if (res == true){//cliente nao esta no banco
-            Intent registerEnd = new Intent(activity_register_cliente.this,activity_register_endereco.class);
-            registerEnd.putExtra("cliente",cliente);
-            startActivity(registerEnd);
-        }else{
-            Toast.makeText(activity_register_cliente.this,message,Toast.LENGTH_SHORT).show();
-            limparCampos();
+            return null;
+        }else {
 
-        }
+            Clinica clinica = criarClinica();
+            clinica.setUsuario(criarUsuario());
+            res = clinicaServices.isEmailClinicaCadastrada(clinica.getUsuario().getEmail());//retorna true para cadastrado;
+            Toast.makeText(activity_register_clinica.this, Boolean.toString(res), Toast.LENGTH_LONG).show();
+            if (res ==false) {//cliente nao esta no banco
+                Intent registerEnd = new Intent(activity_register_clinica.this, activity_register_endereco.class);
+                Bundle accountBundle = new Bundle();
+                accountBundle.putSerializable("clinica",clinica);
+                accountBundle.putString("tipo","clinica");
+                registerEnd.putExtra("bundle",accountBundle);
+                startActivity(registerEnd);
+            } else {
+                Toast.makeText(activity_register_clinica.this, message, Toast.LENGTH_SHORT).show();
+                limparCampos();
 
-     return cliente;
+            }
+            return clinica;
+        }
 
     }
 
     public void capturaTextos(){
         findEditTexts();
         nome = mNome.getText().toString().trim();
-        cpf = mCpf.getText().toString().trim();
+        cnpj= mCnpj.getText().toString().trim();
+        crmv = mCrmv.getText().toString().trim();
         email = mEmail.getText().toString().trim();
         senha = mSenha.getText().toString().trim();
         cmfSenha = mcmfSenha.getText().toString().trim();
@@ -83,12 +83,13 @@ public class activity_register_cliente extends AppCompatActivity {
 
     public void findEditTexts(){
 
-        mNome = (EditText) findViewById(R.id.username);
-        mCpf = (EditText) findViewById(R.id.cpf);
-        mEmail = (EditText) findViewById(R.id.email);
-        mSenha = (EditText) findViewById(R.id.passwd);
-        mcmfSenha = (EditText)findViewById(R.id.cnfpasswd);
-        mTextLogin = (TextView) findViewById(R.id.login);
+        mNome = (EditText) findViewById(R.id.usernameClinica);
+        mCnpj = (EditText) findViewById(R.id.cnpj);
+        mCrmv = (EditText) findViewById(R.id.crmvClinica);
+        mEmail = (EditText) findViewById(R.id.emailClinica);
+        mSenha = (EditText) findViewById(R.id.passwdClinica);
+        mcmfSenha = (EditText)findViewById(R.id.cnfpasswdClinica);
+        mTextLogin = (TextView) findViewById(R.id.loginClinica);
 
     }
 
@@ -97,7 +98,8 @@ public class activity_register_cliente extends AppCompatActivity {
         boolean res = true;
         //reseta os erros
         mNome.setError(null);
-        mCpf.setError(null);
+        mCnpj.setError(null);
+        mCrmv.setError(null);
         mSenha.setError(null);
         mEmail.setError(null);
         mcmfSenha.setError(null);
@@ -106,9 +108,13 @@ public class activity_register_cliente extends AppCompatActivity {
             mNome.setError("Campo vazio");
             focusView = mNome;
             res = false;
-        }  else if (isCampoVazio(cpf)) {
-            mCpf.setError("Campo vazio");
-            focusView = mCpf;
+        }  else if (isCampoVazio(cnpj)) {
+            mCnpj.setError("Campo vazio");
+            focusView = mCnpj;
+            res = false;
+        } else if (isCampoVazio(crmv)){
+            mCrmv.setError("Campo Inválido");
+            focusView = mCrmv;
             res = false;
         } else if (!isEmailValido(email)) {
             mEmail.setError("Email inválido");
@@ -131,7 +137,7 @@ public class activity_register_cliente extends AppCompatActivity {
             focusView.requestFocus();
         }
 
-      return res;
+        return res;
     }
 
 
@@ -149,10 +155,14 @@ public class activity_register_cliente extends AppCompatActivity {
         return ((senha.equals(cmfSenha)));
     }
 
-    private Cliente criarCliente(){
-        Cliente cliente = new Cliente();
-        cliente.setAvaliacao(5);
-        return cliente;
+    private Clinica criarClinica(){
+        Clinica clinica = new Clinica();
+        clinica.setRazaoSocial(cnpj);
+        clinica.setNome(nome);
+        clinica.setCrmv(crmv);
+        clinica.setAvaliacao(5);
+
+        return clinica;
     }
 
     private Usuario criarUsuario(){
@@ -163,22 +173,15 @@ public class activity_register_cliente extends AppCompatActivity {
         return usuario;
     }
 
-    private Pessoa criarPessoa(){
-        Pessoa pessoa = new Pessoa();
-        pessoa.setCpf(cpf);
-        pessoa.setNome(nome);
-
-        return pessoa;
-    }
 
     private void limparCampos(){
         mNome.setText("");
         mSenha.setText("");
         mcmfSenha.setText("");
         mEmail.setText("");
-        mCpf.setText("");
-
-        }
+        mCnpj.setText("");
+        mCrmv.setText("");
+    }
 
 }
 

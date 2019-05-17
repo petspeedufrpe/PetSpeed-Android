@@ -56,7 +56,7 @@ public class FragmentLoginCliente extends Fragment {
         }
         ClienteServices clienteServices = new ClienteServices();
         try {
-            cliente = clienteServices.login(email,senha);
+            clienteServices.login(email,senha);
         } catch (AppException e) {
             e.printStackTrace();
             message = e.getMessage();

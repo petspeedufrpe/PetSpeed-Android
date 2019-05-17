@@ -7,7 +7,7 @@ import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String NOME_DB = "petspeed.db";
-    private static final int VERSAO = 15;
+    private static final int VERSAO = 16;
 
     // TABELA ANIMAL:
     public static final String TABELA_ANIMAL = "TB_ANIMAL";
@@ -34,7 +34,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_CLINICA_AVALIACAO = "AVALIACAO";
     public static final String COL_CLINICA_CRMV = "CRMV";
     public static final String COL_CLINICA_FK_USUARIO = "FK_USUARIO";
-    public static final String COL_CLINICA_FK_MEDICO = "FK_MEDICO";
     // TABELA PESSOA:
     public static final String TABELA_PESSOA = "TB_PESSOA";
     public static final String COL_PESSOA_ID = "ID";
@@ -151,12 +150,11 @@ public class DBHelper extends SQLiteOpenHelper {
                         "  %4$s TEXT NOT NULL, " +
                         " %5$s REAL NOT NULL, " +
                         " %6$s TEXT NOT NULL, " +
-                        " %7$s TEXT NOT NULL, " +
-                        " %8$s TEXT NOT NULL " +
+                        " %7$s TEXT NOT NULL " +
                         ");";
         sqlTbClinica = String.format(sqlTbClinica,
                 TABELA_CLINICA, COL_CLINICA_ID, COL_CLINICA_NOME, COL_CLINICA_RAZAO_SOCIAL,
-                COL_CLINICA_AVALIACAO, COL_CLINICA_CRMV,COL_CLINICA_FK_USUARIO, COL_CLINICA_FK_MEDICO);
+                COL_CLINICA_AVALIACAO, COL_CLINICA_CRMV,COL_CLINICA_FK_USUARIO);
         db.execSQL(sqlTbClinica);
     }
 

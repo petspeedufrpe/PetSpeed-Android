@@ -92,41 +92,6 @@ public class ClienteDAO {
 		return cliente;
 	}
 
-
-	public Animal getAnimalById(long idCliente) {
-
-		return null;
-	}
-
-	public Animal getAnimalByRaca() {
-		return null;
-	}
-
-	public List<Endereco> getAllEndereco() {
-		return null;
-	}
-
-	public List<Animal> getAllAnimal() {
-		return null;
-	}
-
-	public void removeEndereco() {
-
-	}
-
-	public void adicionaEndereco() {
-
-	}
-
-	public void alteraEmail() {
-
-
-	}
-
-	public void alteraSenha() {
-
-	}
-
 	public void alteraAvaliacao(Cliente cliente) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();

@@ -10,6 +10,7 @@ import br.ufrpe.bsi.mpoo.petSpeed.animal.persistencia.AnimalDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.Sessao;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
@@ -39,29 +40,28 @@ public class ClienteServices {
 		cliente.setId(idCliente);
 		return cliente;
 	}
+
 	public void deletaCliente(Cliente cliente) throws AppException {
 		if (clienteDAO.getClienteById(cliente.getId())!=null){
 			clienteDAO.deletaCliente(cliente);
 		}
 
 	}
-	public Cliente login(String email, String senha) throws AppException {
+	public void login(String email, String senha) throws AppException {
 		Usuario usuario = usuarioDAO.getUsuario(email,senha);
-		Cliente cliente = new Cliente();
 		if (usuario == null){
-			cliente = null;
 			throw new AppException("Usuário ou senha inválida.");
 		}
-		PessoaServices pessoaServices = new PessoaServices();
-		cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
-		cliente = getClienteCompleto(cliente.getId());
 
-		return cliente;
+		else{
+			Sessao.instance.setUsuario(usuario);
+		}
 	}
 
-	public boolean isEmailClienteNaoCadastrado(String email){//retorna true se nao estiver no banco
+
+	public boolean isEmailClienteCadastrado(String email){//retorna true se estiver no banco
 		Usuario usuario = usuarioDAO.getUsuario(email);
-		return (!(usuario!= null && usuario.getEmail().length() >0));
+		return ((usuario!= null && usuario.getEmail().length() >0));
 	}
 
 	public String getEmailByCliente(Long idCliente){
@@ -76,6 +76,8 @@ public class ClienteServices {
 		}
 		return null;
 	}
+
+
 	public Cliente getClienteCompleto(long idCliente){
 		Cliente cliente;
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -106,6 +108,11 @@ public class ClienteServices {
 		pessoaDAO.alteraNome(cliente.getDadosPessoais());
 		pessoaDAO.alteraCPF(cliente.getDadosPessoais());
 
+	}
+
+	public void logout(){
+		Sessao sessao = Sessao.instance;
+		sessao.reset();
 	}
 
 	public void alteraSenha(Cliente cliente){
@@ -148,15 +155,10 @@ public class ClienteServices {
 		return null;
 	}
 
-	public void alteraEmail() {
-
-	}
-
-	public void alteraSenha() {
-
-	}
 
 	public void alteraAvaliacao() {
+
+
 
 	}
 

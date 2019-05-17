@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:fillViewport="true"
-    tools:context=".infra.gui.activity_register_endereco"
+    tools:context=".cliente.gui.activity_register_endereco"
     tools:showIn="@layout/activity_register_endereco">
 
     <LinearLayout

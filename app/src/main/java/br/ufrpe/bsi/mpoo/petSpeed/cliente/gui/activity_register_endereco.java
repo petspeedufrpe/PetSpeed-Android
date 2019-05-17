@@ -1,9 +1,8 @@
-package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
+package br.ufrpe.bsi.mpoo.petSpeed.cliente.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -12,16 +11,11 @@ import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.ListaClinicasActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
+import br.ufrpe.bsi.mpoo.petSpeed.clinica.dominio.Clinica;
+import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.PessoaDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
 public class activity_register_endereco extends AppCompatActivity {
     private final PessoaServices pessoaServices = new PessoaServices();
@@ -42,31 +36,39 @@ public class activity_register_endereco extends AppCompatActivity {
         });
     }
 
-
-
-    public Cliente getClienteByAct(){
-        Intent registerEnd = getIntent();
-        Cliente cliente = (Cliente) registerEnd.getExtras().getSerializable("cliente");
-        return cliente;
-    }
-
     public void cadastrar(){
-        boolean res = false;
         capturaTextos();
-        Cliente cliente = getClienteByAct();
-        if (!isCamposValidos()){
-            res = false;
+        if(!isCamposValidos()){
+            return;
         }
+        Intent registerEnd = getIntent();
         Endereco endereco = criarEndereco();
+        Bundle bundle = registerEnd.getExtras().getBundle("bundle");
+        bundle.putSerializable("endereco",endereco);
         Intent finalIntent = new Intent(activity_register_endereco.this,FinalizaCadastroActivity.class);
-        finalIntent.putExtra("cliente", cliente);
-        finalIntent.putExtra("endereco",endereco);
+        finalIntent.putExtra("bundle",bundle);
         startActivity(finalIntent);
-
+        //Cliente cliente = (Cliente) registerIntent.getExtras().getSerializable("cliente");
+        //Clinica clinica = (Clinica) registerIntent.getExtras().getSerializable("clinica");
+        //Medico  medico = (Medico) registerIntent.getExtras().getSerializable("medico");
+        /**
+        if(clinica!= null){
+            Intent finalIntent = new Intent(activity_register_endereco.this,FinalizaCadastroActivity.class);
+            finalIntent.putExtra("clinica",clinica);
+            finalIntent.putExtra("endereco",endereco);
+            startActivity(finalIntent);
+        } else if(medico!=null){
+            Intent finalIntent = new Intent(activity_register_endereco.this,FinalizaCadastroActivity.class);
+            finalIntent.putExtra("medico",medico);
+            finalIntent.putExtra("endereco",endereco);
+            startActivity(finalIntent);
+        } else if(cliente!=null){
+            Intent finalIntent = new Intent(activity_register_endereco.this,FinalizaCadastroActivity.class);
+            finalIntent.putExtra("cliente",cliente);
+            finalIntent.putExtra("endereco",endereco);
+            startActivity(finalIntent);
+        }**/
     }
-
-
-
     public void findEditTexts(){
 
         mLogradouro = (EditText) findViewById(R.id.logradouro);

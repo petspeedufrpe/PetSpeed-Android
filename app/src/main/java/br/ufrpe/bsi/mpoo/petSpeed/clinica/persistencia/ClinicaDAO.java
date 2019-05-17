@@ -4,12 +4,8 @@ package br.ufrpe.bsi.mpoo.petSpeed.clinica.persistencia;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
-import java.util.List;
-
 import br.ufrpe.bsi.mpoo.petSpeed.clinica.dominio.Clinica;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
-import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 
 public class ClinicaDAO {
 
@@ -91,19 +87,6 @@ public class ClinicaDAO {
 		return clinica;
 	}
 
-	public void alteraEndereco() {
-
-	}
-
-	public void adicionaMedico(Medico medico) {
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-
-	}
-
-	public void removeMedico() {
-
-	}
 
 	public void alteraCrmv(Clinica clinica) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -112,14 +95,6 @@ public class ClinicaDAO {
 		db.update(DBHelper.TABELA_CLINICA,values,DBHelper.COL_CLINICA_ID+" = ?",
 				new String[]{String.valueOf(clinica.getId())});
 		db.close();
-	}
-
-	public Medico getMedicoById() {
-		return null;
-	}
-
-	public List<Medico> getAllMedico() {
-		return null;
 	}
 
 }
