@@ -34,7 +34,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_CLINICA_AVALIACAO = "AVALIACAO";
     public static final String COL_CLINICA_CRMV = "CRMV";
     public static final String COL_CLINICA_FK_USUARIO = "FK_USUARIO";
-    public static final String COL_CLINICA_FK_MEDICO = "FK_MEDICO";
     // TABELA PESSOA:
     public static final String TABELA_PESSOA = "TB_PESSOA";
     public static final String COL_PESSOA_ID = "ID";

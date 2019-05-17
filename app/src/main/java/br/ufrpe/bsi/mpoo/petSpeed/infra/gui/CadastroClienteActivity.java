@@ -66,8 +66,8 @@ public class CadastroClienteActivity extends AppCompatActivity {
         Cliente cliente = criarCliente();
         cliente.setUsuario(criarUsuario());
         cliente.setDadosPessoais(criarPessoa());
-        res = clienteServices.isEmailClienteNaoCadastrado(cliente.getUsuario().getEmail());
-        if (res == true) {//cliente nao esta no banco
+        res = clienteServices.isEmailClienteCadastrado(cliente.getUsuario().getEmail());
+        if (!res) {//cliente nao esta no banco
             if (isCamposValidos()){
                 Intent registerEnd = new Intent(CadastroClienteActivity.this, CadastroEnderecoActivity.class);
                 Bundle accountBundle = new Bundle();

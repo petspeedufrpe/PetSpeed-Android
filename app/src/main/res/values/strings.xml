@@ -4,4 +4,19 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user_name_act">Bem vindo, %1$s</string>
+    <string name="las_access_act">Ultimo acesso em %1$s</string>
+
+    <!-- STRINGS TELA ENDERECO -->
+    <string name="nome_rua_end">Nome da Rua</string>
+    <string name="bairro_end">Bairro</string>
+    <string name="cep_end">CEP(só números)</string>
+    <string name="numero_end">Número</string>
+    <string name="complemento_end">Complemento</string>
+    <string name="cidade_end">Cidade</string>
+    <string name="uf_end">UF</string>
+
+    <!-- STRINGS TELA CADASTRO USUARIO/PESSOA -->
+
+
 </resources>

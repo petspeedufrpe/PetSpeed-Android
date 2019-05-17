@@ -18,6 +18,7 @@ public class ClienteDAO {
 
 	private DBHelper dbHelper = new DBHelper();
 
+
 	public long cadastraCliente(Cliente cliente) {
 		long res;
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -37,7 +38,8 @@ public class ClienteDAO {
 		db.close();
 
 	}
-
+	//guarda o indice de cada coluna necessária para montar o obj, e depois passa em uma variavel o valor retornado do banco
+	//seta no objeto e retorna ele.
 	private Cliente createCliente(Cursor cursor){
 		int indexId = cursor.getColumnIndex(DBHelper.COL_CLIENTE_ID);
 		int indexAvaliacao = cursor.getColumnIndex(DBHelper.COL_CLIENTE_AVALIACAO);
@@ -62,6 +64,13 @@ public class ClienteDAO {
 		return cliente;
 	}
 
+	/**
+	 *
+	 * @param id
+	 * @return Cliente
+	 * nesse metodo so inicia a string da query e o arg que será passado.
+	 * no loadCliente o banco é aberto para leitura e retorna um cursor para poder criar o cliente
+	 */
 	public Cliente getClienteById(Long id){
 		String query = "SELECT * FROM " + DBHelper.TABELA_CLIENTE+" WHERE "+DBHelper.COL_CLIENTE_ID+ " LIKE ?;";
 		String[] args = {String.valueOf(id)};
@@ -90,41 +99,6 @@ public class ClienteDAO {
 		Usuario usuario = usuarioDAO.getUsuario(email);//retorna o usuario que tem este email
 		Cliente cliente= getIdClienteByUsuario(usuario.getId());//retorna o cliente que tem este usuario
 		return cliente;
-	}
-
-
-	public Animal getAnimalById(long idCliente) {
-
-		return null;
-	}
-
-	public Animal getAnimalByRaca() {
-		return null;
-	}
-
-	public List<Endereco> getAllEndereco() {
-		return null;
-	}
-
-	public List<Animal> getAllAnimal() {
-		return null;
-	}
-
-	public void removeEndereco() {
-
-	}
-
-	public void adicionaEndereco() {
-
-	}
-
-	public void alteraEmail() {
-
-
-	}
-
-	public void alteraSenha() {
-
 	}
 
 	public void alteraAvaliacao(Cliente cliente) {
