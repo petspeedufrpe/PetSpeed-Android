@@ -40,7 +40,6 @@ public class CadastroMedicoActivity extends AppCompatActivity {
         mTextHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                limparCampos();
                 Intent homeIntent = new Intent(CadastroMedicoActivity.this, LoginActivity.class);
                 startActivity(homeIntent);
 
@@ -81,7 +80,6 @@ public class CadastroMedicoActivity extends AppCompatActivity {
             }
         } else {
             Toast.makeText(CadastroMedicoActivity.this, "Ops! Algo parece estar errado. Verifique seus dados.", Toast.LENGTH_SHORT).show();
-            limparCampos();
 
         }
 

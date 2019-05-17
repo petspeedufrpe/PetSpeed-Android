@@ -40,10 +40,8 @@ public class CadastroClienteActivity extends AppCompatActivity {
         mTextBkHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                limparCampos();
                 Intent homeIntent = new Intent(CadastroClienteActivity.this, LoginActivity.class);
                 startActivity(homeIntent);
-
             }
         });
 
