@@ -34,24 +34,19 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
     }
 
 
-
-    public Cliente getClienteByAct(){
-        Intent registerEnd = getIntent();
-        Cliente cliente = (Cliente) registerEnd.getExtras().getSerializable("cliente");
-        return cliente;
-    }
-
     public void cadastrar(){
         boolean res = false;
         capturaTextos();
-        Cliente cliente = getClienteByAct();
         if (!isCamposValidos()){
             res = false;
         }
+
+        Intent registerEnd = getIntent();
         Endereco endereco = criarEndereco();
+        Bundle accountBundle = registerEnd.getExtras().getBundle("bundle");
+        accountBundle.putSerializable("endereco", endereco);
         Intent finalIntent = new Intent(CadastroEnderecoActivity.this,FinalizaCadastroActivity.class);
-        finalIntent.putExtra("cliente", cliente);
-        finalIntent.putExtra("endereco",endereco);
+        finalIntent.putExtra("bundle", accountBundle);
         startActivity(finalIntent);
 
     }

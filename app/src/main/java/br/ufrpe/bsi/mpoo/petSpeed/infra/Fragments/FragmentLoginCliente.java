@@ -16,9 +16,8 @@ import android.widget.Toast;
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.gui.MainActivity;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.gui.AccountSelectionActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
-import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
 public class FragmentLoginCliente extends Fragment {
 
@@ -35,7 +34,7 @@ public class FragmentLoginCliente extends Fragment {
         View v = inflater.inflate(R.layout.activity_login,container,false);                   //das telas deste fragment
         mSenha = v.findViewById(R.id.passwd);
         mEmail = v.findViewById(R.id.email);
-        btnLogin = v.findViewById(R.id.loginActLoginBtn);
+        btnLogin = v.findViewById(R.id.LoginActCadastrarBtn);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +91,7 @@ public class FragmentLoginCliente extends Fragment {
     }
 
     private void goHome(){
-        startActivity(new Intent(getActivity(), MainActivity.class));
+        startActivity(new Intent(getActivity(), AccountSelectionActivity.class));
         finishActivity();
     }
 

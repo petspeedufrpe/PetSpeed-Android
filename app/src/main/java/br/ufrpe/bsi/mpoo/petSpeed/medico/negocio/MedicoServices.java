@@ -20,26 +20,22 @@ public class MedicoServices {
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 
-    public long cadastraMedico(Medico medico) throws AppException {
+    public Medico cadastraMedico(Medico medico, Usuario usuario) throws AppException {
         try {
             this.checkNull(medico);
         } catch (AppException e) {
             throw new AppException(String.valueOf(e));
         }
-        if (this.usuarioPossuiMedico(medico)) {
-            throw new AppException("UsuarioPossuiMedico");
-        } else {
-            long id = medicoDAO.cadastraMedico(medico);
-            return id;
-        }
+        long idUsuario = usuarioDAO.cadastrarUsuario(usuario);
+        medico.getUsuario().setId(idUsuario);
+        long  idmedico = medicoDAO.cadastraMedico(medico);
+        medico.setId(idmedico);
+        return medico;
     }
 
     private void checkNull(Medico medico) throws AppException {
         if (medico.getUsuario() == null) {
             throw new AppException("Null attribute");
-        }
-        if (medico.getUsuario().getId() == 0) {
-            throw new AppException("usuario medico sem id");
         }
         if (medico.getDadosPessoais() == null) {
             throw new AppException("dados pessoais null");
@@ -50,19 +46,22 @@ public class MedicoServices {
         if (medico.getDadosPessoais().getEndereco() == null) {
             throw new AppException("endereco dados pessoais null");
         }
-        if (medico.getDadosPessoais().getEndereco().getId() == 0) {
-            throw new AppException("endereco sem id");
-        }
-        if (medico.getAvaliacao() > 5) {
-            throw new AppException("avaliacao maior q 5");
-        }
     }
 
-    private boolean usuarioPossuiMedico(Medico medico) throws AppException {
+    public boolean usuarioPossuiMedico(Medico medico) {
+        Usuario usuarioReferencia = usuarioDAO.getUsuario(medico.getUsuario().getEmail());
         try {
-            Medico medicoReferencia = medicoDAO.getMedicoByFkUsuario(medico.getUsuario().getId());
+            long id = usuarioReferencia.getId();
+            //querry retornou um usuário não nulo, logo o email cadastrado já pertence um usuário...
+            //vamos verificar se esse usuário já possui uma conta de médico no proximo try:
+        } catch (Exception e) {
+            return false;
+        }
+        try {
+            Medico medicoReferencia = medicoDAO.getMedicoByFkUsuario(usuarioReferencia.getId());
             medicoReferencia.getId();
-            if (medicoReferencia.getUsuario().getId() == medico.getUsuario().getId()) {
+            if (medicoReferencia.getUsuario().getEmail() == medico.getUsuario().getEmail()) {
+                //se os dois emails são iguais, o o usuário já possui uma conta de médico
                 return true;
             }
         } catch (Exception e) {

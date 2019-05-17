@@ -7,7 +7,7 @@
     tools:context=".infra.gui.LoginMedicoActivity">
 
     <Button
-        android:id="@+id/loginActloginBtn"
+        android:id="@+id/loginActLoginBtn"
         android:layout_width="193dp"
         android:layout_height="46dp"
         android:layout_marginStart="8dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toBottomOf="@+id/LoginPswrdTxBx" />
 
     <Button
-        android:id="@+id/loginActLoginBtn"
+        android:id="@+id/LoginActCadastrarBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -32,7 +32,7 @@
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginActloginBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/loginActLoginBtn" />
 
     <EditText
         android:id="@+id/LoginEmailTxBx"

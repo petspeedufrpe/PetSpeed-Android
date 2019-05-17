@@ -49,6 +49,7 @@
 
         <EditText
             android:id="@+id/cidade"
+            android:hint="cidade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

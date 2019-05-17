@@ -5,21 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.PessoaDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
-import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
 
-public class MainActivity extends AppCompatActivity {
+public class AccountSelectionActivity extends AppCompatActivity {
 	private DBHelper dbHelper = new DBHelper();
     private Button butClinica;
     private Button butVet;
@@ -29,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_account_selection);
 
 
 		butClinica = findViewById(R.id.buttonClinica);
@@ -39,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         butClinica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent loginClinica = new Intent(getBaseContext(), LoginClinicaActivity.class);
+                Intent loginClinica = new Intent(getBaseContext(), LoginActivity.class);
                 startActivity(loginClinica);
             }
         });
@@ -47,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         butVet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent loginMedico = new Intent(getBaseContext(), LoginClinicaActivity.class);
+                Intent loginMedico = new Intent(getBaseContext(), LoginActivity.class);
                 startActivity(loginMedico);
             }
         });

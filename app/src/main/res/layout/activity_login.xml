@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
-    tools:context=".infra.gui.LoginClinicaActivity">
+    tools:context=".infra.gui.LoginActivity">
 
     <Button
-        android:id="@+id/loginActloginBtn"
+        android:id="@+id/loginActLoginBtn"
         android:layout_width="193dp"
         android:layout_height="46dp"
         android:layout_marginStart="8dp"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toBottomOf="@+id/LoginPswrdTxBx" />
 
     <Button
-        android:id="@+id/loginActLoginBtn"
+        android:id="@+id/LoginActCadastrarBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -34,7 +34,7 @@
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginActloginBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/loginActLoginBtn" />
 
     <EditText
         android:id="@+id/LoginEmailTxBx"
@@ -82,6 +82,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.060000002"
-        app:srcCompat="@drawable/logo" />
+        android:src="@drawable/logo" />
+
+    <Spinner
+        android:id="@+id/usuario_login"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32999998" />
 
 </android.support.constraint.ConstraintLayout>

@@ -10,25 +10,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".infra.gui.CadastroMedicoActivity"></activity>
         <activity android:name=".infra.gui.LoginMedicoActivity"></activity>
         <activity android:name=".infra.gui.CrudAnimalActivity" />
         <activity android:name=".infra.gui.SplashScreenActivity" />
-        <activity android:name=".infra.gui.LoginClinicaActivity" />
-        <activity android:name=".infra.gui.MainActivity">
+        <activity android:name=".infra.gui.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".infra.gui.AccountSelectionActivity" />
         <activity android:name=".infra.gui.TesteActivity"></activity>
         <activity android:name=".infra.gui.FinalizaCadastroActivity" />
         <activity
             android:name=".infra.gui.CadastroEnderecoActivity"
             android:label="endereco" />
-        <activity android:name=".infra.gui.CadastroClienteActivity" />
+        <activity android:name=".infra.gui.CadastroClienteActivity"></activity>
         <activity android:name=".cliente.gui.ListaClinicasActivity" />
-        <activity android:name=".infra.gui.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

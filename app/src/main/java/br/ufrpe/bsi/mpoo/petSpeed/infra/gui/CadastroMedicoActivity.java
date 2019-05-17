@@ -1,8 +1,8 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
@@ -15,25 +15,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
+import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
+import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
-public class CadastroClienteActivity extends AppCompatActivity {
-
-    EditText mNome, mCpf, mEmail, mSenha, mcmfSenha;
-    String nome, cpf, email, senha, cmfSenha;
+public class CadastroMedicoActivity extends AppCompatActivity {
+    EditText mNome, mCpf, mEmail, mSenha, mcmfSenha, mCrmv;
+    String nome, cpf, email, senha, cmfSenha, crmv;
     Button mButtoRegister;
     TextView mTextLogin;
-    private final Map<String,Object> values = new HashMap<>();
+    private final Map<String, Object> values = new HashMap<>();
 
-    ClienteServices clienteServices = new ClienteServices();
+    MedicoServices medicoServices = new MedicoServices();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro_cliente);
+        setContentView(R.layout.activity_cadastro_medico);
 
         mButtoRegister = findViewById(R.id.register);
 
@@ -46,32 +45,33 @@ public class CadastroClienteActivity extends AppCompatActivity {
         });
     }
 
-    public Cliente cadastrar() {
+    public Medico cadastrar() {
         boolean res = false;
         String message = new String();
         capturaTextos();
         if (!isCamposValidos()) {
             res = false;
         }
-        Cliente cliente = criarCliente();
-        cliente.setUsuario(criarUsuario());
-        cliente.setDadosPessoais(criarPessoa());
-        res = clienteServices.isEmailClienteNaoCadastrado(cliente.getUsuario().getEmail());
-        Toast.makeText(CadastroClienteActivity.this, Boolean.toString(res), Toast.LENGTH_LONG).show();
-        if (res == true) {//cliente nao esta no banco
-            Intent registerEnd = new Intent(CadastroClienteActivity.this, CadastroEnderecoActivity.class);
+        Medico medico = criarMedico();
+        medico.setUsuario(criarUsuario());
+        medico.setDadosPessoais(criarPessoa());
+        boolean possui = medicoServices.usuarioPossuiMedico(medico);
+        res = !possui;
+        Toast.makeText(CadastroMedicoActivity.this, Boolean.toString(res), Toast.LENGTH_LONG).show();
+        if (res == true) {//medico nao esta no banco
+            Intent registerEnd = new Intent(CadastroMedicoActivity.this, CadastroEnderecoActivity.class);
             Bundle accountBundle = new Bundle();
-            accountBundle.putSerializable("cliente", cliente);
-            accountBundle.putString("tipo", "cliente");
+            accountBundle.putSerializable("medico", medico);
+            accountBundle.putString("tipo", "medico");
             registerEnd.putExtra("bundle", accountBundle);
             startActivity(registerEnd);
         } else {
-            Toast.makeText(CadastroClienteActivity.this, "Por favor, verifique os campos.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CadastroMedicoActivity.this, "Ops! Algo parece estar errado. Verifique seus dados.", Toast.LENGTH_SHORT).show();
             limparCampos();
 
         }
 
-        return cliente;
+        return medico;
 
     }
 
@@ -82,10 +82,11 @@ public class CadastroClienteActivity extends AppCompatActivity {
         email = mEmail.getText().toString().trim();
         senha = mSenha.getText().toString().trim();
         cmfSenha = mcmfSenha.getText().toString().trim();
+        crmv = mCrmv.getText().toString().trim();
     }
 
     public void findEditTexts() {
-
+        mCrmv = (EditText) findViewById(R.id.crmv);
         mNome = (EditText) findViewById(R.id.username);
         mCpf = (EditText) findViewById(R.id.cpf);
         mEmail = (EditText) findViewById(R.id.email);
@@ -104,6 +105,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
         mSenha.setError(null);
         mEmail.setError(null);
         mcmfSenha.setError(null);
+        mCrmv.setError(null);
 
         if (isCampoVazio(nome)) {
             mNome.setError("Campo vazio");
@@ -112,6 +114,10 @@ public class CadastroClienteActivity extends AppCompatActivity {
         } else if (isCampoVazio(cpf)) {
             mCpf.setError("Campo vazio");
             focusView = mCpf;
+            res = false;
+        } else if (isCampoVazio(crmv)) {
+            mCrmv.setError("Campo vazio");
+            focusView = mCrmv;
             res = false;
         } else if (!isEmailValido(email)) {
             mEmail.setError("Email inválido");
@@ -153,10 +159,10 @@ public class CadastroClienteActivity extends AppCompatActivity {
         return ((senha.equals(cmfSenha)));
     }
 
-    private Cliente criarCliente() {
-        Cliente cliente = new Cliente();
-        cliente.setAvaliacao(5);
-        return cliente;
+    private Medico criarMedico() {
+        Medico medico = new Medico();
+        medico.setAvaliacao(5);
+        return medico;
     }
 
     private Usuario criarUsuario() {
@@ -181,6 +187,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
         mcmfSenha.setText("");
         mEmail.setText("");
         mCpf.setText("");
+        mCrmv.setText("");
 
     }
 

@@ -65,13 +65,13 @@ public class TesteActivity extends AppCompatActivity {
 		medico.setUsuario(usuario);
 
 
-       	MedicoServices mservices = new MedicoServices();
+       	/*MedicoServices mservices = new MedicoServices();
         try {
             long id = mservices.cadastraMedico(medico);
             medico.setId(id);
 			Toast.makeText(TesteActivity.this, "Cadastro medico bem sucedido",Toast.LENGTH_LONG).show();
 		}catch(AppException e){
 			Toast.makeText(TesteActivity.this, String.valueOf(e),Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
 }
