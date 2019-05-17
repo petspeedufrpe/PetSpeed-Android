@@ -25,7 +25,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
     EditText mNome, mCpf, mEmail, mSenha, mcmfSenha;
     String nome, cpf, email, senha, cmfSenha;
     Button mButtoRegister;
-    TextView mTextLogin;
+    TextView mTextBkHome;
     private final Map<String,Object> values = new HashMap<>();
 
     ClienteServices clienteServices = new ClienteServices();
@@ -34,6 +34,18 @@ public class CadastroClienteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_cliente);
+
+        mTextBkHome = findViewById(R.id.ActCadastroTxVwBackHome);
+
+        mTextBkHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                limparCampos();
+                Intent homeIntent = new Intent(CadastroClienteActivity.this, LoginActivity.class);
+                startActivity(homeIntent);
+
+            }
+        });
 
         mButtoRegister = findViewById(R.id.register);
 
@@ -57,14 +69,15 @@ public class CadastroClienteActivity extends AppCompatActivity {
         cliente.setUsuario(criarUsuario());
         cliente.setDadosPessoais(criarPessoa());
         res = clienteServices.isEmailClienteNaoCadastrado(cliente.getUsuario().getEmail());
-        Toast.makeText(CadastroClienteActivity.this, Boolean.toString(res), Toast.LENGTH_LONG).show();
         if (res == true) {//cliente nao esta no banco
-            Intent registerEnd = new Intent(CadastroClienteActivity.this, CadastroEnderecoActivity.class);
-            Bundle accountBundle = new Bundle();
-            accountBundle.putSerializable("cliente", cliente);
-            accountBundle.putString("tipo", "cliente");
-            registerEnd.putExtra("bundle", accountBundle);
-            startActivity(registerEnd);
+            if (isCamposValidos()){
+                Intent registerEnd = new Intent(CadastroClienteActivity.this, CadastroEnderecoActivity.class);
+                Bundle accountBundle = new Bundle();
+                accountBundle.putSerializable("cliente", cliente);
+                accountBundle.putString("tipo", "cliente");
+                registerEnd.putExtra("bundle", accountBundle);
+                startActivity(registerEnd);
+            }
         } else {
             Toast.makeText(CadastroClienteActivity.this, "Por favor, verifique os campos.", Toast.LENGTH_SHORT).show();
             limparCampos();
@@ -91,7 +104,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
         mEmail = (EditText) findViewById(R.id.email);
         mSenha = (EditText) findViewById(R.id.passwd);
         mcmfSenha = (EditText) findViewById(R.id.cnfpasswd);
-        mTextLogin = (TextView) findViewById(R.id.login);
+        mTextBkHome = (TextView) findViewById(R.id.ActCadastroTxVwBackHome);
 
     }
 

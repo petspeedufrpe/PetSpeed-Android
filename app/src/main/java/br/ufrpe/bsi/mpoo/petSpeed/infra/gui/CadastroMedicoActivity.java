@@ -24,8 +24,9 @@ public class CadastroMedicoActivity extends AppCompatActivity {
     EditText mNome, mCpf, mEmail, mSenha, mcmfSenha, mCrmv;
     String nome, cpf, email, senha, cmfSenha, crmv;
     Button mButtoRegister;
-    TextView mTextLogin;
-    private final Map<String, Object> values = new HashMap<>();
+    TextView mTextHome;
+
+
 
     MedicoServices medicoServices = new MedicoServices();
 
@@ -33,6 +34,18 @@ public class CadastroMedicoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_medico);
+
+        mTextHome = findViewById(R.id.cdstrMedicoHome);
+
+        mTextHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                limparCampos();
+                Intent homeIntent = new Intent(CadastroMedicoActivity.this, LoginActivity.class);
+                startActivity(homeIntent);
+
+            }
+        });
 
         mButtoRegister = findViewById(R.id.register);
 
@@ -57,14 +70,15 @@ public class CadastroMedicoActivity extends AppCompatActivity {
         medico.setDadosPessoais(criarPessoa());
         boolean possui = medicoServices.usuarioPossuiMedico(medico);
         res = !possui;
-        Toast.makeText(CadastroMedicoActivity.this, Boolean.toString(res), Toast.LENGTH_LONG).show();
         if (res == true) {//medico nao esta no banco
-            Intent registerEnd = new Intent(CadastroMedicoActivity.this, CadastroEnderecoActivity.class);
-            Bundle accountBundle = new Bundle();
-            accountBundle.putSerializable("medico", medico);
-            accountBundle.putString("tipo", "medico");
-            registerEnd.putExtra("bundle", accountBundle);
-            startActivity(registerEnd);
+            if(isCamposValidos()){
+                Intent registerEnd = new Intent(CadastroMedicoActivity.this, CadastroEnderecoActivity.class);
+                Bundle accountBundle = new Bundle();
+                accountBundle.putSerializable("medico", medico);
+                accountBundle.putString("tipo", "medico");
+                registerEnd.putExtra("bundle", accountBundle);
+                startActivity(registerEnd);
+            }
         } else {
             Toast.makeText(CadastroMedicoActivity.this, "Ops! Algo parece estar errado. Verifique seus dados.", Toast.LENGTH_SHORT).show();
             limparCampos();
@@ -92,7 +106,7 @@ public class CadastroMedicoActivity extends AppCompatActivity {
         mEmail = (EditText) findViewById(R.id.email);
         mSenha = (EditText) findViewById(R.id.passwd);
         mcmfSenha = (EditText) findViewById(R.id.cnfpasswd);
-        mTextLogin = (TextView) findViewById(R.id.login);
+        mTextHome = (TextView) findViewById(R.id.cdstrMedicoHome);
 
     }
 

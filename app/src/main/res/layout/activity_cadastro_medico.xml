@@ -15,6 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:inputType="text"
+        android:textColorHint="@color/hintColor"
+        android:textColor="#FF00A759"
         android:layout_marginTop="40dp"
         android:hint="nome" />
 
@@ -24,6 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
+        android:textColorHint="@color/hintColor"
+        android:textColor="#FF00A759"
         android:inputType="number"
         android:hint="cpf" />
 
@@ -33,6 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
+        android:textColorHint="@color/hintColor"
+        android:textColor="#FF00A759"
         android:inputType="number"
         android:hint="crmv" />
 
@@ -42,6 +48,8 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:layout_gravity="center_horizontal"
+        android:textColorHint="@color/hintColor"
+        android:textColor="#FF00A759"
         android:layout_marginTop="30dp"
         android:hint="email" />
 
@@ -51,6 +59,8 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:layout_gravity="center_horizontal"
+        android:textColorHint="@color/hintColor"
+        android:textColor="#FF00A759"
         android:layout_marginTop="30dp"
         android:hint="senha" />
     <EditText
@@ -59,6 +69,8 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:layout_gravity="center_horizontal"
+        android:textColorHint="@color/hintColor"
+        android:textColor="#FF00A759"
         android:layout_marginTop="30dp"
         android:hint="Confirme a senha" />
 
@@ -66,8 +78,10 @@
         android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:hint="Cadastrar endereço"
+        android:hint="CADASTRAR ENDEREÇO"
         android:layout_marginTop="15dp"
+        android:textColorHint="#ffFfff"
+        android:backgroundTint="#FF00A759"
         android:layout_gravity="center_horizontal"/>
 
     <LinearLayout
@@ -78,17 +92,12 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:text="Already Registered?"/>
-
-        <TextView
-            android:id="@+id/login"
+            android:id="@+id/cdstrMedicoHome"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:paddingLeft="10dp"
             android:textStyle="bold"
-            android:text="Login"/>
+            android:text="Voltar à tela inical"/>
     </LinearLayout>
 
 
