@@ -48,11 +48,10 @@ public class LoginActivity extends AppCompatActivity {
         loginbtn = (Button) findViewById(R.id.loginActLoginBtn);
         cadastrarBtn = (Button) findViewById(R.id.LoginActCadastrarBtn);
 
-
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //do-nothing
+                logar();
             }
         });
 
@@ -97,12 +96,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-		loginbtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				logar();
-			}
-		});
 	}
 
 	private void logar(){
