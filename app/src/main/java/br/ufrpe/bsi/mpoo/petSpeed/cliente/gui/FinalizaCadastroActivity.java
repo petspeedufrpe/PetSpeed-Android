@@ -34,7 +34,7 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent finalIntent = getIntent();
                 Bundle bundle = finalIntent.getExtras().getBundle("bundle");
-                String tipo = (String)bundle.getString("tipo");
+                String tipo = (String) bundle.getString("tipo");
 
                 if(tipo.equals("cliente")){
                     Cliente cliente = (Cliente) bundle.getSerializable("cliente");
@@ -48,20 +48,6 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
                     Clinica clinica = (Clinica) bundle.getSerializable("clinica");
                     cadastraClinica(clinica);
                 }
-                /*
-                Cliente cliente = (Cliente) finalIntent.getExtras().getSerializable("cliente");
-                Clinica clinica = (Clinica) finalIntent.getExtras().getSerializable("clinica");
-                Medico medico = (Medico) finalIntent.getExtras().getSerializable("medico");
-                if (finalIntent.getExtras().getSerializable("cliente") != null) {
-                    cliente = (Cliente) finalIntent.getExtras().getSerializable("cliente");
-                    cadastraCliente(cliente);
-                } else if (finalIntent.getExtras().getSerializable("clinica") != null) {
-                    clinica = (Clinica) finalIntent.getExtras().getSerializable("clinica");
-                    cadastraClinica(clinica);
-                } else if (finalIntent.getExtras().getSerializable("medico") != null) {
-                    medico = (Medico) finalIntent.getExtras().getSerializable("medico");
-                }*/
-
             }
         });
 
@@ -81,6 +67,12 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
         return  endereco;
     }
 
+
+    /**
+     *
+     * Os três metodos para cadastrar cliente, medico e clinica. Dependendo de qual objeto seja trazido
+     * pelas Intents, seleciona o metodo especifico do objeto
+     */
     private void cadastraCliente(Cliente cliente) {
         Endereco endereco = getEnderecoByAct();
         cliente.getDadosPessoais().setEndereco(endereco);

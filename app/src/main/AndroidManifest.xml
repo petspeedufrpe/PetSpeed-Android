@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".cliente.gui.activity_register_clinica">
+        <activity android:name=".clinica.gui.activity_register_clinica">
         </activity>
         <activity
             android:name=".cliente.gui.FinalizaCadastroActivity"

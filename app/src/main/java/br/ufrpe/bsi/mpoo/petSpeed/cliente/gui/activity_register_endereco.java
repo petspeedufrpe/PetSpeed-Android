@@ -36,6 +36,13 @@ public class activity_register_endereco extends AppCompatActivity {
         });
     }
 
+
+    /**
+     *
+     *Metodo que repassa o endereco e os dados do objeto a ser cadastrado para a outra activity(final)
+     *Utiliza do bundle e Intents para poder enviar e recuperar os dados serializados.
+     *
+     */
     public void cadastrar(){
         capturaTextos();
         if(!isCamposValidos()){
@@ -43,31 +50,11 @@ public class activity_register_endereco extends AppCompatActivity {
         }
         Intent registerEnd = getIntent();
         Endereco endereco = criarEndereco();
-        Bundle bundle = registerEnd.getExtras().getBundle("bundle");
-        bundle.putSerializable("endereco",endereco);
+        Bundle bundle = registerEnd.getExtras().getBundle("bundle");//inicia um bundle para guardar além do objeto, uma str do seu tipo.
+        bundle.putSerializable("endereco",endereco);//guarda o endereco serializando-o
         Intent finalIntent = new Intent(activity_register_endereco.this,FinalizaCadastroActivity.class);
         finalIntent.putExtra("bundle",bundle);
         startActivity(finalIntent);
-        //Cliente cliente = (Cliente) registerIntent.getExtras().getSerializable("cliente");
-        //Clinica clinica = (Clinica) registerIntent.getExtras().getSerializable("clinica");
-        //Medico  medico = (Medico) registerIntent.getExtras().getSerializable("medico");
-        /**
-        if(clinica!= null){
-            Intent finalIntent = new Intent(activity_register_endereco.this,FinalizaCadastroActivity.class);
-            finalIntent.putExtra("clinica",clinica);
-            finalIntent.putExtra("endereco",endereco);
-            startActivity(finalIntent);
-        } else if(medico!=null){
-            Intent finalIntent = new Intent(activity_register_endereco.this,FinalizaCadastroActivity.class);
-            finalIntent.putExtra("medico",medico);
-            finalIntent.putExtra("endereco",endereco);
-            startActivity(finalIntent);
-        } else if(cliente!=null){
-            Intent finalIntent = new Intent(activity_register_endereco.this,FinalizaCadastroActivity.class);
-            finalIntent.putExtra("cliente",cliente);
-            finalIntent.putExtra("endereco",endereco);
-            startActivity(finalIntent);
-        }**/
     }
     public void findEditTexts(){
 

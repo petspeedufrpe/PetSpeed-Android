@@ -50,7 +50,11 @@ public class ClinicaServices {
 
 	}
 
-	public void deletaClinica() {
+	public void deletaClinica(Long idClinica) {
+
+		if(clinicaDAO.getClinicaById(idClinica)!=null){
+			clinicaDAO.deletaClinica(clinicaDAO.getClinicaById(idClinica));
+		}
 
 	}
 

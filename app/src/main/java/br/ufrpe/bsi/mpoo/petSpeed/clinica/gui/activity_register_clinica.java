@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.cliente.gui;
+package br.ufrpe.bsi.mpoo.petSpeed.clinica.gui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -12,10 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.activity_register_endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.clinica.dominio.Clinica;
 import br.ufrpe.bsi.mpoo.petSpeed.clinica.negocio.ClinicaServices;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
 public class activity_register_clinica extends AppCompatActivity {
@@ -43,7 +42,7 @@ public class activity_register_clinica extends AppCompatActivity {
 
 
     public Clinica cadastrar(){
-        boolean res = false;
+        boolean res;
         String message = new String();
         capturaTextos();
         if(!isCamposValidos()){
@@ -53,8 +52,7 @@ public class activity_register_clinica extends AppCompatActivity {
             Clinica clinica = criarClinica();
             clinica.setUsuario(criarUsuario());
             res = clinicaServices.isEmailClinicaCadastrada(clinica.getUsuario().getEmail());//retorna true para cadastrado;
-            Toast.makeText(activity_register_clinica.this, Boolean.toString(res), Toast.LENGTH_LONG).show();
-            if (res ==false) {//cliente nao esta no banco
+            if (!res) {//cliente nao esta no banco
                 Intent registerEnd = new Intent(activity_register_clinica.this, activity_register_endereco.class);
                 Bundle accountBundle = new Bundle();
                 accountBundle.putSerializable("clinica",clinica);
@@ -113,7 +111,7 @@ public class activity_register_clinica extends AppCompatActivity {
             focusView = mCnpj;
             res = false;
         } else if (isCampoVazio(crmv)){
-            mCrmv.setError("Campo Inválido");
+            mCrmv.setError("Campo Vazio");
             focusView = mCrmv;
             res = false;
         } else if (!isEmailValido(email)) {

@@ -11,13 +11,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/logradouro"
-            android:hint="Nome da rua"
+            android:hint="@string/nome_rua_end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -25,7 +25,7 @@
 
         <EditText
             android:id="@+id/numero"
-            android:hint="Numero"
+            android:hint="@string/numero_end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -33,7 +33,7 @@
 
         <EditText
             android:id="@+id/complemento"
-            android:hint="complemento"
+            android:hint="@string/complemento_end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -41,7 +41,7 @@
 
         <EditText
             android:id="@+id/bairro"
-            android:hint="Bairro"
+            android:hint="@string/bairro_end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -49,6 +49,7 @@
 
         <EditText
             android:id="@+id/cidade"
+            android:hint="@string/cidade_end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -64,7 +65,7 @@
 
         <EditText
             android:id="@+id/cep"
-            android:hint="cep(só numeros)"
+            android:hint="@string/cep_end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

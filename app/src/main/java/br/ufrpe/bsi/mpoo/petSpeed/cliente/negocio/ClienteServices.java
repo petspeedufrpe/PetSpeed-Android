@@ -9,6 +9,7 @@ import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petSpeed.animal.persistencia.AnimalDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.clinica.dominio.Clinica;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Sessao;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
@@ -24,14 +25,20 @@ public class ClienteServices {
 
 	private ClienteDAO clienteDAO = new ClienteDAO();
 
-	private EnderecoDAO enderecoDAO = new EnderecoDAO();
-
 	private  UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 	private PessoaDAO pessoaDAO = new PessoaDAO();
 
 	private AnimalDAO animalDAO;
 
+
+	/**
+	 * verificações são feitas antes do metodo cadastrar ser chamado.
+	 * cadastra o cliente, sendo o último a ser cadastrado(tem 1 ou mais associações nele)
+	 * @param cliente
+	 * @param usuario
+	 * @return cliente
+	 */
 	public Cliente cadastraCliente(Cliente cliente,Usuario usuario) {
 		Long idUser = usuarioDAO.cadastrarUsuario(usuario);
 		usuario.setId(idUser);
@@ -45,8 +52,8 @@ public class ClienteServices {
 		if (clienteDAO.getClienteById(cliente.getId())!=null){
 			clienteDAO.deletaCliente(cliente);
 		}
-
 	}
+
 	public void login(String email, String senha) throws AppException {
 		Usuario usuario = usuarioDAO.getUsuario(email,senha);
 		if (usuario == null){
@@ -58,7 +65,7 @@ public class ClienteServices {
 		}
 	}
 
-
+	//Metodo que verifica se o usuario está ou não cadastrado no banco.
 	public boolean isEmailClienteCadastrado(String email){//retorna true se estiver no banco
 		Usuario usuario = usuarioDAO.getUsuario(email);
 		return ((usuario!= null && usuario.getEmail().length() >0));
@@ -77,7 +84,7 @@ public class ClienteServices {
 		return null;
 	}
 
-
+	//monta o objeto completo(com todos os atributos setados, usando o cursor para navegar entre os dados do banco.
 	public Cliente getClienteCompleto(long idCliente){
 		Cliente cliente;
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -119,47 +126,11 @@ public class ClienteServices {
 		usuarioDAO.alterarSenha(cliente.getUsuario());
 	}
 
-	public Endereco getEnderecoById() {
-		return null;
-	}
+	protected void alteraAvaliacao(Cliente cliente) {
+		if(cliente.getAvaliacao()>5 || cliente.getAvaliacao() < 0){
 
-	public Animal getAnimalById() {
-		return null;
-	}
-
-	public Animal getAnimalByRaca() {
-		return null;
-	}
-
-	public List<Endereco> getAllEndereco() {
-		return null;
-	}
-
-	public List<Animal> getAllAnimal() {
-		return null;
-	}
-
-	public void removeEndereco() {
-
-	}
-
-	public void adicionaEndereco() {
-
-	}
-
-	public Cliente getClienteById() {
-		return null;
-	}
-
-	public Cliente getClienteByEmail() {
-		return null;
-	}
-
-
-	public void alteraAvaliacao() {
-
-
-
+		}
+		clienteDAO.alteraAvaliacao(cliente);
 	}
 
 }
