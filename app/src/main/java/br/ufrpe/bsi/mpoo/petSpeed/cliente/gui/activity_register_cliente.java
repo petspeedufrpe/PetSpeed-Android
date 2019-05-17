@@ -44,14 +44,14 @@ public class activity_register_cliente extends AppCompatActivity {
         capturaTextos();
         if(!isCamposValidos()){
             return null;
-        }else {
 
+        }else {
             Cliente cliente = criarCliente();
             cliente.setUsuario(criarUsuario());
             cliente.setDadosPessoais(criarPessoa());
             res = clienteServices.isEmailClienteCadastrado(cliente.getUsuario().getEmail());//retorna true para cadastrado;
             Toast.makeText(activity_register_cliente.this, Boolean.toString(res), Toast.LENGTH_LONG).show();
-            if (res ==false) {//cliente nao esta no banco
+            if (!res) {//cliente nao esta no banco
                 Intent registerEnd = new Intent(activity_register_cliente.this, activity_register_endereco.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("cliente",cliente);
@@ -61,7 +61,6 @@ public class activity_register_cliente extends AppCompatActivity {
             } else {
                 Toast.makeText(activity_register_cliente.this, message, Toast.LENGTH_SHORT).show();
                 limparCampos();
-
             }
             return cliente;
         }
