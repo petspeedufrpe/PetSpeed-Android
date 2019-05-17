@@ -43,20 +43,17 @@ public class ClienteServices {
 		if (clienteDAO.getClienteById(cliente.getId())!=null){
 			clienteDAO.deletaCliente(cliente);
 		}
-
 	}
-	public Cliente login(String email, String senha) throws AppException {
+
+	public void login(String email, String senha) throws AppException {
 		Usuario usuario = usuarioDAO.getUsuario(email,senha);
-		Cliente cliente = new Cliente();
 		if (usuario == null){
-			cliente = null;
 			throw new AppException("Usuário ou senha inválida.");
 		}
-		PessoaServices pessoaServices = new PessoaServices();
-		cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
-		cliente = getClienteCompleto(cliente.getId());
 
-		return cliente;
+		else{
+			Sessao.instance.setUsuario(usuario);
+		}
 	}
 
 	public boolean isEmailClienteNaoCadastrado(String email){//retorna true se nao estiver no banco

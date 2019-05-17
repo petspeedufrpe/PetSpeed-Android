@@ -1,12 +1,13 @@
 package br.ufrpe.bsi.mpoo.petSpeed.clinica.dominio;
 
+import java.io.Serializable;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
-public class Clinica {
+public class Clinica implements Serializable {
 
     private long id;
 

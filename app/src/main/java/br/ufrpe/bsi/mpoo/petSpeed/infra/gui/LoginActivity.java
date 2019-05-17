@@ -90,14 +90,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        loginbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(LoginActivity.this, AccountSelectionActivity.class);
-                startActivity(it);
-            }
-        });
-    }
+		loginbtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				logar();
+			}
+		});
+	}
 
     private void logar() {
         capturaTextos();
@@ -105,15 +104,20 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        boolean result = false;
-        try {
-            clienteServices.login(email, senha);
-            if (result) {
-                startActivity(new Intent(LoginActivity.this, AccountSelectionActivity.class));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+		boolean result= true;
+		try {
+			clienteServices.login(email,senha);
+		} catch (Exception e) {
+			result = false;
+			Toast.makeText(LoginActivity.this, e.getMessage(),Toast.LENGTH_LONG).show();
+
+
+		}
+		if (result) {
+			startActivity(new Intent(LoginActivity.this, MainActivity.class));
+		}
+
+
 
     }
 
