@@ -41,13 +41,16 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
             res = false;
         }
 
-        Intent registerEnd = getIntent();
-        Endereco endereco = criarEndereco();
-        Bundle accountBundle = registerEnd.getExtras().getBundle("bundle");
-        accountBundle.putSerializable("endereco", endereco);
-        Intent finalIntent = new Intent(CadastroEnderecoActivity.this,FinalizaCadastroActivity.class);
-        finalIntent.putExtra("bundle", accountBundle);
-        startActivity(finalIntent);
+        if(isCamposValidos()){
+            Intent registerEnd = getIntent();
+            Endereco endereco = criarEndereco();
+            Bundle accountBundle = registerEnd.getExtras().getBundle("bundle");
+            accountBundle.putSerializable("endereco", endereco);
+            Intent finalIntent = new Intent(CadastroEnderecoActivity.this,FinalizaCadastroActivity.class);
+            finalIntent.putExtra("bundle", accountBundle);
+            startActivity(finalIntent);
+
+        }
 
     }
 
@@ -130,7 +133,12 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
     public Endereco criarEndereco(){
         Endereco endereco = new Endereco();
         endereco.setLogradouro(logradouro);
-        endereco.setNumero(Long.parseLong(numero));
+
+        try{
+            endereco.setNumero(Long.parseLong(numero));
+        }catch(Exception e){
+            isCamposValidos();
+        }
         endereco.setCep(cep);
         endereco.setUf(uf);
         endereco.setBairro(bairro);

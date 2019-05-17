@@ -90,7 +90,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:textColor="#FF00A759"
-            android:inputType="numberDecimal"
             android:textColorHint="@color/hintColor"
             android:layout_marginTop="40dp"/>
 
