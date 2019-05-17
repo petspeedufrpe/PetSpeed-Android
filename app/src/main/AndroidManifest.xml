@@ -13,7 +13,6 @@
         <activity android:name=".infra.gui.CadastroMedicoActivity"></activity>
         <activity android:name=".infra.gui.LoginMedicoActivity"></activity>
         <activity android:name=".infra.gui.CrudAnimalActivity" />
-        <activity android:name=".infra.gui.SplashScreenActivity" />
         <activity android:name=".infra.gui.MainActivity"/>
         <activity android:name=".infra.gui.LoginActivity">
             <intent-filter>
@@ -21,8 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".infra.gui.AccountSelectionActivity" />
-        <activity android:name=".infra.gui.TesteActivity"></activity>
         <activity android:name=".infra.gui.FinalizaCadastroActivity" />
         <activity
             android:name=".infra.gui.CadastroEnderecoActivity"

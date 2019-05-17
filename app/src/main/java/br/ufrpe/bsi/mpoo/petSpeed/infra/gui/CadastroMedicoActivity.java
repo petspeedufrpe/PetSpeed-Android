@@ -174,6 +174,7 @@ public class CadastroMedicoActivity extends AppCompatActivity {
     private Medico criarMedico() {
         Medico medico = new Medico();
         medico.setAvaliacao(5);
+        medico.setCrmv(crmv);
         return medico;
     }
 
