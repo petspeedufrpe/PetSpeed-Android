@@ -17,6 +17,8 @@ import java.util.Map;
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.SessaoCadastro;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
@@ -56,34 +58,23 @@ public class CadastroClienteActivity extends AppCompatActivity {
         });
     }
 
-    public Cliente cadastrar() {
-        boolean res = false;
-        String message = new String();
+    private void cadastrar() {
         capturaTextos();
-        if (!isCamposValidos()) {
-            res = false;
-        }
         Cliente cliente = criarCliente();
         cliente.setUsuario(criarUsuario());
         cliente.setDadosPessoais(criarPessoa());
-        res = clienteServices.isEmailClienteCadastrado(cliente.getUsuario().getEmail());
-        if (!res) {//cliente nao esta no banco
+        boolean res = clienteServices.isEmailClienteCadastrado(cliente.getUsuario().getEmail());
+        if (!res) {
             if (isCamposValidos()){
+                SessaoCadastro.instance.setCliente(cliente);
+                SessaoCadastro.instance.setTipo(ContasDeUsuario.CLIENTE);
                 Intent registerEnd = new Intent(CadastroClienteActivity.this, CadastroEnderecoActivity.class);
-                Bundle accountBundle = new Bundle();
-                accountBundle.putSerializable("cliente", cliente);
-                accountBundle.putString("tipo", "cliente");
-                registerEnd.putExtra("bundle", accountBundle);
                 startActivity(registerEnd);
             }
         } else {
             Toast.makeText(CadastroClienteActivity.this, "Por favor, verifique os campos.", Toast.LENGTH_SHORT).show();
             limparCampos();
-
         }
-
-        return cliente;
-
     }
 
     public void capturaTextos() {

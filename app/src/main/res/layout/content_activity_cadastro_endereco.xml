@@ -19,7 +19,7 @@
             android:id="@+id/logradouro"
             android:hint="Nome da rua"
             android:layout_width="match_parent"
-            android:textColorHint="@color/hintColor"
+            android:backgroundTint="@color/hintColor"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:textColor="#FF00A759"
@@ -34,9 +34,7 @@
             android:inputType="number"
             android:layout_gravity="center_horizontal"
             android:textColor="#FF00A759"
-
-            android:textColorHint="@color/hintColor"
-
+            android:backgroundTint="@color/hintColor"
             android:layout_marginTop="40dp"/>
 
         <EditText
@@ -46,8 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:textColor="#FF00A759"
-
-            android:textColorHint="@color/hintColor"
+            android:backgroundTint="@color/hintColor"
             android:layout_marginTop="40dp"/>
 
         <EditText
@@ -56,9 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColorHint="@color/hintColor"
+            android:backgroundTint="@color/hintColor"
             android:textColor="#FF00A759"
-
             android:layout_marginTop="40dp"/>
 
         <EditText
@@ -67,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColorHint="@color/hintColor"
+            android:backgroundTint="@color/hintColor"
             android:textColor="#FF00A759"
 
             android:layout_marginTop="40dp"/>
@@ -78,9 +74,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColorHint="@color/hintColor"
             android:textColor="#FF00A759"
-
+            android:backgroundTint="@color/hintColor"
             android:layout_marginTop="40dp"/>
 
         <EditText
@@ -90,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:textColor="#FF00A759"
-            android:textColorHint="@color/hintColor"
+            android:backgroundTint="@color/hintColor"
             android:layout_marginTop="40dp"/>
 
         <Button
@@ -99,8 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-
-            android:textColorHint="#FFFFFF"
+            android:textColor="#FFFFFF"
             android:backgroundTint="@color/hintColor"
             android:layout_marginTop="40dp"/>
 

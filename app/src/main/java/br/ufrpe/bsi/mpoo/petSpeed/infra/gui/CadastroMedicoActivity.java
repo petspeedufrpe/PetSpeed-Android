@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.SessaoCadastro;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
@@ -57,34 +59,22 @@ public class CadastroMedicoActivity extends AppCompatActivity {
         });
     }
 
-    public Medico cadastrar() {
-        boolean res = false;
-        String message = new String();
+    public void cadastrar() {
         capturaTextos();
-        if (!isCamposValidos()) {
-            res = false;
-        }
         Medico medico = criarMedico();
         medico.setUsuario(criarUsuario());
         medico.setDadosPessoais(criarPessoa());
-        boolean possui = medicoServices.usuarioPossuiMedico(medico);
-        res = !possui;
-        if (res == true) {//medico nao esta no banco
+        boolean res = medicoServices.usuarioPossuiMedico(medico);
+        if (!res) {
             if(isCamposValidos()){
                 Intent registerEnd = new Intent(CadastroMedicoActivity.this, CadastroEnderecoActivity.class);
-                Bundle accountBundle = new Bundle();
-                accountBundle.putSerializable("medico", medico);
-                accountBundle.putString("tipo", "medico");
-                registerEnd.putExtra("bundle", accountBundle);
+                SessaoCadastro.instance.setMedico(medico);
+                SessaoCadastro.instance.setTipo(ContasDeUsuario.MEDICO);
                 startActivity(registerEnd);
             }
         } else {
             Toast.makeText(CadastroMedicoActivity.this, "Ops! Algo parece estar errado. Verifique seus dados.", Toast.LENGTH_SHORT).show();
-
         }
-
-        return medico;
-
     }
 
     public void capturaTextos() {

@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,13 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -29,13 +24,11 @@ public class LoginActivity extends AppCompatActivity {
     private Button cadastrarBtn;
     private String email;
     private String senha;
-    private ContasDeUsuario contaDeUsuario;
+    private ContasDeUsuario contaSelecionada;
     private boolean contaSetada = false;
 
 
 	private ClienteServices clienteServices = new ClienteServices();
-	private PessoaServices pessoaServices = new PessoaServices();
-
 
 
     @Override
@@ -59,17 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         cadastrarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (contaSetada) {
-                    if (contaDeUsuario.getDescricao().equals("Medico")) {
-                        Intent registerIntent = new Intent(LoginActivity.this, CadastroMedicoActivity.class);
-                        startActivity(registerIntent);
-                    } else if (contaDeUsuario.getDescricao().equals("Cliente")) {
-                        Intent registerIntent = new Intent(LoginActivity.this, CadastroClienteActivity.class);
-                        startActivity(registerIntent);
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Selecione o tipo de conta a cadastrar.", Toast.LENGTH_LONG).show();
-                    }
-                }
+                cadastraUsuario();
             }
         });
 
@@ -81,10 +64,10 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                contaDeUsuario = ContasDeUsuario.values()[position];
+                contaSelecionada = ContasDeUsuario.values()[position];
                 StringBuilder tipoConta = new StringBuilder();
                 tipoConta.append("Fazer login como: ");
-                tipoConta.append(contaDeUsuario.getDescricao());
+                tipoConta.append(contaSelecionada.getDescricao());
                 Toast.makeText(LoginActivity.this, tipoConta, Toast.LENGTH_LONG).show();
                 contaSetada = true;
             }
@@ -98,7 +81,21 @@ public class LoginActivity extends AppCompatActivity {
 
 	}
 
-	private void logar(){
+    private void cadastraUsuario() {
+        if (contaSetada) {
+            if (contaSelecionada == ContasDeUsuario.MEDICO) {
+                Intent registerIntent = new Intent(LoginActivity.this, CadastroMedicoActivity.class);
+                startActivity(registerIntent);
+            } else if (contaSelecionada == ContasDeUsuario.CLIENTE) {
+                Intent registerIntent = new Intent(LoginActivity.this, CadastroClienteActivity.class);
+                startActivity(registerIntent);
+            } else {
+                Toast.makeText(LoginActivity.this, "Selecione o tipo de conta a cadastrar.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private void logar(){
 		capturaTextos();
 		if(!camposValidos()){
 			return;

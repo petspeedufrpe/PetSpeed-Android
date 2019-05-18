@@ -11,6 +11,8 @@ import android.widget.EditText;
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ParamBundle;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.SessaoCadastro;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
 
@@ -35,26 +37,14 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
 
 
     public void cadastrar(){
-        boolean res = false;
         capturaTextos();
-        if (!isCamposValidos()){
-            res = false;
-        }
-
         if(isCamposValidos()){
-            Intent registerEnd = getIntent();
             Endereco endereco = criarEndereco();
-            Bundle accountBundle = registerEnd.getExtras().getBundle("bundle");
-            accountBundle.putSerializable("endereco", endereco);
+            SessaoCadastro.instance.setEndereco(endereco);
             Intent finalIntent = new Intent(CadastroEnderecoActivity.this,FinalizaCadastroActivity.class);
-            finalIntent.putExtra("bundle", accountBundle);
             startActivity(finalIntent);
-
         }
-
     }
-
-
 
     public void findEditTexts(){
 
@@ -132,13 +122,12 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
 
     public Endereco criarEndereco(){
         Endereco endereco = new Endereco();
-        endereco.setLogradouro(logradouro);
-
         try{
             endereco.setNumero(Long.parseLong(numero));
         }catch(Exception e){
             isCamposValidos();
         }
+        endereco.setLogradouro(logradouro);
         endereco.setCep(cep);
         endereco.setUf(uf);
         endereco.setBairro(bairro);

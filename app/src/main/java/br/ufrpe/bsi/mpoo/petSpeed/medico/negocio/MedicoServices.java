@@ -52,8 +52,6 @@ public class MedicoServices {
         Usuario usuarioReferencia = usuarioDAO.getUsuario(medico.getUsuario().getEmail());
         try {
             long id = usuarioReferencia.getId();
-            //querry retornou um usuário não nulo, logo o email cadastrado já pertence um usuário...
-            //vamos verificar se esse usuário já possui uma conta de médico no proximo try:
         } catch (Exception e) {
             return false;
         }
@@ -61,7 +59,6 @@ public class MedicoServices {
             Medico medicoReferencia = medicoDAO.getMedicoByFkUsuario(usuarioReferencia.getId());
             medicoReferencia.getId();
             if (medicoReferencia.getUsuario().getEmail() == medico.getUsuario().getEmail()) {
-                //se os dois emails são iguais, o o usuário já possui uma conta de médico
                 return true;
             }
         } catch (Exception e) {

@@ -1,22 +1,15 @@
 package br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio;
 
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
-import java.util.List;
-
-import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petSpeed.animal.persistencia.AnimalDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.clinica.dominio.Clinica;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.Sessao;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.PessoaDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
@@ -57,7 +50,7 @@ public class ClienteServices {
 	public void login(String email, String senha) throws AppException {
 		Usuario usuario = usuarioDAO.getUsuario(email,senha);
 		if (usuario == null){
-			throw new AppException("Usuário ou senha inválida.");
+			throw new AppException("Credenciais inválidas.");
 		}
 
 		else{

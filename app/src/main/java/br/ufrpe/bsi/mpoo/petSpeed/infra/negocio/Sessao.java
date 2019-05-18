@@ -1,8 +1,7 @@
-package br.ufrpe.bsi.mpoo.petSpeed.infra;
+package br.ufrpe.bsi.mpoo.petSpeed.infra.negocio;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 
 import java.text.SimpleDateFormat;
@@ -34,9 +33,13 @@ public class Sessao {
         return res != null ? res : "-";
     }
     @SuppressWarnings("WeakerAccess")
-    public void setValue(String key,Object value){values.put(key,value);}
+    public void setValue(String key,Object value){
+        values.put(key,value);
+    }
 
-    public Object getValue(String key){return values.get(key);}
+    public Object getValue(String key){
+        return values.get(key);
+    }
 
     public void reset(){
         this.values.clear();
