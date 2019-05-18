@@ -7,7 +7,7 @@
     android:layout_gravity="center_horizontal"
     android:baselineAligned="false"
     android:orientation="vertical"
-    tools:context=".infra.gui.CadastroMedicoActivity">
+    tools:context=".medico.gui.CadastroMedicoActivity">
 
     <EditText
         android:id="@+id/username"

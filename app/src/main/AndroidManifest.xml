@@ -10,9 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".infra.gui.CadastroMedicoActivity"></activity>
-        <activity android:name=".infra.gui.LoginMedicoActivity"></activity>
-        <activity android:name=".infra.gui.CrudAnimalActivity" />
+        <activity android:name=".medico.gui.CadastroMedicoActivity"></activity>
+        <activity android:name=".animal.gui.CrudAnimalActivity" />
         <activity android:name=".infra.gui.MainActivity"/>
         <activity android:name=".infra.gui.LoginActivity">
             <intent-filter>
@@ -22,10 +21,9 @@
         </activity>
         <activity android:name=".infra.gui.FinalizaCadastroActivity" />
         <activity
-            android:name=".infra.gui.CadastroEnderecoActivity"
+            android:name=".pessoa.gui.CadastroEnderecoActivity"
             android:label="endereco" />
-        <activity android:name=".infra.gui.CadastroClienteActivity"></activity>
-        <activity android:name=".cliente.gui.ListaClinicasActivity" />
+        <activity android:name=".cliente.gui.CadastroClienteActivity"></activity>
     </application>
 
 </manifest>

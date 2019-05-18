@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
+package br.ufrpe.bsi.mpoo.petSpeed.pessoa.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ParamBundle;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.gui.FinalizaCadastroActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.SessaoCadastro;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
@@ -41,7 +40,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
         if(isCamposValidos()){
             Endereco endereco = criarEndereco();
             SessaoCadastro.instance.setEndereco(endereco);
-            Intent finalIntent = new Intent(CadastroEnderecoActivity.this,FinalizaCadastroActivity.class);
+            Intent finalIntent = new Intent(CadastroEnderecoActivity.this, FinalizaCadastroActivity.class);
             startActivity(finalIntent);
         }
     }

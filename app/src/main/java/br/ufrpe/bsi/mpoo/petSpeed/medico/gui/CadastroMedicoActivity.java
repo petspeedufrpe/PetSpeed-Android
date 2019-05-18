@@ -1,8 +1,8 @@
-package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
+package br.ufrpe.bsi.mpoo.petSpeed.medico.gui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
@@ -11,39 +11,39 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import br.ufrpe.bsi.mpoo.petSpeed.R;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
+import br.ufrpe.bsi.mpoo.petSpeed.pessoa.gui.CadastroEnderecoActivity;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.gui.LoginActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.SessaoCadastro;
+import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
+import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
-public class CadastroClienteActivity extends AppCompatActivity {
-
-    EditText mNome, mCpf, mEmail, mSenha, mcmfSenha;
-    String nome, cpf, email, senha, cmfSenha;
+public class CadastroMedicoActivity extends AppCompatActivity {
+    EditText mNome, mCpf, mEmail, mSenha, mcmfSenha, mCrmv;
+    String nome, cpf, email, senha, cmfSenha, crmv;
     Button mButtoRegister;
-    TextView mTextBkHome;
-    private final Map<String,Object> values = new HashMap<>();
+    TextView mTextHome;
 
-    ClienteServices clienteServices = new ClienteServices();
+
+
+    MedicoServices medicoServices = new MedicoServices();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro_cliente);
+        setContentView(R.layout.activity_cadastro_medico);
 
-        mTextBkHome = findViewById(R.id.ActCadastroTxVwBackHome);
+        mTextHome = findViewById(R.id.cdstrMedicoHome);
 
-        mTextBkHome.setOnClickListener(new View.OnClickListener() {
+        mTextHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent homeIntent = new Intent(CadastroClienteActivity.this, LoginActivity.class);
+                Intent homeIntent = new Intent(CadastroMedicoActivity.this, LoginActivity.class);
                 startActivity(homeIntent);
+
             }
         });
 
@@ -58,22 +58,21 @@ public class CadastroClienteActivity extends AppCompatActivity {
         });
     }
 
-    private void cadastrar() {
+    public void cadastrar() {
         capturaTextos();
-        Cliente cliente = criarCliente();
-        cliente.setUsuario(criarUsuario());
-        cliente.setDadosPessoais(criarPessoa());
-        boolean res = clienteServices.isEmailClienteCadastrado(cliente.getUsuario().getEmail());
+        Medico medico = criarMedico();
+        medico.setUsuario(criarUsuario());
+        medico.setDadosPessoais(criarPessoa());
+        boolean res = medicoServices.usuarioPossuiMedico(medico);
         if (!res) {
-            if (isCamposValidos()){
-                SessaoCadastro.instance.setCliente(cliente);
-                SessaoCadastro.instance.setTipo(ContasDeUsuario.CLIENTE);
-                Intent registerEnd = new Intent(CadastroClienteActivity.this, CadastroEnderecoActivity.class);
+            if(isCamposValidos()){
+                Intent registerEnd = new Intent(CadastroMedicoActivity.this, CadastroEnderecoActivity.class);
+                SessaoCadastro.instance.setMedico(medico);
+                SessaoCadastro.instance.setTipo(ContasDeUsuario.MEDICO);
                 startActivity(registerEnd);
             }
         } else {
-            Toast.makeText(CadastroClienteActivity.this, "Por favor, verifique os campos.", Toast.LENGTH_SHORT).show();
-            limparCampos();
+            Toast.makeText(CadastroMedicoActivity.this, "Ops! Algo parece estar errado. Verifique seus dados.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -84,16 +83,17 @@ public class CadastroClienteActivity extends AppCompatActivity {
         email = mEmail.getText().toString().trim();
         senha = mSenha.getText().toString().trim();
         cmfSenha = mcmfSenha.getText().toString().trim();
+        crmv = mCrmv.getText().toString().trim();
     }
 
     public void findEditTexts() {
-
+        mCrmv = (EditText) findViewById(R.id.crmv);
         mNome = (EditText) findViewById(R.id.username);
         mCpf = (EditText) findViewById(R.id.cpf);
         mEmail = (EditText) findViewById(R.id.email);
         mSenha = (EditText) findViewById(R.id.passwd);
         mcmfSenha = (EditText) findViewById(R.id.cnfpasswd);
-        mTextBkHome = (TextView) findViewById(R.id.ActCadastroTxVwBackHome);
+        mTextHome = (TextView) findViewById(R.id.cdstrMedicoHome);
 
     }
 
@@ -106,6 +106,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
         mSenha.setError(null);
         mEmail.setError(null);
         mcmfSenha.setError(null);
+        mCrmv.setError(null);
 
         if (isCampoVazio(nome)) {
             mNome.setError("Campo vazio");
@@ -114,6 +115,10 @@ public class CadastroClienteActivity extends AppCompatActivity {
         } else if (isCampoVazio(cpf)) {
             mCpf.setError("Campo vazio");
             focusView = mCpf;
+            res = false;
+        } else if (isCampoVazio(crmv)) {
+            mCrmv.setError("Campo vazio");
+            focusView = mCrmv;
             res = false;
         } else if (!isEmailValido(email)) {
             mEmail.setError("Email inválido");
@@ -155,10 +160,11 @@ public class CadastroClienteActivity extends AppCompatActivity {
         return ((senha.equals(cmfSenha)));
     }
 
-    private Cliente criarCliente() {
-        Cliente cliente = new Cliente();
-        cliente.setAvaliacao(5);
-        return cliente;
+    private Medico criarMedico() {
+        Medico medico = new Medico();
+        medico.setAvaliacao(5);
+        medico.setCrmv(crmv);
+        return medico;
     }
 
     private Usuario criarUsuario() {
@@ -183,6 +189,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
         mcmfSenha.setText("");
         mEmail.setText("");
         mCpf.setText("");
+        mCrmv.setText("");
 
     }
 
