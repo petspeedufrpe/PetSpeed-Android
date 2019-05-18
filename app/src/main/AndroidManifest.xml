@@ -10,12 +10,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".medico.gui.CadastroMedicoActivity"></activity>
+        <activity
+            android:name=".ui.login.LoginActivityas"
+            android:label="@string/title_activity_login_activityas" />
+        <activity android:name=".medico.gui.CadastroMedicoActivity" />
         <activity android:name=".animal.gui.CrudAnimalActivity" />
         <activity android:name=".infra.gui.MainActivity" />
-        <activity android:name=".infra.gui.LoginActivity">
+        <activity android:name=".infra.gui.LoginActivity" />
+        <activity android:name=".infra.gui.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -23,7 +28,7 @@
         <activity
             android:name=".pessoa.gui.CadastroEnderecoActivity"
             android:label="endereco" />
-        <activity android:name=".cliente.gui.CadastroClienteActivity"></activity>
+        <activity android:name=".cliente.gui.CadastroClienteActivity" />
     </application>
 
 </manifest>
