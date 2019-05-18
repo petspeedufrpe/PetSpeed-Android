@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -155,7 +156,13 @@ public class LoginActivity extends AppCompatActivity {
 		return senha.length() >2;
 	}
 
-	private boolean validaEmail(String email){
-		return email.contains("@");
-	}
+    private boolean validaEmail(String email) {
+        boolean resultado = (!isCampoVazio(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+        return resultado;
+    }
+
+    private boolean isCampoVazio(String valor) {
+        boolean resultado = TextUtils.isEmpty(valor) || valor.trim().isEmpty();
+        return resultado;
+    }
 }
