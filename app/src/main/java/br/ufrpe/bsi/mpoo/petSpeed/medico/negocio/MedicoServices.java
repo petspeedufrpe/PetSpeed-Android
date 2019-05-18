@@ -28,7 +28,7 @@ public class MedicoServices {
         }
         long idUsuario = usuarioDAO.cadastrarUsuario(usuario);
         medico.getUsuario().setId(idUsuario);
-        long  idmedico = medicoDAO.cadastraMedico(medico);
+        long idmedico = medicoDAO.cadastraMedico(medico);
         medico.setId(idmedico);
         return medico;
     }

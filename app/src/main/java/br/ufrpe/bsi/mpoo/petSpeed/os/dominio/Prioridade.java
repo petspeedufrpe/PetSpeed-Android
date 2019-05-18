@@ -1,25 +1,25 @@
 package br.ufrpe.bsi.mpoo.petSpeed.os.dominio;
 
-public enum Prioridade{
+public enum Prioridade {
 
-	ALTA("Alta"),
+    ALTA("Alta"),
 
-	BAIXA("Baixa");
+    BAIXA("Baixa");
 
-	private final String descricao;
+    private final String descricao;
 
-	Prioridade(String descricao) {
-		this.descricao = descricao;
-	}
+    Prioridade(String descricao) {
+        this.descricao = descricao;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	@Override
-	public String toString() {
-		return this.descricao;
-	}
+    @Override
+    public String toString() {
+        return this.descricao;
+    }
 
 
 }

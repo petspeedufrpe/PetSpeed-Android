@@ -5,30 +5,30 @@ import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
 
 public class EnderecoServices {
 
-	private EnderecoDAO enderecoDAO;
+    private EnderecoDAO enderecoDAO;
 
-	public void cadastraEndereco() {
+    public void cadastraEndereco() {
 
-	}
+    }
 
-	public void deletaEndereco() {
+    public void deletaEndereco() {
 
-	}
+    }
 
-	public void alteraCep() {
+    public void alteraCep() {
 
-	}
+    }
 
-	public void alteraNumero() {
+    public void alteraNumero() {
 
-	}
+    }
 
-	public void alteraComplemento() {
+    public void alteraComplemento() {
 
-	}
+    }
 
-	public Endereco getEnderecoById() {
-		return null;
-	}
+    public Endereco getEnderecoById() {
+        return null;
+    }
 
 }

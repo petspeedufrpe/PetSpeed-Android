@@ -17,42 +17,42 @@ public class Sessao {
 
     @SuppressLint("SimpleDateFormat")
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-    private final Map<String,Object> values = new HashMap<>();
+    private final Map<String, Object> values = new HashMap<>();
 
-
-    public void setUsuario(Usuario usuario){
-        setValue("sessao.Usuario",usuario);
+    public Usuario getUsuario() {
+        return (Usuario) values.get("sessao.Usuario");
     }
 
-    public Usuario getUsuario(){
-        return (Usuario)values.get("sessao.Usuario");
+    public void setUsuario(Usuario usuario) {
+        setValue("sessao.Usuario", usuario);
     }
 
-    public String getUltimoAcesso(){
-        String res = (String)values.get("sessao.ultimoAcesso");
+    public String getUltimoAcesso() {
+        String res = (String) values.get("sessao.ultimoAcesso");
         return res != null ? res : "-";
     }
+
     @SuppressWarnings("WeakerAccess")
-    public void setValue(String key,Object value){
-        values.put(key,value);
+    public void setValue(String key, Object value) {
+        values.put(key, value);
     }
 
-    public Object getValue(String key){
+    public Object getValue(String key) {
         return values.get(key);
     }
 
-    public void reset(){
+    public void reset() {
         this.values.clear();
         updateAcesso();
     }
 
-    public void updateAcesso(){
+    public void updateAcesso() {
         SharedPreferences prefs = PetSpeedApp.getContext().getSharedPreferences("sessao", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor= prefs.edit();
+        SharedPreferences.Editor editor = prefs.edit();
         String date = DATE_FORMAT.format(new Date());
         String key = "sessao.ultimoAcesso";
-        setValue(key,date);
-        editor.putString(key,date);
+        setValue(key, date);
+        editor.putString(key, date);
         editor.apply();
 
     }

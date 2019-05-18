@@ -5,8 +5,8 @@ import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petSpeed.clinica.dominio.Clinica;
 import br.ufrpe.bsi.mpoo.petSpeed.clinica.persistencia.ClinicaDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.persistencia.MedicoDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
@@ -57,32 +57,32 @@ public class ClinicaServices {
     }
 
 
-        public void alteraAvaliacao () {
-
-        }
-
-        public void alteraEndereco () {
-
-        }
-
-        public void adicionaMedico () {
-
-        }
-
-        public void removeMedico () {
-
-        }
-
-        public void alteraCrmv () {
-
-        }
-
-        public Medico getMedicoById () {
-            return null;
-        }
-
-        public List<Medico> getAllMedico () {
-            return null;
-        }
+    public void alteraAvaliacao() {
 
     }
+
+    public void alteraEndereco() {
+
+    }
+
+    public void adicionaMedico() {
+
+    }
+
+    public void removeMedico() {
+
+    }
+
+    public void alteraCrmv() {
+
+    }
+
+    public Medico getMedicoById() {
+        return null;
+    }
+
+    public List<Medico> getAllMedico() {
+        return null;
+    }
+
+}

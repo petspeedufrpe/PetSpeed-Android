@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".medico.gui.CadastroMedicoActivity"></activity>
         <activity android:name=".animal.gui.CrudAnimalActivity" />
-        <activity android:name=".infra.gui.MainActivity"/>
+        <activity android:name=".infra.gui.MainActivity" />
         <activity android:name=".infra.gui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

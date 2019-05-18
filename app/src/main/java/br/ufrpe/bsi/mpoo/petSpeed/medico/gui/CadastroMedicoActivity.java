@@ -12,13 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.gui.CadastroEnderecoActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.gui.LoginActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.SessaoCadastro;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
+import br.ufrpe.bsi.mpoo.petSpeed.pessoa.gui.CadastroEnderecoActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
 public class CadastroMedicoActivity extends AppCompatActivity {
@@ -26,7 +26,6 @@ public class CadastroMedicoActivity extends AppCompatActivity {
     String nome, cpf, email, senha, cmfSenha, crmv;
     Button mButtoRegister;
     TextView mTextHome;
-
 
 
     MedicoServices medicoServices = new MedicoServices();
@@ -65,7 +64,7 @@ public class CadastroMedicoActivity extends AppCompatActivity {
         medico.setDadosPessoais(criarPessoa());
         boolean res = medicoServices.usuarioPossuiMedico(medico);
         if (!res) {
-            if(isCamposValidos()){
+            if (isCamposValidos()) {
                 Intent registerEnd = new Intent(CadastroMedicoActivity.this, CadastroEnderecoActivity.class);
                 SessaoCadastro.instance.setMedico(medico);
                 SessaoCadastro.instance.setTipo(ContasDeUsuario.MEDICO);

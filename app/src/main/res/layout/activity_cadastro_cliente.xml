@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,12 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:inputType="text"
         android:layout_marginTop="40dp"
-        android:textColorHint="@color/hintColor"
+        android:hint="nome"
+        android:inputType="text"
         android:textColor="#FF00A759"
 
-        android:hint="nome" />
+        android:textColorHint="@color/hintColor" />
 
     <EditText
         android:id="@+id/cpf"
@@ -27,58 +26,59 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
+        android:hint="cpf"
         android:inputType="number"
-        android:textColorHint="@color/hintColor"
         android:textColor="#FF00A759"
-        android:hint="cpf" />
+        android:textColorHint="@color/hintColor" />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
         android:layout_gravity="center_horizontal"
-        android:textColorHint="@color/hintColor"
-        android:textColor="#FF00A759"
         android:layout_marginTop="30dp"
-        android:hint="email" />
+        android:hint="email"
+        android:inputType="textEmailAddress"
+        android:textColor="#FF00A759"
+        android:textColorHint="@color/hintColor" />
 
     <EditText
         android:id="@+id/passwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:textColorHint="@color/hintColor"
+        android:hint="senha"
+        android:inputType="textPassword"
         android:textColor="#FF00A759"
-        android:hint="senha" />
+        android:textColorHint="@color/hintColor" />
+
     <EditText
         android:id="@+id/cnfpasswd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:textColorHint="@color/hintColor"
+        android:hint="Confirme a senha"
+        android:inputType="textPassword"
         android:textColor="#FF00A759"
-        android:hint="Confirme a senha" />
+        android:textColorHint="@color/hintColor" />
 
     <Button
         android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:hint="CADASTRAR ENDEREÇO"
-        android:backgroundTint="@color/hintColor"
-        android:textColorHint="#ffffff"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
-        android:layout_gravity="center_horizontal"/>
+        android:backgroundTint="@color/hintColor"
+        android:hint="CADASTRAR ENDEREÇO"
+        android:textColorHint="#ffffff" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
 
@@ -87,8 +87,8 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:paddingLeft="10dp"
-            android:textStyle="bold"
-            android:text="Voltar à tela inical"/>
+            android:text="Voltar à tela inical"
+            android:textStyle="bold" />
     </LinearLayout>
 
 

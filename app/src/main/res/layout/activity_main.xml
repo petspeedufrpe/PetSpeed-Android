@@ -21,7 +21,6 @@
         android:layout_marginTop="8dp"
         android:text="@string/las_access_act"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcome_view">
-    </TextView>
+        app:layout_constraintTop_toBottomOf="@+id/welcome_view"></TextView>
 
 </android.support.constraint.ConstraintLayout>

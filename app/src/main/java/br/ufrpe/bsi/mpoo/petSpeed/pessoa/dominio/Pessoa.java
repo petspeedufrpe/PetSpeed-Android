@@ -4,46 +4,45 @@ import java.io.Serializable;
 
 public class Pessoa implements Serializable {
 
-	private long id;
+    private long id;
 
-	private String nome;
+    private String nome;
 
-	private String cpf;
+    private String cpf;
 
-	private Endereco endereco;
-
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
+    private Endereco endereco;
 
 
+    public Endereco getEndereco() {
+        return endereco;
+    }
 
-	public long getId() {
-		return id;
-	}
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
 
-	public String getNome() {
-		return nome;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public String getCpf() {
-		return cpf;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 }

@@ -1,8 +1,8 @@
 package br.ufrpe.bsi.mpoo.petSpeed.cliente.gui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
@@ -17,21 +17,20 @@ import java.util.Map;
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.gui.CadastroEnderecoActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.gui.LoginActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.SessaoCadastro;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
+import br.ufrpe.bsi.mpoo.petSpeed.pessoa.gui.CadastroEnderecoActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
 public class CadastroClienteActivity extends AppCompatActivity {
 
+    private final Map<String, Object> values = new HashMap<>();
     EditText mNome, mCpf, mEmail, mSenha, mcmfSenha;
     String nome, cpf, email, senha, cmfSenha;
     Button mButtoRegister;
     TextView mTextBkHome;
-    private final Map<String,Object> values = new HashMap<>();
-
     ClienteServices clienteServices = new ClienteServices();
 
     @Override
@@ -67,7 +66,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
         cliente.setDadosPessoais(criarPessoa());
         boolean res = clienteServices.isEmailClienteCadastrado(cliente.getUsuario().getEmail());
         if (!res) {
-            if (isCamposValidos()){
+            if (isCamposValidos()) {
                 SessaoCadastro.instance.setCliente(cliente);
                 SessaoCadastro.instance.setTipo(ContasDeUsuario.CLIENTE);
                 Intent registerEnd = new Intent(CadastroClienteActivity.this, CadastroEnderecoActivity.class);

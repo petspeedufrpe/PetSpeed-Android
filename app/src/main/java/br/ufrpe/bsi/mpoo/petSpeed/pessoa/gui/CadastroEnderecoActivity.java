@@ -18,9 +18,10 @@ import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
 public class CadastroEnderecoActivity extends AppCompatActivity {
     private final PessoaServices pessoaServices = new PessoaServices();
     private final ClienteServices clienteServices = new ClienteServices();
-    private EditText mLogradouro,mNumero,mCep,mUf,mBairro,mCidade,mComplemento;
-    private String logradouro,numero,cep,uf,bairro,cidade,complemento;
     Button mBtnCadastro;
+    private EditText mLogradouro, mNumero, mCep, mUf, mBairro, mCidade, mComplemento;
+    private String logradouro, numero, cep, uf, bairro, cidade, complemento;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +36,9 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
     }
 
 
-    public void cadastrar(){
+    public void cadastrar() {
         capturaTextos();
-        if(isCamposValidos()){
+        if (isCamposValidos()) {
             Endereco endereco = criarEndereco();
             SessaoCadastro.instance.setEndereco(endereco);
             Intent finalIntent = new Intent(CadastroEnderecoActivity.this, FinalizaCadastroActivity.class);
@@ -45,7 +46,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
         }
     }
 
-    public void findEditTexts(){
+    public void findEditTexts() {
 
         mLogradouro = (EditText) findViewById(R.id.logradouro);
         mNumero = (EditText) findViewById(R.id.numero);
@@ -56,7 +57,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
         mComplemento = (EditText) findViewById(R.id.complemento);
     }
 
-    public void capturaTextos(){
+    public void capturaTextos() {
         findEditTexts();
         logradouro = mLogradouro.getText().toString().trim();
         numero = mNumero.getText().toString().trim();
@@ -79,11 +80,11 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
         mCidade.setError(null);
         mComplemento.setError(null);
 
-        if (isCampoVazio(logradouro)){
+        if (isCampoVazio(logradouro)) {
             mLogradouro.setError("Campo vazio");
             focusView = mLogradouro;
             res = false;
-        }  else if (isCampoVazio(numero)) {
+        } else if (isCampoVazio(numero)) {
             mNumero.setError("Campo vazio");
             focusView = mNumero;
             res = false;
@@ -91,7 +92,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
             mCep.setError("Campo Vazio");
             focusView = mCep;
             res = false;
-        } else if (isCampoVazio(uf)){
+        } else if (isCampoVazio(uf)) {
             mUf.setError("Campo vazio");
             focusView = mUf;
             res = false;
@@ -99,31 +100,31 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
             focusView = mBairro;
             mBairro.setError("Campo vazio");
             res = false;
-        } else if(isCampoVazio(cidade)){
+        } else if (isCampoVazio(cidade)) {
             focusView = mCidade;
             mCidade.setError("Campo Vazio");
             res = false;
-        } else if(isCampoVazio(complemento)){
-            focusView =mComplemento;
+        } else if (isCampoVazio(complemento)) {
+            focusView = mComplemento;
             mComplemento.setError("Campo Vazio");
         }
-        if(!res){
+        if (!res) {
             focusView.requestFocus();
         }
 
         return res;
     }
 
-    private boolean isCampoVazio(String valor){
+    private boolean isCampoVazio(String valor) {
         boolean resultado = TextUtils.isEmpty(valor) || valor.trim().isEmpty();
         return resultado;
     }
 
-    public Endereco criarEndereco(){
+    public Endereco criarEndereco() {
         Endereco endereco = new Endereco();
-        try{
+        try {
             endereco.setNumero(Long.parseLong(numero));
-        }catch(Exception e){
+        } catch (Exception e) {
             isCamposValidos();
         }
         endereco.setLogradouro(logradouro);

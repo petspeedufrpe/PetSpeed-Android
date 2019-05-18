@@ -1,10 +1,6 @@
 package br.ufrpe.bsi.mpoo.petSpeed.usuario.negocio;
 
-import android.widget.Toast;
-
-import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
-import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
 
@@ -18,9 +14,9 @@ public class UsuarioServices {
         } catch (AppException e) {
             throw new AppException("null atributes");
         }
-        if(usuarioCadastrado(usuario)){
+        if (usuarioCadastrado(usuario)) {
             throw new AppException("usuario já cadastrado, não inserido");
-        }else{
+        } else {
             long id = usuarioDAO.cadastrarUsuario(usuario);
             return id;
         }

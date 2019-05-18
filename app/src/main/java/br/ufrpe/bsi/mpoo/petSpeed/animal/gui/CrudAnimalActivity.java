@@ -1,7 +1,7 @@
 package br.ufrpe.bsi.mpoo.petSpeed.animal.gui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 

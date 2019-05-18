@@ -1,8 +1,8 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -10,10 +10,8 @@ import android.widget.Toast;
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petSpeed.clinica.dominio.Clinica;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ParamBundle;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.SessaoCadastro;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
@@ -42,7 +40,7 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(FinalizaCadastroActivity.this,"Cadastro cancelado.",Toast.LENGTH_LONG).show();
+                Toast.makeText(FinalizaCadastroActivity.this, "Cadastro cancelado.", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(FinalizaCadastroActivity.this, LoginActivity.class));
 
             }
@@ -52,23 +50,17 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
     private void cadastrar() {
         ContasDeUsuario tipo = SessaoCadastro.instance.getTipo();
         Endereco endereco = SessaoCadastro.instance.getEndereco();
-        if (tipo == ContasDeUsuario.CLIENTE){
+        if (tipo == ContasDeUsuario.CLIENTE) {
             Cliente cliente = SessaoCadastro.instance.getCliente();
-             cliente.getDadosPessoais().setEndereco(endereco);
-             cadastraCliente(cliente);
-        }
-
-        else if (tipo == ContasDeUsuario.MEDICO){
+            cliente.getDadosPessoais().setEndereco(endereco);
+            cadastraCliente(cliente);
+        } else if (tipo == ContasDeUsuario.MEDICO) {
             Medico medico = SessaoCadastro.instance.getMedico();
             medico.getDadosPessoais().setEndereco(endereco);
             cadastraMedico(medico);
-        }
-
-        else if (tipo == ContasDeUsuario.CLINICA){
-        }
-
-        else {
-            Toast.makeText(FinalizaCadastroActivity.this,"Ops! parece que algo deu errado.",Toast.LENGTH_LONG).show();
+        } else if (tipo == ContasDeUsuario.CLINICA) {
+        } else {
+            Toast.makeText(FinalizaCadastroActivity.this, "Ops! parece que algo deu errado.", Toast.LENGTH_LONG).show();
             startActivity(new Intent(FinalizaCadastroActivity.this, LoginActivity.class));
         }
     }
