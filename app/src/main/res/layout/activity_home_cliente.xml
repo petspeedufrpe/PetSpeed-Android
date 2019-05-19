@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <Button
+        android:id="@+id/ActHomeClBtnPerf"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/rouded_button"
+        android:text="Meu Perfil"
+        android:textColor="@color/hintColor"
+        app:layout_constraintBottom_toTopOf="@+id/ActHomeClBtnCfg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.989" />
+
+    <Button
+        android:id="@+id/ActHomeClBtnCln"
+        android:layout_width="180dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="27dp"
+        android:background="@drawable/rouded_button"
+        android:text="CLINICAS"
+        android:textColor="@color/hintColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/ActHomeClBtnPerf"
+        app:layout_constraintEnd_toStartOf="@+id/ActHomeClBtnMed"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/ActHomeClBtnMed"
+        android:layout_width="180dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rouded_button"
+        android:text="MEDICOS"
+        android:textColor="@color/hintColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ActHomeClBtnCln"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+
+        app:layout_constraintStart_toEndOf="@+id/ActHomeClBtnCln"
+        app:layout_constraintTop_toTopOf="@+id/ActHomeClBtnCln"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/ActHomeClBtnPets"
+        android:layout_width="180dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="21dp"
+        android:background="@drawable/rouded_button"
+        android:text="MEUS PETS"
+        android:textColor="@color/hintColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/ActHomeClBtnCln"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ActHomeClFragMap" />
+
+    <Button
+        android:id="@+id/ActHomeClBtnHist"
+        android:layout_width="180dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rouded_button"
+        android:text="HISTORICO"
+        android:textColor="@color/hintColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ActHomeClBtnPets"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ActHomeClBtnPets"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/ActHomeClBtnCfg"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="104dp"
+        android:background="@drawable/rouded_button"
+        android:text="Configurações"
+        android:textColor="@color/hintColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ActHomeClFragMap"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <fragment
+        android:id="@+id/ActHomeClFragMap"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="450dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="187dp" />
+
+    <TextView
+        android:id="@+id/ActHomeClTxVwLogOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:textSize="20dp"
+        android:textColor="@color/hintColor"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="176dp"
+        tools:layout_editor_absoluteY="673dp" />
+
+</android.support.constraint.ConstraintLayout>

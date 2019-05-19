@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -25,7 +26,9 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_cadastro_endereco);
+
         mBtnCadastro = (Button) findViewById(R.id.cad_end);
         mBtnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override

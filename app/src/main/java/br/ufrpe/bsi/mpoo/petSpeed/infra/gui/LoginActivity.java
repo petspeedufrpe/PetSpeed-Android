@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.CadastroClienteActivity;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.HomeClienteActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.gui.CadastroMedicoActivity;
@@ -37,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
 
         mEmail = (EditText) findViewById(R.id.LoginEmailTxBx);
@@ -114,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
 
         }
         if (result) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, HomeClienteActivity.class));
         }
 
 

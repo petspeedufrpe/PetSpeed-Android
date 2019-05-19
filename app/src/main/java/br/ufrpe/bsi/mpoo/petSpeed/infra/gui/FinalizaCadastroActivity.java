@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -25,7 +26,10 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_finaliza_cadastro);
+
+
         btnCadastrar = (Button) findViewById(R.id.finaliza_cadastro);
         btnCancelar = (Button) findViewById(R.id.cancela_cadastro);
         final Intent registerEnd = getIntent();
@@ -34,6 +38,8 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cadastrar();
+                startActivity(new Intent(FinalizaCadastroActivity.this, LoginActivity.class));
+                finish();
             }
         });
 
@@ -42,7 +48,7 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(FinalizaCadastroActivity.this, "Cadastro cancelado.", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(FinalizaCadastroActivity.this, LoginActivity.class));
-
+                finish();
             }
         });
     }
@@ -61,7 +67,6 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
         } else if (tipo == ContasDeUsuario.CLINICA) {
         } else {
             Toast.makeText(FinalizaCadastroActivity.this, "Ops! parece que algo deu errado.", Toast.LENGTH_LONG).show();
-            startActivity(new Intent(FinalizaCadastroActivity.this, LoginActivity.class));
         }
     }
 
@@ -73,7 +78,6 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
         ClienteServices clienteServices = new ClienteServices();
         clienteServices.cadastraCliente(cliente, cliente.getUsuario());
         Toast.makeText(FinalizaCadastroActivity.this, "Cadastro realizado.", Toast.LENGTH_LONG).show();
-        startActivity(new Intent(FinalizaCadastroActivity.this, LoginActivity.class));
     }
 
     private void cadastraMedico(Medico medico) {
@@ -88,7 +92,6 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
 
         }
         Toast.makeText(FinalizaCadastroActivity.this, "Cadastro realizado.", Toast.LENGTH_LONG).show();
-        startActivity(new Intent(FinalizaCadastroActivity.this, LoginActivity.class));
     }
 
 }
