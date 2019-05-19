@@ -33,7 +33,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
             android:backgroundTint="@color/hintColor"
-            android:hint="Numero"
+            android:hint="Número"
             android:inputType="number"
             android:textColor="#FF00A759" />
 
@@ -44,7 +44,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
             android:backgroundTint="@color/hintColor"
-            android:hint="complemento"
+            android:hint="@string/complemento_end"
             android:textColor="#FF00A759" />
 
         <EditText
@@ -64,7 +64,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
             android:backgroundTint="@color/hintColor"
-            android:hint="cidade"
+            android:hint="@string/cidade_end"
 
             android:textColor="#FF00A759" />
 
@@ -85,7 +85,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
             android:backgroundTint="@color/hintColor"
-            android:hint="cep(só numeros)"
+            android:hint="CEP (só numeros)"
             android:textColor="#FF00A759" />
 
         <Button
