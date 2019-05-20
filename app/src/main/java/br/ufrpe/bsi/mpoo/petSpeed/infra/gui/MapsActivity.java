@@ -21,6 +21,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ApiRequestService;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -37,9 +39,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        String url = "https://maps.googleapis.com/maps/api/geocode/json?address=rua+leparc,+100&key=AIzaSyBhntuU8NDLx8ZoIIfxnNRXaziGPvtEB6s";
+        ApiRequestService geocodeRequest = new ApiRequestService();
+        geocodeRequest.geocodeReq(url);
+        Double lat = (Double) Sessao.instance.getValue(ApiRequestService.geoCodeCoord.LAT.getStr());
+        Double lng = (Double) Sessao.instance.getValue(ApiRequestService.geoCodeCoord.LNG.getStr());
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+        LatLng sydney = new LatLng(lat, lng);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
