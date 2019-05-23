@@ -118,9 +118,9 @@ public class ClienteServices {
         usuarioDAO.alterarSenha(cliente.getUsuario());
     }
 
-    protected void alteraAvaliacao(Cliente cliente) {
+    protected void alteraAvaliacao(Cliente cliente) throws AppException {
         if (cliente.getAvaliacao() > 5 || cliente.getAvaliacao() < 0) {
-
+            throw new AppException("Erro");
         }
         clienteDAO.alteraAvaliacao(cliente);
     }

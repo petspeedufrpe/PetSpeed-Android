@@ -2,8 +2,6 @@ package br.ufrpe.bsi.mpoo.petSpeed.cliente.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -46,7 +44,7 @@ public class HomeClient1 extends AppCompatActivity
     }
 
     public void actMaps(){
-        Intent intent = new Intent(HomeClient1.this,AtendimentoAcitivity.class);
+        Intent intent = new Intent(HomeClient1.this, MapaHomeCliente.class);//o mapaAct
         startActivity(intent);
 
     }

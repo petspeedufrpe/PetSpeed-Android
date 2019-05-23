@@ -22,6 +22,12 @@ public class OrdemServico {
 
     private Prioridade prioridade;
 
+    private long fkMedico;
+
+    private long fkCliente;
+
+    private long fkAnimal;
+
     public boolean isPendente() {
         return pendente;
     }

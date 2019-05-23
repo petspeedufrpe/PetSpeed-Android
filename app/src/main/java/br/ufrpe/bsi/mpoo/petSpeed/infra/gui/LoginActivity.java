@@ -14,10 +14,19 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.maps.GaeRequestHandler;
+import com.google.maps.GeoApiContext;
+import com.google.maps.GeocodingApi;
+import com.google.maps.errors.ApiException;
+import com.google.maps.model.GeocodingResult;
+
+import java.io.IOException;
+
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.CadastroClienteActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.HomeClient1;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.HomeClienteActivity;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.MapaHomeCliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.gui.CadastroMedicoActivity;
@@ -55,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                 logar();
             }
         });
+
 
 
         cadastrarBtn.setOnClickListener(new View.OnClickListener() {
@@ -115,14 +125,11 @@ public class LoginActivity extends AppCompatActivity {
         } catch (Exception e) {
             result = false;
             Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-
-
         }
+
         if (result) {
             home();
         }
-
-
     }
 
     private void home(){
@@ -130,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, HomeMedicoActivity.class));
 
         }else if(contaSelecionada == ContasDeUsuario.CLIENTE){
-            startActivity(new Intent(LoginActivity.this, HomeCliente.class));
+            startActivity(new Intent(LoginActivity.this, MapaHomeCliente.class));
         }
 
     }

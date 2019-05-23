@@ -137,8 +137,8 @@ public class EnderecoDAO {
         endereco.setLogradouro(cursor.getString(indexLogradouro));
         endereco.setNumero(cursor.getInt(indexNumero));
         endereco.setComplemento(cursor.getString(indexComplemento));
-        endereco.setLatidude(cursor.getString(indexLatitutde));
-        endereco.setLongitude(cursor.getString(indexLongitude));
+        endereco.setLatidude(cursor.getDouble(indexLatitutde));
+        endereco.setLongitude(cursor.getDouble(indexLongitude));
         return endereco;
     }
 

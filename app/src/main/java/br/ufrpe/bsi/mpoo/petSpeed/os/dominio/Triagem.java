@@ -4,7 +4,17 @@ import java.util.List;
 
 public class Triagem {
 
+    private double id;
+
     private List<String> sintomas;
+
+    public double getId() {
+        return id;
+    }
+
+    public void setId(double id) {
+        this.id = id;
+    }
 
     private String outros;
 

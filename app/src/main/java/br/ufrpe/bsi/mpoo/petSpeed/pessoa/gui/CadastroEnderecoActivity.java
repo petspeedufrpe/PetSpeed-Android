@@ -24,7 +24,8 @@ import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
 public class CadastroEnderecoActivity extends AppCompatActivity {
     Button mBtnCadastro;
     private EditText mLogradouro, mNumero, mCep, mUf, mBairro, mCidade, mComplemento,mLatitude,mLongitude;
-    private String logradouro, numero, cep, uf, bairro, cidade, complemento,latitude,longitude;
+    private String logradouro, numero, cep, uf, bairro, cidade, complemento;
+    private Double latitude,longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +75,6 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
         bairro = mBairro.getText().toString().trim();
         cidade = mCidade.getText().toString().trim();
         complemento = mComplemento.getText().toString().trim();
-        latitude = mLatitude.getText().toString().trim();
-        longitude = mLongitude.getText().toString().trim();
     }
 
     private boolean isCamposValidos() {
@@ -143,8 +142,6 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
         endereco.setBairro(bairro);
         endereco.setCidade(cidade);
         endereco.setComplemento(complemento);
-        endereco.setLatidude(latitude);
-        endereco.setLongitude(longitude);
         return endereco;
     }
 

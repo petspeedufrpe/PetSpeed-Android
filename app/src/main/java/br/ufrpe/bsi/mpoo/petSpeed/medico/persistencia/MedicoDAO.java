@@ -24,7 +24,7 @@ public class MedicoDAO {
         values.put(DBHelper.COL_MEDICO_FK_USUARIO, medico.getUsuario().getId());
         values.put(DBHelper.COL_MEDICO_FK_PESSOA, medico.getDadosPessoais().getId());
         long id = dbWrite.insert(DBHelper.TABELA_MEDICO, null, values);
-        helperDb.close();
+        dbWrite.close();
         return id;
     }
 
@@ -62,9 +62,27 @@ public class MedicoDAO {
 
     }
 
+    public Medico getMedicoById(long idMedico){
+        SQLiteDatabase db = helperDb.getReadableDatabase();
+        Medico medico = null;
+        String sql = "SELECT * FROM " + DBHelper.TABELA_MEDICO + " WHERE " + DBHelper.COL_MEDICO_ID+ " LIKE ?;";
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(idMedico)});
+        if (cursor.moveToFirst()){
+            medico = createMedico(cursor);
+        }
+        cursor.close();
+        db.close();
 
-    public void deletaMedico() {
+        return medico;
+    }
 
+
+    public void deletaMedico(Medico medico) {
+        SQLiteDatabase db = helperDb.getWritableDatabase();
+
+        db.delete(DBHelper.TABELA_MEDICO,DBHelper.COL_MEDICO_ID+ " = ?",
+                new String[]{String.valueOf(medico.getId())});
+        db.close();
     }
 
     public void alteraAvaliacao() {

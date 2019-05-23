@@ -8,17 +8,19 @@ import android.os.Bundle;
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.gui.MapsFragment;
 
-public class AtendimentoAcitivity extends AppCompatActivity {
+public class MapaHomeCliente extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_atendimento_acitivity);
+        setContentView(R.layout.activity_mapa_home_cliente);
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.container_,new MapsFragment());
         transaction.commit();
     }
+
+
 }

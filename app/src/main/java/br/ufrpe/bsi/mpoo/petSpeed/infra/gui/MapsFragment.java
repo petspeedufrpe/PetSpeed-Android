@@ -59,32 +59,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         //Endereco endereco = getAddressByName();
         //location = endereco.getLogradouro();
         addMarkerOnMap(getAddressByLatLng(),"TESTE2");
-        /**
-        setLocation(getAddressByName());
-        Toast.makeText(PetSpeedApp.getContext(),location,Toast.LENGTH_LONG).show();
-        try {
-            addMarkerOnMap(geocoder.getLatLgnLocation(location),"TESTE");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }**/
     }
-    /**
-    public void geolocation() throws IOException {
-        Usuario usuario = Sessao.instance.getUsuario();
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        ClienteServices clienteServices = new ClienteServices();
-        ClienteDAO clienteDAO = new ClienteDAO();
-        Cliente cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
-        cliente = clienteServices.getClienteCompleto(cliente.getId());
-        String locationName = cliente.getDadosPessoais().getEndereco().getLogradouro().concat(",").concat(cliente.getDadosPessoais().getEndereco().getComplemento());
-        Toast.makeText(getContext(),locationName,Toast.LENGTH_LONG).show();
-        Geocoder geocoder = new Geocoder(getContext());
-        List<Address> list = geocoder.getFromLocationName(locationName,1);
-        Address address = list.get(0);
-        LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
-        addMarkerOnMap(latLng,"Rua da Aurora");
-    }
-     **/
     public void addMarkerOnMap(LatLng latLng,String title){
         MarkerOptions marker = new MarkerOptions();
         marker.position(latLng);
@@ -115,8 +90,8 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         Cliente cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
         cliente = clienteServices.getClienteCompleto(cliente.getId());
         Endereco endereco = cliente.getDadosPessoais().getEndereco();
-        Double lat = Double.parseDouble(endereco.getLatidude());
-        Double lgn = Double.parseDouble(endereco.getLongitude());
+        Double lat = endereco.getLatidude();
+        Double lgn = endereco.getLongitude();
         LatLng latLng = new LatLng(lat,lgn);
 
         return latLng;

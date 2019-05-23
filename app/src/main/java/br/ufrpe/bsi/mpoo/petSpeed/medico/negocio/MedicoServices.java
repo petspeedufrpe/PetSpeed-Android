@@ -2,6 +2,7 @@ package br.ufrpe.bsi.mpoo.petSpeed.medico.negocio;
 
 import br.ufrpe.bsi.mpoo.petSpeed.clinica.persistencia.ClinicaDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.persistencia.MedicoDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
@@ -67,8 +68,24 @@ public class MedicoServices {
         return false;
     }
 
-    public void deletaMedico() {
+    public void login(String email, String senha) throws AppException {
+        Usuario usuario = usuarioDAO.getUsuario(email, senha);
+        if (usuario == null) {
+            throw new AppException("Credenciais inválidas.");
+        } else {
+            Sessao.instance.setUsuario(usuario);
+        }
+    }
 
+    public void logout() {
+        Sessao sessao = Sessao.instance;
+        sessao.reset();
+    }
+
+    public void deletaMedico(Medico medico) {
+        if (medicoDAO.getMedicoById(medico.getId())!= null){
+            medicoDAO.deletaMedico(medico);
+        }
     }
 
     public void alteraAvaliacao() {

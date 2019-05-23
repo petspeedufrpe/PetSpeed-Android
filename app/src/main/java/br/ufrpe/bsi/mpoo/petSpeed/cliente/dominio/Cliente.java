@@ -64,9 +64,7 @@ public class Cliente implements Serializable {
         this.avaliacao = avaliacao;
     }
 
-    public Pessoa getDadosPessoais() {
-        return dadosPessoais;
-    }
+    public Pessoa getDadosPessoais() { return dadosPessoais; }
 
     public void setDadosPessoais(Pessoa dadosPessoais) {
         this.dadosPessoais = dadosPessoais;

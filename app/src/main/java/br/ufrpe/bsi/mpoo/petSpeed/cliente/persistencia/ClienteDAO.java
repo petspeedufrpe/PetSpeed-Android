@@ -48,7 +48,7 @@ public class ClienteDAO {
         return cliente;
     }
 
-    public Cliente loadCliente(String query, String[] args) {
+    public Cliente loadObject(String query, String[] args) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, args);
         Cliente cliente = null;
@@ -70,7 +70,7 @@ public class ClienteDAO {
     public Cliente getClienteById(Long id) {
         String query = "SELECT * FROM " + DBHelper.TABELA_CLIENTE + " WHERE " + DBHelper.COL_CLIENTE_ID + " LIKE ?;";
         String[] args = {String.valueOf(id)};
-        return this.loadCliente(query, args);
+        return this.loadObject(query, args);
     }
 
     public Cursor getIdObjectByCliente(Long idCliente) {
@@ -88,15 +88,17 @@ public class ClienteDAO {
         String query = " SELECT * FROM " + DBHelper.TABELA_CLIENTE + " WHERE " + DBHelper.COL_CLIENTE_FK_USUARIO +
                 " LIKE ?;";
         String[] args = {String.valueOf(idUsuario)};
-        return this.loadCliente(query, args);
+        return this.loadObject(query, args);
     }
 
     public Cliente getClienteByEmail(String email) {//Passando um email como parametro, recupera o cliente
         UsuarioDAO usuarioDAO = new UsuarioDAO();  // que está atribuido a este email de um usuario(classe)
         Usuario usuario = usuarioDAO.getUsuario(email);//retorna o usuario que tem este email
         Cliente cliente = getIdClienteByUsuario(usuario.getId());//retorna o cliente que tem este usuario
-        return cliente;
+        return cliente;//este metodo tem que ir para o services de cliente
     }
+
+
 
     public void alteraAvaliacao(Cliente cliente) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();

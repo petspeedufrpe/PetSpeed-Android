@@ -25,18 +25,15 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        <activity android:name=".cliente.gui.AtendimentoAcitivity"></activity>
+        <activity android:name=".cliente.gui.MapaHomeCliente"></activity>
         <activity
             android:name=".cliente.gui.HomeClient1"
             android:label="@string/title_activity_home_client1"/>
 
         <activity
             android:name=".medico.gui.HomeMedicoActivity"
-            android:label="@string/title_activity_home_medico"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".ui.login.LoginActivityas"
-            android:label="@string/title_activity_login_activityas" />
+
         <activity android:name=".medico.gui.CadastroMedicoActivity" />
         <activity android:name=".animal.gui.CrudAnimalActivity" />
         <activity android:name=".infra.gui.MainActivity" />
