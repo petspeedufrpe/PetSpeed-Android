@@ -21,33 +21,38 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".cliente.gui.AtendimentoAcitivity"></activity>
-        <activity
-            android:name=".cliente.gui.HomeClient1"
-            android:label="@string/title_activity_home_client1"
-            android:theme="@style/NoActionBar" />
-
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+        <activity android:name=".cliente.gui.AtendimentoAcitivity"></activity>
+        <activity
+            android:name=".cliente.gui.HomeClient1"
+            android:label="@string/title_activity_home_client1"/>
 
-        <activity android:name=".infra.gui.MapsActivity" />
-        <activity android:name=".cliente.gui.HomeClienteActivity" />
+        <activity
+            android:name=".medico.gui.HomeMedicoActivity"
+            android:label="@string/title_activity_home_medico"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.login.LoginActivityas"
+            android:label="@string/title_activity_login_activityas" />
         <activity android:name=".medico.gui.CadastroMedicoActivity" />
         <activity android:name=".animal.gui.CrudAnimalActivity" />
         <activity android:name=".infra.gui.MainActivity" />
         <activity android:name=".infra.gui.LoginActivity" />
-        <activity android:name=".infra.gui.FinalizaCadastroActivity" />
-        <activity android:name=".pessoa.gui.CadastroEnderecoActivity" />
-        <activity android:name=".cliente.gui.CadastroClienteActivity" />
-        <activity android:name=".infra.gui.SplashActivity">
+        <activity android:name=".infra.gui.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".infra.gui.FinalizaCadastroActivity" />
+        <activity
+            android:name=".pessoa.gui.CadastroEnderecoActivity"
+            android:label="endereco" />
+        <activity android:name=".cliente.gui.CadastroClienteActivity" />
     </application>
 
 </manifest>
