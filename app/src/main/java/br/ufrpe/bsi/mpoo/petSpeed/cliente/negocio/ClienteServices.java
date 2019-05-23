@@ -1,7 +1,12 @@
 package br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio;
 
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petSpeed.animal.persistencia.AnimalDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
@@ -22,7 +27,7 @@ public class ClienteServices {
 
     private PessoaDAO pessoaDAO = new PessoaDAO();
 
-    private AnimalDAO animalDAO;
+    private AnimalDAO animalDAO = new AnimalDAO();
 
 
     /**
@@ -51,7 +56,7 @@ public class ClienteServices {
     public void login(String email, String senha) throws AppException {
         Usuario usuario = usuarioDAO.getUsuario(email, senha);
         if (usuario == null) {
-            throw new AppException("Credenciais inválidas.");
+            throw new AppException("Credenciais Inválidas.");
         } else {
             Sessao.instance.setUsuario(usuario);
         }
@@ -60,7 +65,20 @@ public class ClienteServices {
     //Metodo que verifica se o usuario está ou não cadastrado no banco.
     public boolean isEmailClienteCadastrado(String email) {//retorna true se estiver no banco
         Usuario usuario = usuarioDAO.getUsuario(email);
-        return ((usuario != null && usuario.getEmail().length() > 0));
+        try {
+            long id = usuario.getId();
+        }catch (Exception e){
+            return false;
+        }
+        try{
+            Cliente cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
+            if (cliente.getUsuario().getEmail().equals(usuario.getEmail())){
+                return true;
+            }
+        }catch (Exception e){
+            return false;
+        }
+        return false;
     }
 
     public String getEmailByCliente(Long idCliente) {
@@ -87,7 +105,7 @@ public class ClienteServices {
             PessoaServices pessoaServices = new PessoaServices();
             int indexPessoa = data.getColumnIndex(DBHelper.COL_CLIENTE_FK_PESSOA);
             int indexUsuario = data.getColumnIndex(DBHelper.COL_CLIENTE_FK_USUARIO);
-           // int indexAnimal = data.getColumnIndex(DBHelper.COL_ANIMAL_FK_CLIENTE);
+            // int indexAnimal = data.getColumnIndex(DBHelper.COL_ANIMAL_FK_CLIENTE);
 //            long idAnimal = data.getLong(indexAnimal);
             long idPessoa = data.getLong(indexPessoa);
             long idUsuario = data.getLong(indexUsuario);
@@ -125,4 +143,18 @@ public class ClienteServices {
         clienteDAO.alteraAvaliacao(cliente);
     }
 
+    public ArrayList<Animal> getAllAnimalsByIdCliente(long idCliente){
+        boolean result;
+        ArrayList<Animal> listAnimals = animalDAO.getAllAnimalsByIdCliente(idCliente);
+        if (!listAnimals.isEmpty()){
+            result = true;
+        }else{
+            result = false;
+        }
+
+        if (result){
+            return listAnimals;
+        }
+        return null;
+    }
 }

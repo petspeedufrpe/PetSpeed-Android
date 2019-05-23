@@ -52,7 +52,7 @@ public class ClienteDAO {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, args);
         Cliente cliente = null;
-        if (cursor.moveToNext()) {
+        if (cursor.moveToFirst()) {
             cliente = createCliente(cursor);
         }
         cursor.close();
@@ -97,7 +97,6 @@ public class ClienteDAO {
         Cliente cliente = getIdClienteByUsuario(usuario.getId());//retorna o cliente que tem este usuario
         return cliente;//este metodo tem que ir para o services de cliente
     }
-
 
 
     public void alteraAvaliacao(Cliente cliente) {

@@ -70,7 +70,7 @@ public class MedicoServices {
 
     public void login(String email, String senha) throws AppException {
         Usuario usuario = usuarioDAO.getUsuario(email, senha);
-        if (usuario == null) {
+        if (usuario == null){
             throw new AppException("Credenciais inválidas.");
         } else {
             Sessao.instance.setUsuario(usuario);

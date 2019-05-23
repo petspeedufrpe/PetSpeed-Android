@@ -120,6 +120,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         boolean result = true;
+
         try {
             clienteServices.login(email, senha);
         } catch (Exception e) {
