@@ -40,11 +40,17 @@ public class ClienteDAO {
     private Cliente createCliente(Cursor cursor) {
         int indexId = cursor.getColumnIndex(DBHelper.COL_CLIENTE_ID);
         int indexAvaliacao = cursor.getColumnIndex(DBHelper.COL_CLIENTE_AVALIACAO);
+        int indexIdUsuario = cursor.getColumnIndex(DBHelper.COL_CLIENTE_FK_USUARIO);
+        int indexIdPessoa = cursor.getColumnIndex(DBHelper.COL_CLIENTE_FK_PESSOA);
         long id = cursor.getLong(indexId);
         long avaliacao = cursor.getLong(indexAvaliacao);
+        long idUsuario = cursor.getLong(indexIdUsuario);
+        long idPessoa = cursor.getLong(indexIdPessoa);
         Cliente cliente = new Cliente();
         cliente.setId(id);
         cliente.setAvaliacao(avaliacao);
+        cliente.setIdUsuario(idUsuario);
+        cliente.setIdPessoa(idPessoa);
         return cliente;
     }
 
