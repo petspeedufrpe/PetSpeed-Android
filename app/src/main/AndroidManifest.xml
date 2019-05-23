@@ -10,7 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".medico.gui.HomeMedicoActivity"></activity>
+        <activity
+            android:name=".medico.gui.HomeMedicoActivity"
+            android:label="@string/title_activity_home_medico"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ui.login.LoginActivityas"
             android:label="@string/title_activity_login_activityas" />
