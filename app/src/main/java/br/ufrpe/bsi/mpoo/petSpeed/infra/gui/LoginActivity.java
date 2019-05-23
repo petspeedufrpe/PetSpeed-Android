@@ -18,6 +18,7 @@ import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.CadastroClienteActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.gui.CadastroMedicoActivity;
+import br.ufrpe.bsi.mpoo.petSpeed.medico.gui.HomeMedicoActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -125,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, HomeMedicoActivity.class));
 
         }else if(contaSelecionada == ContasDeUsuario.CLIENTE){
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, HomeCliente.class));
         }
 
     }
