@@ -3,6 +3,7 @@ package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -39,6 +40,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         marker.position(latLng);
         marker.title(title);
         mMap.addMarker(marker);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
     }
 
     public Endereco getAddressByName(){//recuperar a lat e lgn pelo nome do endereco
