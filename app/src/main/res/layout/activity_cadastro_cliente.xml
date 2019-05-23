@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context=".cliente.gui.CadastroClienteActivity">
 
+
     <EditText
         android:id="@+id/username"
         android:layout_width="match_parent"

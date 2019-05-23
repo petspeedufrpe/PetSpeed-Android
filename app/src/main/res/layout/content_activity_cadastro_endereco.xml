@@ -16,6 +16,30 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/latitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:hint=""
+            android:visibility="invisible"
+            android:inputType="text"
+            android:textColor="#FF00A759"
+
+            android:textColorHint="@color/hintColor" />
+
+        <EditText
+            android:id="@+id/longitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:hint=""
+            android:visibility="invisible"
+            android:inputType="text"
+            android:textColor="#FF00A759"
+            android:textColorHint="@color/hintColor" />
+        <EditText
             android:id="@+id/logradouro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

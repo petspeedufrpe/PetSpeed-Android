@@ -32,13 +32,19 @@ public class PessoaServices {
 
     }
 
+    public Endereco getEnderecoByIdPessoa(long idPessoa){
+        Endereco endereco;
+        endereco = enderecoDAO.getEnderecoById(idPessoa);
+        return endereco;
+    }
+
     public Pessoa getPessoaCompleta(long idPessoa) {
         Pessoa pessoa;
         EnderecoDAO enderecoDAO = new EnderecoDAO();
         pessoa = pessoaDAO.getPessoaById(idPessoa);
         Cursor data = pessoaDAO.getIdEnderecoByPessoa(idPessoa);
         if (data != null && data.moveToFirst()) {
-            int indexEndereco = data.getColumnIndex(DBHelper.COL_ENDERECO_FK_PESSOA);
+            int indexEndereco = data.getColumnIndex(DBHelper.COL_ENDERECO_ID);
             long idEndereco = data.getLong(indexEndereco);
             data.close();
             pessoa.setEndereco(enderecoDAO.getEnderecoById(idEndereco));

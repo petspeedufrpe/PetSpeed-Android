@@ -14,6 +14,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import java.util.ArrayList;
 
@@ -44,10 +45,12 @@ public class ApiRequestService {
                     JSONObject jsonData = jsonResults.getJSONObject(0);
                     JSONObject jsonGeometry = jsonData.getJSONObject("geometry");
                     JSONObject jsonLocation = jsonGeometry.getJSONObject("location");
-
+                    Object jsonFormatterAddress = jsonData.get("formatted_address");
+                    String address = jsonFormatterAddress.toString();
                     double latitude = jsonLocation.getDouble(geoCodeCoord.LAT.getStr());
                     double longitude = jsonLocation.getDouble(geoCodeCoord.LNG.getStr());
 
+                    Sessao.instance.setValue(geoCodeCoord.ADDRESS.getStr(),address);
                     Sessao.instance.setValue(geoCodeCoord.LAT.getStr(),latitude);
                     Sessao.instance.setValue(geoCodeCoord.LNG.getStr(),longitude);
 
@@ -69,7 +72,7 @@ public class ApiRequestService {
     }
 
     public enum geoCodeCoord {
-        LAT("lat"), LNG("lng");
+        LAT("lat"), LNG("lng"),ADDRESS("endereco");
         private final String descricao;
         geoCodeCoord(String descricao) {
             this.descricao = descricao;

@@ -25,6 +25,8 @@ public class EnderecoDAO {
         values.put(DBHelper.COL_ENDERECO_COMPLEMENTO, endereco.getComplemento());
         values.put(DBHelper.COL_ENDERECO_FK_CLINICA, endereco.getFkClinica());
         values.put(DBHelper.COL_ENDERECO_FK_PESSOA, endereco.getFkPessoa());
+        values.put(DBHelper.COL_ENDERECO_LATITUTDE,endereco.getLatidude());
+        values.put(DBHelper.COL_ENDERECO_LONGITUDE,endereco.getLongitude());
         res = db.insert(DBHelper.TABELA_ENDERECO, null, values);
         db.close();
 
@@ -125,6 +127,8 @@ public class EnderecoDAO {
         int indexLogradouro = cursor.getColumnIndex(DBHelper.COL_ENDERECO_LOGRADOURO);
         int indexNumero = cursor.getColumnIndex(DBHelper.COL_ENDERECO_NUMERO);
         int indexComplemento = cursor.getColumnIndex(DBHelper.COL_ENDERECO_COMPLEMENTO);
+        int indexLatitutde = cursor.getColumnIndex(DBHelper.COL_ENDERECO_LATITUTDE);
+        int indexLongitude = cursor.getColumnIndex(DBHelper.COL_ENDERECO_LONGITUDE);
         endereco.setId(cursor.getInt(indexId));
         endereco.setCep(cursor.getString(indexCep));
         endereco.setUf(cursor.getString(indexUF));
@@ -133,6 +137,8 @@ public class EnderecoDAO {
         endereco.setLogradouro(cursor.getString(indexLogradouro));
         endereco.setNumero(cursor.getInt(indexNumero));
         endereco.setComplemento(cursor.getString(indexComplemento));
+        endereco.setLatidude(cursor.getString(indexLatitutde));
+        endereco.setLongitude(cursor.getString(indexLongitude));
         return endereco;
     }
 

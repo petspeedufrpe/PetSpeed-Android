@@ -2,7 +2,7 @@ package br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio;
 
 import java.io.Serializable;
 
-public class Endereco implements Serializable {
+public class Endereco {
 
     private long id;
 
@@ -23,6 +23,28 @@ public class Endereco implements Serializable {
     private long fkClinica;
 
     private long fkPessoa;
+
+    private Double latidude;
+
+    private Double longitude;
+
+    public Double getLatidude() {
+        return latidude;
+    }
+
+    public void setLatidude(Double latidude) {
+        this.latidude = latidude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+
 
     public long getFkPessoa() {
         return fkPessoa;

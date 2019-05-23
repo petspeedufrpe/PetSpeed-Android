@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.CadastroClienteActivity;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.HomeClient1;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.HomeClienteActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
@@ -102,11 +103,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void logar() {
+        //colocar a selecao de tipo de conta no logar tambem.
         capturaTextos();
         if (!camposValidos()) {
             return;
         }
-
         boolean result = true;
         try {
             clienteServices.login(email, senha);
@@ -117,10 +118,8 @@ public class LoginActivity extends AppCompatActivity {
 
         }
         if (result) {
-            startActivity(new Intent(LoginActivity.this, HomeClienteActivity.class));
+            startActivity(new Intent(LoginActivity.this, HomeClient1.class));
         }
-
-
     }
 
     private void capturaTextos() {

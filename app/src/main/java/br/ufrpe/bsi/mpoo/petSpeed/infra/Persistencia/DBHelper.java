@@ -49,6 +49,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_ENDERECO_COMPLEMENTO = "COMPLEMENTO";
     public static final String COL_ENDERECO_FK_PESSOA = "FK_PESSOA";
     public static final String COL_ENDERECO_FK_CLINICA = "FK_CLINICA";
+    public static final String COL_ENDERECO_LATITUTDE  = "LAT";
+    public static final String COL_ENDERECO_LONGITUDE = "LONG";
     // TABELA CLIENTE:
     public static final String TABELA_CLIENTE = "TB_CLIENTE";
     public static final String COL_CLIENTE_ID = "ID";
@@ -76,7 +78,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_TRIAGEM_SINTOMAS = "SINTOMAS";
     public static final String COL_TRIAGEM_OUTROS = "OUTROS";
     private static final String NOME_DB = "petspeed.db";
-    private static final int VERSAO = 16;
+    private static final int VERSAO = 17;
     private static final String[] TABELAS = {
             TABELA_MEDICO, TABELA_ANIMAL, TABELA_CLIENTE, TABELA_CLINICA,
             TABELA_ENDERECO, TABELA_OS, TABELA_PESSOA, TABELA_TRIAGEM, TABELA_USUARIO
@@ -177,12 +179,14 @@ public class DBHelper extends SQLiteOpenHelper {
                         " %8$s TEXT NOT NULL, " +
                         " %9$s TEXT NOT NULL, " +
                         " %10$s TEXT, " +
-                        " %11$s TEXT " +
+                        " %11$s TEXT, " +
+                        " %12$s TEXT, " +
+                        " %13$s TEXT " +
                         ");";
         sqlTbEndereco = String.format(sqlTbEndereco,
                 TABELA_ENDERECO, COL_ENDERECO_ID, COL_ENDERECO_CEP, COL_ENDERECO_NUMERO,
                 COL_ENDERECO_COMPLEMENTO, COL_ENDERECO_UF, COL_ENDERECO_BAIRRO, COL_ENDERECO_LOGRADOURO,
-                COL_ENDERECO_CIDADE, COL_ENDERECO_FK_PESSOA, COL_ENDERECO_FK_CLINICA);
+                COL_ENDERECO_CIDADE, COL_ENDERECO_FK_PESSOA, COL_ENDERECO_FK_CLINICA,COL_ENDERECO_LATITUTDE,COL_ENDERECO_LONGITUDE);
         db.execSQL(sqlTbEndereco);
     }
 

@@ -9,19 +9,22 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.gui.FinalizaCadastroActivity;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ApiGeocoder;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.SessaoCadastro;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
 
 public class CadastroEnderecoActivity extends AppCompatActivity {
-    private final PessoaServices pessoaServices = new PessoaServices();
-    private final ClienteServices clienteServices = new ClienteServices();
     Button mBtnCadastro;
-    private EditText mLogradouro, mNumero, mCep, mUf, mBairro, mCidade, mComplemento;
-    private String logradouro, numero, cep, uf, bairro, cidade, complemento;
+    private EditText mLogradouro, mNumero, mCep, mUf, mBairro, mCidade, mComplemento,mLatitude,mLongitude;
+    private String logradouro, numero, cep, uf, bairro, cidade, complemento,latitude,longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,8 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
         mBairro = (EditText) findViewById(R.id.bairro);
         mCidade = (EditText) findViewById(R.id.cidade);
         mComplemento = (EditText) findViewById(R.id.complemento);
+        mLatitude = (EditText) findViewById(R.id.latitude);
+        mLongitude = (EditText) findViewById(R.id.longitude);
     }
 
     public void capturaTextos() {
@@ -69,6 +74,8 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
         bairro = mBairro.getText().toString().trim();
         cidade = mCidade.getText().toString().trim();
         complemento = mComplemento.getText().toString().trim();
+        latitude = mLatitude.getText().toString().trim();
+        longitude = mLongitude.getText().toString().trim();
     }
 
     private boolean isCamposValidos() {
@@ -136,8 +143,11 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
         endereco.setBairro(bairro);
         endereco.setCidade(cidade);
         endereco.setComplemento(complemento);
+        endereco.setLatidude(latitude);
+        endereco.setLongitude(longitude);
         return endereco;
     }
+
 
 }
 

@@ -8,9 +8,15 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Map;
+
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ApiGeocoder;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.SessaoCadastro;
@@ -20,6 +26,8 @@ import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
 
 public class FinalizaCadastroActivity extends AppCompatActivity {
+
+    private ApiGeocoder geocoder = new ApiGeocoder(PetSpeedApp.getContext());
 
     Button btnCancelar, btnCadastrar;
 
@@ -37,7 +45,11 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cadastrar();
+                try {
+                    cadastrar();
+                } catch (IOException e) {
+                    Toast.makeText(FinalizaCadastroActivity.this,"Verifique sua Conexão",Toast.LENGTH_SHORT).show();
+                }
                 startActivity(new Intent(FinalizaCadastroActivity.this, LoginActivity.class));
                 finish();
             }
@@ -53,9 +65,10 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
         });
     }
 
-    private void cadastrar() {
+    private void cadastrar() throws IOException {
         ContasDeUsuario tipo = SessaoCadastro.instance.getTipo();
         Endereco endereco = SessaoCadastro.instance.getEndereco();
+        setLatLong(endereco);
         if (tipo == ContasDeUsuario.CLIENTE) {
             Cliente cliente = SessaoCadastro.instance.getCliente();
             cliente.getDadosPessoais().setEndereco(endereco);
@@ -93,5 +106,16 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
         }
         Toast.makeText(FinalizaCadastroActivity.this, "Cadastro realizado.", Toast.LENGTH_LONG).show();
     }
+
+    public void setLatLong(Endereco endereco) throws IOException {
+        StringBuilder parserEndereco = new StringBuilder();
+        parserEndereco.append(endereco.getLogradouro());
+        parserEndereco.append(", ");
+        parserEndereco.append(endereco.getNumero());
+        Map<String,Double> latlngCoord = geocoder.getPositions(parserEndereco.toString());
+          endereco.setLatidude(latlngCoord.get(ApiGeocoder.GeocodeLatLng.LAT.getStr()));
+          endereco.setLongitude(latlngCoord.get(ApiGeocoder.GeocodeLatLng.LNG.getStr()));
+    }
+
 
 }

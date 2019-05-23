@@ -11,7 +11,14 @@
         android:id="@+id/imageView"
         android:layout_width="280dp"
         android:layout_height="577dp"
-        app:srcCompat="@drawable/logo"
-        tools:layout_editor_absoluteX="65dp"
-        tools:layout_editor_absoluteY="65dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/splashscreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 </android.support.constraint.ConstraintLayout>

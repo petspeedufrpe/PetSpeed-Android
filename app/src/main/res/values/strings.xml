@@ -33,6 +33,8 @@
     <string name="nav_header_email">Usuario@email.com</string>
     <string name="title_activity_home_cliente">HomeClienteActivity</string>
     <string name="title_activity_maps">Map</string>
+    <string name="splashscreen">SplashScreen</string>
+    <string name="title_activity_home_client1">HomeClient1</string>
 
 
 </resources>

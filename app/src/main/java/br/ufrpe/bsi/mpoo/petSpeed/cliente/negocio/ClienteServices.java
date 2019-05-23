@@ -87,8 +87,8 @@ public class ClienteServices {
             PessoaServices pessoaServices = new PessoaServices();
             int indexPessoa = data.getColumnIndex(DBHelper.COL_CLIENTE_FK_PESSOA);
             int indexUsuario = data.getColumnIndex(DBHelper.COL_CLIENTE_FK_USUARIO);
-            int indexAnimal = data.getColumnIndex(DBHelper.COL_ANIMAL_FK_CLIENTE);
-            long idAnimal = data.getLong(indexAnimal);
+           // int indexAnimal = data.getColumnIndex(DBHelper.COL_ANIMAL_FK_CLIENTE);
+//            long idAnimal = data.getLong(indexAnimal);
             long idPessoa = data.getLong(indexPessoa);
             long idUsuario = data.getLong(indexUsuario);
 
