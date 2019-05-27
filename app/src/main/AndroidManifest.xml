@@ -28,6 +28,7 @@
         <activity android:name=".cliente.gui.MapaHomeCliente"></activity>
         <activity
             android:name=".cliente.gui.HomeClient1"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/title_activity_home_client1"/>
 
         <activity

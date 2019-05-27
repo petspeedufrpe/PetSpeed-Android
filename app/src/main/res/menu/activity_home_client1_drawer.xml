@@ -5,29 +5,33 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:id="@+id/nav_meus_pets"
+            android:icon="@drawable/outline_pets_white_18"
+            android:title="@string/menu_pets" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:id="@+id/nav_historico"
+            android:icon="@drawable/outline_calendar_today_white_18"
+            android:title="@string/menu_historico" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_atendimento_emergencial"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:title="@string/menu_atendimento_emergencial" />
         <item
-            android:id="@+id/nav_tools"
+            android:id="@+id/nav_atendimento"
             android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_tools" />
+            android:title="@string/menu_atendimento" />
+        <item
+            android:id="@+id/nav_sair"
+            android:icon="@drawable/outline_clear_white_18"
+            android:title="@string/menu_sair" />
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/configuracoes"
                 android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_share" />
+                android:title="@string/menu_configuracoes" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"

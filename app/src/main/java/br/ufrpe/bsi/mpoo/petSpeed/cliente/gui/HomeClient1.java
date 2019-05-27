@@ -14,7 +14,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Button;
 
+import com.google.android.gms.maps.GoogleMap;
+
 import br.ufrpe.bsi.mpoo.petSpeed.R;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.gui.MapsFragment;
 
 public class HomeClient1 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -87,13 +90,15 @@ public class HomeClient1 extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
+        if (id == R.id.nav_meus_pets) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_historico) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_atendimento_emergencial) {
 
-        } else if (id == R.id.nav_tools) {
+        } else if (id == R.id.nav_atendimento) {
+
+        } else if (id == R.id.nav_sair) {
 
         } else if (id == R.id.nav_share) {
 

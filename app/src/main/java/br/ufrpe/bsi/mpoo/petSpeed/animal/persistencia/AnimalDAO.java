@@ -16,14 +16,14 @@ public class AnimalDAO {
 
     private DBHelper dbHelper = new DBHelper();
 
-    public long cadastraAnimal(Animal animal, long idCliente) {
+    public long cadastraAnimal(Animal animal) {
         SQLiteDatabase dbWrite = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DBHelper.COL_ANIMAL_NOME, animal.getNome());
         values.put(DBHelper.COL_ANIMAL_RACA, animal.getRaca());
         values.put(DBHelper.COL_ANIMAL_PESO, animal.getPeso());
         values.put(DBHelper.COL_ANIMAL_IDADE, animal.getIdade());
-        values.put(DBHelper.COL_ANIMAL_FK_CLIENTE, idCliente);
+        values.put(DBHelper.COL_ANIMAL_FK_CLIENTE, animal.getFkCliente());
         long res = dbWrite.insert(DBHelper.TABELA_ANIMAL, null, values);
         dbWrite.close();
         return res;
@@ -70,9 +70,6 @@ public class AnimalDAO {
 
     }
 
-    public void adicionaOS() {
-
-    }
 
     public Animal getAnimalById(long idAnimal) {
         return null;
