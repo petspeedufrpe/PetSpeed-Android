@@ -5,6 +5,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 
@@ -129,6 +131,8 @@ public class EnderecoDAO {
         int indexComplemento = cursor.getColumnIndex(DBHelper.COL_ENDERECO_COMPLEMENTO);
         int indexLatitutde = cursor.getColumnIndex(DBHelper.COL_ENDERECO_LATITUTDE);
         int indexLongitude = cursor.getColumnIndex(DBHelper.COL_ENDERECO_LONGITUDE);
+        int indexFkPessoa = cursor.getColumnIndex(DBHelper.COL_ENDERECO_FK_PESSOA);
+        int indexFkClinica = cursor.getColumnIndex(DBHelper.COL_ENDERECO_FK_CLINICA);
         endereco.setId(cursor.getInt(indexId));
         endereco.setCep(cursor.getString(indexCep));
         endereco.setUf(cursor.getString(indexUF));
@@ -139,6 +143,8 @@ public class EnderecoDAO {
         endereco.setComplemento(cursor.getString(indexComplemento));
         endereco.setLatidude(cursor.getDouble(indexLatitutde));
         endereco.setLongitude(cursor.getDouble(indexLongitude));
+        endereco.setFkPessoa(cursor.getLong(indexFkPessoa));
+        endereco.setFkClinica(cursor.getLong(indexFkClinica));
         return endereco;
     }
 
@@ -152,5 +158,25 @@ public class EnderecoDAO {
         cursor.close();
         db.close();
         return endereco;//passa a query sql e uma array com os campos do banco de dados para criar a pessoa com esses dados
+    }
+
+    public ArrayList<Endereco> getAllAddressByBairro(String arg){
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        ArrayList<Endereco> enderecoArrayList = new ArrayList<>();
+        String sql = "SELECT * FROM "+DBHelper.TABELA_ENDERECO+" WHERE "+DBHelper.COL_ENDERECO_BAIRRO+
+                " = ?";
+        String args[] = {arg};
+        Cursor cursor = db.rawQuery(sql,args);
+        Endereco endereco = null;
+        if (cursor.moveToFirst()){
+            do
+                {
+                endereco = createEndereco(cursor);
+                enderecoArrayList.add(endereco);
+            }while (cursor.moveToNext());
+            return  enderecoArrayList;
+        }
+
+        return null;
     }
 }

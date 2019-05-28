@@ -64,6 +64,14 @@
     <string name="title_activity_maps">Map</string>
     <string name="splashscreen">SplashScreen</string>
     <string name="title_activity_home_client1">HomeClient1</string>
+    <string name="title_activity_home_cliente_maps">Map</string>
+    <string name="title_activity_home_cliente_drawer">homeClienteDrawer</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
 
 
 </resources>
