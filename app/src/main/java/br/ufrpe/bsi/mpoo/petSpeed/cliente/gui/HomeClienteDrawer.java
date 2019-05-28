@@ -40,6 +40,7 @@ public class HomeClienteDrawer extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.findFragmentById(R.id.fragment);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -78,15 +79,19 @@ public class HomeClienteDrawer extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_perfil_cliente) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_meus_pets) {
 
-        } else if (id == R.id.nav_tools) {
+        } else if (id == R.id.nav_historico_cliente) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_atendimento) {
+
+        } else if (id == R.id.nav_atendimento_emergencial) {
+
+        } else if (id == R.id.nav_sair_cliente) {
+
+        } else if (id == R.id.nav_configuracao) {
 
         } else if (id == R.id.nav_send) {
 
