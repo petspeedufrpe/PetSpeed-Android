@@ -30,12 +30,11 @@ public class ApiGeocoder {
         LatLng latLng = new LatLng(lat,lgn);
         return latLng;
     }
-
     public Map<String, Double> getPositions(String location) throws IOException {//metodo que retorna a lat e lgn do usuario, para persistir no banco
         List<Address> list = geocoder.getFromLocationName(location,1);
         Address address = list.get(0);
-        Double lat = (Double) address.getLatitude();
-        Double lgn = (Double) address.getLongitude();
+        Double lat = address.getLatitude();
+        Double lgn = address.getLongitude();
         Map<String,Double> listPositions = new HashMap<String ,Double>();
         listPositions.put(GeocodeLatLng.LAT.getStr(),lat);
         listPositions.put(GeocodeLatLng.LNG.getStr(),lgn);

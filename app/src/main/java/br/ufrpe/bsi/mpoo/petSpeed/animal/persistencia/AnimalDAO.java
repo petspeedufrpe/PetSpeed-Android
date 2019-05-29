@@ -57,11 +57,13 @@ public class AnimalDAO {
         int indexPeso = cursor.getColumnIndex(DBHelper.COL_ANIMAL_PESO);
         int indexRaca = cursor.getColumnIndex(DBHelper.COL_ANIMAL_RACA);
         int indexNome = cursor.getColumnIndex(DBHelper.COL_ANIMAL_NOME);
+        int indexFkCliente = cursor.getColumnIndex(DBHelper.COL_ANIMAL_FK_CLIENTE);
         animal.setId(cursor.getLong(indexId));
         animal.setIdade(cursor.getInt(indexIdade));
         animal.setPeso(cursor.getInt(indexPeso));
         animal.setRaca(cursor.getString(indexRaca));
         animal.setNome(cursor.getString(indexNome));
+        animal.setFkCliente(cursor.getLong(indexFkCliente));
 
         return animal;
     }
@@ -81,22 +83,6 @@ public class AnimalDAO {
                 +" = ?";
         String[] args = {String.valueOf(idCliente)};
         return this.loadObject(sql,args);
-    }
-
-    public ArrayList<Animal> getAllAnimalsByIdCliente(long idCliente){
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        ArrayList<Animal> listAnimals = new ArrayList<>();
-        String sql = "SELECT * FROM "+DBHelper.TABELA_ANIMAL+" WHERE "+DBHelper.COL_ANIMAL_FK_CLIENTE
-                +" = ?";
-        String[] args = {String.valueOf(idCliente)};
-        Cursor cursor = db.rawQuery(sql,args);
-        Animal animal = null;
-        do {
-            animal = createAnimal(cursor);
-            listAnimals.add(animal);
-        }while (cursor.moveToNext());
-
-        return listAnimals;
     }
 
     public void alteraNome(Animal animal){
@@ -126,6 +112,23 @@ public class AnimalDAO {
         values.put(DBHelper.COL_ANIMAL_NOME,animal.getIdade());
         db.update(DBHelper.TABELA_ANIMAL,values,DBHelper.COL_ANIMAL_ID+ " = ?",new String[]{String.valueOf(animal.getId())});
         db.close();
+    }
+
+    public ArrayList<Animal> getAllAnimalByIdCliente(long idCliente){
+        ArrayList<Animal> animalArrayList = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String sql = "SELECT * FROM "+DBHelper.TABELA_ANIMAL+" WHERE "+DBHelper.COL_ANIMAL_FK_CLIENTE+ " = ?";
+        String[] args = {String.valueOf(idCliente)};
+        Cursor cursor = db.rawQuery(sql,args);
+        Animal animal = null;
+        if(cursor.moveToFirst()){
+            do {
+                animal = createAnimal(cursor);
+                animalArrayList.add(animal);
+            }while (cursor.moveToNext());
+            return animalArrayList;
+        }
+        return null;
     }
 
     public OrdemServico getHistoricoById() {

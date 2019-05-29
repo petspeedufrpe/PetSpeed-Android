@@ -1,15 +1,18 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Map;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
@@ -17,6 +20,7 @@ import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ApiGeocoder;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ApiRequestService;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.SessaoCadastro;
@@ -30,6 +34,10 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
     private ApiGeocoder geocoder = new ApiGeocoder(PetSpeedApp.getContext());
 
     Button btnCancelar, btnCadastrar;
+
+    boolean taskRunning;
+
+    private TaskEndereco mTaskEndereco = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +53,19 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    cadastrar();
-                } catch (IOException e) {
-                    Toast.makeText(FinalizaCadastroActivity.this,"Verifique sua Conexão",Toast.LENGTH_SHORT).show();
-                }
-                startActivity(new Intent(FinalizaCadastroActivity.this, LoginActivity.class));
-                finish();
+              if(!taskRunning){
+                  mTaskEndereco = new TaskEndereco();
+                  mTaskEndereco.execute((Void)null);
+                  ApiRequestService req = new ApiRequestService();
+                  req.geocodeReq("jadshasgd", new ApiRequestService.RequestCallback() {
+                      @Override
+                      public void onCallback() {
+                          //todo/
+                      }
+                  });
+              }else{
+                  Toast.makeText(FinalizaCadastroActivity.this,"Processando...",Toast.LENGTH_SHORT).show();
+              }
             }
         });
 
@@ -79,7 +93,7 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
             cadastraMedico(medico);
         } else if (tipo == ContasDeUsuario.CLINICA) {
         } else {
-            Toast.makeText(FinalizaCadastroActivity.this, "Ops! parece que algo deu errado.", Toast.LENGTH_LONG).show();
+            //Toast.makeText(FinalizaCadastroActivity.this, "Ops! parece que algo deu errado.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -90,7 +104,7 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
         cliente.getDadosPessoais().setId(idPessoa);
         ClienteServices clienteServices = new ClienteServices();
         clienteServices.cadastraCliente(cliente, cliente.getUsuario());
-        Toast.makeText(FinalizaCadastroActivity.this, "Cadastro realizado.", Toast.LENGTH_LONG).show();
+        //Toast.makeText(FinalizaCadastroActivity.this, "Cadastro realizado.", Toast.LENGTH_LONG).show();
     }
 
     private void cadastraMedico(Medico medico) {
@@ -101,7 +115,7 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
         try {
             medicoServices.cadastraMedico(medico, medico.getUsuario());
         } catch (AppException e) {
-            Toast.makeText(FinalizaCadastroActivity.this, "Ops! parece que algo deu errado.", Toast.LENGTH_LONG).show();
+           // Toast.makeText(FinalizaCadastroActivity.this, "Ops! parece que algo deu errado.", Toast.LENGTH_LONG).show();
 
         }
         Toast.makeText(FinalizaCadastroActivity.this, "Cadastro realizado.", Toast.LENGTH_LONG).show();
@@ -117,5 +131,37 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
           endereco.setLongitude(latlngCoord.get(ApiGeocoder.GeocodeLatLng.LNG.getStr()));
     }
 
+    public class TaskEndereco extends AsyncTask<Void,Void,Void>{
+        //ProgressDialog load;
+        @Override
+        protected void onPreExecute() {
+            //load = ProgressDialog.show(FinalizaCadastroActivity.this,"Aguarde","");
+        }
 
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                taskRunning=true;
+                cadastrar();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            resetTask();
+            startActivity(new Intent(FinalizaCadastroActivity.this,LoginActivity.class));
+        }
+
+        private void resetTask() {
+            mTaskEndereco = null;
+        }
+
+        @Override
+        protected void onCancelled() {
+            resetTask();
+        }
+    }
 }

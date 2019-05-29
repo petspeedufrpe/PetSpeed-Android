@@ -7,75 +7,88 @@
     tools:context=".animal.gui.CrudAnimalActivity">
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/edt_nome_animal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
         android:ems="10"
         android:hint="Nome"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="99dp"
-        tools:layout_editor_absoluteY="232dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_view_animal_cadastro" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/edt_raca_animal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Raça"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="99dp"
-        tools:layout_editor_absoluteY="301dp" />
+        app:layout_constraintStart_toStartOf="@+id/edt_nome_animal"
+        app:layout_constraintTop_toBottomOf="@+id/edt_nome_animal" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/edt_peso_animal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Peso"
         android:inputType="numberDecimal"
-        tools:layout_editor_absoluteX="99dp"
-        tools:layout_editor_absoluteY="426dp" />
+        app:layout_constraintStart_toStartOf="@+id/edt_idade_animal"
+        app:layout_constraintTop_toBottomOf="@+id/edt_idade_animal" />
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/edt_idade_animal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Idade"
         android:inputType="number"
-        tools:layout_editor_absoluteX="99dp"
-        tools:layout_editor_absoluteY="366dp" />
+        app:layout_constraintStart_toStartOf="@+id/edt_raca_animal"
+        app:layout_constraintTop_toBottomOf="@+id/edt_raca_animal" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_cadastrar_animal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
         android:backgroundTint="#00A759"
         android:text="Cadastrar"
         android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="506dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_peso_animal" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/img_view_animal_cadastro"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="141dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="141dp"
         android:background="#00A659"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="85dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_dados_animais_cadastro"
         tools:srcCompat="@tools:sample/avatars[2]" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txt_dados_animais_cadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
         android:fontFamily="sans-serif"
         android:text="Dados Animal"
         android:textColor="#00A659"
         android:textSize="30sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="111dp"
-        tools:layout_editor_absoluteY="7dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"

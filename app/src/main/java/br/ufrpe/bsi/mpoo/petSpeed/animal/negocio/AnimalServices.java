@@ -10,14 +10,15 @@ import br.ufrpe.bsi.mpoo.petSpeed.os.persistencia.OrdemServicoDAO;
 
 public class AnimalServices {
 
-    private AnimalDAO animalDAO;
+    private AnimalDAO animalDAO = new AnimalDAO();
 
     private OrdemServicoDAO ordemServicoDAO;
 
     private MedicoDAO medicoDAO;
 
-    public void cadastraAnimal() {
-
+    public long cadastraAnimal(Animal animal) {
+        long res = animalDAO.cadastraAnimal(animal);
+        return res;
     }
 
     public void deletaAnimal() {

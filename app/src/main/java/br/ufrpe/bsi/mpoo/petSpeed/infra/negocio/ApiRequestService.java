@@ -19,10 +19,15 @@ import org.json.JSONStringer;
 import java.util.ArrayList;
 
 import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
+import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 
 public class ApiRequestService {
 
-    public void geocodeReq(String urlRequest) {
+    public interface RequestCallback{
+        void onCallback();
+    }
+
+    public void geocodeReq(String urlRequest, final RequestCallback callback) {
 
         final ArrayList<Double>latlong = new ArrayList<>();
 
@@ -55,7 +60,7 @@ public class ApiRequestService {
                     Sessao.instance.setValue(geoCodeCoord.LNG.getStr(),longitude);
 
 
-                    //Fazer uma sessão para inserir num map as infos de lat long
+                    callback.onCallback();//Fazer uma sessão para inserir num map as infos de lat long
 
                 } catch (JSONException e) {
                     e.printStackTrace();

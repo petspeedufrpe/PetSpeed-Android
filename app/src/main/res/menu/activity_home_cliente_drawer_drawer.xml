@@ -10,7 +10,7 @@
             android:title="Meus Perfil" />
         <item
             android:id="@+id/nav_meus_pets"
-            android:icon="@drawable/outline_pets_white_18"
+            android:icon="@drawable/profile"
             android:title="Meus Pets" />
         <item
             android:id="@+id/nav_historico_cliente"

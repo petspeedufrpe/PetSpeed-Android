@@ -22,7 +22,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".cliente.gui.PerfilClienteActivity"></activity>
+        <activity
+            android:name=".cliente.gui.AnimalClienteActivity"
+            android:label="@string/title_activity_animal_cliente"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".cliente.gui.PerfilClienteActivity" />
         <activity
             android:name=".cliente.gui.HomeClienteDrawer"
             android:theme="@style/AppTheme.NoActionBar" />

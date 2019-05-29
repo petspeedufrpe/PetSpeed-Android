@@ -143,9 +143,9 @@ public class ClienteServices {
         clienteDAO.alteraAvaliacao(cliente);
     }
 
-    public ArrayList<Animal> getAllAnimalsByIdCliente(long idCliente){
+    public ArrayList<Animal> getAllAnimalByIdCliente(long idCliente){
         boolean result;
-        ArrayList<Animal> listAnimals = animalDAO.getAllAnimalsByIdCliente(idCliente);
+        ArrayList<Animal> listAnimals = animalDAO.getAllAnimalByIdCliente(idCliente);
         if (!listAnimals.isEmpty()){
             result = true;
         }else{

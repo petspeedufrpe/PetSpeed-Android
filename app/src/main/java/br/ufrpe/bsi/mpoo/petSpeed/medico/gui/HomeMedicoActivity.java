@@ -25,7 +25,7 @@ public class HomeMedicoActivity extends AppCompatActivity
         setContentView(R.layout.activity_home_medico);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab_add_animal);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
