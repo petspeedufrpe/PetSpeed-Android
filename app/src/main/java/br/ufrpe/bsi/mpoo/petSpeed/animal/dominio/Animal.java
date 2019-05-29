@@ -17,9 +17,14 @@ public class Animal {
 
     private int idade;
 
+    private long fkCliente;
     //private BufferedImage foto;
 
     private List<OrdemServico> historico;
+
+    public long getFkCliente() { return fkCliente; }
+
+    public void setFkCliente(long fkCliente) { this.fkCliente = fkCliente; }
 
 
     public long getId() {

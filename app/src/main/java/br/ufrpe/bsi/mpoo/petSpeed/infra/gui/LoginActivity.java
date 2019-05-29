@@ -117,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         boolean result = true;
+
         try {
             clienteServices.login(email, senha);
         } catch (Exception e) {
@@ -134,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, HomeMedicoActivity.class));
 
         }else if(contaSelecionada == ContasDeUsuario.CLIENTE){
-            startActivity(new Intent(LoginActivity.this, MapaHomeCliente.class));
+            startActivity(new Intent(LoginActivity.this, HomeClient1.class));
         }
 
     }

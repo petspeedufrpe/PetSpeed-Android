@@ -1,53 +1,30 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 
-import android.app.Dialog;
-import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.List;
-
-import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ApiGeocoder;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ApiRequestService;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
-import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
 
 public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback {
     private ApiGeocoder geocoder = new ApiGeocoder(PetSpeedApp.getContext());
     private GoogleMap mMap;
     private String location;
+    private ClienteDAO clienteDAO = new ClienteDAO();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +42,8 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         marker.position(latLng);
         marker.title(title);
         mMap.addMarker(marker);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
     }
 
     public Endereco getAddressByName(){//recuperar a lat e lgn pelo nome do endereco
