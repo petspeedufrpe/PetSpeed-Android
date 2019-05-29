@@ -62,8 +62,8 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
         mBairro = (EditText) findViewById(R.id.bairro);
         mCidade = (EditText) findViewById(R.id.cidade);
         mComplemento = (EditText) findViewById(R.id.complemento);
-        mLatitude = (EditText) findViewById(R.id.latitude);
-        mLongitude = (EditText) findViewById(R.id.longitude);
+        //mLatitude = (EditText) findViewById(R.id.latitude);
+        //mLongitude = (EditText) findViewById(R.id.longitude);
     }
 
     public void capturaTextos() {

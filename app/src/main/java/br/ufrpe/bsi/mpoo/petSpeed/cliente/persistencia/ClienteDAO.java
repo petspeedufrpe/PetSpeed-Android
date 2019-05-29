@@ -64,7 +64,7 @@ public class ClienteDAO {
     /**
      * @param id
      * @return Cliente
-     * nesse metodo so inicia a getStr da query e o arg que será passado.
+     * nesse metodo so inicia a getString da query e o arg que será passado.
      * no loadCliente o banco é aberto para leitura e retorna um cursor para poder criar o cliente
      */
     public Cliente getClienteById(Long id) {

@@ -14,10 +14,12 @@ import java.util.Map;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
 
 public class ApiGeocoder {
-    public ApiGeocoder(Context context){
-
-    }
+    public ApiGeocoder(Context context){ }
     Geocoder geocoder = new Geocoder(PetSpeedApp.getContext());
+
+    interface OnGeocodeResultListener {
+        void onGeocodeResult();
+    }
 
 
     public LatLng getLatLgnLocation(String location) throws IOException {
