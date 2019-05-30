@@ -135,7 +135,7 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
     }
 
 
-    private void cadastraCliente(Cliente cliente) {
+    private void cadastraCliente(Cliente cliente) throws AppException{
         PessoaServices pessoaServices = new PessoaServices();
         long idPessoa = pessoaServices.cadastraPessoa(cliente.getDadosPessoais(), cliente.getDadosPessoais().getEndereco());
         cliente.getDadosPessoais().setId(idPessoa);

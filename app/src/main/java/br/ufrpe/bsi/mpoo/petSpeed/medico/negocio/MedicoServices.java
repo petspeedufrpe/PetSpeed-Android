@@ -27,11 +27,23 @@ public class MedicoServices {
         } catch (AppException e) {
             throw new AppException(String.valueOf(e));
         }
+        Usuario usuarioReferencia = usuarioDAO.getUsuario(usuario.getEmail());
+        if(usuarioReferencia!=null){
+            if(!usuarioPossuiMedico(usuarioReferencia.getEmail())){
+                medico.getUsuario().setId(usuarioReferencia.getId());
+                long idmedico = medicoDAO.cadastraMedico(medico);
+                medico.setId(idmedico);
+                return medico;
+            }else{
+                throw new AppException("Usuário já possui conta de médico");
+            }
+        }else{
         long idUsuario = usuarioDAO.cadastrarUsuario(usuario);
         medico.getUsuario().setId(idUsuario);
         long idmedico = medicoDAO.cadastraMedico(medico);
         medico.setId(idmedico);
         return medico;
+        }
     }
 
     private void checkNull(Medico medico) throws AppException {

@@ -36,13 +36,24 @@ public class ClienteServices {
      * @param usuario
      * @return cliente
      */
-    public Cliente cadastraCliente(Cliente cliente, Usuario usuario) {
-        Long idUser = usuarioDAO.cadastrarUsuario(usuario);
-        usuario.setId(idUser);
-        cliente.setUsuario(usuario);
-        Long idCliente = clienteDAO.cadastraCliente(cliente);
-        cliente.setId(idCliente);
-        return cliente;
+    public Cliente cadastraCliente(Cliente cliente, Usuario usuario) throws AppException{
+        Usuario usuarioReferencia = usuarioDAO.getUsuario(usuario.getEmail());
+        if(usuarioReferencia!=null){
+            if(!usuarioPossuiCliente(usuarioReferencia.getEmail())){
+                cliente.getUsuario().setId(usuarioReferencia.getId());
+                long idCliente = clienteDAO.cadastraCliente(cliente);
+                cliente.setId(idCliente);
+                return cliente;
+            }else{
+                throw new AppException("Usuário já possui conta de cliente");
+            }
+        }else{
+            long idUsuario = usuarioDAO.cadastrarUsuario(usuario);
+            cliente.getUsuario().setId(idUsuario);
+            long idCliente = clienteDAO.cadastraCliente(cliente);
+            cliente.setId(idCliente);
+            return cliente;
+        }
     }
 
     public void deletaCliente(Cliente cliente) throws AppException {
