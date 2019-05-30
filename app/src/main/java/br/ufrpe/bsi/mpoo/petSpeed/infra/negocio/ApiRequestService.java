@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
 
 public class ApiRequestService {
@@ -84,7 +85,8 @@ public class ApiRequestService {
     }
 
     private String getApiKey() {
-        return "@strings/google_maps_key";
+        String key = "AIzaSyBhntuU8NDLx8ZoIIfxnNRXaziGPvtEB6s";
+        return key;
     }
 
     public enum GeoCodeCoord {

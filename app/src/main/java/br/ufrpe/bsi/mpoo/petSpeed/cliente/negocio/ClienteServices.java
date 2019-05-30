@@ -1,10 +1,8 @@
 package br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio;
 
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petSpeed.animal.persistencia.AnimalDAO;
@@ -58,7 +56,44 @@ public class ClienteServices {
         if (usuario == null) {
             throw new AppException("Credenciais Inválidas.");
         } else {
+            Cliente cliente = clienteDAO.getClienteByFkUsuario(usuario.getId());
             Sessao.instance.setUsuario(usuario);
+            Sessao.instance.setCliente(cliente);
+        }
+    }
+
+    public boolean usuarioPossuiCliente(Cliente cliente) {
+        Usuario usuarioReferencia = usuarioDAO.getUsuario(cliente.getUsuario().getEmail());
+        try {
+            usuarioReferencia.getId();
+        } catch (Exception e) {
+            return false;
+        }
+        try {
+            Cliente clienteReferencia = clienteDAO.getClienteByFkUsuario(usuarioReferencia.getId());
+            clienteReferencia.getId();
+            if (clienteReferencia.getUsuario().getEmail() == cliente.getUsuario().getEmail()) {
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return false;
+    }
+
+    public boolean usuarioPossuiCliente(String attemptedLoginEmail) {
+        Usuario usuarioReferencia = usuarioDAO.getUsuario(attemptedLoginEmail);
+        try {
+            usuarioReferencia.getId();
+        } catch (Exception e) {
+            return false;
+        }
+        try {
+            Cliente clienteReferencia = clienteDAO.getClienteByFkUsuario(usuarioReferencia.getId());
+            clienteReferencia.getId();
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 
@@ -67,15 +102,15 @@ public class ClienteServices {
         Usuario usuario = usuarioDAO.getUsuario(email);
         try {
             long id = usuario.getId();
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
-        try{
+        try {
             Cliente cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
-            if (cliente.getUsuario().getEmail().equals(usuario.getEmail())){
+            if (cliente.getUsuario().getEmail().equals(usuario.getEmail())) {
                 return true;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
         return false;
@@ -143,16 +178,16 @@ public class ClienteServices {
         clienteDAO.alteraAvaliacao(cliente);
     }
 
-    public ArrayList<Animal> getAllAnimalByIdCliente(long idCliente){
+    public ArrayList<Animal> getAllAnimalByIdCliente(long idCliente) {
         boolean result;
         ArrayList<Animal> listAnimals = animalDAO.getAllAnimalByIdCliente(idCliente);
-        if (!listAnimals.isEmpty()){
+        if (!listAnimals.isEmpty()) {
             result = true;
-        }else{
+        } else {
             result = false;
         }
 
-        if (result){
+        if (result) {
             return listAnimals;
         }
         return null;

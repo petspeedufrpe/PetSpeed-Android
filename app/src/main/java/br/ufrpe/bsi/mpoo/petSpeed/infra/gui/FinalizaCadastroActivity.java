@@ -79,7 +79,7 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
             geocodeReq.geocodeRequest(enderecoF, new GeocodeRequestCallbackListener<Map<Enum, Object>>() {
                 @Override
                 public void onGeocodeCallback(Map latLng) {
-                    if ((Enum) latLng.get(ApiRequestService.GeoCodeCoord.RESULT) == ApiRequestService.GeoCodeCoord.SUCCESS) {
+                    if (latLng.get(ApiRequestService.GeoCodeCoord.RESULT) == ApiRequestService.GeoCodeCoord.SUCCESS) {
                         double lat = (double) latLng.get(ApiRequestService.GeoCodeCoord.LAT);
                         double lng = (double) latLng.get(ApiRequestService.GeoCodeCoord.LNG);
                         Endereco endereco = SessaoCadastro.instance.getEndereco();
@@ -97,7 +97,7 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
                             isRegisterTaskRunning = false;
                         }
                     } else {
-                        Toast.makeText(FinalizaCadastroActivity.this, "Por favor, verifique sua conexão com a internet.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(FinalizaCadastroActivity.this, "Por favor, verifique seus dados ou a conexão com a internet.", Toast.LENGTH_LONG).show();
                         registerTask = null;
                         isRegisterTaskRunning = false;
                     }

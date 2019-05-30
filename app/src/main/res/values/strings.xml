@@ -74,6 +74,7 @@
     <string name="menu_share">Share</string>
     <string name="title_activity_animal_cliente">AnimalClienteActivity</string>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBhntuU8NDLx8ZoIIfxnNRXaziGPvtEB6s</string>
+    <string name="CloudApiKey">AIzaSyBhntuU8NDLx8ZoIIfxnNRXaziGPvtEB6s</string>
 
 
 </resources>

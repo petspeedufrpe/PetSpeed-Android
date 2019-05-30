@@ -112,7 +112,17 @@ public class LoginActivity extends AppCompatActivity {
         boolean result = true;
 
         try {
-            clienteServices.login(email, senha);
+            if(contaSelecionada == ContasDeUsuario.MEDICO) {
+
+            }else if(contaSelecionada == ContasDeUsuario.CLIENTE){
+                if(clienteServices.usuarioPossuiCliente(email)){
+                    clienteServices.login(email, senha);
+                    home();
+                }else{
+                    Toast.makeText(LoginActivity.this,"Credenciais inválidas.",Toast.LENGTH_SHORT).show();
+                    result = !result;
+                }
+            }
         } catch (Exception e) {
             result = false;
             Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();

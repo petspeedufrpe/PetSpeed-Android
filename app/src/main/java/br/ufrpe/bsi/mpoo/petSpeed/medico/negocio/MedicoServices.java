@@ -52,7 +52,7 @@ public class MedicoServices {
     public boolean usuarioPossuiMedico(Medico medico) {
         Usuario usuarioReferencia = usuarioDAO.getUsuario(medico.getUsuario().getEmail());
         try {
-            long id = usuarioReferencia.getId();
+            usuarioReferencia.getId();
         } catch (Exception e) {
             return false;
         }

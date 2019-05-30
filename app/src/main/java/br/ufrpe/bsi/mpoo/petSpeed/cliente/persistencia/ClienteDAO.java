@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
 
@@ -25,6 +26,21 @@ public class ClienteDAO {
         res = db.insert(DBHelper.TABELA_CLIENTE, null, values);
         db.close();
         return res;
+
+    }
+
+    public Cliente getClienteByFkUsuario(Long fkUsuario) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cliente cliente = null;
+        String sql = "SELECT * FROM " + DBHelper.TABELA_CLIENTE + " WHERE " + DBHelper.COL_CLIENTE_FK_USUARIO + " LIKE ?;";
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(fkUsuario)});
+        if (cursor.moveToFirst()) {
+            cliente = createCliente(cursor);
+        }
+        cursor.close();
+        db.close();
+
+        return cliente;
 
     }
 
