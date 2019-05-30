@@ -24,19 +24,9 @@ import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
 public class ApiRequestService {
 
 
-    private GeocodeRequestCallbackListener mListener; // listener field
-
-    // setting the listener
-    public void setGeocodeReqListener(GeocodeRequestCallbackListener listener) {
-        mListener = listener;
-    }
-
-    // My Asynchronous task
     public void geocodeRequest(final String address, final GeocodeRequestCallbackListener listener) {
 
-        // An Async task always executes in new thread
-        String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address +
-                "&key=" + "AIzaSyBhntuU8NDLx8ZoIIfxnNRXaziGPvtEB6s";
+        String url = getGeocodeUrl(address);
 
         final ArrayList<Double> latlong = new ArrayList<>();
 
@@ -86,6 +76,15 @@ public class ApiRequestService {
             }
         });
         mQueue.add(request);
+    }
+
+    private String getGeocodeUrl(String address) {
+        return "https://maps.googleapis.com/maps/api/geocode/json?address=" + address +
+                    "&key=" + getApiKey();
+    }
+
+    private String getApiKey() {
+        return "@strings/google_maps_key";
     }
 
     public enum GeoCodeCoord {

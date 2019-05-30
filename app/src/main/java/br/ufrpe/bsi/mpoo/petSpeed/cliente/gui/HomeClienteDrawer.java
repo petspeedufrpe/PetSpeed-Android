@@ -98,10 +98,10 @@ public class HomeClienteDrawer extends AppCompatActivity
 
         if (id == R.id.nav_perfil_cliente) {
 
-            //startActivity(new Intent(HomeClienteDrawer.this,PerfilClienteActivity.class));
+            startActivity(new Intent(HomeClienteDrawer.this,PerfilClienteActivity.class));
 
         } else if (id == R.id.nav_meus_pets) {
-            //startActivity(new Intent(HomeClienteDrawer.this,AnimalClienteActivity.class));
+            startActivity(new Intent(HomeClienteDrawer.this,AnimalClienteActivity.class));
 
         } else if (id == R.id.nav_historico_cliente) {
 
