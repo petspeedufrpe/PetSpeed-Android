@@ -72,13 +72,10 @@ public class ClienteServices {
         try {
             Cliente clienteReferencia = clienteDAO.getClienteByFkUsuario(usuarioReferencia.getId());
             clienteReferencia.getId();
-            if (clienteReferencia.getUsuario().getEmail() == cliente.getUsuario().getEmail()) {
-                return true;
-            }
+            return true;
         } catch (Exception e) {
             return false;
         }
-        return false;
     }
 
     public boolean usuarioPossuiCliente(String attemptedLoginEmail) {
@@ -95,25 +92,6 @@ public class ClienteServices {
         } catch (Exception e) {
             return false;
         }
-    }
-
-    //Metodo que verifica se o usuario está ou não cadastrado no banco.
-    public boolean isEmailClienteCadastrado(String email) {//retorna true se estiver no banco
-        Usuario usuario = usuarioDAO.getUsuario(email);
-        try {
-            long id = usuario.getId();
-        } catch (Exception e) {
-            return false;
-        }
-        try {
-            Cliente cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
-            if (cliente.getUsuario().getEmail().equals(usuario.getEmail())) {
-                return true;
-            }
-        } catch (Exception e) {
-            return false;
-        }
-        return false;
     }
 
     public String getEmailByCliente(Long idCliente) {

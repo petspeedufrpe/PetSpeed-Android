@@ -59,21 +59,36 @@ public class MedicoServices {
         try {
             Medico medicoReferencia = medicoDAO.getMedicoByFkUsuario(usuarioReferencia.getId());
             medicoReferencia.getId();
-            if (medicoReferencia.getUsuario().getEmail() == medico.getUsuario().getEmail()) {
-                return true;
-            }
+            return true;
         } catch (Exception e) {
             return false;
         }
-        return false;
+    }
+
+    public boolean usuarioPossuiMedico(String attemptedLoginEmail) {
+        Usuario usuarioReferencia = usuarioDAO.getUsuario(attemptedLoginEmail);
+        try {
+            usuarioReferencia.getId();
+        } catch (Exception e) {
+            return false;
+        }
+        try {
+            Medico medicoReferencia = medicoDAO.getMedicoByFkUsuario(usuarioReferencia.getId());
+            medicoReferencia.getId();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public void login(String email, String senha) throws AppException {
         Usuario usuario = usuarioDAO.getUsuario(email, senha);
-        if (usuario == null){
-            throw new AppException("Credenciais inválidas.");
+        if (usuario == null) {
+            throw new AppException("Credenciais Inválidas.");
         } else {
+            Medico medico = medicoDAO.getMedicoByFkUsuario(usuario.getId());
             Sessao.instance.setUsuario(usuario);
+            Sessao.instance.setMedico(medico);
         }
     }
 
@@ -83,7 +98,7 @@ public class MedicoServices {
     }
 
     public void deletaMedico(Medico medico) {
-        if (medicoDAO.getMedicoById(medico.getId())!= null){
+        if (medicoDAO.getMedicoById(medico.getId()) != null) {
             medicoDAO.deletaMedico(medico);
         }
     }

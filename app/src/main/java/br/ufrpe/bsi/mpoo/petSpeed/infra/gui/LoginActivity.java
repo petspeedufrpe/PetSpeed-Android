@@ -21,6 +21,7 @@ import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.gui.CadastroMedicoActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.gui.HomeMedicoActivity;
+import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private ClienteServices clienteServices = new ClienteServices();
+    private MedicoServices medicoServices = new MedicoServices();
 
 
     @Override
@@ -113,7 +115,13 @@ public class LoginActivity extends AppCompatActivity {
 
         try {
             if(contaSelecionada == ContasDeUsuario.MEDICO) {
-
+                if(medicoServices.usuarioPossuiMedico(email)){
+                    medicoServices.login(email, senha);
+                    home();
+                }else{
+                    Toast.makeText(LoginActivity.this,"Credenciais inválidas.",Toast.LENGTH_SHORT).show();
+                    result = !result;
+                }
             }else if(contaSelecionada == ContasDeUsuario.CLIENTE){
                 if(clienteServices.usuarioPossuiCliente(email)){
                     clienteServices.login(email, senha);
