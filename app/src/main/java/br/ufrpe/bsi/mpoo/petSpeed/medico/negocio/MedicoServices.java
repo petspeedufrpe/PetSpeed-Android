@@ -2,6 +2,7 @@ package br.ufrpe.bsi.mpoo.petSpeed.medico.negocio;
 
 import br.ufrpe.bsi.mpoo.petSpeed.clinica.persistencia.ClinicaDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.persistencia.MedicoDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
@@ -28,7 +29,7 @@ public class MedicoServices {
         }
         long idUsuario = usuarioDAO.cadastrarUsuario(usuario);
         medico.getUsuario().setId(idUsuario);
-        long  idmedico = medicoDAO.cadastraMedico(medico);
+        long idmedico = medicoDAO.cadastraMedico(medico);
         medico.setId(idmedico);
         return medico;
     }
@@ -52,8 +53,6 @@ public class MedicoServices {
         Usuario usuarioReferencia = usuarioDAO.getUsuario(medico.getUsuario().getEmail());
         try {
             long id = usuarioReferencia.getId();
-            //querry retornou um usuário não nulo, logo o email cadastrado já pertence um usuário...
-            //vamos verificar se esse usuário já possui uma conta de médico no proximo try:
         } catch (Exception e) {
             return false;
         }
@@ -61,7 +60,6 @@ public class MedicoServices {
             Medico medicoReferencia = medicoDAO.getMedicoByFkUsuario(usuarioReferencia.getId());
             medicoReferencia.getId();
             if (medicoReferencia.getUsuario().getEmail() == medico.getUsuario().getEmail()) {
-                //se os dois emails são iguais, o o usuário já possui uma conta de médico
                 return true;
             }
         } catch (Exception e) {
@@ -70,8 +68,24 @@ public class MedicoServices {
         return false;
     }
 
-    public void deletaMedico() {
+    public void login(String email, String senha) throws AppException {
+        Usuario usuario = usuarioDAO.getUsuario(email, senha);
+        if (usuario == null){
+            throw new AppException("Credenciais inválidas.");
+        } else {
+            Sessao.instance.setUsuario(usuario);
+        }
+    }
 
+    public void logout() {
+        Sessao sessao = Sessao.instance;
+        sessao.reset();
+    }
+
+    public void deletaMedico(Medico medico) {
+        if (medicoDAO.getMedicoById(medico.getId())!= null){
+            medicoDAO.deletaMedico(medico);
+        }
     }
 
     public void alteraAvaliacao() {

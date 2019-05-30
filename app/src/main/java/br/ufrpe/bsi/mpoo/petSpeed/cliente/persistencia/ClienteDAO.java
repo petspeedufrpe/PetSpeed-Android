@@ -5,136 +5,114 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.List;
-
-import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
 
 public class ClienteDAO {
 
-	private DBHelper dbHelper = new DBHelper();
-
-	public long cadastraCliente(Cliente cliente) {
-		long res;
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		ContentValues values = new ContentValues();
-		values.put(DBHelper.COL_CLIENTE_AVALIACAO,cliente.getAvaliacao());
-		values.put(DBHelper.COL_CLIENTE_FK_USUARIO,cliente.getUsuario().getId());
-		values.put(DBHelper.COL_CLIENTE_FK_PESSOA,cliente.getDadosPessoais().getId());
-		res = db.insert(DBHelper.TABELA_CLIENTE,null,values);
-		db.close();
-		return  res;
-
-	}
-
-	public void deletaCliente(Cliente cliente) {
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		db.delete(DBHelper.TABELA_CLIENTE,DBHelper.COL_CLIENTE_ID + " = ?",new String[]{String.valueOf(cliente.getId())});
-		db.close();
-
-	}
-
-	private Cliente createCliente(Cursor cursor){
-		int indexId = cursor.getColumnIndex(DBHelper.COL_CLIENTE_ID);
-		int indexAvaliacao = cursor.getColumnIndex(DBHelper.COL_CLIENTE_AVALIACAO);
-		long id = cursor.getLong(indexId);
-		long avaliacao = cursor.getLong(indexAvaliacao);
-		Cliente cliente = new Cliente();
-		cliente.setId(id);
-		cliente.setAvaliacao(avaliacao);
-		return cliente;
-	}
-
-	public Cliente loadCliente(String query , String[] args){
-		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		Cursor cursor = db.rawQuery(query,args);
-		Cliente cliente = null;
-		if (cursor.moveToNext()){
-			cliente = createCliente(cursor);
-		}
-		cursor.close();
-		db.close();
-
-		return cliente;
-	}
-
-	public Cliente getClienteById(Long id){
-		String query = "SELECT * FROM " + DBHelper.TABELA_CLIENTE+" WHERE "+DBHelper.COL_CLIENTE_ID+ " LIKE ?;";
-		String[] args = {String.valueOf(id)};
-		return this.loadCliente(query,args);
-	}
-
-	public Cursor getIdObjectByCliente(Long idCliente){
-		SQLiteDatabase db= dbHelper.getReadableDatabase();
-		String query = "SELECT * FROM "+DBHelper.TABELA_CLIENTE+ " WHERE "+DBHelper.COL_CLIENTE_ID+
-				" LIKE ?;";
-		String[] args = {String.valueOf(idCliente)};
-
-		return db.rawQuery(query,args); //Metodo para ser usado na classe de negocio, que usa o id do cliente
-										// para recuperar o objeto inteiro(todas as outras classes
-										// ex.(pessoa,usuario e endereco podem ser acessadas).
-	}
-
-	public Cliente getIdClienteByUsuario(long idUsuario){
-		String query = " SELECT * FROM "+DBHelper.TABELA_CLIENTE+" WHERE "+DBHelper.COL_CLIENTE_FK_USUARIO+
-				" LIKE ?;";
-		String[] args = {String.valueOf(idUsuario)};
-		return this.loadCliente(query,args);
-	}
-	public Cliente getClienteByEmail(String email){//Passando um email como parametro, recupera o cliente
-		UsuarioDAO usuarioDAO = new UsuarioDAO();  // que está atribuido a este email de um usuario(classe)
-		Usuario usuario = usuarioDAO.getUsuario(email);//retorna o usuario que tem este email
-		Cliente cliente= getIdClienteByUsuario(usuario.getId());//retorna o cliente que tem este usuario
-		return cliente;
-	}
+    private DBHelper dbHelper = new DBHelper();
 
 
-	public Animal getAnimalById(long idCliente) {
+    public long cadastraCliente(Cliente cliente) {
+        long res;
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.COL_CLIENTE_AVALIACAO, cliente.getAvaliacao());
+        values.put(DBHelper.COL_CLIENTE_FK_USUARIO, cliente.getUsuario().getId());
+        values.put(DBHelper.COL_CLIENTE_FK_PESSOA, cliente.getDadosPessoais().getId());
+        res = db.insert(DBHelper.TABELA_CLIENTE, null, values);
+        db.close();
+        return res;
 
-		return null;
-	}
+    }
 
-	public Animal getAnimalByRaca() {
-		return null;
-	}
+    public void deletaCliente(Cliente cliente) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.delete(DBHelper.TABELA_CLIENTE, DBHelper.COL_CLIENTE_ID + " = ?", new String[]{String.valueOf(cliente.getId())});
+        db.close();
 
-	public List<Endereco> getAllEndereco() {
-		return null;
-	}
+    }
 
-	public List<Animal> getAllAnimal() {
-		return null;
-	}
+    //guarda o indice de cada coluna necessária para montar o obj, e depois passa em uma variavel o valor retornado do banco
+    //seta no objeto e retorna ele.
+    private Cliente createCliente(Cursor cursor) {
+        int indexId = cursor.getColumnIndex(DBHelper.COL_CLIENTE_ID);
+        int indexAvaliacao = cursor.getColumnIndex(DBHelper.COL_CLIENTE_AVALIACAO);
+        int indexIdUsuario = cursor.getColumnIndex(DBHelper.COL_CLIENTE_FK_USUARIO);
+        int indexIdPessoa = cursor.getColumnIndex(DBHelper.COL_CLIENTE_FK_PESSOA);
+        long id = cursor.getLong(indexId);
+        long avaliacao = cursor.getLong(indexAvaliacao);
+        long idUsuario = cursor.getLong(indexIdUsuario);
+        long idPessoa = cursor.getLong(indexIdPessoa);
+        Cliente cliente = new Cliente();
+        cliente.setId(id);
+        cliente.setAvaliacao(avaliacao);
+        cliente.setIdUsuario(idUsuario);
+        cliente.setIdPessoa(idPessoa);
+        return cliente;
+    }
 
-	public void removeEndereco() {
+    public Cliente loadObject(String query, String[] args) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, args);
+        Cliente cliente = null;
+        if (cursor.moveToFirst()) {
+            cliente = createCliente(cursor);
+        }
+        cursor.close();
+        db.close();
 
-	}
+        return cliente;
+    }
 
-	public void adicionaEndereco() {
+    /**
+     * @param id
+     * @return Cliente
+     * nesse metodo so inicia a getString da query e o arg que será passado.
+     * no loadCliente o banco é aberto para leitura e retorna um cursor para poder criar o cliente
+     */
+    public Cliente getClienteById(Long id) {
+        String query = "SELECT * FROM " + DBHelper.TABELA_CLIENTE + " WHERE " + DBHelper.COL_CLIENTE_ID + " LIKE ?;";
+        String[] args = {String.valueOf(id)};
+        return this.loadObject(query, args);
+    }
 
-	}
+    public Cursor getIdObjectByCliente(Long idCliente) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String query = "SELECT * FROM " + DBHelper.TABELA_CLIENTE + " WHERE " + DBHelper.COL_CLIENTE_ID +
+                " LIKE ?;";
+        String[] args = {String.valueOf(idCliente)};
 
-	public void alteraEmail() {
+        return db.rawQuery(query, args); //Metodo para ser usado na classe de negocio, que usa o id do cliente
+        // para recuperar o objeto inteiro(todas as outras classes
+        // ex.(pessoa,usuario e endereco podem ser acessadas).
+    }
+
+    public Cliente getIdClienteByUsuario(long idUsuario) {
+        String query = " SELECT * FROM " + DBHelper.TABELA_CLIENTE + " WHERE " + DBHelper.COL_CLIENTE_FK_USUARIO +
+                " LIKE ?;";
+        String[] args = {String.valueOf(idUsuario)};
+        return this.loadObject(query, args);
+    }
+
+    public Cliente getClienteByEmail(String email) {//Passando um email como parametro, recupera o cliente
+        UsuarioDAO usuarioDAO = new UsuarioDAO();  // que está atribuido a este email de um usuario(classe)
+        Usuario usuario = usuarioDAO.getUsuario(email);//retorna o usuario que tem este email
+        Cliente cliente = getIdClienteByUsuario(usuario.getId());//retorna o cliente que tem este usuario
+        return cliente;//este metodo tem que ir para o services de cliente
+    }
 
 
-	}
+    public void alteraAvaliacao(Cliente cliente) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.COL_CLIENTE_AVALIACAO, cliente.getAvaliacao());
+        db.update(DBHelper.TABELA_CLIENTE, values, DBHelper.COL_CLIENTE_ID + " = ?",
+                new String[]{String.valueOf(cliente.getId())});
+        db.close();
 
-	public void alteraSenha() {
-
-	}
-
-	public void alteraAvaliacao(Cliente cliente) {
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		ContentValues values = new ContentValues();
-		values.put(DBHelper.COL_CLIENTE_AVALIACAO,cliente.getAvaliacao());
-		db.update(DBHelper.TABELA_CLIENTE,values,DBHelper.COL_CLIENTE_ID+ " = ?",
-				new String[]{String.valueOf(cliente.getId())});
-		db.close();
-
-	}
+    }
 
 }

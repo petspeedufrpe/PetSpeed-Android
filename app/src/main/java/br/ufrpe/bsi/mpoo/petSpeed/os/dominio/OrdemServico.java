@@ -6,83 +6,89 @@ import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 
 public class OrdemServico {
 
-	private long id;
+    private long id;
 
-	private boolean pendente;
+    private boolean pendente;
 
-	private Medico medico;
+    private Medico medico;
 
-	private Triagem triagem;
+    private Triagem triagem;
 
-	private Cliente cliente;
+    private Cliente cliente;
 
-	private Animal animal;
+    private Animal animal;
 
-	private String descricao;
+    private String descricao;
 
-	private Prioridade prioridade;
+    private Prioridade prioridade;
 
-	public boolean isPendente() {
-		return pendente;
-	}
+    private long fkMedico;
 
-	public void setPendente(boolean pendente) {
-		this.pendente = pendente;
-	}
+    private long fkCliente;
 
-	public long getId() {
-		return id;
-	}
+    private long fkAnimal;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public boolean isPendente() {
+        return pendente;
+    }
 
-	public Medico getMedico() {
-		return medico;
-	}
+    public void setPendente(boolean pendente) {
+        this.pendente = pendente;
+    }
 
-	public void setMedico(Medico medico) {
-		this.medico = medico;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public Triagem getTriagem() {
-		return triagem;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setTriagem(Triagem triagem) {
-		this.triagem = triagem;
-	}
+    public Medico getMedico() {
+        return medico;
+    }
 
-	public Cliente getCliente() {
-		return cliente;
-	}
+    public void setMedico(Medico medico) {
+        this.medico = medico;
+    }
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
+    public Triagem getTriagem() {
+        return triagem;
+    }
 
-	public Animal getAnimal() {
-		return animal;
-	}
+    public void setTriagem(Triagem triagem) {
+        this.triagem = triagem;
+    }
 
-	public void setAnimal(Animal animal) {
-		this.animal = animal;
-	}
+    public Cliente getCliente() {
+        return cliente;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public Animal getAnimal() {
+        return animal;
+    }
 
-	public Prioridade getPrioridade() {
-		return prioridade;
-	}
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
 
-	public void setPrioridade(Prioridade prioridade) {
-		this.prioridade = prioridade;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Prioridade getPrioridade() {
+        return prioridade;
+    }
+
+    public void setPrioridade(Prioridade prioridade) {
+        this.prioridade = prioridade;
+    }
 }

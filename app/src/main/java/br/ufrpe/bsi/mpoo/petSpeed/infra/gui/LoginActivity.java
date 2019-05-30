@@ -1,11 +1,12 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,9 +15,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.CadastroClienteActivity;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.HomeClienteDrawer;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
+import br.ufrpe.bsi.mpoo.petSpeed.medico.gui.CadastroMedicoActivity;
+import br.ufrpe.bsi.mpoo.petSpeed.medico.gui.HomeMedicoActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -26,15 +30,17 @@ public class LoginActivity extends AppCompatActivity {
     private Button cadastrarBtn;
     private String email;
     private String senha;
-    private ContasDeUsuario contaDeUsuario;
+    private ContasDeUsuario contaSelecionada;
     private boolean contaSetada = false;
 
 
     private ClienteServices clienteServices = new ClienteServices();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
 
         mEmail = (EditText) findViewById(R.id.LoginEmailTxBx);
@@ -42,29 +48,19 @@ public class LoginActivity extends AppCompatActivity {
         loginbtn = (Button) findViewById(R.id.loginActLoginBtn);
         cadastrarBtn = (Button) findViewById(R.id.LoginActCadastrarBtn);
 
-
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //do-nothing
+                logar();
             }
         });
+
 
 
         cadastrarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (contaSetada) {
-                    if (contaDeUsuario.getDescricao().equals("Medico")) {
-                        Intent registerIntent = new Intent(LoginActivity.this, CadastroMedicoActivity.class);
-                        startActivity(registerIntent);
-                    } else if (contaDeUsuario.getDescricao().equals("Cliente")) {
-                        Intent registerIntent = new Intent(LoginActivity.this, CadastroClienteActivity.class);
-                        startActivity(registerIntent);
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Selecione o tipo de conta a cadastrar.", Toast.LENGTH_LONG).show();
-                    }
-                }
+                cadastraUsuario();
             }
         });
 
@@ -76,13 +72,14 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                contaDeUsuario = ContasDeUsuario.values()[position];
+                contaSelecionada = ContasDeUsuario.values()[position];
                 StringBuilder tipoConta = new StringBuilder();
                 tipoConta.append("Fazer login como: ");
-                tipoConta.append(contaDeUsuario.getDescricao());
+                tipoConta.append(contaSelecionada.getDescricao());
                 Toast.makeText(LoginActivity.this, tipoConta, Toast.LENGTH_LONG).show();
                 contaSetada = true;
             }
+
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -90,13 +87,20 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        loginbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(LoginActivity.this, AccountSelectionActivity.class);
-                startActivity(it);
+    }
+
+    private void cadastraUsuario() {
+        if (contaSetada) {
+            if (contaSelecionada == ContasDeUsuario.MEDICO) {
+                Intent registerIntent = new Intent(LoginActivity.this, CadastroMedicoActivity.class);
+                startActivity(registerIntent);
+            } else if (contaSelecionada == ContasDeUsuario.CLIENTE) {
+                Intent registerIntent = new Intent(LoginActivity.this, CadastroClienteActivity.class);
+                startActivity(registerIntent);
+            } else {
+                Toast.makeText(LoginActivity.this, "Selecione o tipo de conta a cadastrar.", Toast.LENGTH_LONG).show();
             }
-        });
+        }
     }
 
     private void logar() {
@@ -105,14 +109,26 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        boolean result = false;
+        boolean result = true;
+
         try {
             clienteServices.login(email, senha);
-            if (result) {
-                startActivity(new Intent(LoginActivity.this, AccountSelectionActivity.class));
-            }
         } catch (Exception e) {
-            e.printStackTrace();
+            result = false;
+            Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+        if (result) {
+            home();
+        }
+    }
+
+    private void home(){
+        if(contaSelecionada == ContasDeUsuario.MEDICO) {
+            startActivity(new Intent(LoginActivity.this, HomeMedicoActivity.class));
+
+        }else if(contaSelecionada == ContasDeUsuario.CLIENTE){
+            startActivity(new Intent(LoginActivity.this, HomeClienteDrawer.class));
         }
 
     }
@@ -151,17 +167,16 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean validaSenha(String senha) {
-        return senha.length() > 3;
+        return senha.length() > 2;
+    }
+
+    private boolean validaEmail(String email) {
+        boolean resultado = (!isCampoVazio(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+        return resultado;
     }
 
     private boolean isCampoVazio(String valor) {
         boolean resultado = TextUtils.isEmpty(valor) || valor.trim().isEmpty();
-        return resultado;
-    }
-
-
-    private boolean validaEmail(String email) {
-        boolean resultado = (!isCampoVazio(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
         return resultado;
     }
 }

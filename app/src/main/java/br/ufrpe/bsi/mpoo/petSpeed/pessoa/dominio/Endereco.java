@@ -2,105 +2,128 @@ package br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio;
 
 import java.io.Serializable;
 
-public class Endereco implements Serializable {
+public class Endereco {
 
-	private long id;
+    private long id;
 
-	private String cep;
+    private String cep;
 
-	private String uf;
+    private String uf;
 
-	private String cidade;
+    private String cidade;
 
-	private String bairro;
+    private String bairro;
 
-	private String logradouro;
+    private String logradouro;
 
-	private long numero;
+    private long numero;
 
-	private String complemento;
+    private String complemento;
 
-	private long fkClinica;
+    private long fkClinica;
 
-	private long fkPessoa;
+    private long fkPessoa;
 
-	public long getFkPessoa() {
-		return fkPessoa;
-	}
+    private Double latidude;
 
-	public void setFkPessoa(long fkPessoa) {
-		this.fkPessoa = fkPessoa;
-	}
+    private Double longitude;
 
-	public long getFkClinica() {
-		return fkClinica;
-	}
+    public Double getLatidude() {
+        return latidude;
+    }
 
-	public void setFkClinica(long fkClinica) {
-		this.fkClinica = fkClinica;
-	}
+    public void setLatidude(Double latidude) {
+        this.latidude = latidude;
+    }
 
-	public String getCidade() {
-		return cidade;
-	}
+    public Double getLongitude() {
+        return longitude;
+    }
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
 
-	public String getBairro() {
-		return bairro;
-	}
 
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
 
-	public String getLogradouro() {
-		return logradouro;
-	}
+    public long getFkPessoa() {
+        return fkPessoa;
+    }
 
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
+    public void setFkPessoa(long fkPessoa) {
+        this.fkPessoa = fkPessoa;
+    }
 
-	public String getUf() {
-		return uf;
-	}
+    public long getFkClinica() {
+        return fkClinica;
+    }
 
-	public void setUf(String uf) {
-		this.uf = uf;
-	}
+    public void setFkClinica(long fkClinica) {
+        this.fkClinica = fkClinica;
+    }
 
-	public long getId() {
-		return id;
-	}
+    public String getCidade() {
+        return cidade;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
 
-	public String getCep() {
-		return cep;
-	}
+    public String getBairro() {
+        return bairro;
+    }
 
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
 
-	public long getNumero() {
-		return numero;
-	}
+    public String getLogradouro() {
+        return logradouro;
+    }
 
-	public void setNumero(long numero) {
-		this.numero = numero;
-	}
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
 
-	public String getComplemento() {
-		return complemento;
-	}
+    public String getUf() {
+        return uf;
+    }
 
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public long getNumero() {
+        return numero;
+    }
+
+    public void setNumero(long numero) {
+        this.numero = numero;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
 }

@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.PessoaDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
@@ -25,11 +24,11 @@ public class MedicoDAO {
         values.put(DBHelper.COL_MEDICO_FK_USUARIO, medico.getUsuario().getId());
         values.put(DBHelper.COL_MEDICO_FK_PESSOA, medico.getDadosPessoais().getId());
         long id = dbWrite.insert(DBHelper.TABELA_MEDICO, null, values);
-        helperDb.close();
+        dbWrite.close();
         return id;
     }
 
-    private Medico createMedico(Cursor cursor){
+    private Medico createMedico(Cursor cursor) {
         Medico medico = new Medico();
         PessoaDAO pessoaDAO = new PessoaDAO();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -48,12 +47,12 @@ public class MedicoDAO {
         return medico;
     }
 
-    public Medico getMedicoByFkUsuario(Long fkUsuario){
+    public Medico getMedicoByFkUsuario(Long fkUsuario) {
         SQLiteDatabase db = helperDb.getReadableDatabase();
         Medico medico = null;
-        String sql = "SELECT * FROM " + DBHelper.TABELA_MEDICO+ " WHERE " + DBHelper.COL_MEDICO_FK_USUARIO + " LIKE ?;";
-        Cursor cursor = db.rawQuery(sql,new String[]{String.valueOf(fkUsuario)});
-        if(cursor.moveToFirst()){
+        String sql = "SELECT * FROM " + DBHelper.TABELA_MEDICO + " WHERE " + DBHelper.COL_MEDICO_FK_USUARIO + " LIKE ?;";
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(fkUsuario)});
+        if (cursor.moveToFirst()) {
             medico = createMedico(cursor);
         }
         cursor.close();
@@ -63,9 +62,27 @@ public class MedicoDAO {
 
     }
 
+    public Medico getMedicoById(long idMedico){
+        SQLiteDatabase db = helperDb.getReadableDatabase();
+        Medico medico = null;
+        String sql = "SELECT * FROM " + DBHelper.TABELA_MEDICO + " WHERE " + DBHelper.COL_MEDICO_ID+ " LIKE ?;";
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(idMedico)});
+        if (cursor.moveToFirst()){
+            medico = createMedico(cursor);
+        }
+        cursor.close();
+        db.close();
 
-    public void deletaMedico() {
+        return medico;
+    }
 
+
+    public void deletaMedico(Medico medico) {
+        SQLiteDatabase db = helperDb.getWritableDatabase();
+
+        db.delete(DBHelper.TABELA_MEDICO,DBHelper.COL_MEDICO_ID+ " = ?",
+                new String[]{String.valueOf(medico.getId())});
+        db.close();
     }
 
     public void alteraAvaliacao() {

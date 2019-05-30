@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
     android:baselineAligned="false"
     android:orientation="vertical"
-    tools:context=".infra.gui.CadastroMedicoActivity">
+    tools:context=".medico.gui.CadastroMedicoActivity">
 
     <EditText
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:inputType="text"
-        android:textColorHint="@color/hintColor"
-        android:textColor="#FF00A759"
         android:layout_marginTop="40dp"
-        android:hint="nome" />
+        android:backgroundTint="@color/hintColor"
+        android:hint="Nome"
+        android:inputType="text"
+        android:textColor="#FF00A759" />
 
     <EditText
         android:id="@+id/cpf"
@@ -26,10 +25,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:textColorHint="@color/hintColor"
-        android:textColor="#FF00A759"
+        android:backgroundTint="@color/hintColor"
+        android:hint="CPF"
         android:inputType="number"
-        android:hint="cpf" />
+        android:textColor="#FF00A759" />
 
     <EditText
         android:id="@+id/crmv"
@@ -37,58 +36,59 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:textColorHint="@color/hintColor"
-        android:textColor="#FF00A759"
+        android:backgroundTint="@color/hintColor"
+        android:hint="CRMV"
         android:inputType="number"
-        android:hint="crmv" />
+        android:textColor="#FF00A759" />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
         android:layout_gravity="center_horizontal"
-        android:textColorHint="@color/hintColor"
-        android:textColor="#FF00A759"
         android:layout_marginTop="30dp"
-        android:hint="email" />
+        android:backgroundTint="@color/hintColor"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        android:textColor="#FF00A759" />
 
     <EditText
         android:id="@+id/passwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
         android:layout_gravity="center_horizontal"
-        android:textColorHint="@color/hintColor"
-        android:textColor="#FF00A759"
         android:layout_marginTop="30dp"
-        android:hint="senha" />
+        android:backgroundTint="@color/hintColor"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        android:textColor="#FF00A759" />
+
     <EditText
         android:id="@+id/cnfpasswd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
         android:layout_gravity="center_horizontal"
-        android:textColorHint="@color/hintColor"
-        android:textColor="#FF00A759"
         android:layout_marginTop="30dp"
-        android:hint="Confirme a senha" />
+        android:backgroundTint="@color/hintColor"
+        android:hint="Confirme a senha"
+        android:inputType="textPassword"
+        android:textColor="#FF00A759" />
 
     <Button
         android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:hint="CADASTRAR ENDEREÇO"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
-        android:textColorHint="#ffFfff"
         android:backgroundTint="#FF00A759"
-        android:layout_gravity="center_horizontal"/>
+        android:hint="CADASTRAR ENDEREÇO"
+        android:textColorHint="#ffFfff" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <TextView
@@ -96,8 +96,8 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:paddingLeft="10dp"
-            android:textStyle="bold"
-            android:text="Voltar à tela inical"/>
+            android:text="Voltar à tela inical"
+            android:textStyle="bold" />
     </LinearLayout>
 
 

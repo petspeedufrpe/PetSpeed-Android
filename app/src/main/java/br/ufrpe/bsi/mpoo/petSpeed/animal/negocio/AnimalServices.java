@@ -4,48 +4,49 @@ import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petSpeed.animal.persistencia.AnimalDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.os.dominio.OrdemServico;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.persistencia.MedicoDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.os.dominio.OrdemServico;
 import br.ufrpe.bsi.mpoo.petSpeed.os.persistencia.OrdemServicoDAO;
 
 public class AnimalServices {
 
-	private AnimalDAO animalDAO;
+    private AnimalDAO animalDAO = new AnimalDAO();
 
-	private OrdemServicoDAO ordemServicoDAO;
+    private OrdemServicoDAO ordemServicoDAO;
 
-	private MedicoDAO medicoDAO;
+    private MedicoDAO medicoDAO;
 
-	public void cadastraAnimal() {
+    public long cadastraAnimal(Animal animal) {
+        long res = animalDAO.cadastraAnimal(animal);
+        return res;
+    }
 
-	}
+    public void deletaAnimal() {
 
-	public void deletaAnimal() {
+    }
 
-	}
+    public void alteraFoto() {
 
-	public void alteraFoto() {
+    }
 
-	}
+    public void adicionaOS() {
 
-	public void adicionaOS() {
+    }
 
-	}
+    public Animal getAnimalById() {
+        return null;
+    }
 
-	public Animal getAnimalById() {
-		return null;
-	}
+    public OrdemServico getHistoricoById() {
+        return null;
+    }
 
-	public OrdemServico getHistoricoById() {
-		return null;
-	}
+    public List<OrdemServico> getHistoricoByMedico() {
+        return null;
+    }
 
-	public List<OrdemServico> getHistoricoByMedico() {
-		return null;
-	}
-
-	public List<OrdemServico> getAllHistorico() {
-		return null;
-	}
+    public List<OrdemServico> getAllHistorico() {
+        return null;
+    }
 
 }

@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:fillViewport="true"
-    tools:context=".infra.gui.CadastroEnderecoActivity"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".pessoa.gui.CadastroEnderecoActivity"
     tools:showIn="@layout/activity_cadastro_endereco">
 
     <LinearLayout
@@ -17,92 +17,91 @@
 
         <EditText
             android:id="@+id/logradouro"
-            android:hint="Nome da rua"
             android:layout_width="match_parent"
-            android:textColorHint="@color/hintColor"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColor="#FF00A759"
-
-            android:layout_marginTop="100dp"/>
+            android:layout_marginTop="100dp"
+            android:backgroundTint="@color/hintColor"
+            android:hint="Nome da rua"
+            android:inputType="text"
+            android:textColor="#FF00A759" />
 
         <EditText
             android:id="@+id/numero"
-            android:hint="Numero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
             android:layout_gravity="center_horizontal"
-            android:textColor="#FF00A759"
-
-            android:textColorHint="@color/hintColor"
-
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/hintColor"
+            android:hint="Número"
+            android:inputType="number"
+            android:textColor="#FF00A759" />
 
         <EditText
             android:id="@+id/complemento"
-            android:hint="complemento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColor="#FF00A759"
-
-            android:textColorHint="@color/hintColor"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="40dp"
+            android:inputType="text"
+            android:backgroundTint="@color/hintColor"
+            android:hint="@string/complemento_end"
+            android:textColor="#FF00A759" />
 
         <EditText
             android:id="@+id/bairro"
-            android:hint="Bairro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColorHint="@color/hintColor"
-            android:textColor="#FF00A759"
-
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/hintColor"
+            android:hint="Bairro"
+            android:inputType="text"
+            android:textColor="#FF00A759" />
 
         <EditText
             android:id="@+id/cidade"
-            android:hint="cidade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColorHint="@color/hintColor"
-            android:textColor="#FF00A759"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/hintColor"
+            android:inputType="text"
+            android:hint="@string/cidade_end"
 
-            android:layout_marginTop="40dp"/>
+            android:textColor="#FF00A759" />
 
         <EditText
             android:id="@+id/uf"
-            android:hint="UF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColorHint="@color/hintColor"
-            android:textColor="#FF00A759"
-
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/hintColor"
+            android:hint="UF"
+            android:inputType="text"
+            android:textColor="#FF00A759" />
 
         <EditText
             android:id="@+id/cep"
-            android:hint="cep(só numeros)"
+            android:inputType="numberDecimal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColor="#FF00A759"
-            android:textColorHint="@color/hintColor"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/hintColor"
+            android:hint="CEP (só numeros)"
+            android:textColor="#FF00A759" />
 
         <Button
             android:id="@+id/cad_end"
-            android:text="CADASTRAR"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-
-            android:textColorHint="#FFFFFF"
+            android:layout_marginTop="40dp"
             android:backgroundTint="@color/hintColor"
-            android:layout_marginTop="40dp"/>
+            android:text="CADASTRAR"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 </ScrollView>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Window;
 import android.view.WindowManager;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
@@ -21,10 +22,10 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(getBaseContext(), AccountSelectionActivity.class));
+                startActivity(new Intent(getBaseContext(), LoginActivity.class));
                 finish();
 
             }
-        },3000);
+        },2000);
     }
 }

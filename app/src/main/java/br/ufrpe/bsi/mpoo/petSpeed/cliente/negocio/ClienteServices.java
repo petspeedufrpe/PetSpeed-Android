@@ -3,6 +3,7 @@ package br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
@@ -11,153 +12,149 @@ import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.PessoaDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
 
 public class ClienteServices {
 
-	private ClienteDAO clienteDAO = new ClienteDAO();
+    private ClienteDAO clienteDAO = new ClienteDAO();
 
-	private EnderecoDAO enderecoDAO = new EnderecoDAO();
+    private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-	private  UsuarioDAO usuarioDAO = new UsuarioDAO();
+    private PessoaDAO pessoaDAO = new PessoaDAO();
 
-	private PessoaDAO pessoaDAO = new PessoaDAO();
+    private AnimalDAO animalDAO = new AnimalDAO();
 
-	private AnimalDAO animalDAO;
 
-	public Cliente cadastraCliente(Cliente cliente,Usuario usuario) {
-		Long idUser = usuarioDAO.cadastrarUsuario(usuario);
-		usuario.setId(idUser);
-		cliente.setUsuario(usuario);
-		Long idCliente = clienteDAO.cadastraCliente(cliente);
-		cliente.setId(idCliente);
-		return cliente;
-	}
-	public void deletaCliente(Cliente cliente) throws AppException {
-		if (clienteDAO.getClienteById(cliente.getId())!=null){
-			clienteDAO.deletaCliente(cliente);
-		}
+    /**
+     * verificações são feitas antes do metodo cadastrar ser chamado.
+     * cadastra o cliente, sendo o último a ser cadastrado(tem 1 ou mais associações nele)
+     *
+     * @param cliente
+     * @param usuario
+     * @return cliente
+     */
+    public Cliente cadastraCliente(Cliente cliente, Usuario usuario) {
+        Long idUser = usuarioDAO.cadastrarUsuario(usuario);
+        usuario.setId(idUser);
+        cliente.setUsuario(usuario);
+        Long idCliente = clienteDAO.cadastraCliente(cliente);
+        cliente.setId(idCliente);
+        return cliente;
+    }
 
-	}
-	public Cliente login(String email, String senha) throws AppException {
-		Usuario usuario = usuarioDAO.getUsuario(email,senha);
-		Cliente cliente = new Cliente();
-		if (usuario == null){
-			cliente = null;
-			throw new AppException("Usuário ou senha inválida.");
-		}
-		PessoaServices pessoaServices = new PessoaServices();
-		cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
-		cliente = getClienteCompleto(cliente.getId());
+    public void deletaCliente(Cliente cliente) throws AppException {
+        if (clienteDAO.getClienteById(cliente.getId()) != null) {
+            clienteDAO.deletaCliente(cliente);
+        }
+    }
 
-		return cliente;
-	}
+    public void login(String email, String senha) throws AppException {
+        Usuario usuario = usuarioDAO.getUsuario(email, senha);
+        if (usuario == null) {
+            throw new AppException("Credenciais Inválidas.");
+        } else {
+            Sessao.instance.setUsuario(usuario);
+        }
+    }
 
-	public boolean isEmailClienteNaoCadastrado(String email){//retorna true se nao estiver no banco
-		Usuario usuario = usuarioDAO.getUsuario(email);
-		return (!(usuario!= null && usuario.getEmail().length() >0));
-	}
+    //Metodo que verifica se o usuario está ou não cadastrado no banco.
+    public boolean isEmailClienteCadastrado(String email) {//retorna true se estiver no banco
+        Usuario usuario = usuarioDAO.getUsuario(email);
+        try {
+            long id = usuario.getId();
+        }catch (Exception e){
+            return false;
+        }
+        try{
+            Cliente cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
+            if (cliente.getUsuario().getEmail().equals(usuario.getEmail())){
+                return true;
+            }
+        }catch (Exception e){
+            return false;
+        }
+        return false;
+    }
 
-	public String getEmailByCliente(Long idCliente){
-		Cliente cliente;
-		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		cliente = clienteDAO.getClienteById(idCliente);
-		Cursor data = clienteDAO.getIdObjectByCliente(idCliente);
-		if (data!= null && data.moveToFirst()){
-			int indexUsuario = data.getColumnIndex(DBHelper.COL_CLIENTE_FK_USUARIO);
-			long idUsuario = data.getLong(indexUsuario);
-			return usuarioDAO.getUsuario(idUsuario).getEmail();
-		}
-		return null;
-	}
-	public Cliente getClienteCompleto(long idCliente){
-		Cliente cliente;
-		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		cliente = clienteDAO.getClienteById(idCliente);
-		Cursor data = clienteDAO.getIdObjectByCliente(idCliente);
+    public String getEmailByCliente(Long idCliente) {
+        Cliente cliente;
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        cliente = clienteDAO.getClienteById(idCliente);
+        Cursor data = clienteDAO.getIdObjectByCliente(idCliente);
+        if (data != null && data.moveToFirst()) {
+            int indexUsuario = data.getColumnIndex(DBHelper.COL_CLIENTE_FK_USUARIO);
+            long idUsuario = data.getLong(indexUsuario);
+            return usuarioDAO.getUsuario(idUsuario).getEmail();
+        }
+        return null;
+    }
 
-		if (data!= null && data.moveToFirst()){
-			PessoaServices pessoaServices = new PessoaServices();
-			int indexPessoa = data.getColumnIndex(DBHelper.COL_CLIENTE_FK_PESSOA);
-			int indexUsuario = data.getColumnIndex(DBHelper.COL_CLIENTE_FK_USUARIO);
-			int indexAnimal = data.getColumnIndex(DBHelper.COL_ANIMAL_FK_CLIENTE);
-			long idAnimal = data.getLong(indexAnimal);
-			long idPessoa = data.getLong(indexPessoa);
-			long idUsuario = data.getLong(indexUsuario);
+    //monta o objeto completo(com todos os atributos setados, usando o cursor para navegar entre os dados do banco.
+    public Cliente getClienteCompleto(long idCliente) {
+        Cliente cliente;
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        cliente = clienteDAO.getClienteById(idCliente);
+        Cursor data = clienteDAO.getIdObjectByCliente(idCliente);
 
-			data.close();
-			Pessoa pessoa = pessoaServices.getPessoaCompleta(idPessoa);
-			cliente.setDadosPessoais(pessoa);
-			cliente.setUsuario(usuarioDAO.getUsuario(idUsuario));
+        if (data != null && data.moveToFirst()) {
+            PessoaServices pessoaServices = new PessoaServices();
+            int indexPessoa = data.getColumnIndex(DBHelper.COL_CLIENTE_FK_PESSOA);
+            int indexUsuario = data.getColumnIndex(DBHelper.COL_CLIENTE_FK_USUARIO);
+            // int indexAnimal = data.getColumnIndex(DBHelper.COL_ANIMAL_FK_CLIENTE);
+//            long idAnimal = data.getLong(indexAnimal);
+            long idPessoa = data.getLong(indexPessoa);
+            long idUsuario = data.getLong(indexUsuario);
 
-			return cliente;
-		}
-		return null;
-	}
+            data.close();
+            Pessoa pessoa = pessoaServices.getPessoaCompleta(idPessoa);
+            cliente.setDadosPessoais(pessoa);
+            cliente.setUsuario(usuarioDAO.getUsuario(idUsuario));
 
-	public void alterarDadosCliente(Cliente cliente){
-		usuarioDAO.alterarEmail(cliente.getUsuario());
-		pessoaDAO.alteraNome(cliente.getDadosPessoais());
-		pessoaDAO.alteraCPF(cliente.getDadosPessoais());
+            return cliente;
+        }
+        return null;
+    }
 
-	}
+    public void alterarDadosCliente(Cliente cliente) {
+        usuarioDAO.alterarEmail(cliente.getUsuario());
+        pessoaDAO.alteraNome(cliente.getDadosPessoais());
+        pessoaDAO.alteraCPF(cliente.getDadosPessoais());
 
-	public void alteraSenha(Cliente cliente){
-		usuarioDAO.alterarSenha(cliente.getUsuario());
-	}
+    }
 
-	public Endereco getEnderecoById() {
-		return null;
-	}
+    public void logout() {
+        Sessao sessao = Sessao.instance;
+        sessao.reset();
+    }
 
-	public Animal getAnimalById() {
-		return null;
-	}
+    public void alteraSenha(Cliente cliente) {
+        usuarioDAO.alterarSenha(cliente.getUsuario());
+    }
 
-	public Animal getAnimalByRaca() {
-		return null;
-	}
+    protected void alteraAvaliacao(Cliente cliente) throws AppException {
+        if (cliente.getAvaliacao() > 5 || cliente.getAvaliacao() < 0) {
+            throw new AppException("Erro");
+        }
+        clienteDAO.alteraAvaliacao(cliente);
+    }
 
-	public List<Endereco> getAllEndereco() {
-		return null;
-	}
+    public ArrayList<Animal> getAllAnimalByIdCliente(long idCliente){
+        boolean result;
+        ArrayList<Animal> listAnimals = animalDAO.getAllAnimalByIdCliente(idCliente);
+        if (!listAnimals.isEmpty()){
+            result = true;
+        }else{
+            result = false;
+        }
 
-	public List<Animal> getAllAnimal() {
-		return null;
-	}
-
-	public void removeEndereco() {
-
-	}
-
-	public void adicionaEndereco() {
-
-	}
-
-	public Cliente getClienteById() {
-		return null;
-	}
-
-	public Cliente getClienteByEmail() {
-		return null;
-	}
-
-	public void alteraEmail() {
-
-	}
-
-	public void alteraSenha() {
-
-	}
-
-	public void alteraAvaliacao() {
-
-	}
-
+        if (result){
+            return listAnimals;
+        }
+        return null;
+    }
 }
