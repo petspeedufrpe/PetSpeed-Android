@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
@@ -19,12 +20,18 @@ public class Sessao {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     private final Map<String, Object> values = new HashMap<>();
 
+    public Cliente getCliente() {return (Cliente)values.get("sessao.Cliente");}
+
     public Usuario getUsuario() {
         return (Usuario) values.get("sessao.Usuario");
     }
 
     public void setUsuario(Usuario usuario) {
         setValue("sessao.Usuario", usuario);
+    }
+
+    public void setCliente(Cliente cliente){
+        setValue("sessao.Cliente",cliente);
     }
 
     public String getUltimoAcesso() {

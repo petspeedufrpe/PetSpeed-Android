@@ -55,7 +55,7 @@ public class Animal {
         return peso;
     }
 
-    public void setPeso(int peso) {
+    public void setPeso(float peso) {
         this.peso = peso;
     }
 

@@ -14,14 +14,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.util.EventListener;
-
 import br.ufrpe.bsi.mpoo.petSpeed.R;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.AnimalClienteActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.CadastroClienteActivity;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.HomeClient1;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.HomeClienteActivity;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.MapaHomeCliente;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.HomeClienteDrawer;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.gui.CadastroMedicoActivity;
@@ -47,8 +43,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
-
-
 
         mEmail = (EditText) findViewById(R.id.LoginEmailTxBx);
         mSenha = (EditText) findViewById(R.id.LoginPswrdTxBx);
@@ -135,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, HomeMedicoActivity.class));
 
         }else if(contaSelecionada == ContasDeUsuario.CLIENTE){
-            startActivity(new Intent(LoginActivity.this, HomeClient1.class));
+            startActivity(new Intent(LoginActivity.this, HomeClienteDrawer.class));
         }
 
     }

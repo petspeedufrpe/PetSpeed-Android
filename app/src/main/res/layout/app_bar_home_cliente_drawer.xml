@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".cliente.gui.HomeClienteDrawer">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:popupTheme="@null" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_home_cliente_drawer" />
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/ClHmFltBtnShwMnu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/lightgreen"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="end|center"
+        app:srcCompat="@android:drawable/arrow_down_float" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/ClHmFltBtnCntrMp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:backgroundTint="@color/lightgreen"
+        android:clickable="true"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="top|center"
+        app:srcCompat="@android:drawable/ic_menu_mylocation" />
+
+</android.support.design.widget.CoordinatorLayout>
