@@ -21,14 +21,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".cliente.gui.AnimalClienteActivity"
             android:label="@string/title_activity_animal_cliente"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".cliente.gui.PerfilClienteActivity" />
         <activity
-            android:name=".cliente.gui.HomeClienteDrawer"
+            android:name=".cliente.gui.HomeClienteActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
