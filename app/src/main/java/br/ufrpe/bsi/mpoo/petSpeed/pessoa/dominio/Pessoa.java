@@ -12,6 +12,15 @@ public class Pessoa implements Serializable {
 
     private Endereco endereco;
 
+    private long idUsuario;
+
+    public long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
     public Endereco getEndereco() {
         return endereco;

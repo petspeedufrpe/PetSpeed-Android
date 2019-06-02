@@ -138,18 +138,12 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
 
 
     private void cadastraCliente(Cliente cliente) throws AppException {
-        PessoaServices pessoaServices = new PessoaServices();
-        long idPessoa = pessoaServices.cadastraPessoa(cliente.getDadosPessoais(), cliente.getDadosPessoais().getEndereco());
-        cliente.getDadosPessoais().setId(idPessoa);
         ClienteServices clienteServices = new ClienteServices();
         clienteServices.cadastraCliente(cliente, cliente.getUsuario());
         Toast.makeText(FinalizaCadastroActivity.this, "Cadastro realizado.", Toast.LENGTH_LONG).show();
     }
 
     private void cadastraMedico(Medico medico) throws AppException {
-        PessoaServices pessoaServices = new PessoaServices();
-        long idPessoa = pessoaServices.cadastraPessoa(medico.getDadosPessoais(), medico.getDadosPessoais().getEndereco());
-        medico.getDadosPessoais().setId(idPessoa);
         MedicoServices medicoServices = new MedicoServices();
         medicoServices.cadastraMedico(medico, medico.getUsuario());
         Toast.makeText(FinalizaCadastroActivity.this, "Cadastro realizado.", Toast.LENGTH_LONG).show();

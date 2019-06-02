@@ -6,7 +6,10 @@ import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.persistencia.MedicoDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
+import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
+import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.PessoaDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
 
@@ -19,6 +22,7 @@ public class MedicoServices {
     private ClinicaDAO clinicaDAO = new ClinicaDAO();
 
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
+    private PessoaDAO pessoaDAO = new PessoaDAO();
 
 
     public Medico cadastraMedico(Medico medico, Usuario usuario) throws AppException {
@@ -28,21 +32,28 @@ public class MedicoServices {
             throw new AppException(String.valueOf(e));
         }
         Usuario usuarioReferencia = usuarioDAO.getUsuario(usuario.getEmail());
-        if(usuarioReferencia!=null){
-            if(!usuarioPossuiMedico(usuarioReferencia.getEmail())){
-                medico.getUsuario().setId(usuarioReferencia.getId());
+        if (usuarioReferencia != null) {
+            if (!usuarioPossuiMedico(usuarioReferencia.getEmail())) {
+                PessoaServices pessoaServices = new PessoaServices();
+                Pessoa pessoaReferencia = pessoaServices.getPessoaByFkUsuario(usuarioReferencia.getId());
+                medico.setDadosPessoais(pessoaReferencia);
+                medico.setUsuario(usuarioReferencia);
                 long idmedico = medicoDAO.cadastraMedico(medico);
                 medico.setId(idmedico);
                 return medico;
-            }else{
+            } else {
                 throw new AppException("Usuário já possui conta de médico");
             }
-        }else{
-        long idUsuario = usuarioDAO.cadastrarUsuario(usuario);
-        medico.getUsuario().setId(idUsuario);
-        long idmedico = medicoDAO.cadastraMedico(medico);
-        medico.setId(idmedico);
-        return medico;
+        } else {
+            long idUsuario = usuarioDAO.cadastrarUsuario(usuario);
+            medico.getUsuario().setId(idUsuario);
+            medico.getDadosPessoais().setIdUsuario(idUsuario);
+            PessoaServices pessoaServices = new PessoaServices();
+            long idPessoa = pessoaServices.cadastraPessoa(medico.getDadosPessoais(), medico.getDadosPessoais().getEndereco());
+            medico.getDadosPessoais().setId(idPessoa);
+            long idmedico = medicoDAO.cadastraMedico(medico);
+            medico.setId(idmedico);
+            return medico;
         }
     }
 
@@ -53,9 +64,7 @@ public class MedicoServices {
         if (medico.getDadosPessoais() == null) {
             throw new AppException("dados pessoais null");
         }
-        if (medico.getDadosPessoais().getId() == 0) {
-            throw new AppException("dados pessoais sem id");
-        }
+
         if (medico.getDadosPessoais().getEndereco() == null) {
             throw new AppException("endereco dados pessoais null");
         }

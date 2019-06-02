@@ -16,6 +16,7 @@ public class PessoaDAO {
         ContentValues values = new ContentValues();
         values.put(DBHelper.COL_PESSOA_NOME, pessoa.getNome());
         values.put(DBHelper.COL_PESSOA_CPF, pessoa.getCpf());
+        values.put(DBHelper.COL_PESSOA_FK_USUARIO, pessoa.getIdUsuario());
         res = db.insert(DBHelper.TABELA_PESSOA, null, values);
         db.close();
 
@@ -63,6 +64,12 @@ public class PessoaDAO {
         String[] args = {String.valueOf(id)};
         return this.loadObject(sql, args); /** pega o object da pessoa pelo id dela. usa a func loadObject
          para criar a pessoa e assim retorna-la nessa funcao**/
+    }
+
+    public Pessoa getPessoaByFkUsuario(Long id) {
+        String sql = "SELECT * FROM " + DBHelper.TABELA_PESSOA + " WHERE " + DBHelper.COL_PESSOA_FK_USUARIO + " LIKE ?;";
+        String[] args = {String.valueOf(id)};
+        return this.loadObject(sql, args);
     }
 
     public Cursor getIdEnderecoByPessoa(Long idPessoa) {

@@ -36,20 +36,27 @@ public class ClienteServices {
      * @param usuario
      * @return cliente
      */
-    public Cliente cadastraCliente(Cliente cliente, Usuario usuario) throws AppException{
+    public Cliente cadastraCliente(Cliente cliente, Usuario usuario) throws AppException {
         Usuario usuarioReferencia = usuarioDAO.getUsuario(usuario.getEmail());
-        if(usuarioReferencia!=null){
-            if(!usuarioPossuiCliente(usuarioReferencia.getEmail())){
-                cliente.getUsuario().setId(usuarioReferencia.getId());
+        if (usuarioReferencia != null) {
+            if (!usuarioPossuiCliente(usuarioReferencia.getEmail())) {
+                PessoaServices pessoaServices = new PessoaServices();
+                Pessoa pessoaReferencia = pessoaServices.getPessoaByFkUsuario(usuarioReferencia.getId());
+                cliente.setDadosPessoais(pessoaReferencia);
+                cliente.setUsuario(usuarioReferencia);
                 long idCliente = clienteDAO.cadastraCliente(cliente);
                 cliente.setId(idCliente);
                 return cliente;
-            }else{
+            } else {
                 throw new AppException("Usuário já possui conta de cliente");
             }
-        }else{
+        } else {
             long idUsuario = usuarioDAO.cadastrarUsuario(usuario);
             cliente.getUsuario().setId(idUsuario);
+            cliente.getDadosPessoais().setIdUsuario(idUsuario);
+            PessoaServices pessoaServices = new PessoaServices();
+            long idPessoa = pessoaServices.cadastraPessoa(cliente.getDadosPessoais(), cliente.getDadosPessoais().getEndereco());
+            cliente.getDadosPessoais().setId(idPessoa);
             long idCliente = clienteDAO.cadastraCliente(cliente);
             cliente.setId(idCliente);
             return cliente;
