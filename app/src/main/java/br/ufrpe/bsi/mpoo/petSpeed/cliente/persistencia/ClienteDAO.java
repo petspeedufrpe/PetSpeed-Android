@@ -67,6 +67,7 @@ public class ClienteDAO {
         cliente.setAvaliacao(avaliacao);
         cliente.setIdUsuario(idUsuario);
         cliente.setIdPessoa(idPessoa);
+        cursor.close();
         return cliente;
     }
 

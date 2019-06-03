@@ -25,26 +25,4 @@
         layout="@layout/content_home_cliente_drawer" />
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/ClHmFltBtnShwMnu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/lightgreen"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="end|center"
-        app:srcCompat="@android:drawable/arrow_down_float" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/ClHmFltBtnCntrMp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:backgroundTint="@color/lightgreen"
-        android:clickable="true"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="top|center"
-        app:srcCompat="@android:drawable/ic_menu_mylocation" />
-
 </android.support.design.widget.CoordinatorLayout>

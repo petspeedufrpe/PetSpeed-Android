@@ -51,6 +51,7 @@ public class PessoaServices {
 
             return pessoa;
         }
+        data.close();
         return null;
     }
 

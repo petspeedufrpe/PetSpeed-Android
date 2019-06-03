@@ -1,6 +1,7 @@
 package br.ufrpe.bsi.mpoo.petSpeed.cliente.gui;
 
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -39,6 +40,8 @@ public class HomeClienteDrawer extends AppCompatActivity
 
     TextView mNomeCliente,mEmailCliente;
 
+    ClienteServices clienteServices = new ClienteServices();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,10 +74,7 @@ public class HomeClienteDrawer extends AppCompatActivity
 
     public void setTexts(){
         Usuario usuario = Sessao.instance.getUsuario();
-        ClienteDAO clienteDAO = new ClienteDAO();
-        Cliente cliente =  clienteDAO.getIdClienteByUsuario(usuario.getId());
-        ClienteServices clienteServices = new ClienteServices();
-        cliente = clienteServices.getClienteCompleto(cliente.getId());
+        Cliente cliente =  clienteServices.getClienteCompleto(Sessao.instance.getCliente().getId());
         mEmailCliente.setText(usuario.getEmail());
         mNomeCliente.setText(cliente.getDadosPessoais().getNome());
     }
@@ -124,4 +124,5 @@ public class HomeClienteDrawer extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

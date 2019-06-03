@@ -85,6 +85,20 @@ public class MedicoDAO {
         db.close();
     }
 
+    public Double getMedicoByFkPessoa(long idPessoa){
+        SQLiteDatabase db = helperDb.getReadableDatabase();
+        String sql = "SELECT AVALIACAO FROM " +DBHelper.TABELA_MEDICO+
+                " WHERE "+DBHelper.COL_MEDICO_FK_PESSOA+ " = ?";
+        String[] args={String.valueOf(idPessoa)};
+        Cursor cursor = db.rawQuery(sql,args);
+        if (cursor.moveToFirst()){
+            int indexAvaliacao = cursor.getColumnIndex(DBHelper.COL_MEDICO_AVALIACAO);
+            return cursor.getDouble(indexAvaliacao);
+        }
+        cursor.close();
+        return null;
+    }
+
     public void alteraAvaliacao() {
 
     }

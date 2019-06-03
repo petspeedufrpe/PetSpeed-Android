@@ -27,6 +27,8 @@ public class Sessao {
         return (Usuario) values.get("sessao.Usuario");
     }
 
+    public Medico getMedico(){return (Medico)values.get("sessao.Medico");}
+
     public void setUsuario(Usuario usuario) {
         setValue("sessao.Usuario", usuario);
     }
@@ -36,7 +38,7 @@ public class Sessao {
     }
 
     public void setMedico(Medico medico){
-        setValue("sessao.Cliente",medico);
+        setValue("sessao.Medico",medico);
     }
 
     public String getUltimoAcesso() {

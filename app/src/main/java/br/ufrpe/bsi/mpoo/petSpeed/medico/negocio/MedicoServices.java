@@ -115,6 +115,11 @@ public class MedicoServices {
         }
     }
 
+    public Double getAvaliacaoByIdPessoa(long idPessoa){
+        return medicoDAO.getMedicoByFkPessoa(idPessoa);
+    }
+
+
     public void alteraAvaliacao() {
 
     }

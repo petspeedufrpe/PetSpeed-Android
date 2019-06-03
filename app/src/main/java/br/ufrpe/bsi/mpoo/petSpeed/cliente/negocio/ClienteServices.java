@@ -68,6 +68,7 @@ public class ClienteServices {
             throw new AppException("Credenciais Inválidas.");
         } else {
             Cliente cliente = clienteDAO.getClienteByFkUsuario(usuario.getId());
+            cliente = getClienteCompleto(cliente.getId());
             Sessao.instance.setUsuario(usuario);
             Sessao.instance.setCliente(cliente);
         }
@@ -170,7 +171,7 @@ public class ClienteServices {
     public ArrayList<Animal> getAllAnimalByIdCliente(long idCliente) {
         boolean result;
         ArrayList<Animal> listAnimals = animalDAO.getAllAnimalByIdCliente(idCliente);
-        if (!listAnimals.isEmpty()) {
+        if (listAnimals != null) {
             result = true;
         } else {
             result = false;
