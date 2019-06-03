@@ -146,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, HomeMedicoActivity.class));
 
         }else if(contaSelecionada == ContasDeUsuario.CLIENTE){
-            startActivity(new Intent(LoginActivity.this, PerfilClienteActivity.class));
+            startActivity(new Intent(LoginActivity.this, MapsFragment.class));
         }
 
     }

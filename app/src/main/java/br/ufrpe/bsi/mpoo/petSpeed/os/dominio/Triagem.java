@@ -6,7 +6,7 @@ public class Triagem {
 
     private double id;
 
-    private List<String> sintomas;
+    private String sintomas;
 
     public double getId() {
         return id;
@@ -19,11 +19,11 @@ public class Triagem {
     private String outros;
 
 
-    public List<String> getSintomas() {
+    public String getSintomas() {
         return sintomas;
     }
 
-    public void setSintomas(List<String> sintomas) {
+    public void setSintomas(String sintomas) {
         this.sintomas = sintomas;
     }
 

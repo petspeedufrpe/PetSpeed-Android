@@ -44,14 +44,6 @@ public class OrdemServicoDAO {
         return this.loadObject(sql,args);
     }
 
-    public List<OrdemServico> getOSbyPrioridade() {
-        return null;
-    }
-
-    public List<OrdemServico> getAllOS() {
-        return null;
-    }
-
     public OrdemServico createOS(Cursor cursor){
         OrdemServico ordemServico = new OrdemServico();
         int indexId = cursor.getColumnIndex(DBHelper.COL_OS_ID);
