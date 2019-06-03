@@ -37,6 +37,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_PESSOA_ID = "ID";
     public static final String COL_PESSOA_NOME = "NOME";
     public static final String COL_PESSOA_CPF = "CPF";
+    public static final String COL_PESSOA_FK_USUARIO = "FK_USUARIO";
     // TABELA ENDERECO:
     public static final String TABELA_ENDERECO = "TB_ENDERECO";
     public static final String COL_ENDERECO_ID = "ID";
@@ -160,10 +161,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 "CREATE TABLE %1$s ( " +
                         "  %2$s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "  %3$s TEXT NOT NULL, " +
-                        "  %4$s TEXT NOT NULL " +
+                        "  %4$s TEXT NOT NULL, " +
+                        "  %5$s TEXT NOT NULL " +
                         ");";
         sqlTbPessoa = String.format(sqlTbPessoa,
-                TABELA_PESSOA, COL_PESSOA_ID, COL_PESSOA_NOME, COL_PESSOA_CPF);
+                TABELA_PESSOA, COL_PESSOA_ID, COL_PESSOA_NOME, COL_PESSOA_CPF,COL_PESSOA_FK_USUARIO);
         db.execSQL(sqlTbPessoa);
     }
 

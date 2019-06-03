@@ -38,6 +38,10 @@ public class PessoaServices {
         return endereco;
     }
 
+    public Pessoa getPessoaByFkUsuario(long fkUsuario){
+        return pessoaDAO.getPessoaByFkUsuario(fkUsuario);
+    }
+
     public Pessoa getPessoaCompleta(long idPessoa) {
         Pessoa pessoa;
         EnderecoDAO enderecoDAO = new EnderecoDAO();
