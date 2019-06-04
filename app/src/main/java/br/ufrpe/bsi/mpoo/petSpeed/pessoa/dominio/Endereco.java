@@ -1,7 +1,5 @@
 package br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio;
 
-import java.io.Serializable;
-
 public class Endereco {
 
     private long id;

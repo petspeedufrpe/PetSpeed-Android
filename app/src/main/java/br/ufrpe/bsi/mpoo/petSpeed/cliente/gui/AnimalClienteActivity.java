@@ -63,10 +63,13 @@ public class AnimalClienteActivity extends AppCompatActivity {
             }
         };
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_animal_cliente);
-        RecyclerViewAdapterAnimalCliente adapterAnimalCliente = new RecyclerViewAdapterAnimalCliente(this,animalArrayList,listener);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.hasFixedSize();
-        recyclerView.setAdapter(adapterAnimalCliente);
+        if (animalArrayList != null){
+            RecyclerViewAdapterAnimalCliente adapterAnimalCliente = new RecyclerViewAdapterAnimalCliente(this,animalArrayList,listener);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.hasFixedSize();
+            recyclerView.setAdapter(adapterAnimalCliente);
+        }
+
 
     }
 }

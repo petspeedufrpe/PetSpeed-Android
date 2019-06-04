@@ -1,8 +1,6 @@
 package br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio;
 
-import java.io.Serializable;
-
-public class Pessoa implements Serializable {
+public class Pessoa {
 
     private long id;
 
@@ -12,6 +10,15 @@ public class Pessoa implements Serializable {
 
     private Endereco endereco;
 
+    private long idUsuario;
+
+    public long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
     public Endereco getEndereco() {
         return endereco;

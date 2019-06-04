@@ -1,10 +1,8 @@
 package br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio;
 
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petSpeed.animal.persistencia.AnimalDAO;
@@ -38,13 +36,31 @@ public class ClienteServices {
      * @param usuario
      * @return cliente
      */
-    public Cliente cadastraCliente(Cliente cliente, Usuario usuario) {
-        Long idUser = usuarioDAO.cadastrarUsuario(usuario);
-        usuario.setId(idUser);
-        cliente.setUsuario(usuario);
-        Long idCliente = clienteDAO.cadastraCliente(cliente);
-        cliente.setId(idCliente);
-        return cliente;
+    public Cliente cadastraCliente(Cliente cliente, Usuario usuario) throws AppException {
+        Usuario usuarioReferencia = usuarioDAO.getUsuario(usuario.getEmail());
+        if (usuarioReferencia != null) {
+            if (!usuarioPossuiCliente(usuarioReferencia.getEmail())) {
+                PessoaServices pessoaServices = new PessoaServices();
+                Pessoa pessoaReferencia = pessoaServices.getPessoaByFkUsuario(usuarioReferencia.getId());
+                cliente.setDadosPessoais(pessoaReferencia);
+                cliente.setUsuario(usuarioReferencia);
+                long idCliente = clienteDAO.cadastraCliente(cliente);
+                cliente.setId(idCliente);
+                return cliente;
+            } else {
+                throw new AppException("Usuário já possui conta de cliente");
+            }
+        } else {
+            long idUsuario = usuarioDAO.cadastrarUsuario(usuario);
+            cliente.getUsuario().setId(idUsuario);
+            cliente.getDadosPessoais().setIdUsuario(idUsuario);
+            PessoaServices pessoaServices = new PessoaServices();
+            long idPessoa = pessoaServices.cadastraPessoa(cliente.getDadosPessoais(), cliente.getDadosPessoais().getEndereco());
+            cliente.getDadosPessoais().setId(idPessoa);
+            long idCliente = clienteDAO.cadastraCliente(cliente);
+            cliente.setId(idCliente);
+            return cliente;
+        }
     }
 
     public void deletaCliente(Cliente cliente) throws AppException {
@@ -58,27 +74,43 @@ public class ClienteServices {
         if (usuario == null) {
             throw new AppException("Credenciais Inválidas.");
         } else {
+            Cliente cliente = clienteDAO.getClienteByFkUsuario(usuario.getId());
+            cliente = getClienteCompleto(cliente.getId());
             Sessao.instance.setUsuario(usuario);
+            Sessao.instance.setCliente(cliente);
         }
     }
 
-    //Metodo que verifica se o usuario está ou não cadastrado no banco.
-    public boolean isEmailClienteCadastrado(String email) {//retorna true se estiver no banco
-        Usuario usuario = usuarioDAO.getUsuario(email);
+    public boolean usuarioPossuiCliente(Cliente cliente) {
+        Usuario usuarioReferencia = usuarioDAO.getUsuario(cliente.getUsuario().getEmail());
         try {
-            long id = usuario.getId();
-        }catch (Exception e){
+            usuarioReferencia.getId();
+        } catch (Exception e) {
             return false;
         }
-        try{
-            Cliente cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
-            if (cliente.getUsuario().getEmail().equals(usuario.getEmail())){
-                return true;
-            }
-        }catch (Exception e){
+        try {
+            Cliente clienteReferencia = clienteDAO.getClienteByFkUsuario(usuarioReferencia.getId());
+            clienteReferencia.getId();
+            return true;
+        } catch (Exception e) {
             return false;
         }
-        return false;
+    }
+
+    public boolean usuarioPossuiCliente(String attemptedLoginEmail) {
+        Usuario usuarioReferencia = usuarioDAO.getUsuario(attemptedLoginEmail);
+        try {
+            usuarioReferencia.getId();
+        } catch (Exception e) {
+            return false;
+        }
+        try {
+            Cliente clienteReferencia = clienteDAO.getClienteByFkUsuario(usuarioReferencia.getId());
+            clienteReferencia.getId();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public String getEmailByCliente(Long idCliente) {
@@ -143,16 +175,16 @@ public class ClienteServices {
         clienteDAO.alteraAvaliacao(cliente);
     }
 
-    public ArrayList<Animal> getAllAnimalByIdCliente(long idCliente){
+    public ArrayList<Animal> getAllAnimalByIdCliente(long idCliente) {
         boolean result;
         ArrayList<Animal> listAnimals = animalDAO.getAllAnimalByIdCliente(idCliente);
-        if (!listAnimals.isEmpty()){
+        if (listAnimals != null) {
             result = true;
-        }else{
+        } else {
             result = false;
         }
 
-        if (result){
+        if (result) {
             return listAnimals;
         }
         return null;

@@ -38,8 +38,7 @@ public class ApiRequestService {
 
         mQueue.start();
 
-
-        final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -81,11 +80,12 @@ public class ApiRequestService {
 
     private String getGeocodeUrl(String address) {
         return "https://maps.googleapis.com/maps/api/geocode/json?address=" + address +
-                "&key=" + "AIzaSyBhntuU8NDLx8ZoIIfxnNRXaziGPvtEB6s";
+                    "&key=" + getApiKey();
     }
 
     private String getApiKey() {
-        return "@strings/google_maps_key";
+        String key = "AIzaSyBhntuU8NDLx8ZoIIfxnNRXaziGPvtEB6s";
+        return key;
     }
 
     public enum GeoCodeCoord {

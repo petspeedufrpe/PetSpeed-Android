@@ -66,7 +66,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
         Cliente cliente = criarCliente();
         cliente.setUsuario(criarUsuario());
         cliente.setDadosPessoais(criarPessoa());
-        boolean res = clienteServices.isEmailClienteCadastrado(cliente.getUsuario().getEmail());
+        boolean res = clienteServices.usuarioPossuiCliente(cliente);
         if (!res) {
             if (isCamposValidos()) {
                 SessaoCadastro.instance.setCliente(cliente);

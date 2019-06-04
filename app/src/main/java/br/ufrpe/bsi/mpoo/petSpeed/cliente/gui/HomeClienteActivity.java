@@ -2,26 +2,17 @@ package br.ufrpe.bsi.mpoo.petSpeed.cliente.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.v4.view.GravityCompat;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.MenuItem;
-import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.Window;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
-
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMapOptions;
-import com.google.android.gms.maps.SupportMapFragment;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
@@ -30,15 +21,12 @@ import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.gui.LoginActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.gui.MapsFragment;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
-public class HomeClienteDrawer extends AppCompatActivity
+public class HomeClienteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView mNomeCliente,mEmailCliente;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,15 +45,14 @@ public class HomeClienteDrawer extends AppCompatActivity
         mEmailCliente = (TextView) headerView.findViewById(R.id.textViewEmailCliente);
         setTexts();
         initMapFragment();
+
     }
-
     public void initMapFragment(){
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.findFragmentById(R.id.fragment);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fragment, new MapsFragment());
-        transaction.commitAllowingStateLoss();
+        transaction.add(R.id.fragment, new MapsFragment(),"MapsFragment");
+        transaction.commit();
     }
 
 
@@ -84,10 +71,13 @@ public class HomeClienteDrawer extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        }else{
+            Intent a = new Intent(Intent.ACTION_MAIN);
+            a.addCategory(Intent.CATEGORY_HOME);
+            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(a);
         }
-    }
+        }
 
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -98,10 +88,10 @@ public class HomeClienteDrawer extends AppCompatActivity
 
         if (id == R.id.nav_perfil_cliente) {
 
-            startActivity(new Intent(HomeClienteDrawer.this,PerfilClienteActivity.class));
+            startActivity(new Intent(HomeClienteActivity.this, PerfilClienteActivity.class));
 
         } else if (id == R.id.nav_meus_pets) {
-            startActivity(new Intent(HomeClienteDrawer.this,AnimalClienteActivity.class));
+            startActivity(new Intent(HomeClienteActivity.this, AnimalClienteActivity.class));
 
         } else if (id == R.id.nav_historico_cliente) {
 
@@ -110,7 +100,7 @@ public class HomeClienteDrawer extends AppCompatActivity
         } else if (id == R.id.nav_atendimento_emergencial) {
 
         } else if (id == R.id.nav_sair_cliente) {
-            startActivity(new Intent(HomeClienteDrawer.this, LoginActivity.class));
+            startActivity(new Intent(HomeClienteActivity.this, LoginActivity.class));
             ClienteServices clienteServices = new ClienteServices();
             clienteServices.logout();
 

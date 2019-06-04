@@ -28,6 +28,21 @@ public class ClienteDAO {
 
     }
 
+    public Cliente getClienteByFkUsuario(Long fkUsuario) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cliente cliente = null;
+        String sql = "SELECT * FROM " + DBHelper.TABELA_CLIENTE + " WHERE " + DBHelper.COL_CLIENTE_FK_USUARIO + " LIKE ?;";
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(fkUsuario)});
+        if (cursor.moveToFirst()) {
+            cliente = createCliente(cursor);
+        }
+        cursor.close();
+        db.close();
+
+        return cliente;
+
+    }
+
     public void deletaCliente(Cliente cliente) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(DBHelper.TABELA_CLIENTE, DBHelper.COL_CLIENTE_ID + " = ?", new String[]{String.valueOf(cliente.getId())});
@@ -51,6 +66,7 @@ public class ClienteDAO {
         cliente.setAvaliacao(avaliacao);
         cliente.setIdUsuario(idUsuario);
         cliente.setIdPessoa(idPessoa);
+        cursor.close();
         return cliente;
     }
 
@@ -70,7 +86,7 @@ public class ClienteDAO {
     /**
      * @param id
      * @return Cliente
-     * nesse metodo so inicia a getStr da query e o arg que será passado.
+     * nesse metodo so inicia a getString da query e o arg que será passado.
      * no loadCliente o banco é aberto para leitura e retorna um cursor para poder criar o cliente
      */
     public Cliente getClienteById(Long id) {

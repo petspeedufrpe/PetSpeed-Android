@@ -33,13 +33,13 @@ public class OrdemServicoDAO {
     public void deletaOS(long id) {
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.delete(DBHelper.TABELA_OS,DBHelper.COL_OS_ID+" = ?",new String[]{String.valueOf(id)});
+        db.delete(DBHelper.TABELA_OS, DBHelper.COL_OS_ID+" = ?",new String[]{String.valueOf(id)});
         db.close();
 
     }
 
     public OrdemServico GetOSbyId(long idOs) {
-        String sql = "SELECT * FROM "+DBHelper.TABELA_OS+" WHERE "+DBHelper.COL_OS_ID+ " =?";
+        String sql = "SELECT * FROM "+ DBHelper.TABELA_OS+" WHERE "+ DBHelper.COL_OS_ID+ " =?";
         String[] args = {String.valueOf(idOs)};
         return this.loadObject(sql,args);
     }
@@ -63,7 +63,7 @@ public class OrdemServicoDAO {
         return ordemServico;
     }
 
-    public OrdemServico loadObject(String sql,String[] args){
+    public OrdemServico loadObject(String sql, String[] args){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql,args);
         OrdemServico ordemServico = null;

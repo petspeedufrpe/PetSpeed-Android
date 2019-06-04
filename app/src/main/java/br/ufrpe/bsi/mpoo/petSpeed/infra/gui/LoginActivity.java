@@ -15,13 +15,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.AnimalClienteActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.CadastroClienteActivity;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.HomeClienteDrawer;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.HomeClienteActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.gui.CadastroMedicoActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.gui.HomeMedicoActivity;
+import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private ClienteServices clienteServices = new ClienteServices();
+    private MedicoServices medicoServices = new MedicoServices();
 
 
     @Override
@@ -113,7 +114,23 @@ public class LoginActivity extends AppCompatActivity {
         boolean result = true;
 
         try {
-            clienteServices.login(email, senha);
+            if(contaSelecionada == ContasDeUsuario.MEDICO) {
+                if(medicoServices.usuarioPossuiMedico(email)){
+                    medicoServices.login(email, senha);
+                    home();
+                }else{
+                    Toast.makeText(LoginActivity.this,"Credenciais inválidas.",Toast.LENGTH_SHORT).show();
+                    result = !result;
+                }
+            }else if(contaSelecionada == ContasDeUsuario.CLIENTE){
+                if(clienteServices.usuarioPossuiCliente(email)){
+                    clienteServices.login(email, senha);
+                    home();
+                }else{
+                    Toast.makeText(LoginActivity.this,"Credenciais inválidas.",Toast.LENGTH_SHORT).show();
+                    result = !result;
+                }
+            }
         } catch (Exception e) {
             result = false;
             Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -129,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, HomeMedicoActivity.class));
 
         }else if(contaSelecionada == ContasDeUsuario.CLIENTE){
-            startActivity(new Intent(LoginActivity.this, HomeClienteDrawer.class));
+            startActivity(new Intent(LoginActivity.this, HomeClienteActivity.class));
         }
 
     }

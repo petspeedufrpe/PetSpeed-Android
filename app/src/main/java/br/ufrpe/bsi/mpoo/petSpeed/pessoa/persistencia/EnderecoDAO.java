@@ -163,7 +163,7 @@ public class EnderecoDAO {
     public ArrayList<Endereco> getAllAddressByBairro(String arg){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         ArrayList<Endereco> enderecoArrayList = new ArrayList<>();
-        String sql = "SELECT * FROM "+DBHelper.TABELA_ENDERECO+" WHERE "+DBHelper.COL_ENDERECO_BAIRRO+
+        String sql = "SELECT * FROM "+ DBHelper.TABELA_ENDERECO+", "+ DBHelper.TABELA_MEDICO+" WHERE "+ DBHelper.COL_ENDERECO_BAIRRO+
                 " = ?";
         String args[] = {arg};
         Cursor cursor = db.rawQuery(sql,args);

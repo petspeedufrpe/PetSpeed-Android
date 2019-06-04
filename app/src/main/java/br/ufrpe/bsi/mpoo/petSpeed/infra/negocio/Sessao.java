@@ -11,6 +11,7 @@ import java.util.Map;
 
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
+import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
 public class Sessao {
@@ -26,12 +27,18 @@ public class Sessao {
         return (Usuario) values.get("sessao.Usuario");
     }
 
+    public Medico getMedico(){return (Medico)values.get("sessao.Medico");}
+
     public void setUsuario(Usuario usuario) {
         setValue("sessao.Usuario", usuario);
     }
 
     public void setCliente(Cliente cliente){
         setValue("sessao.Cliente",cliente);
+    }
+
+    public void setMedico(Medico medico){
+        setValue("sessao.Medico",medico);
     }
 
     public String getUltimoAcesso() {

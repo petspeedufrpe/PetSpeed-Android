@@ -1,7 +1,6 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 
 import android.content.Intent;
-import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,14 +9,11 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.Map;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ApiGeocoder;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ApiRequestService;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
@@ -26,7 +22,6 @@ import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.SessaoCadastro;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
 
 public class FinalizaCadastroActivity extends AppCompatActivity {
 
@@ -78,31 +73,38 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
             geocodeReq.geocodeRequest(enderecoF, new GeocodeRequestCallbackListener<Map<Enum, Object>>() {
                 @Override
                 public void onGeocodeCallback(Map latLng) {
-                    if ((Enum) latLng.get(ApiRequestService.GeoCodeCoord.RESULT) == ApiRequestService.GeoCodeCoord.SUCCESS) {
-                        double lat = (double) latLng.get(ApiRequestService.GeoCodeCoord.LAT);
-                        double lng = (double) latLng.get(ApiRequestService.GeoCodeCoord.LNG);
-                        Endereco endereco = SessaoCadastro.instance.getEndereco();
-                        endereco.setLatidude(lat);
-                        endereco.setLongitude(lng);
+                    if (latLng.get(ApiRequestService.GeoCodeCoord.RESULT) == ApiRequestService.GeoCodeCoord.SUCCESS) {
+                        Endereco endereco = setCoordinates(latLng);
                         try {
                             cadastrar(endereco);
                             startActivity(new Intent(FinalizaCadastroActivity.this, LoginActivity.class));
                             finish();
-                            registerTask = null;
-                            isRegisterTaskRunning = false;
+                            resetTask();
                         } catch (AppException e) {
                             Toast.makeText(FinalizaCadastroActivity.this, "Ops! parece que algo deu errado.", Toast.LENGTH_LONG).show();
-                            registerTask = null;
-                            isRegisterTaskRunning = false;
+                            resetTask();
                         }
                     } else {
-                        Toast.makeText(FinalizaCadastroActivity.this, "Por favor, verifique sua conexão com a internet.", Toast.LENGTH_LONG).show();
-                        registerTask = null;
-                        isRegisterTaskRunning = false;
+                        Toast.makeText(FinalizaCadastroActivity.this, "Por favor, verifique seus dados ou a conexão com a internet.", Toast.LENGTH_LONG).show();
+                        resetTask();
                     }
                 }
             });
             return null;
+        }
+
+        private void resetTask() {
+            registerTask = null;
+            isRegisterTaskRunning = false;
+        }
+
+        private Endereco setCoordinates(Map latLng) {
+            double lat = (double) latLng.get(ApiRequestService.GeoCodeCoord.LAT);
+            double lng = (double) latLng.get(ApiRequestService.GeoCodeCoord.LNG);
+            Endereco endereco = SessaoCadastro.instance.getEndereco();
+            endereco.setLatidude(lat);
+            endereco.setLongitude(lng);
+            return endereco;
         }
     }
 
@@ -134,31 +136,15 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
     }
 
 
-    private void cadastraCliente(Cliente cliente) {
-        PessoaServices pessoaServices = new PessoaServices();
-        long idPessoa = pessoaServices.cadastraPessoa(cliente.getDadosPessoais(), cliente.getDadosPessoais().getEndereco());
-        cliente.getDadosPessoais().setId(idPessoa);
+    private void cadastraCliente(Cliente cliente) throws AppException {
         ClienteServices clienteServices = new ClienteServices();
         clienteServices.cadastraCliente(cliente, cliente.getUsuario());
         Toast.makeText(FinalizaCadastroActivity.this, "Cadastro realizado.", Toast.LENGTH_LONG).show();
     }
 
     private void cadastraMedico(Medico medico) throws AppException {
-        PessoaServices pessoaServices = new PessoaServices();
-        long idPessoa = pessoaServices.cadastraPessoa(medico.getDadosPessoais(), medico.getDadosPessoais().getEndereco());
-        medico.getDadosPessoais().setId(idPessoa);
         MedicoServices medicoServices = new MedicoServices();
         medicoServices.cadastraMedico(medico, medico.getUsuario());
         Toast.makeText(FinalizaCadastroActivity.this, "Cadastro realizado.", Toast.LENGTH_LONG).show();
     }
-
-    /*public void setLatLong(Endereco endereco) throws IOException {
-        StringBuilder parserEndereco = new StringBuilder();
-        parserEndereco.append(endereco.getLogradouro());
-        parserEndereco.append(", ");
-        parserEndereco.append(endereco.getNumero());
-        Map<String, Double> latlngCoord = geocoder.getPositions(parserEndereco.toString());
-        endereco.setLatidude(latlngCoord.get(ApiGeocoder.GeocodeLatLng.LAT.getStr()));
-        endereco.setLongitude(latlngCoord.get(ApiGeocoder.GeocodeLatLng.LNG.getStr()));
-    }*/
 }

@@ -9,17 +9,10 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import br.ufrpe.bsi.mpoo.petSpeed.R;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.gui.FinalizaCadastroActivity;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ApiGeocoder;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.SessaoCadastro;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
 
 public class CadastroEnderecoActivity extends AppCompatActivity {
     Button mBtnCadastro;
@@ -62,8 +55,8 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
         mBairro = (EditText) findViewById(R.id.bairro);
         mCidade = (EditText) findViewById(R.id.cidade);
         mComplemento = (EditText) findViewById(R.id.complemento);
-        mLatitude = (EditText) findViewById(R.id.latitude);
-        mLongitude = (EditText) findViewById(R.id.longitude);
+        //mLatitude = (EditText) findViewById(R.id.latitude);
+        //mLongitude = (EditText) findViewById(R.id.longitude);
     }
 
     public void capturaTextos() {
