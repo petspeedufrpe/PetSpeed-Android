@@ -26,7 +26,6 @@ public class TriagemDAO {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(DBHelper.TABELA_TRIAGEM,DBHelper.COL_TRIAGEM_ID+" = ?",new String[]{String.valueOf(id)});
         db.close();
-
     }
 
     public Triagem GetTriagembyId(long idOs) {
