@@ -1,88 +1,143 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.graphics.Camera;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.text.Html;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.DexterBuilder;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.single.PermissionListener;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.Executor;
 
+import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.HomeClienteActivity;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ConvertLatLngToKm;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
+import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
+import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
+
+import static android.content.ContentValues.TAG;
 
 public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMyLocationButtonClickListener,
-        GoogleMap.OnMyLocationClickListener,/*LocationListener*/GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+        GoogleMap.OnMyLocationClickListener, LocationListener {
 
 
-    private static final String REQUESTING_LOCATION_UPDATES_KEY = "requesting Update";
+    private static final String REQUESTING_LOCATION_UPDATES_KEY = "requesting Update" ;
     private Context mContext;
     private GoogleMap mMap;
     private LocationManager mLocationManager;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 101;
     private final LatLng mDefaultLocation = defaultLocationCLient();//endereço do cliente no DAO
+    private FusedLocationProviderClient fusedLocationProviderClient;
     private Location mLocation;
-    private LocationRequest locationRequest;
-    private GoogleApiClient mGoogleApiClient;
+    private LocationRequest locationRequest = new LocationRequest();
+    private LocationCallback locationCallback;
+    private boolean requestingLocationUpdates = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getMapAsync(this);
         mContext = getActivity().getBaseContext();
-        callConnections();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
-            startLocationUpdate();
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(mContext);
+        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
         }
-    }
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+                    mLocation = location;
+                }
+            }
+        });
 
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        if (mGoogleApiClient != null) {
-            stopLocationRequest();
-        }
+        locationRequest = new LocationRequest();
+        locationCallback = new LocationCallback(){
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null){
+                    return;
+                }
+                for (Location location:locationResult.getLocations()){
+                    mLocation = location;
+                }
+            }
+        };
+        initLocationRequest();
+        upDateValuesFromBundle(savedInstanceState);
     }
 
     @Override
@@ -92,6 +147,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         createNoGpsDialog();
         InitalizeMap();
         String bairro = getBairroCliente();
+
         ArrayList<Endereco> list = getAllAddressByBairro(bairro);
         ArrayList<Marker> markers = addMutilpeMarkersOnMap(list);
         mMap.setOnMarkerClickListener(this);
@@ -99,10 +155,10 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         mMap.setOnMyLocationButtonClickListener(this);
     }
 
-    public void setTypeOfSearch() {
-        if (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+    public void setTypeOfSearch(){
+        if (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
             //List<Medico> listMedicos = getMedicosInRaio();
-        } else {
+        }else{
             ArrayList<Endereco> listEndereco = getAllAddressByBairro(getBairroCliente());
         }
     }
@@ -119,8 +175,6 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         return false;
     }
 
-
-    //MARKERS OM MAP
     public ArrayList<Marker> addMutilpeMarkersOnMap(ArrayList<Endereco> enderecos) {
         int i = 0;
         ArrayList<Marker> list = new ArrayList<>();
@@ -191,11 +245,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         mMap.setOnMyLocationButtonClickListener(this);
 
     }
-    // MARKERS ON MAP END
 
-
-
-    //PERMISSIONS HANDLING
 
     public void enableMyLocation() {
         if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
@@ -210,7 +260,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
     @Override
     public boolean onMyLocationButtonClick() {
-        Toast.makeText(mContext, mLocation.toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext,mLocation.toString(),Toast.LENGTH_SHORT).show();
         return false;
 
     }
@@ -262,78 +312,6 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
     }
 
-
-
-    private synchronized void callConnections() {
-        mGoogleApiClient = new GoogleApiClient.Builder(mContext)
-                .addOnConnectionFailedListener(this)
-                .addConnectionCallbacks(this)
-                .addApi(LocationServices.API)
-                .build();
-        mGoogleApiClient.connect();
-
-    }
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-
-        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-
-        if (location != null) {
-            Log.i("LOG", location.toString());
-            mLocation = location;
-        }
-        startLocationUpdate();
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        mLocation.set(location);
-        Toast.makeText(mContext, location.toString(), Toast.LENGTH_LONG).show();
-
-    }
-
-    public void initLocationRequest() {
-        locationRequest = new LocationRequest();
-        locationRequest.setInterval(5000);
-        locationRequest.setFastestInterval(2000);
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-    }
-
-    public void startLocationUpdate() {
-        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        initLocationRequest();
-        LocationServices.getFusedLocationProviderClient(mContext);
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, locationRequest, MapsFragment.this);
-    }
-
-    private void stopLocationRequest() {
-        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, MapsFragment.this);
-    }
-
-}
-
-
-    //PERMISSIONS HANDLING END//
-
-
-/**
-    //LOCATION IN REAL TIME BY DEVICE  && PERMISSIONS AND HANDLE THE GPS AND MY LOCATION IN GOOGLE MAPS
 
     public void initLocationRequest() {
         LocationRequest locationRequest = LocationRequest.create();
@@ -393,14 +371,14 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
     }
 
-
     @Override
     public void onLocationChanged(Location location) {
-        if (location!=null){
+        if (location!= null){
             mLocation = location;
         }
     }
 }
+
 
 
     /**
