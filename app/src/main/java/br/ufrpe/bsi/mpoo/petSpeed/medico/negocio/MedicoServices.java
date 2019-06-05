@@ -96,13 +96,12 @@ public class MedicoServices {
             lngUpRange = userLng + (radius * kmInLatLng);
         }
 
-
         List<Endereco> enderecosInRadius = enderecoDAO.getEnderecosByLatLngInterval(latDownRange, latUpRange, lngDownRange, lngUpRange);
         List<Medico> medicos = new LinkedList<>();
         for (Endereco endereco : enderecosInRadius) {
             if (endereco.getFkPessoa() != 0) {
                 Medico medico = medicoDAO.getMedicoByFkPessoa(endereco.getFkPessoa());
-                if (medico != null){
+                if (medico != null) {
                     medicos.add(medico);
                 }
             }

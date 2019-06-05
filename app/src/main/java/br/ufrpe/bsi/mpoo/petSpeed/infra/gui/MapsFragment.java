@@ -139,7 +139,6 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         markerOptions.position(latLng);
         markerOptions.title(title);
         markerOptions.snippet(avaliacao);
-        markerOptions.draggable(true);
         marker = mMap.addMarker(markerOptions);
         marker.showInfoWindow();
         return marker;
@@ -162,9 +161,9 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         double lat = cliente.getDadosPessoais().getEndereco().getLatidude();
         double lng = cliente.getDadosPessoais().getEndereco().getLongitude();
         if (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            listMedicos = medicoServices.getMedicosInRaio(5,mLocation.getLatitude(),mLocation.getLongitude());
+            listMedicos = medicoServices.getMedicosInRaio(20,mLocation.getLatitude(),mLocation.getLongitude());
         }else{
-            listMedicos = medicoServices.getMedicosInRaio(5,lat,lng);
+            listMedicos = medicoServices.getMedicosInRaio(20,lat,lng);
         }
     }
 
@@ -186,7 +185,6 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         mapSettings.setZoomGesturesEnabled(true);
         mapSettings.setMyLocationButtonEnabled(true);
         enableMyLocation();
-        moveCameraToMyLocation();
         mMap.resetMinMaxZoomPreference();
         mMap.setOnMyLocationClickListener(this);
         mMap.setOnMyLocationButtonClickListener(this);
@@ -310,7 +308,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             //Toast.makeText(mContext, location.toString(), Toast.LENGTH_LONG).show();
             setTypeOfSearch();
             mMap.clear();
-            //moveCameraToMyLocation();
+           // moveCameraToMyLocation();
             addMutilpeMarkersOnMap(listMedicos);
         }
 
@@ -330,6 +328,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         initLocationRequest();
         LocationServices.getFusedLocationProviderClient(mContext);
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, locationRequest, MapsFragment.this);
+        moveCameraToMyLocation();
     }
 
     private void stopLocationRequest() {
