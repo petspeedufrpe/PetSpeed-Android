@@ -14,16 +14,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
+import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ControleMeusPets;
 
 
-public class AdapterMeuPet extends ArrayAdapter<ControleMeusPets> {
+public class AdapterMeuPet extends ArrayAdapter<Animal> {
 
     private final Context contexto;
-    private final ArrayList<ControleMeusPets> listaAnimal = new ArrayList<>();
+    private final ArrayList<Animal> listaAnimal = new ArrayList<>();
 
 
-    public AdapterMeuPet(Context contexto, ArrayList<ControleMeusPets> arrayMeusPets, Context contexto1){
+    public AdapterMeuPet(Context contexto, ArrayList<Animal> arrayMeusPets, Context contexto1){
         super(contexto, R.layout.activity_meus_pets, arrayMeusPets);
 
         this.contexto = contexto;
@@ -41,10 +42,10 @@ public class AdapterMeuPet extends ArrayAdapter<ControleMeusPets> {
         TextView pesoPet = (TextView) rowView.findViewById(R.id.campo_peso);
         ImageView fotoPet = (ImageView) rowView.findViewById(R.id.campo_fotoPet);
 
-        nomePet.setText(listaAnimal.get(position).getAnimal().getNome());
-        racaPet.setText(listaAnimal.get(position).getAnimal().getRaca());
-        idadePet.setText(listaAnimal.get(position).getAnimal().getIdade());
-        pesoPet.setText((int) listaAnimal.get(position).getAnimal().getPeso());
+        nomePet.setText(listaAnimal.get(position).getNome());
+        racaPet.setText(listaAnimal.get(position).getRaca());
+        idadePet.setText(listaAnimal.get(position).getIdade());
+        pesoPet.setText((int) listaAnimal.get(position).getPeso());
         //fotoPet.setImageResource(listaAnimal.get(position).getFoto);
 
         return rowView;
