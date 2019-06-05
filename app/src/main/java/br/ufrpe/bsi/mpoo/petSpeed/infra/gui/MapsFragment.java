@@ -1,7 +1,6 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 
 import android.Manifest;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,8 +18,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -34,11 +31,12 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.HomeClienteActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
+import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
@@ -49,7 +47,9 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         GoogleMap.OnMyLocationClickListener,/*LocationListener*/GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
 
+
     private static final String REQUESTING_LOCATION_UPDATES_KEY = "requesting Update";
+    private MedicoServices medicoServices = new MedicoServices();
     private Context mContext;
     private GoogleMap mMap;
     private LocationManager mLocationManager;
@@ -58,6 +58,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     private Location mLocation = new Location(LocationManager.GPS_PROVIDER);
     private LocationRequest locationRequest;
     private GoogleApiClient mGoogleApiClient;
+    private List<Medico> listMedicos;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,19 +93,12 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         createNoGpsDialog();
         InitalizeMap();
         String bairro = getBairroCliente();
+        setTypeOfSearch();
         ArrayList<Endereco> list = getAllAddressByBairro(bairro);
-        ArrayList<Marker> markers = addMutilpeMarkersOnMap(list);
+        ArrayList<Marker> markers = addMutilpeMarkersOnMap(listMedicos);
         mMap.setOnMarkerClickListener(this);
         mMap.setOnMyLocationClickListener(this);
         mMap.setOnMyLocationButtonClickListener(this);
-    }
-
-    public void setTypeOfSearch() {
-        if (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            //List<Medico> listMedicos = getMedicosInRaio();
-        } else {
-            ArrayList<Endereco> listEndereco = getAllAddressByBairro(getBairroCliente());
-        }
     }
 
     @Override
@@ -120,21 +114,17 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     }
 
 
-    public ArrayList<Marker> addMutilpeMarkersOnMap(ArrayList<Endereco> enderecos) {
+    public ArrayList<Marker> addMutilpeMarkersOnMap(List<Medico> listMedicos) {
         int i = 0;
         ArrayList<Marker> list = new ArrayList<>();
-        enderecos.size();
-        while (i < enderecos.size()) {
-            double lat = enderecos.get(i).getLatidude();
-            double lng = enderecos.get(i).getLongitude();
+        listMedicos.size();
+        while (i < listMedicos.size()) {
+            double lat = listMedicos.get(i).getDadosPessoais().getEndereco().getLatidude();
+            double lng = listMedicos.get(i).getDadosPessoais().getEndereco().getLongitude();
             LatLng latLng = new LatLng(lat, lng);
-            PessoaServices pessoaServices = new PessoaServices();
-            MedicoServices medicoServices = new MedicoServices();
-            Endereco endereco = enderecos.get(i);
-            long idPessoa = endereco.getFkPessoa();
-            Pessoa pessoa = pessoaServices.getPessoaCompleta(idPessoa);
-            String nome = pessoa.getNome();
-            String aval = String.valueOf(medicoServices.getAvaliacaoByIdPessoa(pessoa.getId()));
+            Medico medico = listMedicos.get(i);
+            String nome = medico.getDadosPessoais().getNome();
+            String aval = String.valueOf(medico.getAvaliacao());
             list.add(addMarkerOnMap(latLng, nome, aval));
             i++;
         }
@@ -165,6 +155,17 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             return null;
         }
         return enderecoArrayList;
+    }
+
+    public void setTypeOfSearch() {
+
+        Cliente cliente = Sessao.instance.getCliente();
+        double lat = cliente.getDadosPessoais().getEndereco().getLatidude();
+        double lng = cliente.getDadosPessoais().getEndereco().getLongitude();
+        if (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            listMedicos = medicoServices.getMedicosInRaio(5,lat,lng);
+
+        }
     }
 
     public String getBairroCliente() {
@@ -299,14 +300,15 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         if(location!=null){
             mLocation.set(location);
             Toast.makeText(mContext, location.toString(), Toast.LENGTH_LONG).show();
+            setTypeOfSearch();
         }
 
     }
 
     public void initLocationRequest() {
         locationRequest = new LocationRequest();
-        locationRequest.setInterval(5000);
-        locationRequest.setFastestInterval(2000);
+        locationRequest.setInterval(30000);
+        locationRequest.setFastestInterval(15000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
