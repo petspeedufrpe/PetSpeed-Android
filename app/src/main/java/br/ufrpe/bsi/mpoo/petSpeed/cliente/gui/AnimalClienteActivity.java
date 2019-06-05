@@ -58,11 +58,13 @@ public class AnimalClienteActivity extends AppCompatActivity {
     }
 
 
-
-    /*  private void preencherArray() {
+    //funcao para puxar os dados do banco de dados.
+    private void preencherArray() {
         ArrayList<ControleMeusPets> lista = new ArrayList<>();
-        funcao para puxar os dados do banco de dados.
-    }*/
+
+    }
+
+
 
     public void createAllAnimals(){
         cliente = clienteServices.getClienteCompleto(cliente.getId());

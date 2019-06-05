@@ -85,6 +85,7 @@ public class AnimalDAO {
         return this.loadObject(sql,args);
     }
 
+
     public void alteraNome(Animal animal){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
