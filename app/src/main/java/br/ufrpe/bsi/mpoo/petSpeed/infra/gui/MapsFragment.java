@@ -325,10 +325,6 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
 }
 
-
-    //PERMISSIONS HANDLING END//
-
-
 /**
     //LOCATION IN REAL TIME BY DEVICE  && PERMISSIONS AND HANDLE THE GPS AND MY LOCATION IN GOOGLE MAPS
 
