@@ -15,7 +15,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.AnimalClienteActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.CadastroClienteActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.HomeClienteActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;

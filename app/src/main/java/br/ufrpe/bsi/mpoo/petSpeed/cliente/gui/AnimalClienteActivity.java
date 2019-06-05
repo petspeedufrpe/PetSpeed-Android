@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,6 +21,9 @@ import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.gui.RecyclerViewAdapterAnimalCliente;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.gui.adapter.AdapterMeuPet;
+//import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AnimalClienteService;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ControleMeusPets;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.RecyclerViewClickListener;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
@@ -32,6 +36,10 @@ public class AnimalClienteActivity extends AppCompatActivity {
     private Usuario usuario = Sessao.instance.getUsuario();
     private ClienteDAO clienteDAO = new ClienteDAO();
     private Cliente cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
+    private ListView listaAnimais;
+    //private AnimalClienteService animalClienteService;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +56,18 @@ public class AnimalClienteActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    //funcao para puxar os dados do banco de dados.
+
+    private void preencherArray() {
+        ClienteServices clienteServices = new ClienteServices();
+        long idCliente = Sessao.instance.getCliente().getId();
+        ArrayList<Animal> petsCliente = clienteServices.getAllAnimalByIdCliente(idCliente);
+
+    }
+
+
 
     public void createAllAnimals(){
         cliente = clienteServices.getClienteCompleto(cliente.getId());

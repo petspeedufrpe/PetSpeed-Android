@@ -24,15 +24,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".cliente.gui.MeusPetsActivity"></activity>
         <activity
             android:name=".cliente.gui.AnimalClienteActivity"
             android:label="@string/title_activity_animal_cliente"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".cliente.gui.PerfilClienteActivity" />
         <activity
             android:name=".cliente.gui.HomeClienteActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
