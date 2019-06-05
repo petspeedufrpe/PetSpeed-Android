@@ -157,7 +157,7 @@
                         android:src="@drawable/profile" />
 
                     <TextView
-                        android:id="@+id/campo_cidade"
+                        android:id="@+id/campo_peso"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/linha2"
@@ -174,7 +174,7 @@
                         android:layout_height="4dp"
                         android:id="@+id/linha3"
                         android:orientation="vertical"
-                        android:layout_below="@id/campo_cidade"
+                        android:layout_below="@id/campo_peso"
                         android:background="@color/lightgreen">
                     </LinearLayout>
                 </RelativeLayout>

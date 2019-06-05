@@ -38,7 +38,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
         editDados = (FloatingActionButton) findViewById(R.id.fab_edit);
         mEmail = (TextView) findViewById(R.id.campo_email);
         mTelefone = (TextView) findViewById(R.id.campo_telefone);
-        mCidade = (TextView) findViewById(R.id.campo_cidade);
+        mCidade = (TextView) findViewById(R.id.campo_peso);
         mFoto = (ImageView) findViewById(R.id.campo_imagem);
 
     }

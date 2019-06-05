@@ -56,12 +56,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="#00A759"
         android:text="Cadastrar"
         android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_peso_animal" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_peso_animal"
+        app:layout_constraintVertical_bias="0.196" />
 
     <ImageView
         android:id="@+id/img_view_animal_cadastro"
@@ -80,7 +83,7 @@
         android:id="@+id/txt_dados_animais_cadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="sans-serif"
         android:text="Dados Animal"
         android:textColor="#00A659"
