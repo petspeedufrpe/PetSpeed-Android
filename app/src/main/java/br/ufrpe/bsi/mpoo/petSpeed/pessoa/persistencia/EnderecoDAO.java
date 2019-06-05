@@ -198,13 +198,18 @@ public class EnderecoDAO {
         Cursor cursor = db.rawQuery(sql,args);
         Endereco endereco = null;
         if (cursor.moveToFirst()){
-            do
-                {
+            do {
+
                 endereco = createEndereco(cursor);
                 enderecoArrayList.add(endereco);
-            }while (cursor.moveToNext());
+
+            } while (cursor.moveToNext());
+            cursor.close();
+            db.close();
             return  enderecoArrayList;
         }
+        cursor.close();
+        db.close();
 
         return null;
     }

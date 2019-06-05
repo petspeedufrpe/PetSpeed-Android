@@ -3,7 +3,6 @@ package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Window;
 
 
@@ -33,7 +32,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void mostrarMainActivity() {
         Intent intent = new Intent(
-                SplashActivity.this,LoginActivity.class
+                SplashActivity.this, LoginActivity.class
         );
         startActivity(intent);
         finish();

@@ -37,7 +37,7 @@ public class AnimalDAO {
 
     }
 
-    public Animal loadObject(String sql,String[] args){
+    public Animal loadObject(String sql, String[] args){
         Animal animal = null;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql,args);
@@ -79,7 +79,7 @@ public class AnimalDAO {
 
     public Animal getAnimalByIdCliente(long idCliente) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String sql = "SELECT * FROM "+DBHelper.TABELA_ANIMAL+" WHERE "+DBHelper.COL_ANIMAL_FK_CLIENTE
+        String sql = "SELECT * FROM "+ DBHelper.TABELA_ANIMAL+" WHERE "+ DBHelper.COL_ANIMAL_FK_CLIENTE
                 +" = ?";
         String[] args = {String.valueOf(idCliente)};
         return this.loadObject(sql,args);
@@ -89,35 +89,35 @@ public class AnimalDAO {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DBHelper.COL_ANIMAL_NOME,animal.getNome());
-        db.update(DBHelper.TABELA_ANIMAL,values,DBHelper.COL_ANIMAL_ID+ " = ?",new String[]{String.valueOf(animal.getId())});
+        db.update(DBHelper.TABELA_ANIMAL,values, DBHelper.COL_ANIMAL_ID+ " = ?",new String[]{String.valueOf(animal.getId())});
         db.close();
     }
     public void alteraPeso(Animal animal){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DBHelper.COL_ANIMAL_NOME,animal.getPeso());
-        db.update(DBHelper.TABELA_ANIMAL,values,DBHelper.COL_ANIMAL_ID+ " = ?",new String[]{String.valueOf(animal.getId())});
+        db.update(DBHelper.TABELA_ANIMAL,values, DBHelper.COL_ANIMAL_ID+ " = ?",new String[]{String.valueOf(animal.getId())});
         db.close();
     }
     public void alteraRaca(Animal animal){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DBHelper.COL_ANIMAL_NOME,animal.getRaca());
-        db.update(DBHelper.TABELA_ANIMAL,values,DBHelper.COL_ANIMAL_ID+ " = ?",new String[]{String.valueOf(animal.getId())});
+        db.update(DBHelper.TABELA_ANIMAL,values, DBHelper.COL_ANIMAL_ID+ " = ?",new String[]{String.valueOf(animal.getId())});
         db.close();
     }
     public void alteraIdade(Animal animal){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DBHelper.COL_ANIMAL_NOME,animal.getIdade());
-        db.update(DBHelper.TABELA_ANIMAL,values,DBHelper.COL_ANIMAL_ID+ " = ?",new String[]{String.valueOf(animal.getId())});
+        db.update(DBHelper.TABELA_ANIMAL,values, DBHelper.COL_ANIMAL_ID+ " = ?",new String[]{String.valueOf(animal.getId())});
         db.close();
     }
 
     public ArrayList<Animal> getAllAnimalByIdCliente(long idCliente){
         ArrayList<Animal> animalArrayList = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String sql = "SELECT * FROM "+DBHelper.TABELA_ANIMAL+" WHERE "+DBHelper.COL_ANIMAL_FK_CLIENTE+ " = ?";
+        String sql = "SELECT * FROM "+ DBHelper.TABELA_ANIMAL+" WHERE "+ DBHelper.COL_ANIMAL_FK_CLIENTE+ " = ?";
         String[] args = {String.valueOf(idCliente)};
         Cursor cursor = db.rawQuery(sql,args);
         Animal animal = null;
@@ -125,9 +125,15 @@ public class AnimalDAO {
             do {
                 animal = createAnimal(cursor);
                 animalArrayList.add(animal);
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
+
+            cursor.close();
+            db.close();
+
             return animalArrayList;
         }
+        cursor.close();
+        db.close();
         return null;
     }
 

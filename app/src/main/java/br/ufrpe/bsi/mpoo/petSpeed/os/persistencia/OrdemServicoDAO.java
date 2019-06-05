@@ -36,7 +36,7 @@ public class OrdemServicoDAO {
     public void deletaOS(long id) {
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.delete(DBHelper.TABELA_OS,DBHelper.COL_OS_ID+" = ?",new String[]{String.valueOf(id)});
+        db.delete(DBHelper.TABELA_OS, DBHelper.COL_OS_ID+" = ?",new String[]{String.valueOf(id)});
         db.close();
 
     }

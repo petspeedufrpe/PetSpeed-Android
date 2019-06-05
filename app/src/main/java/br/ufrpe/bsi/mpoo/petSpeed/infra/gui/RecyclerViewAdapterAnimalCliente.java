@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
+
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.RecyclerViewClickListener;
@@ -22,7 +24,7 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
     public ArrayList<Animal> mAnimals;
 
 
-    public RecyclerViewAdapterAnimalCliente(Context mContext, ArrayList<Animal> mAnimals,RecyclerViewClickListener listener) {
+    public RecyclerViewAdapterAnimalCliente(Context mContext, ArrayList<Animal> mAnimals, RecyclerViewClickListener listener) {
         this.mContext = mContext;
         this.mAnimals = mAnimals;
         this.listener = listener;
@@ -60,7 +62,7 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
         TextView nomeAnimal,racaAnimal,pesoAnimal,idadeAnimal;
         ImageView imageAnimal;
 
-        public MyViewHolder(@NonNull View itemView,RecyclerViewClickListener listener) {
+        public MyViewHolder(@NonNull View itemView, RecyclerViewClickListener listener) {
             super(itemView);
             findTexts();
             mListener = listener;

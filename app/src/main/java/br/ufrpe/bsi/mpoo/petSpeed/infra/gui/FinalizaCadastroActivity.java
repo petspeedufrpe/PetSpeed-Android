@@ -22,7 +22,6 @@ import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.SessaoCadastro;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
 
 public class FinalizaCadastroActivity extends AppCompatActivity {
 

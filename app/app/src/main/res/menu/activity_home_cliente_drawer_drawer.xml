@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_perfil_cliente"
+            android:icon="@drawable/profile"
+            android:title="Meus Perfil" />
+        <item
+            android:id="@+id/nav_meus_pets"
+            android:icon="@drawable/outline_pets_white_18"
+            android:title="Meus Pets" />
+        <item
+            android:id="@+id/nav_historico_cliente"
+            android:icon="@drawable/outline_calendar_today_white_18"
+            android:title="Histórico" />
+        <item
+            android:id="@+id/nav_atendimento"
+            android:icon="@mipmap/ic_agendamento"
+            android:title="Atendimento" />
+        <item
+            android:id="@+id/nav_atendimento_emergencial"
+            android:icon="@mipmap/ic_agendamento_emergencial"
+            android:title="Atendimento Emergencial" />
+
+        <item
+            android:id="@+id/nav_sair_cliente"
+            android:icon="@drawable/outline_clear_white_18"
+            android:title="Sair" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_configuracao"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Configurações" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Fale conosco" />
+        </menu>
+    </item>
+
+</menu>

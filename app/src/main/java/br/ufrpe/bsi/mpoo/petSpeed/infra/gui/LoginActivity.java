@@ -15,8 +15,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.AnimalClienteActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.CadastroClienteActivity;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.PerfilClienteActivity;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.HomeClienteActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.gui.CadastroMedicoActivity;
@@ -146,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, HomeMedicoActivity.class));
 
         }else if(contaSelecionada == ContasDeUsuario.CLIENTE){
-            startActivity(new Intent(LoginActivity.this, MapsFragment.class));
+            startActivity(new Intent(LoginActivity.this, HomeClienteActivity.class));
         }
 
     }
