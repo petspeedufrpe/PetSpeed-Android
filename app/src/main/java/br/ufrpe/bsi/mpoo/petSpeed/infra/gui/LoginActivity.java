@@ -148,7 +148,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, HomeMedicoActivity.class));
 
         }else if(contaSelecionada == ContasDeUsuario.CLIENTE){
-            startActivity(new Intent(LoginActivity.this, MeusPetsActivity.class));
+            startActivity(new Intent(LoginActivity.this, HomeClienteDrawer.class));
         }
 
     }
