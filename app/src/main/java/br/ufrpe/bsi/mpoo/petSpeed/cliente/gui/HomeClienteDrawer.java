@@ -101,7 +101,7 @@ public class HomeClienteDrawer extends AppCompatActivity
             startActivity(new Intent(HomeClienteDrawer.this,PerfilClienteActivity.class));
 
         } else if (id == R.id.nav_meus_pets) {
-            startActivity(new Intent(HomeClienteDrawer.this,AnimalClienteActivity.class));
+            startActivity(new Intent(HomeClienteDrawer.this,MeusPetsActivity.class));
 
         } else if (id == R.id.nav_historico_cliente) {
 
