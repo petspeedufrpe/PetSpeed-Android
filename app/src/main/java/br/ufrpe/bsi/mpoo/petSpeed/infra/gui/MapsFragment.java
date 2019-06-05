@@ -54,8 +54,8 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     private GoogleMap mMap;
     private LocationManager mLocationManager;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 101;
-    private final LatLng mDefaultLocation = defaultLocationCLient();//endereço do cliente no DAO
-    private Location mLocation;
+    private final LatLng mDefaultLocation = defaultLocationCLient();
+    private Location mLocation = new Location(LocationManager.GPS_PROVIDER);
     private LocationRequest locationRequest;
     private GoogleApiClient mGoogleApiClient;
 
@@ -80,7 +80,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     public void onPause() {
         super.onPause();
 
-        if (mGoogleApiClient != null) {
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected())  {
             stopLocationRequest();
         }
     }
@@ -120,7 +120,6 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     }
 
 
-    //MARKERS OM MAP
     public ArrayList<Marker> addMutilpeMarkersOnMap(ArrayList<Endereco> enderecos) {
         int i = 0;
         ArrayList<Marker> list = new ArrayList<>();
@@ -191,11 +190,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         mMap.setOnMyLocationButtonClickListener(this);
 
     }
-    // MARKERS ON MAP END
 
-
-
-    //PERMISSIONS HANDLING
 
     public void enableMyLocation() {
         if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
@@ -301,8 +296,10 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
     @Override
     public void onLocationChanged(Location location) {
-        mLocation.set(location);
-        Toast.makeText(mContext, location.toString(), Toast.LENGTH_LONG).show();
+        if(location!=null){
+            mLocation.set(location);
+            Toast.makeText(mContext, location.toString(), Toast.LENGTH_LONG).show();
+        }
 
     }
 

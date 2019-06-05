@@ -125,9 +125,15 @@ public class AnimalDAO {
             do {
                 animal = createAnimal(cursor);
                 animalArrayList.add(animal);
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
+
+            cursor.close();
+            db.close();
+
             return animalArrayList;
         }
+        cursor.close();
+        db.close();
         return null;
     }
 
