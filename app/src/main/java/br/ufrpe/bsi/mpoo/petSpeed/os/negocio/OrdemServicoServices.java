@@ -22,6 +22,7 @@ public class OrdemServicoServices {
     private ClienteDAO clienteDAO;
 
     private AnimalDAO animalDAO;
+
     private TriagemDAO triagemDAO;
 
     public void cadastraOS(OrdemServico os, Triagem triagem) {

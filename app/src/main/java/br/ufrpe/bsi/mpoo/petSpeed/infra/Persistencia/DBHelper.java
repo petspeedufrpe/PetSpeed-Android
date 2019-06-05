@@ -182,8 +182,8 @@ public class DBHelper extends SQLiteOpenHelper {
                         " %9$s TEXT NOT NULL, " +
                         " %10$s TEXT, " +
                         " %11$s TEXT, " +
-                        " %12$s TEXT, " +
-                        " %13$s TEXT " +
+                        " %12$s FLOAT, " +
+                        " %13$s FLOAT " +
                         ");";
         sqlTbEndereco = String.format(sqlTbEndereco,
                 TABELA_ENDERECO, COL_ENDERECO_ID, COL_ENDERECO_CEP, COL_ENDERECO_NUMERO,

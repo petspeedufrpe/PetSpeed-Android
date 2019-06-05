@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
 
@@ -48,12 +51,14 @@ public class PessoaDAO {
 
     private Pessoa createPessoa(Cursor cursor) { //usa o cursor para recuperar os valores das colunas;
         Pessoa pessoa = new Pessoa();
+        EnderecoDAO enderecoDAO = new EnderecoDAO();
         int indexId = cursor.getColumnIndex(DBHelper.COL_PESSOA_ID);
         int indexNome = cursor.getColumnIndex(DBHelper.COL_PESSOA_NOME);
         int indexCpf = cursor.getColumnIndex(DBHelper.COL_PESSOA_CPF);
         pessoa.setNome(cursor.getString(indexNome));
         pessoa.setId(cursor.getInt(indexId));
         pessoa.setCpf(cursor.getString(indexCpf));
+        pessoa.setEndereco(enderecoDAO.getEnderecoByFkPessoa(pessoa.getId()));
 
         return pessoa;
 
@@ -64,6 +69,31 @@ public class PessoaDAO {
         String[] args = {String.valueOf(id)};
         return this.loadObject(sql, args); /** pega o object da pessoa pelo id dela. usa a func loadObject
          para criar a pessoa e assim retorna-la nessa funcao**/
+    }
+
+    public List<Pessoa> getMultiplePessoaById(List<Long> indicesPessoas) {
+        StringBuilder strIndexes = new StringBuilder();
+        for (int i = 0; i < indicesPessoas.size() - 1; i++) {
+            strIndexes.append(indicesPessoas.get(i));
+            strIndexes.append(", ");
+        }
+        strIndexes.append(indicesPessoas.get(indicesPessoas.size() - 1));
+
+        String sql = "SELECT * FROM " + DBHelper.TABELA_PESSOA + " WHERE " + DBHelper.COL_PESSOA_ID + " IN (?);";
+        String[] args = {strIndexes.toString()};
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, args);
+        Pessoa pessoa = null;
+        List<Pessoa> pessoas = new LinkedList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                pessoa = createPessoa(cursor);
+                pessoas.add(pessoa);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return pessoas;
     }
 
     public Pessoa getPessoaByFkUsuario(Long id) {

@@ -7,7 +7,11 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import java.util.List;
+
 import br.ufrpe.bsi.mpoo.petSpeed.R;
+import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
+import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

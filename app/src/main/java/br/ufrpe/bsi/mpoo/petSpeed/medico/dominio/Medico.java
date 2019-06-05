@@ -71,4 +71,5 @@ public class Medico implements Serializable {
     public void setClinicas(List<Clinica> clinicas) {
         this.clinicas = clinicas;
     }
+
 }

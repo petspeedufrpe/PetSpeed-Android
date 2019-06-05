@@ -34,7 +34,7 @@ public class TriagemDAO {
         return this.loadObject(sql,args);
     }
 
-    public Triagem createOS(Cursor cursor){
+    public Triagem createTriagem(Cursor cursor){
         Triagem triagem = new Triagem();
         int indexId = cursor.getColumnIndex(DBHelper.COL_TRIAGEM_ID);
         int indexOutros = cursor.getColumnIndex(DBHelper.COL_TRIAGEM_OUTROS);
@@ -50,7 +50,7 @@ public class TriagemDAO {
         Cursor cursor = db.rawQuery(sql,args);
         Triagem triagem = null;
         if (cursor.moveToFirst()){
-            triagem = createOS(cursor);
+            triagem = createTriagem(cursor);
         }
         cursor.close();
         db.close();

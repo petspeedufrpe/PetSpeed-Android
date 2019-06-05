@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
@@ -113,6 +115,33 @@ public class EnderecoDAO {
         String sql = "SELECT * FROM " + DBHelper.TABELA_ENDERECO + " WHERE " + DBHelper.COL_ENDERECO_ID + " LIKE ?;";
         String[] args = {String.valueOf(id)};
         return this.loadEndereco(sql, args);
+    }
+
+    public Endereco getEnderecoByFkPessoa(Long fkPessoa) {
+        String sql = "SELECT * FROM " + DBHelper.TABELA_ENDERECO + " WHERE " + DBHelper.COL_ENDERECO_FK_PESSOA + " LIKE ?;";
+        String[] args = {String.valueOf(fkPessoa)};
+        return this.loadEndereco(sql, args);
+    }
+
+    public List<Endereco> getEnderecosByLatLngInterval(double LatDownRange, double LatUpRange, double LngDownRange, double LngUpRange) {
+        String sql = "SELECT * FROM " + DBHelper.TABELA_ENDERECO +
+                " WHERE " + DBHelper.COL_ENDERECO_LATITUTDE + " BETWEEN ? AND ?" +
+                " AND " + DBHelper.COL_ENDERECO_LONGITUDE + " BETWEEN ? AND ?";
+        String[] args = {String.valueOf(LatDownRange),String.valueOf(LatUpRange),String.valueOf(LngDownRange),String.valueOf(LngUpRange)};
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, args);
+        Endereco endereco = null;
+        List<Endereco> resultEndereco = new LinkedList<Endereco>();
+        if (cursor.moveToFirst()) {
+            do
+            {
+                endereco = createEndereco(cursor);
+                resultEndereco.add(endereco);
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return resultEndereco;
     }
 
     public Cursor getIdPessoaByEndereco(Long idEndereco) {

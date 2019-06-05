@@ -1,5 +1,8 @@
 package br.ufrpe.bsi.mpoo.petSpeed.medico.negocio;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import br.ufrpe.bsi.mpoo.petSpeed.clinica.persistencia.ClinicaDAO;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
@@ -70,6 +73,24 @@ public class MedicoServices {
         }
     }
 
+    public List<Medico> getMedicosInRaio(double radius, double userLat, double userLng) {
+        final double kmInLatLng = 0.008983;
+        double latDownRange = userLat - (radius * kmInLatLng);
+        double latUpRange = userLat + (radius * kmInLatLng);
+        double lngDownRange = userLng - (radius * kmInLatLng);
+        double lngUpRange = userLng + (radius * kmInLatLng);
+
+        List<Endereco> enderecosInRadius = enderecoDAO.getEnderecosByLatLngInterval(latDownRange, latUpRange, lngDownRange, lngUpRange);
+        List<Medico> medicos = new LinkedList<>();
+        for (Endereco endereco : enderecosInRadius) {
+            if (endereco.getFkPessoa() != 0) {
+                Medico medico = medicoDAO.getMedicoByFkPessoa(endereco.getFkPessoa());
+                medicos.add(medico);
+            }
+        }
+        return medicos;
+    }
+
     public boolean usuarioPossuiMedico(Medico medico) {
         Usuario usuarioReferencia = usuarioDAO.getUsuario(medico.getUsuario().getEmail());
         try {
@@ -124,8 +145,9 @@ public class MedicoServices {
         }
     }
 
-    public Double getAvaliacaoByIdPessoa(long idPessoa){
-        return medicoDAO.getMedicoByFkPessoa(idPessoa);
+    public Double getAvaliacaoByIdPessoa(long idPessoa) {
+        Medico medico = medicoDAO.getMedicoByFkPessoa(idPessoa);
+        return medico.getAvaliacao();
     }
 
 

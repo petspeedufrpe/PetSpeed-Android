@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
@@ -63,10 +64,13 @@ public class OrdemServicoDAO {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql,args);
         OrdemServico ordemServico = null;
-        List<OrdemServico> osByPriority = new ArrayList<>();
-        while (cursor.moveToFirst()){
-            ordemServico = createOS(cursor);
-            osByPriority.add(ordemServico);
+        List<OrdemServico> osByPriority = new LinkedList<>();
+        if (cursor.moveToFirst()){
+            do
+            {
+                ordemServico = createOS(cursor);
+                osByPriority.add(ordemServico);
+            }while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
@@ -79,10 +83,13 @@ public class OrdemServicoDAO {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql,args);
         OrdemServico ordemServico = null;
-        List<OrdemServico> osByPriority = new ArrayList<>();
-        while (cursor.moveToFirst()){
-            ordemServico = createOS(cursor);
-            osByPriority.add(ordemServico);
+        List<OrdemServico> osByPriority = new LinkedList<>();
+        if (cursor.moveToFirst()){
+            do
+            {
+                ordemServico = createOS(cursor);
+                osByPriority.add(ordemServico);
+            }while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
