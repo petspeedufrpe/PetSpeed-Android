@@ -13,7 +13,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -39,8 +38,6 @@ import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
 
 public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMyLocationButtonClickListener,
@@ -54,7 +51,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     private LocationManager mLocationManager;
     private final LatLng mDefaultLocation = defaultLocationCLient();
     Cliente cliente = Sessao.instance.getCliente();
-    double lat = cliente.getDadosPessoais().getEndereco().getLatidude();
+    double lat = cliente.getDadosPessoais().getEndereco().getLatitude();
     double lng = cliente.getDadosPessoais().getEndereco().getLongitude();
     private Location mLocation = new Location(LocationManager.GPS_PROVIDER);
     private LocationRequest locationRequest;
@@ -120,7 +117,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         ArrayList<Marker> list = new ArrayList<>();
         listMedicos.size();
         while (i < listMedicos.size()) {
-            double lat = listMedicos.get(i).getDadosPessoais().getEndereco().getLatidude();
+            double lat = listMedicos.get(i).getDadosPessoais().getEndereco().getLatitude();
             double lng = listMedicos.get(i).getDadosPessoais().getEndereco().getLongitude();
             LatLng latLng = new LatLng(lat, lng);
             Medico medico = listMedicos.get(i);
@@ -158,7 +155,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     public void setTypeOfSearch() {
 
         Cliente cliente = Sessao.instance.getCliente();
-        double lat = cliente.getDadosPessoais().getEndereco().getLatidude();
+        double lat = cliente.getDadosPessoais().getEndereco().getLatitude();
         double lng = cliente.getDadosPessoais().getEndereco().getLongitude();
         if (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             listMedicos = medicoServices.getMedicosInRaio(40,mLocation.getLatitude(),mLocation.getLongitude());
@@ -174,7 +171,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
     public LatLng defaultLocationCLient() {
         Cliente cliente = Sessao.instance.getCliente();
-        return new LatLng(cliente.getDadosPessoais().getEndereco().getLatidude(), cliente.getDadosPessoais().getEndereco().getLongitude());
+        return new LatLng(cliente.getDadosPessoais().getEndereco().getLatitude(), cliente.getDadosPessoais().getEndereco().getLongitude());
     }
 
     public void InitalizeMap() {

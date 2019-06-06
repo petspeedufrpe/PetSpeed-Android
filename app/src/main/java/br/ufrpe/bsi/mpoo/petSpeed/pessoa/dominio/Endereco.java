@@ -22,16 +22,16 @@ public class Endereco {
 
     private long fkPessoa;
 
-    private Double latidude;
+    private Double latitude;
 
     private Double longitude;
 
-    public Double getLatidude() {
-        return latidude;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public void setLatidude(Double latidude) {
-        this.latidude = latidude;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
     public Double getLongitude() {
