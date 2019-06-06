@@ -17,12 +17,18 @@ public class AnimalServices {
     private MedicoDAO medicoDAO;
 
     public long cadastraAnimal(Animal animal) {
-        long res = animalDAO.cadastraAnimal(animal);
-        return res;
+        if (animal != null){
+            long res = animalDAO.cadastraAnimal(animal);
+            return res;
+
+        }
+        return -1;
     }
 
-    public void deletaAnimal() {
-
+    public void deletaAnimal(Animal animal) {
+        if (animal != null){
+            animalDAO.deletaAnimal(animal);
+        }
     }
 
     public void alteraFoto() {

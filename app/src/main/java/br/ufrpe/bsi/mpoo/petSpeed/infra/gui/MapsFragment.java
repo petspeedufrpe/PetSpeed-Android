@@ -66,6 +66,8 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         super.onCreate(savedInstanceState);
         getMapAsync(this);
         mContext = getActivity().getBaseContext();
+        mLocation.setLatitude(lat);
+        mLocation.setLongitude(lng);
         callConnections();
     }
 
@@ -93,9 +95,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         mLocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         createNoGpsDialog();
         InitalizeMap();
-        String bairro = getBairroCliente();
         setTypeOfSearch();
-        ArrayList<Endereco> list = getAllAddressByBairro(bairro);
         ArrayList<Marker> markers = addMutilpeMarkersOnMap(listMedicos);
         mMap.setOnMarkerClickListener(this);
         mMap.setOnMyLocationClickListener(this);
@@ -252,7 +252,6 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                 }
             }
         };
-
         if ((!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             AlertDialog mNoGpsDialog = builder.setMessage("Por favor ative seu GPS para usar esse aplicativo.")
@@ -282,13 +281,16 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             return;
         }
         Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        mLocation = location;
 
         if (location != null) {
-            Log.i("LOG", location.toString());
             mLocation = location;
+
         }
         startLocationUpdate();
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            moveCameraToMyLocation();
+        }
     }
 
     @Override
@@ -305,10 +307,8 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     public void onLocationChanged(Location location) {
         if(location!=null){
             mLocation.set(location);
-            //Toast.makeText(mContext, location.toString(), Toast.LENGTH_LONG).show();
             setTypeOfSearch();
             mMap.clear();
-           // moveCameraToMyLocation();
             addMutilpeMarkersOnMap(listMedicos);
         }
 
@@ -328,7 +328,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         initLocationRequest();
         LocationServices.getFusedLocationProviderClient(mContext);
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, locationRequest, MapsFragment.this);
-        moveCameraToMyLocation();
+
     }
 
     private void stopLocationRequest() {
