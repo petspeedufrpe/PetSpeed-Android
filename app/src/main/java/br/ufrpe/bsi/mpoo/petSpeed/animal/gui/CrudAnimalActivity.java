@@ -3,6 +3,7 @@ package br.ufrpe.bsi.mpoo.petSpeed.animal.gui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -57,7 +58,9 @@ public class CrudAnimalActivity extends AppCompatActivity {
     }
 
     public void cadastrar(){
-        capturaTextos();
+        if (!isCamposValidos()){
+            return;
+        }
         Usuario usuario = Sessao.instance.getUsuario();
         ClienteDAO clienteDAO = new ClienteDAO();
         Cliente cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
@@ -77,5 +80,36 @@ public class CrudAnimalActivity extends AppCompatActivity {
         animal.setIdade(Integer.parseInt(idade));
 
         return animal;
+    }
+
+    public boolean isCamposValidos(){
+        boolean result = true;
+        View focusView = null;
+        capturaTextos();
+        if (TextUtils.isEmpty(nome)){
+            mNome.setError("Campo vazio");
+            focusView = mNome;
+            result = false;
+        }else if (TextUtils.isEmpty(raca)){
+            mRaca.setError("Campo vazio");
+            focusView = mRaca;
+            result = false;
+
+        } else if (TextUtils.isEmpty(peso)){
+            mPeso.setError("Campo vazio");
+            focusView = mPeso;
+            result = false;
+
+        } else if (TextUtils.isEmpty(idade)){
+            mIdade.setError("Campo vazio");
+            focusView = mIdade;
+            result = false;
+        }
+
+        if (!result){
+            focusView.requestFocus();
+        }
+        return result;
+
     }
 }

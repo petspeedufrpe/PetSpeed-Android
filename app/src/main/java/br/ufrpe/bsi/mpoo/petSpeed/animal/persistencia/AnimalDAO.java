@@ -74,7 +74,11 @@ public class AnimalDAO {
 
 
     public Animal getAnimalById(long idAnimal) {
-        return null;
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String sql = "SELECT * FROM "+DBHelper.TABELA_ANIMAL+" WHERE "+DBHelper.COL_ANIMAL_ID
+                +" = ?";
+        String[] args = {String.valueOf(idAnimal)};
+        return this.loadObject(sql,args);
     }
 
     public Animal getAnimalByIdCliente(long idCliente) {
@@ -135,18 +139,6 @@ public class AnimalDAO {
         }
         cursor.close();
         db.close();
-        return null;
-    }
-
-    public OrdemServico getHistoricoById() {
-        return null;
-    }
-
-    public List<OrdemServico> getHistoricoByMedico() {
-        return null;
-    }
-
-    public List<OrdemServico> getAllHistorico() {
         return null;
     }
 

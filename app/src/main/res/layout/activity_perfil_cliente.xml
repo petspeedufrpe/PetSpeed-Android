@@ -41,7 +41,7 @@
                 android:layout_alignBottom="@+id/image"
                 android:layout_gravity="bottom"/>
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/toolbar_nome_do_usuario"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:theme="@style/AlertDialog.AppCompat.Light"
@@ -89,7 +89,7 @@
                         android:layout_marginEnd="12dp"
                         android:layout_marginBottom="5dp"
                         android:contentDescription="Icone Email"
-                        android:src="@drawable/ic_menu_manage"/>
+                        android:src="@mipmap/ic_email"/>
 
                     <TextView
                         android:id="@+id/campo_email"
@@ -121,7 +121,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:contentDescription="Cidade do Cliente"
-                        android:src="@drawable/profile" />
+                        android:src="@drawable/ic_info_black_24dp" />
 
                     <TextView
                         android:id="@+id/campo_telefone"
@@ -154,7 +154,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:contentDescription="Cidade do Cliente"
-                        android:src="@drawable/profile" />
+                        android:src="@drawable/ic_info_black_24dp" />
 
                     <TextView
                         android:id="@+id/campo_peso"
@@ -242,6 +242,17 @@
         app:layout_anchor="@id/app_bar_layout"
         app:layout_anchorGravity="bottom|right|end"
         app:pressedTranslationZ="12dp" />
+
+    <Button
+        android:id="@+id/btn_alterar_senha"
+        android:layout_width="353dp"
+        android:layout_height="wrap_content"
+        android:text="ALTERAR SENHA"
+        app:layout_anchor="@+id/nested_scroll_view_cliente"
+        android:textColor="#FFFF"
+        android:textStyle="bold"
+        android:background="@color/lightgreen"
+        app:layout_anchorGravity="center" />
 
 
 </android.support.design.widget.CoordinatorLayout>
