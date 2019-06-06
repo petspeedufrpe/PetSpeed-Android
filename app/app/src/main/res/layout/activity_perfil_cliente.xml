@@ -128,7 +128,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/linha"
-                        android:layout_alignStart="@+id/campo_email"
+                        android:layout_alignStart="@+id/campo_altera_nome_cliente"
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="16dp"
                         android:paddingTop="12dp"
@@ -141,7 +141,7 @@
                         android:id="@+id/linha2"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_below="@id/campo_telefone"
+                        android:layout_below="@id/campo_altera_telefone_cliente"
                         android:background="@color/lightgreen"
                         android:orientation="vertical"></LinearLayout>
 
@@ -161,7 +161,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/linha2"
-                        android:layout_alignStart="@+id/campo_email"
+                        android:layout_alignStart="@+id/campo_altera_nome_cliente"
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="16dp"
                         android:paddingTop="12dp"

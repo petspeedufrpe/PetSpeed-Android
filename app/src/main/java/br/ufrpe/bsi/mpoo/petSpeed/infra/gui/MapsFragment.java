@@ -113,18 +113,21 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
 
     public ArrayList<Marker> addMutilpeMarkersOnMap(List<Medico> listMedicos) {
-        int i = 0;
         ArrayList<Marker> list = new ArrayList<>();
-        listMedicos.size();
-        while (i < listMedicos.size()) {
-            double lat = listMedicos.get(i).getDadosPessoais().getEndereco().getLatitude();
-            double lng = listMedicos.get(i).getDadosPessoais().getEndereco().getLongitude();
-            LatLng latLng = new LatLng(lat, lng);
-            Medico medico = listMedicos.get(i);
-            String nome = medico.getDadosPessoais().getNome();
-            String aval = String.valueOf(medico.getAvaliacao());
-            list.add(addMarkerOnMap(latLng, nome, aval));
-            i++;
+        if (listMedicos.size() > 0) {
+            int i = 0;
+            listMedicos.size();
+            while (i < listMedicos.size()) {
+                double lat = listMedicos.get(i).getDadosPessoais().getEndereco().getLatitude();
+                double lng = listMedicos.get(i).getDadosPessoais().getEndereco().getLongitude();
+                LatLng latLng = new LatLng(lat, lng);
+                Medico medico = listMedicos.get(i);
+                String nome = medico.getDadosPessoais().getNome();
+                String aval = String.valueOf(medico.getAvaliacao());
+                list.add(addMarkerOnMap(latLng, nome, aval));
+                i++;
+            }
+            return list;
         }
         return list;
     }
@@ -158,9 +161,9 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         double lat = cliente.getDadosPessoais().getEndereco().getLatitude();
         double lng = cliente.getDadosPessoais().getEndereco().getLongitude();
         if (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            listMedicos = medicoServices.getMedicosInRaio(40,mLocation.getLatitude(),mLocation.getLongitude());
+            listMedicos = medicoServices.getMedicosInRaio(5,mLocation.getLatitude(),mLocation.getLongitude());
         }else{
-            //listMedicos = medicoServices.getMedicosInRaio(20,lat,lng);
+            listMedicos = medicoServices.getMedicosInRaio(20,lat,lng);
         }
     }
 
