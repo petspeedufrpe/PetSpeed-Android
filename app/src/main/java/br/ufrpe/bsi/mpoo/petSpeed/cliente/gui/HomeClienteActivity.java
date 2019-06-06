@@ -44,7 +44,7 @@ public class HomeClienteActivity extends AppCompatActivity
         mNomeCliente = (TextView) headerView.findViewById(R.id.NomeCliente);
         mEmailCliente = (TextView) headerView.findViewById(R.id.textViewEmailCliente);
         setTexts();
-        initMapFragment();
+       initMapFragment();
 
     }
     public void initMapFragment(){

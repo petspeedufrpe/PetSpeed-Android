@@ -1,6 +1,9 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.gui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,8 @@ import java.util.ArrayList;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.AnimalClienteActivity;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ControleMeusPets;
 
 
 public class AdapterMeuPet extends ArrayAdapter<Animal> {
@@ -20,14 +25,17 @@ public class AdapterMeuPet extends ArrayAdapter<Animal> {
     private final ArrayList<Animal> listaAnimal = new ArrayList<>();
 
 
-    public AdapterMeuPet(Context contexto, ArrayList<Animal> arrayMeusPets, Context contexto1){
+    public AdapterMeuPet(Context contexto, ArrayList<Animal> arrayMeusPets){
         super(contexto, R.layout.activity_meus_pets, arrayMeusPets);
 
         this.contexto = contexto;
         this.listaAnimal.addAll(arrayMeusPets);
     }
+
+
+
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(int position, View view, ViewGroup parent){
         LayoutInflater inflater = (LayoutInflater) contexto
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.activity_meus_pets,parent,false);
