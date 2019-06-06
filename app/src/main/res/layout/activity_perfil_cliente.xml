@@ -89,7 +89,7 @@
                         android:layout_marginEnd="12dp"
                         android:layout_marginBottom="5dp"
                         android:contentDescription="Icone Email"
-                        android:src="@mipmap/ic_email"/>
+                        android:src="@mipmap/ic_launcher_round"/>
 
                     <TextView
                         android:id="@+id/campo_email"
@@ -121,7 +121,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:contentDescription="Cidade do Cliente"
-                        android:src="@drawable/ic_info_black_24dp" />
+                        android:src="@mipmap/ic_launcher_round" />
 
                     <TextView
                         android:id="@+id/campo_telefone"
@@ -154,7 +154,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:contentDescription="Cidade do Cliente"
-                        android:src="@drawable/ic_info_black_24dp" />
+                        android:src="@mipmap/ic_launcher_round" />
 
                     <TextView
                         android:id="@+id/campo_peso"
