@@ -161,9 +161,9 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         double lat = cliente.getDadosPessoais().getEndereco().getLatidude();
         double lng = cliente.getDadosPessoais().getEndereco().getLongitude();
         if (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            listMedicos = medicoServices.getMedicosInRaio(20,mLocation.getLatitude(),mLocation.getLongitude());
+            listMedicos = medicoServices.getMedicosInRaio(5,mLocation.getLatitude(),mLocation.getLongitude());
         }else{
-            listMedicos = medicoServices.getMedicosInRaio(20,lat,lng);
+            //listMedicos = medicoServices.getMedicosInRaio(20,lat,lng);
         }
     }
 
