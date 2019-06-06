@@ -143,10 +143,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void home(){
         if(contaSelecionada == ContasDeUsuario.MEDICO) {
-            startActivity(new Intent(LoginActivity.this, HomeMedicoActivity.class));
+            startActivity(new Intent(LoginActivity.this, HomeMedicoActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+
 
         }else if(contaSelecionada == ContasDeUsuario.CLIENTE){
-            startActivity(new Intent(LoginActivity.this, HomeClienteActivity.class));
+            startActivity(new Intent(LoginActivity.this, HomeClienteActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            );
         }
 
     }

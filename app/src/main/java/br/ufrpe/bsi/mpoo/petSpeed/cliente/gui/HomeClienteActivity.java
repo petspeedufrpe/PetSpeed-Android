@@ -100,9 +100,10 @@ public class HomeClienteActivity extends AppCompatActivity
         } else if (id == R.id.nav_atendimento_emergencial) {
 
         } else if (id == R.id.nav_sair_cliente) {
-            startActivity(new Intent(HomeClienteActivity.this, LoginActivity.class));
             ClienteServices clienteServices = new ClienteServices();
             clienteServices.logout();
+            startActivity(new Intent(HomeClienteActivity.this, LoginActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
 
         } else if (id == R.id.nav_configuracao) {
 
