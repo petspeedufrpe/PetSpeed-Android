@@ -13,9 +13,9 @@ public class Animal {
 
     private String raca;
 
-    private float peso;
+    private double peso;
 
-    private int idade;
+    private int nascimento;
 
     private long fkCliente;
     //private BufferedImage foto;
@@ -51,20 +51,20 @@ public class Animal {
         this.raca = raca;
     }
 
-    public float getPeso() {
+    public double getPeso() {
         return peso;
     }
 
-    public void setPeso(float peso) {
+    public void setPeso(double peso) {
         this.peso = peso;
     }
 
-    public int getIdade() {
-        return idade;
+    public int getNascimento() {
+        return nascimento;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setNascimento(int nascimento) {
+        this.nascimento = nascimento;
     }
 
     public List<OrdemServico> getHistorico() {

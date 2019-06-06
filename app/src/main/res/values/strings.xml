@@ -76,7 +76,7 @@
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBhntuU8NDLx8ZoIIfxnNRXaziGPvtEB6s</string>
     <string name="CloudApiKey">AIzaSyBhntuU8NDLx8ZoIIfxnNRXaziGPvtEB6s</string>
     <string name="raca">Raça</string>
-    <string name="idade">Idade</string>
+    <string name="nascimento">Idade</string>
     <string name="peso_kg">Peso kg</string>
     <string name="nome">Nome</string>
     <string name="todo">TODO</string>

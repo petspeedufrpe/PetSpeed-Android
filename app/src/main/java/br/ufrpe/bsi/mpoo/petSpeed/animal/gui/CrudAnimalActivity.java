@@ -76,8 +76,8 @@ public class CrudAnimalActivity extends AppCompatActivity {
         Animal animal = new Animal();
         animal.setNome(nome);
         animal.setRaca(raca);
-        animal.setPeso(Float.parseFloat(peso));
-        animal.setIdade(Integer.parseInt(idade));
+        animal.setPeso(Double.parseDouble(peso));
+        animal.setNascimento(Integer.parseInt(idade));
 
         return animal;
     }
