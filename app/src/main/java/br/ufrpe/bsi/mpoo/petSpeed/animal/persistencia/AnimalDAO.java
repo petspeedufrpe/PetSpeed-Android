@@ -22,7 +22,7 @@ public class AnimalDAO {
         values.put(DBHelper.COL_ANIMAL_NOME, animal.getNome());
         values.put(DBHelper.COL_ANIMAL_RACA, animal.getRaca());
         values.put(DBHelper.COL_ANIMAL_PESO, animal.getPeso());
-        values.put(DBHelper.COL_ANIMAL_IDADE, animal.getIdade());
+        values.put(DBHelper.COL_ANIMAL_IDADE, animal.getNascimento());
         values.put(DBHelper.COL_ANIMAL_FK_CLIENTE, animal.getFkCliente());
         long res = dbWrite.insert(DBHelper.TABELA_ANIMAL, null, values);
         dbWrite.close();
@@ -59,7 +59,7 @@ public class AnimalDAO {
         int indexNome = cursor.getColumnIndex(DBHelper.COL_ANIMAL_NOME);
         int indexFkCliente = cursor.getColumnIndex(DBHelper.COL_ANIMAL_FK_CLIENTE);
         animal.setId(cursor.getLong(indexId));
-        animal.setIdade(cursor.getInt(indexIdade));
+        animal.setNascimento(cursor.getInt(indexIdade));
         animal.setPeso(cursor.getInt(indexPeso));
         animal.setRaca(cursor.getString(indexRaca));
         animal.setNome(cursor.getString(indexNome));
@@ -110,7 +110,7 @@ public class AnimalDAO {
     public void alteraIdade(Animal animal){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DBHelper.COL_ANIMAL_NOME,animal.getIdade());
+        values.put(DBHelper.COL_ANIMAL_NOME,animal.getNascimento());
         db.update(DBHelper.TABELA_ANIMAL,values, DBHelper.COL_ANIMAL_ID+ " = ?",new String[]{String.valueOf(animal.getId())});
         db.close();
     }

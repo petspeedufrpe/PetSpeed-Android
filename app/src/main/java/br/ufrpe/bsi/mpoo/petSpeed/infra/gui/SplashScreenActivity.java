@@ -9,6 +9,8 @@ import android.view.WindowManager;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.PreencherBanco;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
 
@@ -20,6 +22,10 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        if(new ClienteServices().getClienteCompleto(1)==null){
+            new PreencherBanco().start();
+        }
 
         new Handler().postDelayed(new Runnable() {
             @Override

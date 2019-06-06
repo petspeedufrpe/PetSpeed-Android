@@ -101,6 +101,7 @@ public class DBHelper extends SQLiteOpenHelper {
         createTabelaOS(db);
         createTabelaTriagem(db);
         createTabelaUsuario(db);
+
     }
 
 

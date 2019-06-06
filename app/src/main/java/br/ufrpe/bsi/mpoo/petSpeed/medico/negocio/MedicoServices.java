@@ -50,7 +50,7 @@ public class MedicoServices {
         } else {
             long idUsuario = usuarioDAO.cadastrarUsuario(usuario);
             medico.getUsuario().setId(idUsuario);
-            medico.getDadosPessoais().setIdUsuario(idUsuario);
+            medico.getDadosPessoais().setFkUsuario(idUsuario);
             PessoaServices pessoaServices = new PessoaServices();
             long idPessoa = pessoaServices.cadastraPessoa(medico.getDadosPessoais(), medico.getDadosPessoais().getEndereco());
             medico.getDadosPessoais().setId(idPessoa);
