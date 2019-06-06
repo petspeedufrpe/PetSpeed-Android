@@ -75,26 +75,10 @@ public class MedicoServices {
 
     public List<Medico> getMedicosInRaio(double radius, double userLat, double userLng) {
         final double kmInLatLng = 0.008983;
-        double latDownRange = 0;
-        double latUpRange = 0;
-        double lngDownRange = 0;
-        double lngUpRange = 0;
-        if (userLat<0){
-            latDownRange = -1*(Math.abs(userLat) - (radius * kmInLatLng));
-            latUpRange = -1*(Math.abs(userLat) + (radius * kmInLatLng));
-        } else {
-
-            latDownRange = userLat - (radius * kmInLatLng);
-            latUpRange = userLat + (radius * kmInLatLng);
-        }
-        if (userLng<0){
-            lngDownRange = -1*(Math.abs(userLng) - (radius * kmInLatLng));
-            lngUpRange = -1*(Math.abs(userLng) + (radius * kmInLatLng));
-
-        } else {
-            lngDownRange = userLng - (radius * kmInLatLng);
-            lngUpRange = userLng + (radius * kmInLatLng);
-        }
+        double latDownRange = userLat - (radius * kmInLatLng);
+        double latUpRange = userLat + (radius * kmInLatLng);
+        double lngDownRange = userLng - (radius * kmInLatLng);
+        double lngUpRange = userLng + (radius * kmInLatLng);
 
         List<Endereco> enderecosInRadius = enderecoDAO.getEnderecosByLatLngInterval(latDownRange, latUpRange, lngDownRange, lngUpRange);
         List<Medico> medicos = new LinkedList<>();

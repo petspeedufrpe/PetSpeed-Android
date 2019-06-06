@@ -13,7 +13,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -31,20 +30,21 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
 
 public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMyLocationButtonClickListener,
-        GoogleMap.OnMyLocationClickListener,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+        GoogleMap.OnMyLocationClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
 
     private GoogleMap mMap;
@@ -84,7 +84,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     public void onPause() {
         super.onPause();
 
-        if (mGoogleApiClient != null && mGoogleApiClient.isConnected())  {
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             stopLocationRequest();
         }
     }
@@ -100,14 +100,15 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         mMap.setOnMarkerClickListener(this);
         mMap.setOnMyLocationClickListener(this);
         mMap.setOnMyLocationButtonClickListener(this);
+        mMap.setOnMarkerClickListener(this);
     }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        Integer clickCount = (Integer) marker.getTag();
-        if (clickCount != null) {
-            clickCount++;
-            marker.setTag(clickCount);
+        Medico medico;
+        Map markerMap = (Map<ContasDeUsuario, Object>) marker.getTag();
+        if (markerMap.containsKey(ContasDeUsuario.MEDICO)) {
+            medico = (Medico) markerMap.get(ContasDeUsuario.MEDICO);
         }
         LatLng location = marker.getPosition();
         Toast.makeText(PetSpeedApp.getContext(), location.toString(), Toast.LENGTH_SHORT).show();
@@ -126,20 +127,23 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             Medico medico = listMedicos.get(i);
             String nome = medico.getDadosPessoais().getNome();
             String aval = String.valueOf(medico.getAvaliacao());
-            list.add(addMarkerOnMap(latLng, nome, aval));
+            Map<ContasDeUsuario, Object> mapMedico = new HashMap<>();
+            mapMedico.put(ContasDeUsuario.MEDICO, (Object) medico);
+            list.add(addMarkerOnMap(latLng, nome, aval, mapMedico));
             i++;
         }
         return list;
     }
 
 
-    public Marker addMarkerOnMap(LatLng latLng, String title, String avaliacao) {
+    public Marker addMarkerOnMap(LatLng latLng, String title, String avaliacao, Map<ContasDeUsuario, Object> mapConta) {
         Marker marker;
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title(title);
-        markerOptions.snippet(avaliacao);
+        markerOptions.snippet("média: " + avaliacao);
         marker = mMap.addMarker(markerOptions);
+        marker.setTag(mapConta);
         marker.showInfoWindow();
         return marker;
     }
@@ -161,9 +165,9 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         double lat = cliente.getDadosPessoais().getEndereco().getLatidude();
         double lng = cliente.getDadosPessoais().getEndereco().getLongitude();
         if (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            listMedicos = medicoServices.getMedicosInRaio(20,mLocation.getLatitude(),mLocation.getLongitude());
-        }else{
-            listMedicos = medicoServices.getMedicosInRaio(20,lat,lng);
+            listMedicos = medicoServices.getMedicosInRaio(20, mLocation.getLatitude(), mLocation.getLongitude());
+        } else {
+            listMedicos = medicoServices.getMedicosInRaio(20, lat, lng);
         }
     }
 
@@ -188,11 +192,12 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         mMap.resetMinMaxZoomPreference();
         mMap.setOnMyLocationClickListener(this);
         mMap.setOnMyLocationButtonClickListener(this);
+        moveCameraToMyLocation();
 
     }
 
-    public void moveCameraToMyLocation(){
-        LatLng latLng = new LatLng(mLocation.getLatitude(),mLocation.getLongitude());
+    public void moveCameraToMyLocation() {
+        LatLng latLng = new LatLng(mLocation.getLatitude(), mLocation.getLongitude());
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
     }
@@ -263,7 +268,6 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     }
 
 
-
     private synchronized void callConnections() {
         mGoogleApiClient = new GoogleApiClient.Builder(mContext)
                 .addOnConnectionFailedListener(this)
@@ -288,7 +292,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         }
         startLocationUpdate();
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             moveCameraToMyLocation();
         }
     }
@@ -305,7 +309,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
     @Override
     public void onLocationChanged(Location location) {
-        if(location!=null){
+        if (location != null) {
             mLocation.set(location);
             setTypeOfSearch();
             mMap.clear();
