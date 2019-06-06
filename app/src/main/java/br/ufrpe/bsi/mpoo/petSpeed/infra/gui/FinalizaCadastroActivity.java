@@ -102,7 +102,7 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
             double lat = (double) latLng.get(ApiRequestService.GeoCodeCoord.LAT);
             double lng = (double) latLng.get(ApiRequestService.GeoCodeCoord.LNG);
             Endereco endereco = SessaoCadastro.instance.getEndereco();
-            endereco.setLatidude(lat);
+            endereco.setLatitude(lat);
             endereco.setLongitude(lng);
             return endereco;
         }

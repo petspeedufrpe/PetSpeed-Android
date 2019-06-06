@@ -30,7 +30,7 @@ public class Endereco {
         return latidude;
     }
 
-    public void setLatidude(Double latidude) {
+    public void setLatitude(Double latidude) {
         this.latidude = latidude;
     }
 

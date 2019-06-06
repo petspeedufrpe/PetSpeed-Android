@@ -44,6 +44,8 @@ public class PreencherBanco {
         endereco.setBairro("Dois Irmaos");
         endereco.setLogradouro("R. Manuel de Medeiros");
         endereco.setCidade("Recife");
+        endereco.setLatitude(-8.0164513);
+        endereco.setLongitude(-34.9531421);
 
         pessoa.setNome("Joao manuel");
         pessoa.setCpf("645389675");
@@ -77,6 +79,8 @@ public class PreencherBanco {
         endereco.setBairro("Dois Irmaos");
         endereco.setLogradouro("Av. Dois Irmaos");
         endereco.setCidade("Recife");
+        endereco.setLatitude(-8.015605);
+        endereco.setLongitude(-34.9444292);
 
         pessoa.setNome("Miguel Arcanjo");
         pessoa.setCpf("23752395");
@@ -111,6 +115,8 @@ public class PreencherBanco {
         endereco.setBairro("Sitio dos Pintos");
         endereco.setLogradouro("R. Prof. Claudio Selva");
         endereco.setCidade("Recife");
+        endereco.setLatitude(-8.0132771);
+        endereco.setLongitude(-34.9540023);
 
         pessoa.setNome("Thiago Manuel");
         pessoa.setCpf("7203572");
@@ -144,6 +150,8 @@ public class PreencherBanco {
         endereco.setBairro("Apipucos");
         endereco.setLogradouro("R. Dois Irmaos");
         endereco.setCidade("Recife");
+        endereco.setLatitude(-8.019182);
+        endereco.setLongitude(-34.943102);
 
         pessoa.setNome("Francisco Albuquerque");
         pessoa.setCpf("765824658");
@@ -177,6 +185,8 @@ public class PreencherBanco {
         endereco.setBairro("Apipucos");
         endereco.setLogradouro("R. Caetés");
         endereco.setCidade("Recife");
+        endereco.setLatitude(-8.0146247);
+        endereco.setLongitude(-34.9409997);
 
         pessoa.setNome("Edivaldo Nogueira");
         pessoa.setCpf("879665845");
@@ -210,6 +220,8 @@ public class PreencherBanco {
         endereco.setBairro("Imbiribeira");
         endereco.setLogradouro("Av. General Mac Arthur");
         endereco.setCidade("Recife");
+        endereco.setLatitude(-8.1095715);
+        endereco.setLongitude(-34.9107608);
 
         pessoa.setNome("Irineu Manuel");
         pessoa.setCpf("92385082");
@@ -243,6 +255,8 @@ public class PreencherBanco {
         endereco.setBairro("Imbiribeira");
         endereco.setLogradouro("R. Leparc");
         endereco.setCidade("Recife");
+        endereco.setLatitude(-8.1093971);
+        endereco.setLongitude(-34.9052494);
 
         pessoa.setNome("Francisco Mota");
         pessoa.setCpf("769854625");
@@ -286,6 +300,8 @@ public class PreencherBanco {
         endereco.setBairro("Boa Viagem");
         endereco.setLogradouro("Av. conselheiro aguiar");
         endereco.setCidade("Recife");
+        endereco.setLatitude(-8.1115339);
+        endereco.setLongitude(-34.8942523);
 
         pessoa.setNome("Gabriel Alves");
         pessoa.setCpf("987654321");
@@ -355,6 +371,8 @@ public class PreencherBanco {
         endereco.setBairro("Corrego do Jenipapo");
         endereco.setLogradouro("R. Nove de Março");
         endereco.setCidade("Recife");
+        endereco.setLatitude(-8.0087481);
+        endereco.setLongitude(-34.9380275);
 
         pessoa.setNome("Tadeu Josué");
         pessoa.setCpf("5385610");
@@ -424,6 +442,8 @@ public class PreencherBanco {
         endereco.setBairro("Dois Irmãos");
         endereco.setLogradouro("R. Manuel de Medeiros");
         endereco.setCidade("Recife");
+        endereco.setLatitude(-8.0148223);
+        endereco.setLongitude(-34.9496496);
 
         pessoa.setNome("José Alves");
         pessoa.setCpf("87049373");

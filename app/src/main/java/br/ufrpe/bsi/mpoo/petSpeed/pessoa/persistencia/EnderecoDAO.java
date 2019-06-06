@@ -170,7 +170,7 @@ public class EnderecoDAO {
         endereco.setLogradouro(cursor.getString(indexLogradouro));
         endereco.setNumero(cursor.getInt(indexNumero));
         endereco.setComplemento(cursor.getString(indexComplemento));
-        endereco.setLatidude(cursor.getDouble(indexLatitutde));
+        endereco.setLatitude(cursor.getDouble(indexLatitutde));
         endereco.setLongitude(cursor.getDouble(indexLongitude));
         endereco.setFkPessoa(cursor.getLong(indexFkPessoa));
         endereco.setFkClinica(cursor.getLong(indexFkClinica));
