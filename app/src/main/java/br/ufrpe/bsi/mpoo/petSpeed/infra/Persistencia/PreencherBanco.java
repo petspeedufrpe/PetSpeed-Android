@@ -328,7 +328,7 @@ public class PreencherBanco {
         animal.setPeso((float)12.3);
         animal.setNascimento(2015);
         animal.setFkCliente(cliente.getId());
-        cService.cadastraAnimal(animal);
+        //cService.cadastraAnimal(animal);
 
         //ANIMAL 2 ##################################
 
@@ -338,7 +338,7 @@ public class PreencherBanco {
         animal.setPeso((float)7.5);
         animal.setNascimento(2012);
         animal.setFkCliente(cliente.getId());
-        cService.cadastraAnimal(animal);
+        //cService.cadastraAnimal(animal);
 
         //ANIMAL 3 ##################################
 
@@ -348,7 +348,7 @@ public class PreencherBanco {
         animal.setPeso((float)15.9);
         animal.setNascimento(2015);
         animal.setFkCliente(cliente.getId());
-        cService.cadastraAnimal(animal);
+        //cService.cadastraAnimal(animal);
 
 
         Sessao.instance.reset();
@@ -399,7 +399,7 @@ public class PreencherBanco {
         animal.setPeso((float)7.7);
         animal.setNascimento(2014);
         animal.setFkCliente(cliente.getId());
-        cService.cadastraAnimal(animal);
+        //cService.cadastraAnimal(animal);
 
         //ANIMAL 2 ##################################
 
@@ -409,7 +409,7 @@ public class PreencherBanco {
         animal.setPeso((float)10.1);
         animal.setNascimento(2013);
         animal.setFkCliente(cliente.getId());
-        cService.cadastraAnimal(animal);
+        //cService.cadastraAnimal(animal);
 
         //ANIMAL 3 ##################################
 
@@ -419,7 +419,7 @@ public class PreencherBanco {
         animal.setPeso((float)14.8);
         animal.setNascimento(2014);
         animal.setFkCliente(cliente.getId());
-        cService.cadastraAnimal(animal);
+        //cService.cadastraAnimal(animal);
 
 
         Sessao.instance.reset();
@@ -470,7 +470,7 @@ public class PreencherBanco {
         animal.setPeso((float)17.3);
         animal.setNascimento(2010);
         animal.setFkCliente(cliente.getId());
-        cService.cadastraAnimal(animal);
+        //cService.cadastraAnimal(animal);
 
         //ANIMAL 2 ##################################
 
@@ -480,7 +480,7 @@ public class PreencherBanco {
         animal.setPeso((float)7.9);
         animal.setNascimento(2013);
         animal.setFkCliente(cliente.getId());
-        cService.cadastraAnimal(animal);
+        //cService.cadastraAnimal(animal);
 
         //ANIMAL 3 ##################################
 
@@ -490,7 +490,7 @@ public class PreencherBanco {
         animal.setPeso((float)18.5);
         animal.setNascimento(2013);
         animal.setFkCliente(cliente.getId());
-        cService.cadastraAnimal(animal);
+        //cService.cadastraAnimal(animal);
 
 
         Sessao.instance.reset();
