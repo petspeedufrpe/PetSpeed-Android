@@ -28,6 +28,7 @@
         <activity
             android:name=".cliente.gui.AnimalClienteActivity"
             android:label="Meus Pets"
+            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".cliente.gui.PerfilClienteActivity" />
         <activity
@@ -42,7 +43,8 @@
             android:name=".medico.gui.HomeMedicoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".medico.gui.CadastroMedicoActivity" />
-        <activity android:name=".animal.gui.CrudAnimalActivity" />
+        <activity android:name=".animal.gui.CrudAnimalActivity"
+            android:noHistory="true" />
         <activity android:name=".infra.gui.MainActivity" />
         <activity android:name=".infra.gui.LoginActivity" />
         <activity android:name=".infra.gui.SplashScreenActivity">
