@@ -171,7 +171,6 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             marker.setTag(clickCount);
         }
         LatLng location = marker.getPosition();
-        Toast.makeText(PetSpeedApp.getContext(), location.toString(), Toast.LENGTH_SHORT).show();
         return false;
     }
 
@@ -260,14 +259,12 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
     @Override
     public boolean onMyLocationButtonClick() {
-        Toast.makeText(mContext,mLocation.toString(),Toast.LENGTH_SHORT).show();
         return false;
 
     }
 
     @Override
     public void onMyLocationClick(@NonNull Location location) {
-        Toast.makeText(mContext, location.toString(), Toast.LENGTH_SHORT).show();
 
     }
 

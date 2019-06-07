@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.HomeClienteActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.ViewMedicosFragment;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
@@ -110,16 +111,19 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     @Override
     public boolean onMarkerClick(Marker marker) {
         Medico medico;
+        Cliente cliente;
         Map markerMap = (Map<ContasDeUsuario, Object>) marker.getTag();
         if (markerMap.containsKey(ContasDeUsuario.MEDICO)) {
             medico = (Medico) markerMap.get(ContasDeUsuario.MEDICO);
             Sessao.instance.setValue(ContasDeUsuario.MEDICO.getDescricao(),medico);
-            ViewMedicosFragment viewPinMedico = new ViewMedicosFragment();
-            viewPinMedico.show(getFragmentManager(), "ViewMedicosFragment");
 
         }
+        HomeClienteActivity hCliente = (HomeClienteActivity) getActivity();
+
+        Sessao.instance.setValue("HostActivity",hCliente);
+        ViewMedicosFragment viewPinMedico = new ViewMedicosFragment();
+        viewPinMedico.show(getFragmentManager(), "ViewMedicosFragment");
         LatLng location = marker.getPosition();
-        Toast.makeText(PetSpeedApp.getContext(), location.toString(), Toast.LENGTH_SHORT).show();
         return false;
 
     }
@@ -136,22 +140,39 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             Medico medico = listMedicos.get(i);
             String nome = medico.getDadosPessoais().getNome();
             String aval = String.valueOf(medico.getAvaliacao());
-            Map<ContasDeUsuario, Object> mapMedico = new HashMap<>();
-            mapMedico.put(ContasDeUsuario.MEDICO, (Object) medico);
-            list.add(addMarkerOnMap(latLng, nome, aval, mapMedico));
+            Map<ContasDeUsuario, Object> mapSessao = new HashMap<>();
+            mapSessao.put(ContasDeUsuario.MEDICO, (Object) medico);
+            list.add(addMarkerOnMap(latLng, nome, aval, mapSessao));
             i++;
         }
+        Map<ContasDeUsuario, Object> mapSessao = new HashMap<>();
+        mapSessao.put(ContasDeUsuario.CLIENTE, (Object) Sessao.instance.getCliente());
+        String nome = "Meu Endereço";
+        Endereco endereco = Sessao.instance.getCliente().getDadosPessoais().getEndereco();
+        String aval = endereco.getLogradouro() +" N° "+String.valueOf(endereco.getNumero());
+        double lat = Sessao.instance.getCliente().getDadosPessoais().getEndereco().getLatidude();
+        double lng = Sessao.instance.getCliente().getDadosPessoais().getEndereco().getLongitude();
+        LatLng latLng = new LatLng(lat, lng);
+        list.add(addMarkerOnMap(latLng, nome, aval, mapSessao));
+
         return list;
     }
 
 
-    public Marker addMarkerOnMap(LatLng latLng, String title, String avaliacao, Map<ContasDeUsuario, Object> mapConta) {
+    public Marker addMarkerOnMap(LatLng latLng, String title, String snippetInfo, Map<ContasDeUsuario, Object> mapConta) {
         Marker marker;
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title(title);
-        markerOptions.snippet("média: " + avaliacao);
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+        if(mapConta.containsKey(ContasDeUsuario.MEDICO)){
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+            markerOptions.snippet("média: " + snippetInfo);
+
+        } else {
+            markerOptions.snippet("Local: " + snippetInfo);
+
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+        }
         marker = mMap.addMarker(markerOptions);
         marker.setTag(mapConta);
         marker.showInfoWindow();
@@ -226,14 +247,12 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
     @Override
     public boolean onMyLocationButtonClick() {
-        Toast.makeText(mContext, mLocation.toString(), Toast.LENGTH_SHORT).show();
         return false;
 
     }
 
     @Override
     public void onMyLocationClick(@NonNull Location location) {
-        Toast.makeText(mContext, location.toString(), Toast.LENGTH_SHORT).show();
 
     }
 

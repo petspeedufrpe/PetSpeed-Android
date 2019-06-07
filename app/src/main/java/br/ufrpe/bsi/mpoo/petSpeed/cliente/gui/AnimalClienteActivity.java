@@ -80,7 +80,6 @@ public class AnimalClienteActivity extends AppCompatActivity {
         RecyclerViewClickListener listener = new RecyclerViewClickListener() {
             @Override
             public void onClick(View v, int position) {
-                Toast.makeText(PetSpeedApp.getContext(),String.valueOf(position),Toast.LENGTH_SHORT).show();
             }
         };
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_animal_cliente);

@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
@@ -73,16 +74,21 @@ public class HomeClienteActivity extends AppCompatActivity
         if(faseRaio==1){
             mapsFrag.setNovoRaio(novoRaio);
             mAlternaRaio.setText("Raio atual: 5Km");
+            Toast.makeText(HomeClienteActivity.this,"Visualizando medicos em um raio de 5km",Toast.LENGTH_SHORT).show();
             novoRaio=10.0;
             faseRaio=2;
         }else if(faseRaio==2){
             mapsFrag.setNovoRaio(novoRaio);
             mAlternaRaio.setText("Raio atual: 10Km");
+            Toast.makeText(HomeClienteActivity.this,"Visualizando medicos em um raio de 10km",Toast.LENGTH_SHORT).show();
+
             novoRaio=20.0;
             faseRaio=3;
         }else if(faseRaio==3){
             mapsFrag.setNovoRaio(novoRaio);
             mAlternaRaio.setText("Raio atual: 20Km");
+            Toast.makeText(HomeClienteActivity.this,"Visualizando medicos em um raio de 20km",Toast.LENGTH_SHORT).show();
+
             novoRaio=5.0;
             faseRaio=1;
         }

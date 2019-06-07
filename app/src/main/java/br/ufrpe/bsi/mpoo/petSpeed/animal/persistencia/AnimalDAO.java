@@ -6,23 +6,27 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
 
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
-import br.ufrpe.bsi.mpoo.petSpeed.os.dominio.OrdemServico;
 
 public class AnimalDAO {
 
     private DBHelper dbHelper = new DBHelper();
 
     public long cadastraAnimal(Animal animal) {
+
+        int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
+        int anoNascimento = anoAtual - animal.getIdade();
+        animal.setIdade(anoNascimento);
+
         SQLiteDatabase dbWrite = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DBHelper.COL_ANIMAL_NOME, animal.getNome());
         values.put(DBHelper.COL_ANIMAL_RACA, animal.getRaca());
         values.put(DBHelper.COL_ANIMAL_PESO, animal.getPeso());
-        values.put(DBHelper.COL_ANIMAL_IDADE, animal.getNascimento());
+        values.put(DBHelper.COL_ANIMAL_IDADE, animal.getIdade());
         values.put(DBHelper.COL_ANIMAL_FK_CLIENTE, animal.getFkCliente());
         long res = dbWrite.insert(DBHelper.TABELA_ANIMAL, null, values);
         dbWrite.close();
@@ -58,8 +62,13 @@ public class AnimalDAO {
         int indexRaca = cursor.getColumnIndex(DBHelper.COL_ANIMAL_RACA);
         int indexNome = cursor.getColumnIndex(DBHelper.COL_ANIMAL_NOME);
         int indexFkCliente = cursor.getColumnIndex(DBHelper.COL_ANIMAL_FK_CLIENTE);
+
+        int anoNascimento = cursor.getInt(indexIdade);
+        int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
+        int idade = anoAtual - anoNascimento;
+
+        animal.setIdade(idade);
         animal.setId(cursor.getLong(indexId));
-        animal.setNascimento(cursor.getInt(indexIdade));
         animal.setPeso(cursor.getInt(indexPeso));
         animal.setRaca(cursor.getString(indexRaca));
         animal.setNome(cursor.getString(indexNome));
@@ -114,7 +123,7 @@ public class AnimalDAO {
     public void alteraIdade(Animal animal){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DBHelper.COL_ANIMAL_NOME,animal.getNascimento());
+        values.put(DBHelper.COL_ANIMAL_NOME,animal.getIdade());
         db.update(DBHelper.TABELA_ANIMAL,values, DBHelper.COL_ANIMAL_ID+ " = ?",new String[]{String.valueOf(animal.getId())});
         db.close();
     }

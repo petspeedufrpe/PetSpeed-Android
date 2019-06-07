@@ -1,9 +1,6 @@
 package br.ufrpe.bsi.mpoo.petSpeed.infra.gui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +12,6 @@ import java.util.ArrayList;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.AnimalClienteActivity;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ControleMeusPets;
 
 
 public class AdapterMeuPet extends ArrayAdapter<Animal> {
@@ -48,7 +43,7 @@ public class AdapterMeuPet extends ArrayAdapter<Animal> {
 
         nomePet.setText(listaAnimal.get(position).getNome());
         racaPet.setText(listaAnimal.get(position).getRaca());
-        idadePet.setText(listaAnimal.get(position).getNascimento());
+        idadePet.setText(listaAnimal.get(position).getIdade());
         pesoPet.setText((int) listaAnimal.get(position).getPeso());
         //fotoPet.setImageResource(listaAnimal.get(position).getFoto);
 

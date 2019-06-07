@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
@@ -30,7 +29,6 @@ public class CrudAnimalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_crud_animal);
-        Toast.makeText(this, peso, Toast.LENGTH_SHORT).show();
         btnCadastrar = (Button) findViewById(R.id.btn_cadastrar_animal);
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +36,8 @@ public class CrudAnimalActivity extends AppCompatActivity {
                 capturaTextos();
                 if (isCamposValidos()) {
                     cadastrar();
-                    startActivity(new Intent(CrudAnimalActivity.this, AnimalClienteActivity.class));
+                    startActivity(new Intent(CrudAnimalActivity.this, AnimalClienteActivity.class)
+                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                 }
             }
         });
@@ -61,6 +60,8 @@ public class CrudAnimalActivity extends AppCompatActivity {
     }
 
     public void cadastrar() {
+
+
         capturaTextos();
         Usuario usuario = Sessao.instance.getUsuario();
         ClienteDAO clienteDAO = new ClienteDAO();
@@ -77,8 +78,8 @@ public class CrudAnimalActivity extends AppCompatActivity {
         Animal animal = new Animal();
         animal.setNome(nome);
         animal.setRaca(raca);
-        animal.setPeso(Float.parseFloat(peso));
-        animal.setNascimento(Integer.parseInt(idade));
+        animal.setPeso(Double.parseDouble(peso));
+        animal.setIdade(Integer.parseInt(idade));
 
         return animal;
     }

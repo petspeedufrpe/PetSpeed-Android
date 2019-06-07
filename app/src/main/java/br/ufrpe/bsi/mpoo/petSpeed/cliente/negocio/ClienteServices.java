@@ -3,6 +3,7 @@ package br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio;
 import android.database.Cursor;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petSpeed.animal.persistencia.AnimalDAO;
@@ -165,6 +166,7 @@ public class ClienteServices {
     }
 
     public long cadastraAnimal(Animal animal) {
+
         long res = animalDAO.cadastraAnimal(animal);
         return res;
     }

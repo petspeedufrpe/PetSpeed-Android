@@ -333,8 +333,8 @@ public class PreencherBanco {
         animal = new Animal();
         animal.setNome("Encapsulamentovaldo");
         animal.setRaca("Labrador");
-        animal.setPeso((float)12.3);
-        animal.setNascimento(2015);
+        animal.setPeso(12.3);
+        animal.setIdade(7);
         animal.setFkCliente(cliente.getId());
         cService.cadastraAnimal(animal);
 
@@ -343,8 +343,8 @@ public class PreencherBanco {
         animal = new Animal();
         animal.setNome("Polimorfismineuso");
         animal.setRaca("Poodle");
-        animal.setPeso((float)7.5);
-        animal.setNascimento(2012);
+        animal.setPeso(7.5);
+        animal.setIdade(5);
         animal.setFkCliente(cliente.getId());
         cService.cadastraAnimal(animal);
 
@@ -353,8 +353,8 @@ public class PreencherBanco {
         animal = new Animal();
         animal.setNome("Herrançoso");
         animal.setRaca("Rottweiler");
-        animal.setPeso((float)15.9);
-        animal.setNascimento(2015);
+        animal.setPeso(15.9);
+        animal.setIdade(8);
         animal.setFkCliente(cliente.getId());
         cService.cadastraAnimal(animal);
 
@@ -405,8 +405,8 @@ public class PreencherBanco {
         animal = new Animal();
         animal.setNome("Toto");
         animal.setRaca("Mestiço");
-        animal.setPeso((float)7.7);
-        animal.setNascimento(2014);
+        animal.setPeso(7.7);
+        animal.setIdade(9);
         animal.setFkCliente(cliente.getId());
         cService.cadastraAnimal(animal);
 
@@ -415,8 +415,8 @@ public class PreencherBanco {
         animal = new Animal();
         animal.setNome("Zeus");
         animal.setRaca("shiba inu");
-        animal.setPeso((float)10.1);
-        animal.setNascimento(2013);
+        animal.setPeso(10.1);
+        animal.setIdade(3);
         animal.setFkCliente(cliente.getId());
         cService.cadastraAnimal(animal);
 
@@ -425,8 +425,8 @@ public class PreencherBanco {
         animal = new Animal();
         animal.setNome("Thor");
         animal.setRaca("Rottweiler");
-        animal.setPeso((float)14.8);
-        animal.setNascimento(2014);
+        animal.setPeso(14.8);
+        animal.setIdade(4);
         animal.setFkCliente(cliente.getId());
         cService.cadastraAnimal(animal);
 
@@ -477,8 +477,8 @@ public class PreencherBanco {
         animal = new Animal();
         animal.setNome("Jupter");
         animal.setRaca("Labrador");
-        animal.setPeso((float)17.3);
-        animal.setNascimento(2010);
+        animal.setPeso(17.3);
+        animal.setIdade(6);
         animal.setFkCliente(cliente.getId());
         cService.cadastraAnimal(animal);
 
@@ -487,8 +487,8 @@ public class PreencherBanco {
         animal = new Animal();
         animal.setNome("Saturno");
         animal.setRaca("Shitsu");
-        animal.setPeso((float)7.9);
-        animal.setNascimento(2013);
+        animal.setPeso(7.9);
+        animal.setIdade(10);
         animal.setFkCliente(cliente.getId());
         cService.cadastraAnimal(animal);
 
@@ -497,8 +497,8 @@ public class PreencherBanco {
         animal = new Animal();
         animal.setNome("Tobias");
         animal.setRaca("Bulldog");
-        animal.setPeso((float)18.5);
-        animal.setNascimento(2013);
+        animal.setPeso(18.5);
+        animal.setIdade(12);
         animal.setFkCliente(cliente.getId());
         cService.cadastraAnimal(animal);
 
