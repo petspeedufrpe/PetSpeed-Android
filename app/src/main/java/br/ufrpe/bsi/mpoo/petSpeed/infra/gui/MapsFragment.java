@@ -58,9 +58,8 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     private MedicoServices medicoServices = new MedicoServices();
     private Context mContext;
     private LocationManager mLocationManager;
-    private final LatLng mDefaultLocation = defaultLocationCLient();
     Cliente cliente = Sessao.instance.getCliente();
-    double lat = cliente.getDadosPessoais().getEndereco().getLatidude();
+    double lat = cliente.getDadosPessoais().getEndereco().getLatitude();
     double lng = cliente.getDadosPessoais().getEndereco().getLongitude();
     private Location mLocation = new Location(LocationManager.GPS_PROVIDER);
     private LocationRequest locationRequest;
@@ -150,7 +149,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         String nome = "Meu Endereço";
         Endereco endereco = Sessao.instance.getCliente().getDadosPessoais().getEndereco();
         String aval = endereco.getLogradouro() +" N° "+String.valueOf(endereco.getNumero());
-        double lat = Sessao.instance.getCliente().getDadosPessoais().getEndereco().getLatidude();
+        double lat = Sessao.instance.getCliente().getDadosPessoais().getEndereco().getLatitude();
         double lng = Sessao.instance.getCliente().getDadosPessoais().getEndereco().getLongitude();
         LatLng latLng = new LatLng(lat, lng);
         list.add(addMarkerOnMap(latLng, nome, aval, mapSessao));
@@ -193,7 +192,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     public void setTypeOfSearch() {
 
         Cliente cliente = Sessao.instance.getCliente();
-        double lat = cliente.getDadosPessoais().getEndereco().getLatidude();
+        double lat = cliente.getDadosPessoais().getEndereco().getLatitude();
         double lng = cliente.getDadosPessoais().getEndereco().getLongitude();
         if (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             listMedicos = medicoServices.getMedicosInRaio(raio, mLocation.getLatitude(), mLocation.getLongitude());
@@ -209,7 +208,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
     public LatLng defaultLocationCLient() {
         Cliente cliente = Sessao.instance.getCliente();
-        return new LatLng(cliente.getDadosPessoais().getEndereco().getLatidude(), cliente.getDadosPessoais().getEndereco().getLongitude());
+        return new LatLng(cliente.getDadosPessoais().getEndereco().getLatitude(), cliente.getDadosPessoais().getEndereco().getLongitude());
     }
 
     public void InitalizeMap() {

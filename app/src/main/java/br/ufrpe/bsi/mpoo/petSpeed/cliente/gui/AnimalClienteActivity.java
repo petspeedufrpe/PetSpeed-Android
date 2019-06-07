@@ -48,6 +48,7 @@ public class AnimalClienteActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         createAllAnimals();
         initRecyclerView();
+        setTitle("PetSpeed");
         FloatingActionButton fab = findViewById(R.id.fab_add_animal);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,8 +58,6 @@ public class AnimalClienteActivity extends AppCompatActivity {
         });
     }
 
-
-    //funcao para puxar os dados do banco de dados.
 
     private void preencherArray() {
         ClienteServices clienteServices = new ClienteServices();

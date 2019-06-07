@@ -40,7 +40,7 @@ public class AdapterMeuPet extends ArrayAdapter<Animal> {
         TextView nomePet = (TextView) rowView.findViewById(R.id.campo_nome);
         TextView racaPet = (TextView) rowView.findViewById(R.id.campo_raca);
         TextView idadePet = (TextView) rowView.findViewById(R.id.campo_idade);
-        ImageView fotoPet = (ImageView) rowView.findViewById(R.id.campo_fotoPet);
+        TextView pesoPet = (TextView) rowView.findViewById(R.id.campo_peso);
 
         nomePet.setText(listaAnimal.get(position).getNome());
         racaPet.setText(listaAnimal.get(position).getRaca());
