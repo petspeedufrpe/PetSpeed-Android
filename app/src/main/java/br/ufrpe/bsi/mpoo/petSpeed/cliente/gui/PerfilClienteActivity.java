@@ -1,10 +1,12 @@
 package br.ufrpe.bsi.mpoo.petSpeed.cliente.gui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,10 +27,12 @@ public class PerfilClienteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_perfil_cliente);
         findTexts();
         showTexts();
+        editDados = (FloatingActionButton) findViewById(R.id.fab_edit);
         editDados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //LEVA PARA ACT DE EDITAR DADOS DO CLIENTE;
+                startActivity(new Intent(PerfilClienteActivity.this,EditDadosClienteActivity.class));
+                finish();
             }
         });
     }
@@ -42,9 +46,9 @@ public class PerfilClienteActivity extends AppCompatActivity {
 
     public void findTexts(){
         editDados = (FloatingActionButton) findViewById(R.id.fab_edit);
-        mEmail = (TextView) findViewById(R.id.campo_email);
-        mTelefone = (TextView) findViewById(R.id.campo_telefone);
-        mCidade = (TextView) findViewById(R.id.campo_peso);
+        mEmail = (TextView) findViewById(R.id.campo_altera_nome_cliente);
+        mTelefone = (TextView) findViewById(R.id.campo_altera_telefone_cliente);
+        mCidade = (TextView) findViewById(R.id.campo_altera_email_cliente);
         mFoto = (ImageView) findViewById(R.id.campo_imagem);
         mEndereco = (TextView) findViewById(R.id.lbl_show_endereco);
         mNomeUsuario = (Toolbar) findViewById(R.id.toolbar_nome_do_usuario);

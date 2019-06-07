@@ -10,6 +10,7 @@ import java.util.Calendar;
 
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petSpeed.os.dominio.OrdemServico;
 
 public class AnimalDAO {
 

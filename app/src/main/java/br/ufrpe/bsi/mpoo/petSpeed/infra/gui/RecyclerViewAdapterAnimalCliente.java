@@ -44,7 +44,7 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
         myViewHolder.nomeAnimal.setText(mAnimals.get(i).getNome());
         myViewHolder.racaAnimal.setText(mAnimals.get(i).getRaca());
         myViewHolder.pesoAnimal.setText(String.valueOf(mAnimals.get(i).getPeso()));
-        myViewHolder.idadeAnimal.setText(String.valueOf(mAnimals.get(i).getIdade()));
+        myViewHolder.idadeAnimal.setText(String.valueOf(mAnimals.get(i).getNascimento()));
         //myViewHolder.imageAnimal.setImageResource(mAnimals.get(i).getFoto);
     }
 

@@ -24,7 +24,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".cliente.gui.MeusPetsActivity"></activity>
+        <activity android:name=".cliente.gui.MudarSenhaAcitivity"></activity>
+        <activity android:name=".cliente.gui.EditDadosClienteActivity" />
+        <activity android:name=".cliente.gui.MeusPetsActivity" />
         <activity
             android:name=".cliente.gui.AnimalClienteActivity"
             android:label="Meus Pets"
@@ -35,6 +37,7 @@
             android:name=".cliente.gui.HomeClienteActivity"
             android:label="Home"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />

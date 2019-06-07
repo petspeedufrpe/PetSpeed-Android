@@ -15,7 +15,7 @@ public class Animal {
 
     private double peso;
 
-    private int idade;
+    private int nascimento;
 
     private long fkCliente;
     //private BufferedImage foto;
@@ -59,12 +59,12 @@ public class Animal {
         this.peso = peso;
     }
 
-    public int getIdade() {
-        return idade;
+    public int getNascimento() {
+        return nascimento;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setNascimento(int nascimento) {
+        this.nascimento = nascimento;
     }
 
     public List<OrdemServico> getHistorico() {

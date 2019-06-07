@@ -36,8 +36,8 @@ public class PerfilClienteActivity extends AppCompatActivity {
 
     public void findTexts(){
         editDados = (FloatingActionButton) findViewById(R.id.fab_edit);
-        mEmail = (TextView) findViewById(R.id.campo_email);
-        mTelefone = (TextView) findViewById(R.id.campo_telefone);
+        mEmail = (TextView) findViewById(R.id.campo_altera_nome_cliente);
+        mTelefone = (TextView) findViewById(R.id.campo_altera_telefone_cliente);
         mCidade = (TextView) findViewById(R.id.campo_cidade);
         mFoto = (ImageView) findViewById(R.id.campo_imagem);
 
