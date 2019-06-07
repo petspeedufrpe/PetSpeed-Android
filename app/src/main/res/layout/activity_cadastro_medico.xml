@@ -31,6 +31,17 @@
         android:textColor="#FF00A759" />
 
     <EditText
+        android:id="@+id/medicoTelefone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/hintColor"
+        android:hint="DDD e Telefone"
+        android:inputType="number"
+        android:textColor="#FF00A759" />
+
+    <EditText
         android:id="@+id/crmv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

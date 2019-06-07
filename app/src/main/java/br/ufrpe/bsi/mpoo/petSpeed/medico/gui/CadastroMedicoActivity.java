@@ -23,8 +23,8 @@ import br.ufrpe.bsi.mpoo.petSpeed.pessoa.gui.CadastroEnderecoActivity;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 
 public class CadastroMedicoActivity extends AppCompatActivity {
-    EditText mNome, mCpf, mEmail, mSenha, mcmfSenha, mCrmv;
-    String nome, cpf, email, senha, cmfSenha, crmv;
+    EditText mNome, mCpf, mEmail, mSenha, mcmfSenha, mCrmv, mTelefone;
+    String nome, cpf, email, senha, cmfSenha, crmv, telefone;
     Button mButtoRegister;
     TextView mTextHome;
 
@@ -80,6 +80,7 @@ public class CadastroMedicoActivity extends AppCompatActivity {
     public void capturaTextos() {
         findEditTexts();
         nome = mNome.getText().toString().trim();
+        telefone = mTelefone.getText().toString().trim();
         cpf = mCpf.getText().toString().trim();
         email = mEmail.getText().toString().trim();
         senha = mSenha.getText().toString().trim();
@@ -90,6 +91,7 @@ public class CadastroMedicoActivity extends AppCompatActivity {
     public void findEditTexts() {
         mCrmv = (EditText) findViewById(R.id.crmv);
         mNome = (EditText) findViewById(R.id.username);
+        mTelefone = (EditText) findViewById(R.id.medicoTelefone);
         mCpf = (EditText) findViewById(R.id.cpf);
         mEmail = (EditText) findViewById(R.id.email);
         mSenha = (EditText) findViewById(R.id.passwd);
@@ -103,6 +105,7 @@ public class CadastroMedicoActivity extends AppCompatActivity {
         boolean res = true;
         //reseta os erros
         mNome.setError(null);
+        mTelefone.setError(null);
         mCpf.setError(null);
         mSenha.setError(null);
         mEmail.setError(null);
@@ -112,6 +115,14 @@ public class CadastroMedicoActivity extends AppCompatActivity {
         if (isCampoVazio(nome)) {
             mNome.setError("Campo vazio");
             focusView = mNome;
+            res = false;
+        }if (isCampoVazio(telefone)) {
+            mTelefone.setError("Campo vazio");
+            focusView = mTelefone;
+            res = false;
+        }if (telefone.length()!=10) {
+            mTelefone.setError("telefone inválido");
+            focusView = mTelefone;
             res = false;
         } else if (isCampoVazio(cpf)) {
             mCpf.setError("Campo vazio");
@@ -165,6 +176,7 @@ public class CadastroMedicoActivity extends AppCompatActivity {
         Medico medico = new Medico();
         medico.setAvaliacao(5);
         medico.setCrmv(crmv);
+        medico.setTelefone(telefone);
         return medico;
     }
 
@@ -186,6 +198,7 @@ public class CadastroMedicoActivity extends AppCompatActivity {
 
     private void limparCampos() {
         mNome.setText("");
+        mTelefone.setText("");
         mSenha.setText("");
         mcmfSenha.setText("");
         mEmail.setText("");

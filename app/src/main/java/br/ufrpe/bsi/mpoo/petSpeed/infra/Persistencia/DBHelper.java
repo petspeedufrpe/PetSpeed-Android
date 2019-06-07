@@ -21,6 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_MEDICO_ID = "ID";
     public static final String COL_MEDICO_AVALIACAO = "AVALIACAO";
     public static final String COL_MEDICO_CRMV = "CRMV";
+    public static final String COL_MEDICO_TELEFONE = "TELEFONE";
     public static final String COL_MEDICO_FK_USUARIO = "FK_USUARIO";
     public static final String COL_MEDICO_FK_CLINICA = "FK_CLINICA";
     public static final String COL_MEDICO_FK_PESSOA = "FK_PESSOA";
@@ -56,6 +57,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String TABELA_CLIENTE = "TB_CLIENTE";
     public static final String COL_CLIENTE_ID = "ID";
     public static final String COL_CLIENTE_AVALIACAO = "AVALIACAO";
+    public static final String COL_CLIENTE_TELEFONE = "TELEFONE";
     public static final String COL_CLIENTE_FK_USUARIO = "FK_USUARIO";
     public static final String COL_CLIENTE_FK_PESSOA = "FK_PESSOA";
     // TABELA OS:
@@ -131,12 +133,13 @@ public class DBHelper extends SQLiteOpenHelper {
                         "  %4$s TEXT NOT NULL, " +
                         " %5$s TEXT NOT NULL, " +
                         " %6$s TEXT NOT NULL, " +
-                        " %7$s TEXT " +
+                        " %7$s TEXT NOT NULL, " +
+                        " %8$s TEXT " +
 
                         ");";
         sqlTbMedico = String.format(sqlTbMedico,
                 TABELA_MEDICO, COL_MEDICO_ID, COL_MEDICO_AVALIACAO,
-                COL_MEDICO_CRMV, COL_MEDICO_FK_USUARIO,
+                COL_MEDICO_CRMV,COL_MEDICO_TELEFONE, COL_MEDICO_FK_USUARIO,
                 COL_MEDICO_FK_PESSOA, COL_MEDICO_FK_CLINICA);
         db.execSQL(sqlTbMedico);
     }
@@ -199,10 +202,11 @@ public class DBHelper extends SQLiteOpenHelper {
                         "  %2$s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "  %3$s REAL NOT NULL, " +
                         "  %4$s TEXT NOT NULL, " +
-                        "  %5$s TEXT NOT NULL " +
+                        "  %5$s TEXT NOT NULL, " +
+                        "  %6$s TEXT NOT NULL " +
                         ");";
         sqlTbCliente = String.format(sqlTbCliente,
-                TABELA_CLIENTE, COL_CLIENTE_ID, COL_CLIENTE_AVALIACAO, COL_CLIENTE_FK_PESSOA, COL_CLIENTE_FK_USUARIO);
+                TABELA_CLIENTE, COL_CLIENTE_ID, COL_CLIENTE_AVALIACAO,COL_CLIENTE_TELEFONE, COL_CLIENTE_FK_PESSOA, COL_CLIENTE_FK_USUARIO);
         db.execSQL(sqlTbCliente);
     }
 

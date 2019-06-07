@@ -28,8 +28,8 @@ import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 public class CadastroClienteActivity extends AppCompatActivity {
 
     private final Map<String, Object> values = new HashMap<>();
-    EditText mNome, mCpf, mEmail, mSenha, mcmfSenha;
-    String nome, cpf, email, senha, cmfSenha;
+    EditText mNome, mCpf, mEmail, mSenha, mcmfSenha, mTelefone;
+    String nome, cpf, email, senha, cmfSenha, telefone;
     Button mButtoRegister;
     TextView mTextBkHome;
     ClienteServices clienteServices = new ClienteServices();
@@ -83,6 +83,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
     public void capturaTextos() {
         findEditTexts();
         nome = mNome.getText().toString().trim();
+        telefone = mTelefone.getText().toString().trim();
         cpf = mCpf.getText().toString().trim();
         email = mEmail.getText().toString().trim();
         senha = mSenha.getText().toString().trim();
@@ -92,6 +93,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
     public void findEditTexts() {
 
         mNome = (EditText) findViewById(R.id.username);
+        mTelefone = (EditText) findViewById(R.id.clienteTelefone);
         mCpf = (EditText) findViewById(R.id.cpf);
         mEmail = (EditText) findViewById(R.id.email);
         mSenha = (EditText) findViewById(R.id.passwd);
@@ -105,6 +107,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
         boolean res = true;
         //reseta os erros
         mNome.setError(null);
+        mTelefone.setError(null);
         mCpf.setError(null);
         mSenha.setError(null);
         mEmail.setError(null);
@@ -113,6 +116,14 @@ public class CadastroClienteActivity extends AppCompatActivity {
         if (isCampoVazio(nome)) {
             mNome.setError("Campo vazio");
             focusView = mNome;
+            res = false;
+        } else if (isCampoVazio(telefone)) {
+            mTelefone.setError("Campo vazio");
+            focusView = mTelefone;
+            res = false;
+        } if (telefone.length()!=10) {
+            mTelefone.setError("telefone inválido");
+            focusView = mTelefone;
             res = false;
         } else if (isCampoVazio(cpf)) {
             mCpf.setError("Campo vazio");
@@ -161,6 +172,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
     private Cliente criarCliente() {
         Cliente cliente = new Cliente();
         cliente.setAvaliacao(5);
+        cliente.setTelefone(telefone);
         return cliente;
     }
 
@@ -182,6 +194,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
 
     private void limparCampos() {
         mNome.setText("");
+        mTelefone.setText("");
         mSenha.setText("");
         mcmfSenha.setText("");
         mEmail.setText("");

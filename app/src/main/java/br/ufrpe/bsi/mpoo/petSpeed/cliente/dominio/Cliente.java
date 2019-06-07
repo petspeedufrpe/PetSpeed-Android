@@ -23,6 +23,16 @@ public class Cliente implements Serializable {
 
     private long idPessoa;
 
+    private String telefone;
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
 
     public long getIdUsuario() {
         return idUsuario;

@@ -19,8 +19,17 @@ public class Medico implements Serializable {
 
     private Pessoa dadosPessoais;
 
+    private String telefone;
+
     private List<Clinica> clinicas;
 
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
     public long getId() {
         return id;

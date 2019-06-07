@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
-import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
 
@@ -21,6 +20,7 @@ public class ClienteDAO {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DBHelper.COL_CLIENTE_AVALIACAO, cliente.getAvaliacao());
+        values.put(DBHelper.COL_CLIENTE_TELEFONE, cliente.getTelefone());
         values.put(DBHelper.COL_CLIENTE_FK_USUARIO, cliente.getUsuario().getId());
         values.put(DBHelper.COL_CLIENTE_FK_PESSOA, cliente.getDadosPessoais().getId());
         res = db.insert(DBHelper.TABELA_CLIENTE, null, values);
@@ -56,14 +56,17 @@ public class ClienteDAO {
     private Cliente createCliente(Cursor cursor) {
         int indexId = cursor.getColumnIndex(DBHelper.COL_CLIENTE_ID);
         int indexAvaliacao = cursor.getColumnIndex(DBHelper.COL_CLIENTE_AVALIACAO);
+        int indexTelefone = cursor.getColumnIndex(DBHelper.COL_CLIENTE_TELEFONE);
         int indexIdUsuario = cursor.getColumnIndex(DBHelper.COL_CLIENTE_FK_USUARIO);
         int indexIdPessoa = cursor.getColumnIndex(DBHelper.COL_CLIENTE_FK_PESSOA);
         long id = cursor.getLong(indexId);
         long avaliacao = cursor.getLong(indexAvaliacao);
+        String telefone = cursor.getString(indexTelefone);
         long idUsuario = cursor.getLong(indexIdUsuario);
         long idPessoa = cursor.getLong(indexIdPessoa);
         Cliente cliente = new Cliente();
         cliente.setId(id);
+        cliente.setTelefone(telefone);
         cliente.setAvaliacao(avaliacao);
         cliente.setIdUsuario(idUsuario);
         cliente.setIdPessoa(idPessoa);

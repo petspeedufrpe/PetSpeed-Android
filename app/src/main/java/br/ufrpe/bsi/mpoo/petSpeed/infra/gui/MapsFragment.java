@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.ViewMedicosFragment;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
@@ -109,10 +110,15 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         Map markerMap = (Map<ContasDeUsuario, Object>) marker.getTag();
         if (markerMap.containsKey(ContasDeUsuario.MEDICO)) {
             medico = (Medico) markerMap.get(ContasDeUsuario.MEDICO);
+            Sessao.instance.setValue(ContasDeUsuario.MEDICO.getDescricao(),medico);
+            ViewMedicosFragment viewPinMedico = new ViewMedicosFragment();
+            viewPinMedico.show(getFragmentManager(), "ViewMedicosFragment");
+
         }
         LatLng location = marker.getPosition();
         Toast.makeText(PetSpeedApp.getContext(), location.toString(), Toast.LENGTH_SHORT).show();
         return false;
+
     }
 
 
