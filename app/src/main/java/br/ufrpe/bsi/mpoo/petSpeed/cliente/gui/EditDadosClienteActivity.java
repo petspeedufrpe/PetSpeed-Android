@@ -102,19 +102,17 @@ public class EditDadosClienteActivity extends AppCompatActivity {
     }
 
     public boolean setNovosDados(){
-        boolean result = true;
+        boolean result;
         if (validaCampos()){
                 cliente.getDadosPessoais().setNome(nome);
-
             if (!cliente.getUsuario().getEmail().equals(email) && usuarioDAO.getUsuario(email)== null ) {
-
                 cliente.getUsuario().setEmail(email);
             } else {
                 Toast.makeText(this,"Email já cadastrado",Toast.LENGTH_SHORT).show();
                 result = false;
             }
             //faltando o telefone
-        }
+        } result = false;
 
         return result;
     }
@@ -125,7 +123,7 @@ public class EditDadosClienteActivity extends AppCompatActivity {
             Toast.makeText(this,"Dados Alterados com sucesso",Toast.LENGTH_SHORT).show();
             sair();
         } else {
-            Toast.makeText(this,"Email já cadastrado",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Verifique seus dados",Toast.LENGTH_SHORT).show();
         }
     }
 
