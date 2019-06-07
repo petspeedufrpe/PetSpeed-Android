@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.AnimalClienteActivity;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ControleMeusPets;
 
 
 public class AdapterMeuPet extends ArrayAdapter<Animal> {
@@ -38,7 +40,6 @@ public class AdapterMeuPet extends ArrayAdapter<Animal> {
         TextView nomePet = (TextView) rowView.findViewById(R.id.campo_nome);
         TextView racaPet = (TextView) rowView.findViewById(R.id.campo_raca);
         TextView idadePet = (TextView) rowView.findViewById(R.id.campo_idade);
-        TextView pesoPet = (TextView) rowView.findViewById(R.id.campo_altera_email_cliente);
         ImageView fotoPet = (ImageView) rowView.findViewById(R.id.campo_fotoPet);
 
         nomePet.setText(listaAnimal.get(position).getNome());

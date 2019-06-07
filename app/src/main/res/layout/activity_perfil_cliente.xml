@@ -90,7 +90,7 @@
                         android:layout_marginEnd="12dp"
                         android:layout_marginBottom="5dp"
                         android:contentDescription="Icone Email"
-                        android:src="@mipmap/ic_launcher_round"/>
+                        android:src="@mipmap/ic_email"/>
 
                     <TextView
                         android:id="@+id/campo_altera_nome_cliente"
@@ -122,7 +122,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:contentDescription="Cidade do Cliente"
-                        android:src="@mipmap/ic_launcher_round" />
+                        android:src="@drawable/ic_info_black_24dp" />
 
                     <TextView
                         android:id="@+id/campo_altera_telefone_cliente"
@@ -155,7 +155,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:contentDescription="Cidade do Cliente"
-                        android:src="@mipmap/ic_launcher_round" />
+                        android:src="@drawable/ic_info_black_24dp" />
 
                     <TextView
                         android:id="@+id/campo_altera_email_cliente"

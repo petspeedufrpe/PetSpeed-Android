@@ -25,6 +25,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_MEDICO_FK_USUARIO = "FK_USUARIO";
     public static final String COL_MEDICO_FK_CLINICA = "FK_CLINICA";
     public static final String COL_MEDICO_FK_PESSOA = "FK_PESSOA";
+    public static final String COL_MEDICO_FOTO = "FOTO";
+
     // TABELA CLINICA:
     public static final String TABELA_CLINICA = "TB_CLINICA";
     public static final String COL_CLINICA_ID = "ID";
@@ -60,6 +62,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_CLIENTE_TELEFONE = "TELEFONE";
     public static final String COL_CLIENTE_FK_USUARIO = "FK_USUARIO";
     public static final String COL_CLIENTE_FK_PESSOA = "FK_PESSOA";
+    public static final String COL_CLIENTE_FOTO = "FOTO";
     // TABELA OS:
     public static final String TABELA_OS = "TB_OS";
     public static final String COL_OS_ID = "ID";
@@ -81,7 +84,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_TRIAGEM_SINTOMAS = "SINTOMAS";
     public static final String COL_TRIAGEM_OUTROS = "OUTROS";
     private static final String NOME_DB = "petspeed.db";
-    private static final int VERSAO = 17;
+    private static final int VERSAO = 18;
     private static final String[] TABELAS = {
             TABELA_MEDICO, TABELA_ANIMAL, TABELA_CLIENTE, TABELA_CLINICA,
             TABELA_ENDERECO, TABELA_OS, TABELA_PESSOA, TABELA_TRIAGEM, TABELA_USUARIO
@@ -134,13 +137,14 @@ public class DBHelper extends SQLiteOpenHelper {
                         " %5$s TEXT NOT NULL, " +
                         " %6$s TEXT NOT NULL, " +
                         " %7$s TEXT NOT NULL, " +
-                        " %8$s TEXT " +
+                        " %8$s BLOB, " +
+                        " %9$s TEXT " +
 
                         ");";
         sqlTbMedico = String.format(sqlTbMedico,
                 TABELA_MEDICO, COL_MEDICO_ID, COL_MEDICO_AVALIACAO,
                 COL_MEDICO_CRMV,COL_MEDICO_TELEFONE, COL_MEDICO_FK_USUARIO,
-                COL_MEDICO_FK_PESSOA, COL_MEDICO_FK_CLINICA);
+                COL_MEDICO_FK_PESSOA,COL_MEDICO_FOTO,COL_MEDICO_FK_CLINICA);
         db.execSQL(sqlTbMedico);
     }
 
@@ -202,11 +206,12 @@ public class DBHelper extends SQLiteOpenHelper {
                         "  %2$s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "  %3$s REAL NOT NULL, " +
                         "  %4$s TEXT NOT NULL, " +
-                        "  %5$s TEXT NOT NULL, " +
-                        "  %6$s TEXT NOT NULL " +
+                        "  %5$s BLOB, " +
+                        "  %6$s TEXT NOT NULL, " +
+                        "  %7$s TEXT NOT NULL " +
                         ");";
         sqlTbCliente = String.format(sqlTbCliente,
-                TABELA_CLIENTE, COL_CLIENTE_ID, COL_CLIENTE_AVALIACAO,COL_CLIENTE_TELEFONE, COL_CLIENTE_FK_PESSOA, COL_CLIENTE_FK_USUARIO);
+                TABELA_CLIENTE, COL_CLIENTE_ID, COL_CLIENTE_AVALIACAO,COL_CLIENTE_TELEFONE,COL_CLIENTE_FOTO,COL_CLIENTE_FK_PESSOA, COL_CLIENTE_FK_USUARIO);
         db.execSQL(sqlTbCliente);
     }
 

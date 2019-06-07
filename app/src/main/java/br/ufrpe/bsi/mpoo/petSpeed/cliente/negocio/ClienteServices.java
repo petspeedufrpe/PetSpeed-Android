@@ -182,6 +182,9 @@ public class ClienteServices {
         clienteDAO.alteraAvaliacao(cliente);
     }
 
+    public void alteraFotoCliente(Cliente cliente){
+        clienteDAO.alteraFotoCliente(cliente);
+    }
     public ArrayList<Animal> getAllAnimalByIdCliente(long idCliente) {
         boolean result;
         ArrayList<Animal> listAnimals = animalDAO.getAllAnimalByIdCliente(idCliente);

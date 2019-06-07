@@ -21,6 +21,8 @@ public class Medico implements Serializable {
 
     private String telefone;
 
+    private byte[] foto;
+
     private List<Clinica> clinicas;
 
     public String getTelefone() {
@@ -81,4 +83,11 @@ public class Medico implements Serializable {
         this.clinicas = clinicas;
     }
 
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
 }

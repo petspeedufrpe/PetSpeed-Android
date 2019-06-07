@@ -49,7 +49,7 @@ import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
 
 public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMyLocationButtonClickListener,
-        GoogleMap.OnMyLocationClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+        GoogleMap.OnMyLocationClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
 
 
     private double raio = 5.0;
@@ -134,7 +134,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         ArrayList<Marker> list = new ArrayList<>();
         listMedicos.size();
         while (i < listMedicos.size()) {
-            double lat = listMedicos.get(i).getDadosPessoais().getEndereco().getLatidude();
+            double lat = listMedicos.get(i).getDadosPessoais().getEndereco().getLatitude();
             double lng = listMedicos.get(i).getDadosPessoais().getEndereco().getLongitude();
             LatLng latLng = new LatLng(lat, lng);
             Medico medico = listMedicos.get(i);
