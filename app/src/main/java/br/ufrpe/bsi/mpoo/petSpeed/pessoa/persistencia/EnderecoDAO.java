@@ -29,7 +29,7 @@ public class EnderecoDAO {
         values.put(DBHelper.COL_ENDERECO_COMPLEMENTO, endereco.getComplemento());
         values.put(DBHelper.COL_ENDERECO_FK_CLINICA, endereco.getFkClinica());
         values.put(DBHelper.COL_ENDERECO_FK_PESSOA, endereco.getFkPessoa());
-        values.put(DBHelper.COL_ENDERECO_LATITUTDE,endereco.getLatitude());
+        values.put(DBHelper.COL_ENDERECO_LATITUTDE,endereco.getLatidude());
         values.put(DBHelper.COL_ENDERECO_LONGITUDE,endereco.getLongitude());
         res = db.insert(DBHelper.TABELA_ENDERECO, null, values);
         db.close();
