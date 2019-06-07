@@ -25,6 +25,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -38,6 +39,7 @@ import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.ViewMedicosFragment;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.FragmentDataTransferInterface;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
@@ -48,6 +50,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         GoogleMap.OnMyLocationClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
 
+    private double raio = 5.0;
     private GoogleMap mMap;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 101;
     private MedicoServices medicoServices = new MedicoServices();
@@ -148,6 +151,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         markerOptions.position(latLng);
         markerOptions.title(title);
         markerOptions.snippet("média: " + avaliacao);
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(82.0f));
         marker = mMap.addMarker(markerOptions);
         marker.setTag(mapConta);
         marker.showInfoWindow();
@@ -171,9 +175,9 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         double lat = cliente.getDadosPessoais().getEndereco().getLatidude();
         double lng = cliente.getDadosPessoais().getEndereco().getLongitude();
         if (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            listMedicos = medicoServices.getMedicosInRaio(20, mLocation.getLatitude(), mLocation.getLongitude());
+            listMedicos = medicoServices.getMedicosInRaio(raio, mLocation.getLatitude(), mLocation.getLongitude());
         } else {
-            listMedicos = medicoServices.getMedicosInRaio(20, lat, lng);
+            listMedicos = medicoServices.getMedicosInRaio(raio, lat, lng);
         }
     }
 
@@ -247,6 +251,12 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                     }
                 }
         }
+    }
+    public void setNovoRaio(Double novoRaio) {
+        this.raio = novoRaio;
+        setTypeOfSearch();
+        mMap.clear();
+        addMutilpeMarkersOnMap(listMedicos);
     }
 
     private void createNoGpsDialog() {
