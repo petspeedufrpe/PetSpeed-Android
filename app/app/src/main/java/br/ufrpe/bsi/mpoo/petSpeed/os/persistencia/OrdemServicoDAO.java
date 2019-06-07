@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.os.persistencia;
+package br.ufrpe.bsi.mpoo.petspeed.os.persistencia;
 
 
 import android.content.ContentValues;
@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.List;
 
-import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
-import br.ufrpe.bsi.mpoo.petSpeed.os.dominio.OrdemServico;
+import br.ufrpe.bsi.mpoo.petspeed.infra.Persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 
 public class OrdemServicoDAO {
 

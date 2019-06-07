@@ -1,15 +1,15 @@
-package br.ufrpe.bsi.mpoo.petSpeed.medico.persistencia;
+package br.ufrpe.bsi.mpoo.petspeed.medico.persistencia;
 
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
-import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.PessoaDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
-import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
+import br.ufrpe.bsi.mpoo.petspeed.infra.Persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.persistencia.PessoaDAO;
+import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
+import br.ufrpe.bsi.mpoo.petspeed.usuario.persistencia.UsuarioDAO;
 
 public class MedicoDAO {
 

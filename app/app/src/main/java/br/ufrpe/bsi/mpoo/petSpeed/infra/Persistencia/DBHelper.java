@@ -1,9 +1,9 @@
-package br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia;
+package br.ufrpe.bsi.mpoo.petspeed.infra.Persistencia;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
+import br.ufrpe.bsi.mpoo.petspeed.infra.app.PetSpeedApp;
 
 
 public class DBHelper extends SQLiteOpenHelper {

@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
+package br.ufrpe.bsi.mpoo.petspeed.infra.gui;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -11,18 +11,18 @@ import android.widget.Toast;
 
 import java.util.Map;
 
-import br.ufrpe.bsi.mpoo.petSpeed.R;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ApiRequestService;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.GeocodeRequestCallbackListener;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.SessaoCadastro;
-import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
-import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
+import br.ufrpe.bsi.mpoo.petspeed.R;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.ApiRequestService;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.AppException;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.ContasDeUsuario;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.GeocodeRequestCallbackListener;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoCadastro;
+import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
+import br.ufrpe.bsi.mpoo.petspeed.medico.negocio.MedicoServices;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Endereco;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.negocio.PessoaServices;
 
 public class FinalizaCadastroActivity extends AppCompatActivity {
 

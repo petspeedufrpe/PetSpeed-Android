@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio;
+package br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio;
 
 import java.io.Serializable;
 

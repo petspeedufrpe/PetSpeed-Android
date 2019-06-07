@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
+package br.ufrpe.bsi.mpoo.petspeed.infra.gui;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -72,21 +72,20 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Executor;
 
-import br.ufrpe.bsi.mpoo.petSpeed.R;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.HomeClienteActivity;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ConvertLatLngToKm;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
-import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
-import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.HomeClienteActivity;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.persistencia.ClienteDAO;
+import br.ufrpe.bsi.mpoo.petspeed.infra.app.PetSpeedApp;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.ConvertLatLngToKm;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
+import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
+import br.ufrpe.bsi.mpoo.petspeed.medico.negocio.MedicoServices;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Endereco;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Pessoa;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.negocio.PessoaServices;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.persistencia.EnderecoDAO;
+import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 
 import static android.content.ContentValues.TAG;
 

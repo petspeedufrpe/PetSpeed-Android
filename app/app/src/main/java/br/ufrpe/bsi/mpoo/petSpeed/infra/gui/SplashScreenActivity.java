@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
+package br.ufrpe.bsi.mpoo.petspeed.infra.gui;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
-import br.ufrpe.bsi.mpoo.petSpeed.R;
+import br.ufrpe.bsi.mpoo.petspeed.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

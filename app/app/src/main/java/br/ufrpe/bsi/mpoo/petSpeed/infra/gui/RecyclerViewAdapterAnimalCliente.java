@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
+package br.ufrpe.bsi.mpoo.petspeed.infra.gui;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
-import br.ufrpe.bsi.mpoo.petSpeed.R;
-import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.RecyclerViewClickListener;
+import br.ufrpe.bsi.mpoo.petspeed.R;
+import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.RecyclerViewClickListener;
 
 
 //Classe para renderizar os n Animais da ArrayList para n CardViews no Layout

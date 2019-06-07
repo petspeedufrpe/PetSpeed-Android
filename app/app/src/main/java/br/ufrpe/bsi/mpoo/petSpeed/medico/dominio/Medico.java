@@ -1,11 +1,11 @@
-package br.ufrpe.bsi.mpoo.petSpeed.medico.dominio;
+package br.ufrpe.bsi.mpoo.petspeed.medico.dominio;
 
 import java.io.Serializable;
 import java.util.List;
 
-import br.ufrpe.bsi.mpoo.petSpeed.clinica.dominio.Clinica;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
-import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
+import br.ufrpe.bsi.mpoo.petspeed.clinica.dominio.Clinica;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Pessoa;
+import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 
 public class Medico implements Serializable {
 

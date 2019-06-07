@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.cliente.gui;
+package br.ufrpe.bsi.mpoo.petspeed.cliente.gui;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import br.ufrpe.bsi.mpoo.petSpeed.R;
+import br.ufrpe.bsi.mpoo.petspeed.R;
 
 public class PerfilClienteActivity extends AppCompatActivity {
     private TextView mEmail,mNome,mTelefone,mCidade;

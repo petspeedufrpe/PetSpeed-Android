@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.os.dominio;
+package br.ufrpe.bsi.mpoo.petspeed.os.dominio;
 
 import java.util.List;
 

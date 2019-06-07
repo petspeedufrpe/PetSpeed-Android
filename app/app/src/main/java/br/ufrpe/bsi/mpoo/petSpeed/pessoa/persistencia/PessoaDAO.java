@@ -1,11 +1,11 @@
-package br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia;
+package br.ufrpe.bsi.mpoo.petspeed.pessoa.persistencia;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
+import br.ufrpe.bsi.mpoo.petspeed.infra.Persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Pessoa;
 
 public class PessoaDAO {
     private DBHelper dbHelper = new DBHelper();

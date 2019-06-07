@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.cliente.gui;
+package br.ufrpe.bsi.mpoo.petspeed.cliente.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,17 +12,17 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import br.ufrpe.bsi.mpoo.petSpeed.R;
-import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
-import br.ufrpe.bsi.mpoo.petSpeed.animal.gui.CrudAnimalActivity;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.app.PetSpeedApp;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.gui.RecyclerViewAdapterAnimalCliente;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.RecyclerViewClickListener;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
-import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
+import br.ufrpe.bsi.mpoo.petspeed.R;
+import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
+import br.ufrpe.bsi.mpoo.petspeed.animal.gui.CrudAnimalActivity;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.persistencia.ClienteDAO;
+import br.ufrpe.bsi.mpoo.petspeed.infra.app.PetSpeedApp;
+import br.ufrpe.bsi.mpoo.petspeed.infra.gui.RecyclerViewAdapterAnimalCliente;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.RecyclerViewClickListener;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
+import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 
 public class AnimalClienteActivity extends AppCompatActivity {
 

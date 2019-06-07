@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.cliente.gui;
+package br.ufrpe.bsi.mpoo.petspeed.cliente.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,15 +15,15 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.ufrpe.bsi.mpoo.petSpeed.R;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.gui.LoginActivity;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.SessaoCadastro;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.gui.CadastroEnderecoActivity;
-import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
+import br.ufrpe.bsi.mpoo.petspeed.R;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
+import br.ufrpe.bsi.mpoo.petspeed.infra.gui.LoginActivity;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.ContasDeUsuario;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoCadastro;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Pessoa;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.gui.CadastroEnderecoActivity;
+import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 
 public class CadastroClienteActivity extends AppCompatActivity {
 

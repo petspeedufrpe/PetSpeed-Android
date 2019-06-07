@@ -1,8 +1,8 @@
-package br.ufrpe.bsi.mpoo.petSpeed.animal.dominio;
+package br.ufrpe.bsi.mpoo.petspeed.animal.dominio;
 
 import java.util.List;
 
-import br.ufrpe.bsi.mpoo.petSpeed.os.dominio.OrdemServico;
+import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 //import java.awt.image;
 
 public class Animal {

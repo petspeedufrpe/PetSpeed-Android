@@ -1,21 +1,21 @@
-package br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio;
+package br.ufrpe.bsi.mpoo.petspeed.cliente.negocio;
 
 import android.database.Cursor;
 
 import java.util.ArrayList;
 
-import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
-import br.ufrpe.bsi.mpoo.petSpeed.animal.persistencia.AnimalDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.persistencia.ClienteDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.PessoaDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
-import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
+import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
+import br.ufrpe.bsi.mpoo.petspeed.animal.persistencia.AnimalDAO;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.persistencia.ClienteDAO;
+import br.ufrpe.bsi.mpoo.petspeed.infra.Persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.AppException;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Pessoa;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.negocio.PessoaServices;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.persistencia.PessoaDAO;
+import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
+import br.ufrpe.bsi.mpoo.petspeed.usuario.persistencia.UsuarioDAO;
 
 public class ClienteServices {
 

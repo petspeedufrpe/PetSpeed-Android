@@ -1,12 +1,12 @@
-package br.ufrpe.bsi.mpoo.petSpeed.animal.negocio;
+package br.ufrpe.bsi.mpoo.petspeed.animal.negocio;
 
 import java.util.List;
 
-import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
-import br.ufrpe.bsi.mpoo.petSpeed.animal.persistencia.AnimalDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.medico.persistencia.MedicoDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.os.dominio.OrdemServico;
-import br.ufrpe.bsi.mpoo.petSpeed.os.persistencia.OrdemServicoDAO;
+import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
+import br.ufrpe.bsi.mpoo.petspeed.animal.persistencia.AnimalDAO;
+import br.ufrpe.bsi.mpoo.petspeed.medico.persistencia.MedicoDAO;
+import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
+import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.OrdemServicoDAO;
 
 public class AnimalServices {
 

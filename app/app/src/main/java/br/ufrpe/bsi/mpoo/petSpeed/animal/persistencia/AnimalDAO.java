@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.animal.persistencia;
+package br.ufrpe.bsi.mpoo.petspeed.animal.persistencia;
 
 
 import android.content.ContentValues;
@@ -8,9 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.Persistencia.DBHelper;
-import br.ufrpe.bsi.mpoo.petSpeed.os.dominio.OrdemServico;
+import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
+import br.ufrpe.bsi.mpoo.petspeed.infra.Persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 
 public class AnimalDAO {
 

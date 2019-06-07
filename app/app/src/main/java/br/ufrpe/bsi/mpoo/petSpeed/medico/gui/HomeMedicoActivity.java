@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.medico.gui;
+package br.ufrpe.bsi.mpoo.petspeed.medico.gui;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,7 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
-import br.ufrpe.bsi.mpoo.petSpeed.R;
+import br.ufrpe.bsi.mpoo.petspeed.R;
 
 public class HomeMedicoActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

@@ -1,17 +1,17 @@
-package br.ufrpe.bsi.mpoo.petSpeed.medico.negocio;
+package br.ufrpe.bsi.mpoo.petspeed.medico.negocio;
 
-import br.ufrpe.bsi.mpoo.petSpeed.clinica.persistencia.ClinicaDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AppException;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
-import br.ufrpe.bsi.mpoo.petSpeed.medico.dominio.Medico;
-import br.ufrpe.bsi.mpoo.petSpeed.medico.persistencia.MedicoDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Endereco;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.dominio.Pessoa;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.negocio.PessoaServices;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.EnderecoDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.pessoa.persistencia.PessoaDAO;
-import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
-import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
+import br.ufrpe.bsi.mpoo.petspeed.clinica.persistencia.ClinicaDAO;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.AppException;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
+import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
+import br.ufrpe.bsi.mpoo.petspeed.medico.persistencia.MedicoDAO;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Endereco;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Pessoa;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.negocio.PessoaServices;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.persistencia.EnderecoDAO;
+import br.ufrpe.bsi.mpoo.petspeed.pessoa.persistencia.PessoaDAO;
+import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
+import br.ufrpe.bsi.mpoo.petspeed.usuario.persistencia.UsuarioDAO;
 
 public class MedicoServices {
 

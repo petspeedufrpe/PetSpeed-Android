@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petSpeed.infra.gui;
+package br.ufrpe.bsi.mpoo.petspeed.infra.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,14 +14,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import br.ufrpe.bsi.mpoo.petSpeed.R;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.CadastroClienteActivity;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.HomeClienteActivity;
-import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ContasDeUsuario;
-import br.ufrpe.bsi.mpoo.petSpeed.medico.gui.CadastroMedicoActivity;
-import br.ufrpe.bsi.mpoo.petSpeed.medico.gui.HomeMedicoActivity;
-import br.ufrpe.bsi.mpoo.petSpeed.medico.negocio.MedicoServices;
+import br.ufrpe.bsi.mpoo.petspeed.R;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.CadastroClienteActivity;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.HomeClienteActivity;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.ContasDeUsuario;
+import br.ufrpe.bsi.mpoo.petspeed.medico.gui.CadastroMedicoActivity;
+import br.ufrpe.bsi.mpoo.petspeed.medico.gui.HomeMedicoActivity;
+import br.ufrpe.bsi.mpoo.petspeed.medico.negocio.MedicoServices;
 
 public class LoginActivity extends AppCompatActivity {
 
