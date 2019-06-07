@@ -16,8 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:title="Editar Perfil"
-            android:background="@color/lightgreen"
-            app:navigationIcon="@drawable/ic_arrow_back_black_24dp">
+            android:background="@color/lightgreen">
             </android.support.v7.widget.Toolbar>
             <ImageView
                 android:id="@+id/campo_imagem"
@@ -67,7 +66,7 @@
                         android:layout_marginBottom="5dp"
                         android:paddingTop="12dp"
                         android:paddingBottom="12dp"
-                        android:text="Digite seu nome"
+                        android:hint="Digite seu nome"
                         android:textColor="@color/lightgreen"
                         android:textSize="16sp" />
 
@@ -83,7 +82,7 @@
                         android:paddingTop="12dp"
                         android:paddingBottom="12dp"
                         android:layout_marginBottom="12dp"
-                        android:text="Digite seu telefone"
+                        android:hint="Digite seu telefone"
                         android:textColor="@color/lightgreen"
                         android:textSize="16sp" />
 
@@ -98,7 +97,7 @@
                         android:layout_marginEnd="0dp"
                         android:paddingTop="12dp"
                         android:paddingBottom="12dp"
-                        android:text="exemplo@gmail.com"
+                        android:hint="exemplo@gmail.com"
                         android:textColor="@color/lightgreen"
                         android:textSize="16sp" />
 

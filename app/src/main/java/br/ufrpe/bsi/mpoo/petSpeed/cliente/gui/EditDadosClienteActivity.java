@@ -16,14 +16,17 @@ import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petSpeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.Sessao;
+import br.ufrpe.bsi.mpoo.petSpeed.usuario.persistencia.UsuarioDAO;
 
 public class EditDadosClienteActivity extends AppCompatActivity {
 
     private EditText mNome,mEmail,mTelefone;
     private String nome, email, telefone;
+    private Button btnMudarSenha;
     private android.support.v7.widget.Toolbar toolbar;
     private Cliente cliente = Sessao.instance.getCliente();
     private ClienteServices clienteServices = new ClienteServices();
+    private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,13 @@ public class EditDadosClienteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_dados_cliente);
         toolbar = (Toolbar) findViewById(R.id.toolbar_altera_dados);
         setSupportActionBar(toolbar);
+        btnMudarSenha = (Button) findViewById(R.id.btn_alterar_senha);
+        btnMudarSenha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(EditDadosClienteActivity.this,MudarSenhaAcitivity.class));
+            }
+        });
 
     }
 
@@ -40,10 +50,18 @@ public class EditDadosClienteActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         alteraDados();
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,PerfilClienteActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     public void findEditTexts(){
@@ -84,27 +102,36 @@ public class EditDadosClienteActivity extends AppCompatActivity {
         return result;
     }
 
-    public void setNovosDados(){
-        capturaTextos();
+    public boolean setNovosDados(){
+        boolean result = true;
         if (validaCampos()){
-            cliente.getDadosPessoais().setNome(nome);
-            cliente.getUsuario().setEmail(email);
+                cliente.getDadosPessoais().setNome(nome);
+
+            if (!cliente.getUsuario().getEmail().equals(email) && usuarioDAO.getUsuario(email)== null ) {
+
+                cliente.getUsuario().setEmail(email);
+            } else {
+                Toast.makeText(this,"Email já cadastrado",Toast.LENGTH_SHORT).show();
+                result = false;
+            }
             //faltando o telefone
-        } else {
-            Toast.makeText(this,"Dados Alterados com sucesso",Toast.LENGTH_SHORT).show();
         }
 
+        return result;
     }
 
     public void alteraDados(){
-        setNovosDados();
-        if (cliente!= null){
+        if (setNovosDados()){
             clienteServices.alterarDadosCliente(cliente);
             Toast.makeText(this,"Dados Alterados com sucesso",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(EditDadosClienteActivity.this,PerfilClienteActivity.class));
-            finish();
+            sair();
         } else {
-            Toast.makeText(this,"Verificar Dados",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Email já cadastrado",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void sair(){
+        startActivity(new Intent(EditDadosClienteActivity.this,PerfilClienteActivity.class));
+        finish();
     }
 }

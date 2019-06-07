@@ -32,6 +32,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(PerfilClienteActivity.this,EditDadosClienteActivity.class));
+                finish();
             }
         });
     }
