@@ -12,31 +12,25 @@
     <fragment
         android:id="@+id/fragment"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="396dp"
-        android:layout_height="457dp"
-        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:orientation="vertical"
-        android:layout_width="0dp"
-        android:layout_height="125dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+    <Button
+        android:id="@+id/buttonRaio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Raio"
+        android:textColor="#000000"
+        android:backgroundTint="@color/lightgreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.974" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:text="Exemplo" />
-    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

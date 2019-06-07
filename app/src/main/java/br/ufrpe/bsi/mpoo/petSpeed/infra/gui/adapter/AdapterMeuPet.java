@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
 import br.ufrpe.bsi.mpoo.petSpeed.animal.dominio.Animal;
+import br.ufrpe.bsi.mpoo.petSpeed.cliente.gui.AnimalClienteActivity;
+import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.ControleMeusPets;
 
 
 public class AdapterMeuPet extends ArrayAdapter<Animal> {
@@ -20,14 +22,17 @@ public class AdapterMeuPet extends ArrayAdapter<Animal> {
     private final ArrayList<Animal> listaAnimal = new ArrayList<>();
 
 
-    public AdapterMeuPet(Context contexto, ArrayList<Animal> arrayMeusPets, Context contexto1){
+    public AdapterMeuPet(Context contexto, ArrayList<Animal> arrayMeusPets){
         super(contexto, R.layout.activity_meus_pets, arrayMeusPets);
 
         this.contexto = contexto;
         this.listaAnimal.addAll(arrayMeusPets);
     }
+
+
+
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(int position, View view, ViewGroup parent){
         LayoutInflater inflater = (LayoutInflater) contexto
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.activity_meus_pets,parent,false);
@@ -35,13 +40,12 @@ public class AdapterMeuPet extends ArrayAdapter<Animal> {
         TextView nomePet = (TextView) rowView.findViewById(R.id.campo_nome);
         TextView racaPet = (TextView) rowView.findViewById(R.id.campo_raca);
         TextView idadePet = (TextView) rowView.findViewById(R.id.campo_idade);
-        TextView pesoPet = (TextView) rowView.findViewById(R.id.campo_altera_email_cliente);
         ImageView fotoPet = (ImageView) rowView.findViewById(R.id.campo_fotoPet);
 
         nomePet.setText(listaAnimal.get(position).getNome());
         racaPet.setText(listaAnimal.get(position).getRaca());
         idadePet.setText(listaAnimal.get(position).getNascimento());
-        pesoPet.setText((int) listaAnimal.get(position).getPeso());
+        //pesoPet.setText((int) listaAnimal.get(position).getPeso());
         //fotoPet.setImageResource(listaAnimal.get(position).getFoto);
 
         return rowView;

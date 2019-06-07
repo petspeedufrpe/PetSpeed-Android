@@ -19,8 +19,19 @@ public class Medico implements Serializable {
 
     private Pessoa dadosPessoais;
 
+    private String telefone;
+
+    private byte[] foto;
+
     private List<Clinica> clinicas;
 
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
     public long getId() {
         return id;
@@ -72,4 +83,11 @@ public class Medico implements Serializable {
         this.clinicas = clinicas;
     }
 
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
 }

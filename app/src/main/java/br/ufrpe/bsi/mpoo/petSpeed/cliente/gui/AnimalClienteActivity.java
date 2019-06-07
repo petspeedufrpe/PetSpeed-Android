@@ -36,7 +36,7 @@ public class AnimalClienteActivity extends AppCompatActivity {
     private Usuario usuario = Sessao.instance.getUsuario();
     private ClienteDAO clienteDAO = new ClienteDAO();
     private Cliente cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
-    private ListView listaAnimais;
+    private ListView listaAnimal;
     //private AnimalClienteService animalClienteService;
 
 
@@ -64,9 +64,10 @@ public class AnimalClienteActivity extends AppCompatActivity {
         ClienteServices clienteServices = new ClienteServices();
         long idCliente = Sessao.instance.getCliente().getId();
         ArrayList<Animal> petsCliente = clienteServices.getAllAnimalByIdCliente(idCliente);
+        final AdapterMeuPet adapter = new AdapterMeuPet(this, petsCliente);
+        listaAnimal.setAdapter(adapter);
 
     }
-
 
 
     public void createAllAnimals(){

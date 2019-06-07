@@ -53,6 +53,7 @@ public class PreencherBanco {
 
         medico.setAvaliacao(5.0);
         medico.setCrmv("68444");
+        medico.setTelefone("1125698687");
         medico.setUsuario(usuario);
         medico.setDadosPessoais(pessoa);
 
@@ -88,6 +89,7 @@ public class PreencherBanco {
 
         medico.setAvaliacao(4.8);
         medico.setCrmv("06856");
+        medico.setTelefone("5569868547");
         medico.setUsuario(usuario);
         medico.setDadosPessoais(pessoa);
 
@@ -124,6 +126,7 @@ public class PreencherBanco {
 
         medico.setAvaliacao(4.4);
         medico.setCrmv("09644");
+        medico.setTelefone("8536598658");
         medico.setUsuario(usuario);
         medico.setDadosPessoais(pessoa);
 
@@ -159,6 +162,7 @@ public class PreencherBanco {
 
         medico.setAvaliacao(4.8);
         medico.setCrmv("6754357");
+        medico.setTelefone("8256965875");
         medico.setUsuario(usuario);
         medico.setDadosPessoais(pessoa);
 
@@ -194,6 +198,7 @@ public class PreencherBanco {
 
         medico.setAvaliacao(4.3);
         medico.setCrmv("8587");
+        medico.setTelefone("8365968547");
         medico.setUsuario(usuario);
         medico.setDadosPessoais(pessoa);
 
@@ -229,6 +234,7 @@ public class PreencherBanco {
 
         medico.setAvaliacao(4.8);
         medico.setCrmv("8547");
+        medico.setTelefone("8125698658");
         medico.setUsuario(usuario);
         medico.setDadosPessoais(pessoa);
 
@@ -264,6 +270,7 @@ public class PreencherBanco {
 
         medico.setAvaliacao(4.9);
         medico.setCrmv("5968");
+        medico.setTelefone("8569896354");
         medico.setUsuario(usuario);
         medico.setDadosPessoais(pessoa);
 
@@ -308,6 +315,7 @@ public class PreencherBanco {
         pessoa.setEndereco(endereco);
 
         cliente.setAvaliacao(5.0);
+        cliente.setTelefone("8759686584");
         cliente.setDadosPessoais(pessoa);
         cliente.setUsuario(usuario);
 
@@ -328,7 +336,7 @@ public class PreencherBanco {
         animal.setPeso((float)12.3);
         animal.setNascimento(2015);
         animal.setFkCliente(cliente.getId());
-        //cService.cadastraAnimal(animal);
+        cService.cadastraAnimal(animal);
 
         //ANIMAL 2 ##################################
 
@@ -338,7 +346,7 @@ public class PreencherBanco {
         animal.setPeso((float)7.5);
         animal.setNascimento(2012);
         animal.setFkCliente(cliente.getId());
-        //cService.cadastraAnimal(animal);
+        cService.cadastraAnimal(animal);
 
         //ANIMAL 3 ##################################
 
@@ -348,7 +356,7 @@ public class PreencherBanco {
         animal.setPeso((float)15.9);
         animal.setNascimento(2015);
         animal.setFkCliente(cliente.getId());
-        //cService.cadastraAnimal(animal);
+        cService.cadastraAnimal(animal);
 
 
         Sessao.instance.reset();
@@ -379,6 +387,7 @@ public class PreencherBanco {
         pessoa.setEndereco(endereco);
 
         cliente.setAvaliacao(4.4);
+        cliente.setTelefone("8236598685");
         cliente.setDadosPessoais(pessoa);
         cliente.setUsuario(usuario);
 
@@ -399,7 +408,7 @@ public class PreencherBanco {
         animal.setPeso((float)7.7);
         animal.setNascimento(2014);
         animal.setFkCliente(cliente.getId());
-        //cService.cadastraAnimal(animal);
+        cService.cadastraAnimal(animal);
 
         //ANIMAL 2 ##################################
 
@@ -409,7 +418,7 @@ public class PreencherBanco {
         animal.setPeso((float)10.1);
         animal.setNascimento(2013);
         animal.setFkCliente(cliente.getId());
-        //cService.cadastraAnimal(animal);
+        cService.cadastraAnimal(animal);
 
         //ANIMAL 3 ##################################
 
@@ -419,7 +428,7 @@ public class PreencherBanco {
         animal.setPeso((float)14.8);
         animal.setNascimento(2014);
         animal.setFkCliente(cliente.getId());
-        //cService.cadastraAnimal(animal);
+        cService.cadastraAnimal(animal);
 
 
         Sessao.instance.reset();
@@ -450,6 +459,7 @@ public class PreencherBanco {
         pessoa.setEndereco(endereco);
 
         cliente.setAvaliacao(4.1);
+        cliente.setTelefone("8658547589");
         cliente.setDadosPessoais(pessoa);
         cliente.setUsuario(usuario);
 
@@ -470,7 +480,7 @@ public class PreencherBanco {
         animal.setPeso((float)17.3);
         animal.setNascimento(2010);
         animal.setFkCliente(cliente.getId());
-        //cService.cadastraAnimal(animal);
+        cService.cadastraAnimal(animal);
 
         //ANIMAL 2 ##################################
 
@@ -480,7 +490,7 @@ public class PreencherBanco {
         animal.setPeso((float)7.9);
         animal.setNascimento(2013);
         animal.setFkCliente(cliente.getId());
-        //cService.cadastraAnimal(animal);
+        cService.cadastraAnimal(animal);
 
         //ANIMAL 3 ##################################
 
@@ -490,7 +500,7 @@ public class PreencherBanco {
         animal.setPeso((float)18.5);
         animal.setNascimento(2013);
         animal.setFkCliente(cliente.getId());
-        //cService.cadastraAnimal(animal);
+        cService.cadastraAnimal(animal);
 
 
         Sessao.instance.reset();

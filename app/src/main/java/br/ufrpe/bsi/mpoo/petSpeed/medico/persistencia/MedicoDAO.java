@@ -24,6 +24,7 @@ public class MedicoDAO {
         ContentValues values = new ContentValues();
         values.put(DBHelper.COL_MEDICO_AVALIACAO, medico.getAvaliacao());
         values.put(DBHelper.COL_MEDICO_CRMV, medico.getCrmv());
+        values.put(DBHelper.COL_MEDICO_TELEFONE, medico.getTelefone());
         values.put(DBHelper.COL_MEDICO_FK_USUARIO, medico.getUsuario().getId());
         values.put(DBHelper.COL_MEDICO_FK_PESSOA, medico.getDadosPessoais().getId());
         long id = dbWrite.insert(DBHelper.TABELA_MEDICO, null, values);
@@ -39,8 +40,10 @@ public class MedicoDAO {
         int indexCRMV = cursor.getColumnIndex(DBHelper.COL_MEDICO_CRMV);
         int indexAvaliacao = cursor.getColumnIndex(DBHelper.COL_MEDICO_AVALIACAO);
         int indexFkPessoa = cursor.getColumnIndex(DBHelper.COL_MEDICO_FK_PESSOA);
+        int indexTelefone = cursor.getColumnIndex(DBHelper.COL_MEDICO_TELEFONE);
         medico.setId(cursor.getLong(indexID));
         medico.setCrmv(cursor.getString(indexCRMV));
+        medico.setTelefone(cursor.getString(indexTelefone));
         medico.setAvaliacao(cursor.getDouble(indexAvaliacao));
         int indexfkUsuario = cursor.getColumnIndex(DBHelper.COL_MEDICO_FK_USUARIO);
         long fkUsuario = cursor.getLong(indexfkUsuario);

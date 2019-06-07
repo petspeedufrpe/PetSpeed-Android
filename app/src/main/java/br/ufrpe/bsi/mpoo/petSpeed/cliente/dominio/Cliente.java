@@ -23,6 +23,10 @@ public class Cliente implements Serializable {
 
     private long idPessoa;
 
+    private String telefone;
+
+    private byte[] foto;
+
 
     public long getIdUsuario() {
         return idUsuario;
@@ -76,5 +80,21 @@ public class Cliente implements Serializable {
 
     public void setAnimais(List<Animal> animais) {
         this.animais = animais;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 }

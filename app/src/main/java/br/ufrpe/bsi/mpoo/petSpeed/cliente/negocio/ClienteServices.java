@@ -53,7 +53,7 @@ public class ClienteServices {
         } else {
             long idUsuario = usuarioDAO.cadastrarUsuario(usuario);
             cliente.getUsuario().setId(idUsuario);
-            cliente.getDadosPessoais().setIdUsuario(idUsuario);
+            cliente.getDadosPessoais().setFkUsuario(idUsuario);
             PessoaServices pessoaServices = new PessoaServices();
             long idPessoa = pessoaServices.cadastraPessoa(cliente.getDadosPessoais(), cliente.getDadosPessoais().getEndereco());
             cliente.getDadosPessoais().setId(idPessoa);
@@ -164,6 +164,11 @@ public class ClienteServices {
         sessao.reset();
     }
 
+    public long cadastraAnimal(Animal animal) {
+        long res = animalDAO.cadastraAnimal(animal);
+        return res;
+    }
+
     public void alteraSenha(Cliente cliente) {
         usuarioDAO.alterarSenha(cliente.getUsuario());
     }
@@ -175,6 +180,9 @@ public class ClienteServices {
         clienteDAO.alteraAvaliacao(cliente);
     }
 
+    public void alteraFotoCliente(Cliente cliente){
+        clienteDAO.alteraFotoCliente(cliente);
+    }
     public ArrayList<Animal> getAllAnimalByIdCliente(long idCliente) {
         boolean result;
         ArrayList<Animal> listAnimals = animalDAO.getAllAnimalByIdCliente(idCliente);

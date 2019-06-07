@@ -50,7 +50,7 @@ public class MedicoServices {
         } else {
             long idUsuario = usuarioDAO.cadastrarUsuario(usuario);
             medico.getUsuario().setId(idUsuario);
-            medico.getDadosPessoais().setIdUsuario(idUsuario);
+            medico.getDadosPessoais().setFkUsuario(idUsuario);
             PessoaServices pessoaServices = new PessoaServices();
             long idPessoa = pessoaServices.cadastraPessoa(medico.getDadosPessoais(), medico.getDadosPessoais().getEndereco());
             medico.getDadosPessoais().setId(idPessoa);
@@ -75,10 +75,10 @@ public class MedicoServices {
 
     public List<Medico> getMedicosInRaio(double radius, double userLat, double userLng) {
         final double kmInLatLng = 0.008983;
-            double latDownRange = userLat - (radius * kmInLatLng);
-            double latUpRange = userLat + (radius * kmInLatLng);
-            double lngDownRange = userLng - (radius * kmInLatLng);
-            double lngUpRange = userLng + (radius * kmInLatLng);
+        double latDownRange = userLat - (radius * kmInLatLng);
+        double latUpRange = userLat + (radius * kmInLatLng);
+        double lngDownRange = userLng - (radius * kmInLatLng);
+        double lngUpRange = userLng + (radius * kmInLatLng);
 
         List<Endereco> enderecosInRadius = enderecoDAO.getEnderecosByLatLngInterval(latDownRange, latUpRange, lngDownRange, lngUpRange);
         List<Medico> medicos = new LinkedList<>();

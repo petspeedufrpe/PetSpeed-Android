@@ -1,6 +1,8 @@
 package br.ufrpe.bsi.mpoo.petSpeed.cliente.gui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -21,11 +23,14 @@ public class PerfilClienteActivity extends AppCompatActivity {
     private String email,nome,telefone,cidade;
     private FloatingActionButton editDados;
     private Cliente cliente = Sessao.instance.getCliente();
+    private Bitmap bitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_cliente);
         findTexts();
+        byte[] imagemEmBits = cliente.getFoto();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(imagemEmBits, 0, imagemEmBits.length);
         showTexts();
         editDados = (FloatingActionButton) findViewById(R.id.fab_edit);
         editDados.setOnClickListener(new View.OnClickListener() {
@@ -37,7 +42,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
         });
     }
 
-    public void setTexts(){
+    public void getTexts(){
         findTexts();
         email = mEmail.getText().toString().trim();
         telefone = mTelefone.getText().toString().trim();
@@ -61,6 +66,8 @@ public class PerfilClienteActivity extends AppCompatActivity {
         mCidade.setText(cliente.getDadosPessoais().getEndereco().getCidade());
         mEndereco.setText(formatEndereco());
         mNomeUsuario.setTitle(cliente.getDadosPessoais().getNome());
+        mTelefone.setText(cliente.getTelefone());
+        mFoto.setImageBitmap(bitmap);
     }
 
     public StringBuilder formatEndereco(){

@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import br.ufrpe.bsi.mpoo.petSpeed.R;
@@ -26,7 +27,11 @@ import br.ufrpe.bsi.mpoo.petSpeed.usuario.dominio.Usuario;
 public class HomeClienteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextView mNomeCliente,mEmailCliente;
+    TextView mNomeCliente, mEmailCliente;
+    Button mAlternaRaio;
+    private Double novoRaio = 5.0;
+    private int faseRaio = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,23 +48,59 @@ public class HomeClienteActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         mNomeCliente = (TextView) headerView.findViewById(R.id.NomeCliente);
         mEmailCliente = (TextView) headerView.findViewById(R.id.textViewEmailCliente);
+        mAlternaRaio = (Button) findViewById(R.id.buttonRaio);
+        mAlternaRaio.setText("Raio atual: 5km");
+
+        mAlternaRaio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MapsFragment mapsFrag = (MapsFragment)
+                        getSupportFragmentManager().findFragmentById(R.id.fragment);
+                if (mapsFrag != null) {
+                    alternaFaseRaio(mapsFrag);
+                } else {
+                    return;
+                }
+            }
+        });
+
         setTexts();
         initMapFragment();
 
     }
-    public void initMapFragment(){
+
+    private void alternaFaseRaio(MapsFragment mapsFrag) {
+        if(faseRaio==1){
+            mapsFrag.setNovoRaio(novoRaio);
+            mAlternaRaio.setText("Raio atual: 5Km");
+            novoRaio=10.0;
+            faseRaio=2;
+        }else if(faseRaio==2){
+            mapsFrag.setNovoRaio(novoRaio);
+            mAlternaRaio.setText("Raio atual: 10Km");
+            novoRaio=20.0;
+            faseRaio=3;
+        }else if(faseRaio==3){
+            mapsFrag.setNovoRaio(novoRaio);
+            mAlternaRaio.setText("Raio atual: 20Km");
+            novoRaio=5.0;
+            faseRaio=1;
+        }
+    }
+
+    public void initMapFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.findFragmentById(R.id.fragment);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.fragment, new MapsFragment(),"MapsFragment");
+        transaction.add(R.id.fragment, new MapsFragment(), "MapsFragment");
         transaction.commit();
     }
 
 
-    public void setTexts(){
+    public void setTexts() {
         Usuario usuario = Sessao.instance.getUsuario();
         ClienteDAO clienteDAO = new ClienteDAO();
-        Cliente cliente =  clienteDAO.getIdClienteByUsuario(usuario.getId());
+        Cliente cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
         ClienteServices clienteServices = new ClienteServices();
         cliente = clienteServices.getClienteCompleto(cliente.getId());
         mEmailCliente.setText(usuario.getEmail());
@@ -71,13 +112,13 @@ public class HomeClienteActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }else{
+        } else {
             Intent a = new Intent(Intent.ACTION_MAIN);
             a.addCategory(Intent.CATEGORY_HOME);
             a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(a);
         }
-        }
+    }
 
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -100,9 +141,10 @@ public class HomeClienteActivity extends AppCompatActivity
         } else if (id == R.id.nav_atendimento_emergencial) {
 
         } else if (id == R.id.nav_sair_cliente) {
-            startActivity(new Intent(HomeClienteActivity.this, LoginActivity.class));
             ClienteServices clienteServices = new ClienteServices();
             clienteServices.logout();
+            startActivity(new Intent(HomeClienteActivity.this, LoginActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
 
         } else if (id == R.id.nav_configuracao) {
 

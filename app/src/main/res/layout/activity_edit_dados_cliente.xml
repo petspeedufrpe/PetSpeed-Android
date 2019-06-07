@@ -30,6 +30,7 @@
             app:layout_collapseMode="parallax"
             app:layout_constraintBottom_toTopOf="@+id/layoutPrincipal"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@drawable/profile" />
@@ -38,6 +39,7 @@
             android:id="@+id/camera_alterar_foto_cliente"
             android:layout_width="35dp"
             android:layout_height="35dp"
+            android:clickable="true"
             android:layout_marginBottom="12dp"
             android:layout_marginEnd="26dp"
             android:src="@drawable/ic_menu_camera"

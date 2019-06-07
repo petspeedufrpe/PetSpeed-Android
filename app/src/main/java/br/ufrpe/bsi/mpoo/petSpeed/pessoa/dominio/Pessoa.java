@@ -18,7 +18,7 @@ public class Pessoa{
         return idUsuario;
     }
 
-    public void setIdUsuario(long idUsuario) {
+    public void setFkUsuario(long idUsuario) {
         this.idUsuario = idUsuario;
     }
 

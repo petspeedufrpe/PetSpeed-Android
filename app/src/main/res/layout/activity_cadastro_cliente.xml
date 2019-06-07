@@ -33,6 +33,17 @@
         android:textColorHint="@color/hintColor" />
 
     <EditText
+        android:id="@+id/clienteTelefone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:hint="DDD e Telefone"
+        android:inputType="number"
+        android:textColor="#FF00A759"
+        android:textColorHint="@color/hintColor" />
+
+    <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

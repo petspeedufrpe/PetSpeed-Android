@@ -13,7 +13,7 @@ public class Animal {
 
     private String raca;
 
-    private double peso;
+    private float peso;
 
     private int nascimento;
 
@@ -51,11 +51,11 @@ public class Animal {
         this.raca = raca;
     }
 
-    public double getPeso() {
+    public float getPeso() {
         return peso;
     }
 
-    public void setPeso(double peso) {
+    public void setPeso(float peso) {
         this.peso = peso;
     }
 
@@ -63,8 +63,8 @@ public class Animal {
         return nascimento;
     }
 
-    public void setNascimento(int nascimento) {
-        this.nascimento = nascimento;
+    public void setNascimento(int idade) {
+        this.nascimento = idade;
     }
 
     public List<OrdemServico> getHistorico() {
