@@ -151,7 +151,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         markerOptions.position(latLng);
         markerOptions.title(title);
         markerOptions.snippet("média: " + avaliacao);
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(82.0f));
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
         marker = mMap.addMarker(markerOptions);
         marker.setTag(mapConta);
         marker.showInfoWindow();
