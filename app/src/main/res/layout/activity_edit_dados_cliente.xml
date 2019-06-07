@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".cliente.gui.PerfilClienteActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_altera_dados"
             android:layout_width="match_parent"
@@ -18,30 +15,49 @@
             app:title="Editar Perfil"
             android:background="@color/lightgreen">
             </android.support.v7.widget.Toolbar>
-            <ImageView
-                android:id="@+id/campo_imagem"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:contentDescription="@string/app_name"
-                android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax"
-                android:background="@color/cardview_dark_background"
-                tools:srcCompat="@drawable/profile" />
-    </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
-        android:id="@+id/relative_layou_altera_dados_cliente"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/campo_imagem"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/cardview_dark_background"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop"
+            app:layout_collapseMode="parallax"
+            app:layout_constraintBottom_toTopOf="@+id/layoutPrincipal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/profile" />
+
+        <ImageView
+            android:id="@+id/camera_alterar_foto_cliente"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="26dp"
+            android:src="@drawable/ic_menu_camera"
+            app:layout_constraintBottom_toBottomOf="@+id/campo_imagem"
+            app:layout_constraintEnd_toEndOf="@+id/campo_imagem" />
+
 
         <LinearLayout
             android:id="@+id/layoutPrincipal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="25dp"
             android:orientation="vertical"
-            android:paddingTop="5dp">
+            android:paddingTop="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/campo_imagem"
+            app:layout_constraintVertical_bias="0.0">
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cardViewInfo_perfil_cliente"
@@ -64,10 +80,11 @@
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="0dp"
                         android:layout_marginBottom="5dp"
+                        android:hint="Digite seu nome"
                         android:paddingTop="12dp"
                         android:paddingBottom="12dp"
-                        android:hint="Digite seu nome"
                         android:textColor="@color/lightgreen"
+                        android:textColorHint="@color/lightgreen"
                         android:textSize="16sp" />
 
 
@@ -79,11 +96,12 @@
                         android:layout_alignStart="@+id/campo_altera_nome_cliente"
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="0dp"
-                        android:paddingTop="12dp"
-                        android:paddingBottom="12dp"
                         android:layout_marginBottom="12dp"
                         android:hint="Digite seu telefone"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
                         android:textColor="@color/lightgreen"
+                        android:textColorHint="@color/lightgreen"
                         android:textSize="16sp" />
 
 
@@ -95,13 +113,13 @@
                         android:layout_alignStart="@+id/campo_altera_nome_cliente"
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="0dp"
+                        android:hint="exemplo@gmail.com"
                         android:paddingTop="12dp"
                         android:paddingBottom="12dp"
-                        android:hint="exemplo@gmail.com"
                         android:textColor="@color/lightgreen"
+
+                        android:textColorHint="@color/lightgreen"
                         android:textSize="16sp" />
-
-
 
 
                 </RelativeLayout>
@@ -126,8 +144,6 @@
         </LinearLayout>
 
 
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 
-
-
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

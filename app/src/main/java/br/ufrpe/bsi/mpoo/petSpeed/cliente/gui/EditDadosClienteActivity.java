@@ -1,6 +1,5 @@
 package br.ufrpe.bsi.mpoo.petSpeed.cliente.gui;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
