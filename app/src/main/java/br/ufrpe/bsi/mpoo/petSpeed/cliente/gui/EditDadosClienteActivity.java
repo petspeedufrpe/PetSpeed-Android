@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.media.Image;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Build;
@@ -30,7 +29,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -114,7 +112,6 @@ public class EditDadosClienteActivity extends AppCompatActivity {
         mNome = (EditText) findViewById(R.id.campo_altera_nome_cliente);
         mTelefone = (EditText) findViewById(R.id.campo_altera_telefone_cliente);
         mEmail = (EditText) findViewById(R.id.campo_altera_email_cliente);
-        //mImagemCliente = (ImageView) findViewById(R.id.campo_imagem);
     }
 
     public void capturaTextos() {
@@ -152,17 +149,26 @@ public class EditDadosClienteActivity extends AppCompatActivity {
         boolean result;
         if (validaCampos()) {
             cliente.getDadosPessoais().setNome(nome);
+            cliente.setTelefone(telefone);
             if (!cliente.getUsuario().getEmail().equals(email) && usuarioDAO.getUsuario(email) == null) {
                 cliente.getUsuario().setEmail(email);
             } else {
                 Toast.makeText(this, "Email já cadastrado", Toast.LENGTH_SHORT).show();
+
                 result = false;
             }
-            //faltando o telefone
         }
         result = false;
 
         return result;
+    }
+
+    public void setNovoNome(String nome){
+        cliente.getDadosPessoais().setNome(nome);
+    }
+
+    public void setmTelefone(String telefone){
+        cliente.setTelefone(telefone);
     }
 
     public void alteraDados() {
@@ -229,6 +235,15 @@ public class EditDadosClienteActivity extends AppCompatActivity {
         }
     }
 
+    private void getPermissionsCamera() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+        }
+        else
+            takePhoto();
+    }
     private void abrirGaleriaIntent() {
         Intent intent =new Intent();
         intent.setType("image/*");
@@ -285,7 +300,8 @@ public class EditDadosClienteActivity extends AppCompatActivity {
             case REQUEST_CAPTURE:
                 if (resultCode == RESULT_OK){
                     if (requestCode == 1){
-                        Bitmap bitmap = BitmapFactory.decodeFile(mCurrenPath);
+                        Uri img = data.getData();
+                        Bitmap bitmap = BitmapFactory.decodeFile(String.valueOf(img));
                         mImagemCliente.setImageBitmap(bitmap);
                     }
                 }
