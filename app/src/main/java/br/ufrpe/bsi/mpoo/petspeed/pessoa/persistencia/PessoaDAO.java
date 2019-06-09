@@ -7,10 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.LinkedList;
 import java.util.List;
 
-import br.ufrpe.bsi.mpoo.petspeed.infra.Persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Pessoa;
 
 public class PessoaDAO {
+    private static final String SQL_SELECT_FROM = "SELECT * FROM ";
+    private static final String SQL_WHERE = " WHERE ";
+    private static final String SQL_LIKE = " LIKE ?;";
     private DBHelper dbHelper = new DBHelper();
 
     public long cadastraPessoa(Pessoa pessoa) { // Retorna o id da pessoa cadastrada
@@ -49,7 +52,7 @@ public class PessoaDAO {
         db.close();//recupera a pessoa pelo ID_pessoa
     }
 
-    private Pessoa createPessoa(Cursor cursor) { //usa o cursor para recuperar os valores das colunas;
+    private Pessoa createPessoa(Cursor cursor) {
         Pessoa pessoa = new Pessoa();
         EnderecoDAO enderecoDAO = new EnderecoDAO();
         int indexId = cursor.getColumnIndex(DBHelper.COL_PESSOA_ID);
@@ -65,7 +68,7 @@ public class PessoaDAO {
     }
 
     public Pessoa getPessoaById(Long id) {
-        String sql = "SELECT * FROM " + DBHelper.TABELA_PESSOA + " WHERE " + DBHelper.COL_PESSOA_ID + " LIKE ?;";
+        String sql = SQL_SELECT_FROM + DBHelper.TABELA_PESSOA + SQL_WHERE + DBHelper.COL_PESSOA_ID + SQL_LIKE;
         String[] args = {String.valueOf(id)};
         return this.loadObject(sql, args); /** pega o object da pessoa pelo id dela. usa a func loadObject
          para criar a pessoa e assim retorna-la nessa funcao**/
@@ -79,7 +82,7 @@ public class PessoaDAO {
         }
         strIndexes.append(indicesPessoas.get(indicesPessoas.size() - 1));
 
-        String sql = "SELECT * FROM " + DBHelper.TABELA_PESSOA + " WHERE " + DBHelper.COL_PESSOA_ID + " IN (?);";
+        String sql = SQL_SELECT_FROM + DBHelper.TABELA_PESSOA + SQL_WHERE + DBHelper.COL_PESSOA_ID + " IN (?);";
         String[] args = {strIndexes.toString()};
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, args);
@@ -97,15 +100,15 @@ public class PessoaDAO {
     }
 
     public Pessoa getPessoaByFkUsuario(Long id) {
-        String sql = "SELECT * FROM " + DBHelper.TABELA_PESSOA + " WHERE " + DBHelper.COL_PESSOA_FK_USUARIO + " LIKE ?;";
+        String sql = SQL_SELECT_FROM + DBHelper.TABELA_PESSOA + SQL_WHERE + DBHelper.COL_PESSOA_FK_USUARIO + SQL_LIKE;
         String[] args = {String.valueOf(id)};
         return this.loadObject(sql, args);
     }
 
     public Cursor getIdEnderecoByPessoa(Long idPessoa) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String query = "SELECT * FROM " + DBHelper.TABELA_ENDERECO + " WHERE " +
-                DBHelper.COL_ENDERECO_FK_PESSOA + " LIKE ?;";
+        String query = SQL_SELECT_FROM + DBHelper.TABELA_ENDERECO + SQL_WHERE +
+                DBHelper.COL_ENDERECO_FK_PESSOA + SQL_LIKE;
         String[] args = {String.valueOf(idPessoa)};
         return db.rawQuery(query, args);
     }

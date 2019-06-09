@@ -17,8 +17,7 @@ public class UsuarioServices {
         if (usuarioCadastrado(usuario)) {
             throw new AppException("usuario já cadastrado, não inserido");
         } else {
-            long id = usuarioDAO.cadastrarUsuario(usuario);
-            return id;
+            return usuarioDAO.cadastrarUsuario(usuario);
         }
     }
 

@@ -51,11 +51,7 @@ public class MudarSenhaAcitivity extends AppCompatActivity {
 
     public boolean isSenhaAntigaEquals(String senhaAntiga){
         String senhaCliente = cliente.getUsuario().getSenha();
-        if(senhaAntiga.equals(senhaCliente)){
-            return true;
-        }
-
-        return false;
+        return senhaAntiga.equals(senhaCliente);
     }
     public boolean isSenhaIguais(String novaSenha,String confirmaSenha) {
 

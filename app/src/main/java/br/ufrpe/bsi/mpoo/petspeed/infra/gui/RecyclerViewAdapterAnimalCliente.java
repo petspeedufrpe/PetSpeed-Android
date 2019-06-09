@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
@@ -21,10 +22,10 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
 
     private RecyclerViewClickListener listener;
     private Context mContext;
-    public ArrayList<Animal> mAnimals;
+    private List<Animal> mAnimals;
 
 
-    public RecyclerViewAdapterAnimalCliente(Context mContext, ArrayList<Animal> mAnimals, RecyclerViewClickListener listener) {
+    public RecyclerViewAdapterAnimalCliente(Context mContext, List<Animal> mAnimals, RecyclerViewClickListener listener) {
         this.mContext = mContext;
         this.mAnimals = mAnimals;
         this.listener = listener;
@@ -45,7 +46,6 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
         myViewHolder.racaAnimal.setText(mAnimals.get(i).getRaca());
         myViewHolder.pesoAnimal.setText(String.valueOf(mAnimals.get(i).getPeso()));
         myViewHolder.idadeAnimal.setText(String.valueOf(mAnimals.get(i).getNascimento()));
-        //myViewHolder.imageAnimal.setImageResource(mAnimals.get(i).getFoto);
     }
 
     @Override
@@ -75,11 +75,11 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
         }
 
         public void findTexts(){
-            nomeAnimal = (TextView) itemView.findViewById(R.id.txt_nome_animal);
-            racaAnimal = (TextView) itemView.findViewById(R.id.txt_raca_animal);
-            pesoAnimal = (TextView) itemView.findViewById(R.id.txt_peso_animal);
-            idadeAnimal = (TextView) itemView.findViewById(R.id.txt_idade_animal);
-            imageAnimal = (ImageView) itemView.findViewById(R.id.image_animal);
+            nomeAnimal = itemView.findViewById(R.id.txt_nome_animal);
+            racaAnimal = itemView.findViewById(R.id.txt_raca_animal);
+            pesoAnimal = itemView.findViewById(R.id.txt_peso_animal);
+            idadeAnimal = itemView.findViewById(R.id.txt_idade_animal);
+            imageAnimal = itemView.findViewById(R.id.image_animal);
 
         }
 

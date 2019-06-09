@@ -18,7 +18,7 @@ public class Sessao {
     public static final Sessao instance = new Sessao();
 
     @SuppressLint("SimpleDateFormat")
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     private final Map<String, Object> values = new HashMap<>();
 
     public Cliente getCliente() {return (Cliente)values.get("sessao.Cliente");}
@@ -63,7 +63,7 @@ public class Sessao {
     public void updateAcesso() {
         SharedPreferences prefs = PetSpeedApp.getContext().getSharedPreferences("sessao", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        String date = DATE_FORMAT.format(new Date());
+        String date = dateFormat.format(new Date());
         String key = "sessao.ultimoAcesso";
         setValue(key, date);
         editor.putString(key, date);

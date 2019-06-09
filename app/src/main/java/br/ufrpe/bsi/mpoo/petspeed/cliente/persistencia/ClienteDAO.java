@@ -6,12 +6,16 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
-import br.ufrpe.bsi.mpoo.petspeed.infra.Persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.AppException;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.persistencia.UsuarioDAO;
 
 public class ClienteDAO {
 
+    public static final String SQL_SELECT_ALL_FROM = "SELECT * FROM ";
+    public static final String SQL_WHERE = " WHERE ";
+    public static final String SQL_LIKE = " LIKE ?;";
     private DBHelper dbHelper = new DBHelper();
 
 
@@ -33,7 +37,7 @@ public class ClienteDAO {
     public Cliente getClienteByFkUsuario(Long fkUsuario) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cliente cliente = null;
-        String sql = "SELECT * FROM " + DBHelper.TABELA_CLIENTE + " WHERE " + DBHelper.COL_CLIENTE_FK_USUARIO + " LIKE ?;";
+        String sql = SQL_SELECT_ALL_FROM + DBHelper.TABELA_CLIENTE + SQL_WHERE + DBHelper.COL_CLIENTE_FK_USUARIO + SQL_LIKE;
         Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(fkUsuario)});
         if (cursor.moveToFirst()) {
             cliente = createCliente(cursor);
@@ -45,9 +49,13 @@ public class ClienteDAO {
 
     }
 
-    public void deletaCliente(Cliente cliente) {
+    public void deletaCliente(Cliente cliente) throws AppException {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.delete(DBHelper.TABELA_CLIENTE, DBHelper.COL_CLIENTE_ID + " = ?", new String[]{String.valueOf(cliente.getId())});
+        try{
+            db.delete(DBHelper.TABELA_CLIENTE, DBHelper.COL_CLIENTE_ID + " = ?", new String[]{String.valueOf(cliente.getId())});
+        }catch(Exception e){
+            throw new AppException("Erro ao deletar");
+        }
         db.close();
 
     }
@@ -98,15 +106,15 @@ public class ClienteDAO {
      * no loadCliente o banco é aberto para leitura e retorna um cursor para poder criar o cliente
      */
     public Cliente getClienteById(Long id) {
-        String query = "SELECT * FROM " + DBHelper.TABELA_CLIENTE + " WHERE " + DBHelper.COL_CLIENTE_ID + " LIKE ?;";
+        String query = SQL_SELECT_ALL_FROM + DBHelper.TABELA_CLIENTE + SQL_WHERE + DBHelper.COL_CLIENTE_ID + SQL_LIKE;
         String[] args = {String.valueOf(id)};
         return this.loadObject(query, args);
     }
 
     public Cursor getIdObjectByCliente(Long idCliente) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String query = "SELECT * FROM " + DBHelper.TABELA_CLIENTE + " WHERE " + DBHelper.COL_CLIENTE_ID +
-                " LIKE ?;";
+        String query = SQL_SELECT_ALL_FROM + DBHelper.TABELA_CLIENTE + SQL_WHERE + DBHelper.COL_CLIENTE_ID +
+                SQL_LIKE;
         String[] args = {String.valueOf(idCliente)};
 
         return db.rawQuery(query, args); //Metodo para ser usado na classe de negocio, que usa o id do cliente
@@ -115,8 +123,8 @@ public class ClienteDAO {
     }
 
     public Cliente getIdClienteByUsuario(long idUsuario) {
-        String query = " SELECT * FROM " + DBHelper.TABELA_CLIENTE + " WHERE " + DBHelper.COL_CLIENTE_FK_USUARIO +
-                " LIKE ?;";
+        String query = " SELECT * FROM " + DBHelper.TABELA_CLIENTE + SQL_WHERE + DBHelper.COL_CLIENTE_FK_USUARIO +
+                SQL_LIKE;
         String[] args = {String.valueOf(idUsuario)};
         return this.loadObject(query, args);
     }
@@ -124,8 +132,7 @@ public class ClienteDAO {
     public Cliente getClienteByEmail(String email) {//Passando um email como parametro, recupera o cliente
         UsuarioDAO usuarioDAO = new UsuarioDAO();  // que está atribuido a este email de um usuario(classe)
         Usuario usuario = usuarioDAO.getUsuario(email);//retorna o usuario que tem este email
-        Cliente cliente = getIdClienteByUsuario(usuario.getId());//retorna o cliente que tem este usuario
-        return cliente;//este metodo tem que ir para o services de cliente
+        return getIdClienteByUsuario(usuario.getId());//retorna o cliente que tem este usuario
     }
 
 

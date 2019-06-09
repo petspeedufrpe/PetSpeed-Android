@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -15,7 +16,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -25,7 +25,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -52,7 +51,6 @@ public class EditDadosClienteActivity extends AppCompatActivity {
     private Cliente cliente = Sessao.instance.getCliente();
     private ClienteServices clienteServices = new ClienteServices();
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
-    private String mCurrenPath;
     private static final int PERMISSION_REQUEST = 0;
     private static final int REQUEST_GALLERY = 2;
     private static final int REQUEST_CAPTURE = 1;
@@ -152,7 +150,6 @@ public class EditDadosClienteActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Email já cadastrado", Toast.LENGTH_SHORT).show();
 
-                result = false;
             }
         }
         result = false;
@@ -160,11 +157,11 @@ public class EditDadosClienteActivity extends AppCompatActivity {
         return result;
     }
 
-    public void setNovoNome(String nome){
+    public void setNovoNome(String nome) {
         cliente.getDadosPessoais().setNome(nome);
     }
 
-    public void setmTelefone(String telefone){
+    public void setmTelefone(String telefone) {
         cliente.setTelefone(telefone);
     }
 
@@ -183,17 +180,16 @@ public class EditDadosClienteActivity extends AppCompatActivity {
         finish();
     }
 
-    private void takePhoto(){
+    private void takePhoto() {
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (intent.resolveActivity(getPackageManager())!= null){
+        if (intent.resolveActivity(getPackageManager()) != null) {
             File photoFile = null;
             photoFile = createPhotoFile();
-            if (photoFile!= null){
-                String pathTofile = photoFile.getAbsolutePath();
-                Uri photoUri = FileProvider.getUriForFile(EditDadosClienteActivity.this,"br.ufrpe.bsi.mpoo.petSpeed",photoFile);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT,photoUri);
-                startActivityForResult(intent,REQUEST_CAPTURE);
+            if (photoFile != null) {
+                Uri photoUri = FileProvider.getUriForFile(EditDadosClienteActivity.this, "br.ufrpe.bsi.mpoo.petSpeed", photoFile);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                startActivityForResult(intent, REQUEST_CAPTURE);
             }
         }
 
@@ -205,9 +201,9 @@ public class EditDadosClienteActivity extends AppCompatActivity {
         File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         File image = null;
         try {
-            image = File.createTempFile(name,".jpg",storageDir);
+            image = File.createTempFile(name, ".jpg", storageDir);
         } catch (IOException e) {
-            Log.d("My Tag","Error "+ e.toString());
+            Log.d("My Tag", "Error " + e.toString());
         }
 
         return image;
@@ -233,19 +229,20 @@ public class EditDadosClienteActivity extends AppCompatActivity {
     }
 
     private void getPermissionsCamera() {
+        //a fazer
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-        }
-        else
+        } else
             takePhoto();
     }
+
     private void abrirGaleriaIntent() {
-        Intent intent =new Intent();
+        Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Selecione a foto"),REQUEST_GALLERY);
+        startActivityForResult(Intent.createChooser(intent, "Selecione a foto"), REQUEST_GALLERY);
     }
 
     private void salvarFoto() {
@@ -278,30 +275,33 @@ public class EditDadosClienteActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        switch (requestCode){
+        switch (requestCode) {
             case REQUEST_GALLERY:
-                if (resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
                     try {
                         Uri img = data.getData();
                         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(img));
                         bitmap = getThumbnailFromBitmap(bitmap);
                         mImagemCliente.setImageBitmap(bitmap);
                         salvarFoto();
-                        Toast.makeText(this,"Foto Alterada Com sucesso",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Foto Alterada Com sucesso", Toast.LENGTH_SHORT).show();
+                        break;
                     } catch (FileNotFoundException e) {
 
-                        Toast.makeText(this,"Foto não encontrada",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Foto não encontrada", Toast.LENGTH_SHORT).show();
                     }
                 }
+                break;
 
             case REQUEST_CAPTURE:
-                if (resultCode == RESULT_OK){
-                    if (requestCode == 1){
-                        Uri img = data.getData();
-                        Bitmap bitmap = BitmapFactory.decodeFile(String.valueOf(img));
-                        mImagemCliente.setImageBitmap(bitmap);
-                    }
+                if (resultCode == RESULT_OK && requestCode == 1) {
+                    Uri img = data.getData();
+                    Bitmap bitmap = BitmapFactory.decodeFile(String.valueOf(img));
+                    mImagemCliente.setImageBitmap(bitmap);
                 }
+                break;
+            default:
+                break;
         }
 
     }

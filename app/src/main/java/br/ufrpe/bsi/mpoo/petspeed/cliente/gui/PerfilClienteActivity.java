@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,7 +20,6 @@ public class PerfilClienteActivity extends AppCompatActivity {
     private TextView mEmail, mTelefone, mCidade, mEndereco;
     private android.support.v7.widget.Toolbar mNomeUsuario;
     private ImageView mFoto;
-    private String email, nome, telefone, cidade;
     private FloatingActionButton editDados;
     private Cliente cliente = Sessao.instance.getCliente();
     private Bitmap bitmap;
@@ -33,7 +31,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
         findTexts();
         convertByteInBitMap();
         showTexts(bitmap);
-        editDados = (FloatingActionButton) findViewById(R.id.fab_edit);
+        editDados = findViewById(R.id.fab_edit);
         editDados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,13 +55,13 @@ public class PerfilClienteActivity extends AppCompatActivity {
 
 
         public void findTexts () {
-            editDados = (FloatingActionButton) findViewById(R.id.fab_edit);
-            mEmail = (TextView) findViewById(R.id.campo_altera_nome_cliente);
-            mTelefone = (TextView) findViewById(R.id.campo_altera_telefone_cliente);
-            mCidade = (TextView) findViewById(R.id.campo_altera_email_cliente);
-            mFoto = (ImageView) findViewById(R.id.campo_imagem);
-            mEndereco = (TextView) findViewById(R.id.lbl_show_endereco);
-            mNomeUsuario = (Toolbar) findViewById(R.id.toolbar_nome_do_usuario);
+            editDados = findViewById(R.id.fab_edit);
+            mEmail = findViewById(R.id.campo_altera_nome_cliente);
+            mTelefone = findViewById(R.id.campo_altera_telefone_cliente);
+            mCidade = findViewById(R.id.campo_altera_email_cliente);
+            mFoto = findViewById(R.id.campo_imagem);
+            mEndereco = findViewById(R.id.lbl_show_endereco);
+            mNomeUsuario = findViewById(R.id.toolbar_nome_do_usuario);
         }
 
         public void showTexts (Bitmap bitmap){

@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import br.ufrpe.bsi.mpoo.petspeed.infra.Persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Endereco;
 
 public class EnderecoDAO {
 
+    private static final String SQL_SELECT_ALL_FROM = "SELECT * FROM ";
+    private static final String SQL_WHERE = " WHERE ";
     private DBHelper dbHelper = new DBHelper();
 
     public long cadastraEndereco(Endereco endereco) {
@@ -112,26 +114,26 @@ public class EnderecoDAO {
     }
 
     public Endereco getEnderecoById(Long id) {
-        String sql = "SELECT * FROM " + DBHelper.TABELA_ENDERECO + " WHERE " + DBHelper.COL_ENDERECO_ID + " LIKE ?;";
+        String sql = SQL_SELECT_ALL_FROM + DBHelper.TABELA_ENDERECO + SQL_WHERE + DBHelper.COL_ENDERECO_ID + " LIKE ?;";
         String[] args = {String.valueOf(id)};
         return this.loadEndereco(sql, args);
     }
 
     public Endereco getEnderecoByFkPessoa(Long fkPessoa) {
-        String sql = "SELECT * FROM " + DBHelper.TABELA_ENDERECO + " WHERE " + DBHelper.COL_ENDERECO_FK_PESSOA + " LIKE ?;";
+        String sql = SQL_SELECT_ALL_FROM + DBHelper.TABELA_ENDERECO + SQL_WHERE + DBHelper.COL_ENDERECO_FK_PESSOA + " LIKE ?;";
         String[] args = {String.valueOf(fkPessoa)};
         return this.loadEndereco(sql, args);
     }
 
-    public List<Endereco> getEnderecosByLatLngInterval(double LatDownRange, double LatUpRange, double LngDownRange, double LngUpRange) {
-        String sql = "SELECT * FROM " + DBHelper.TABELA_ENDERECO +
-                " WHERE " + DBHelper.COL_ENDERECO_LATITUTDE + " BETWEEN ? AND ?" +
+    public List<Endereco> getEnderecosByLatLngInterval(double latDownRange, double latUpRange, double lngDownRange, double lngUpRange) {
+        String sql = SQL_SELECT_ALL_FROM + DBHelper.TABELA_ENDERECO +
+                SQL_WHERE + DBHelper.COL_ENDERECO_LATITUTDE + " BETWEEN ? AND ?" +
                 " AND " + DBHelper.COL_ENDERECO_LONGITUDE + " BETWEEN ? AND ?";
-        String[] args = {String.valueOf(LatDownRange),String.valueOf(LatUpRange),String.valueOf(LngDownRange),String.valueOf(LngUpRange)};
+        String[] args = {String.valueOf(latDownRange),String.valueOf(latUpRange),String.valueOf(lngDownRange),String.valueOf(lngUpRange)};
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, args);
         Endereco endereco = null;
-        List<Endereco> resultEndereco = new LinkedList<Endereco>();
+        List<Endereco> resultEndereco = new LinkedList<>();
         if (cursor.moveToFirst()) {
             do
             {
@@ -142,10 +144,6 @@ public class EnderecoDAO {
         cursor.close();
         db.close();
         return resultEndereco;
-    }
-
-    public Cursor getIdPessoaByEndereco(Long idEndereco) {
-        return null;
     }
 
     private Endereco createEndereco(Cursor cursor) {
@@ -189,12 +187,12 @@ public class EnderecoDAO {
         return endereco;//passa a query sql e uma array com os campos do banco de dados para criar a pessoa com esses dados
     }
 
-    public ArrayList<Endereco> getAllAddressByBairro(String arg){
+    public List<Endereco> getAllAddressByBairro(String arg){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        ArrayList<Endereco> enderecoArrayList = new ArrayList<>();
-        String sql = "SELECT * FROM "+DBHelper.TABELA_ENDERECO+", "+DBHelper.TABELA_MEDICO+" WHERE "+DBHelper.COL_ENDERECO_BAIRRO+
+        List<Endereco> enderecoArrayList = new ArrayList<>();
+        String sql = SQL_SELECT_ALL_FROM +DBHelper.TABELA_ENDERECO+", "+DBHelper.TABELA_MEDICO+ SQL_WHERE +DBHelper.COL_ENDERECO_BAIRRO+
                 " = ?";
-        String args[] = {arg};
+        String[] args = {arg};
         Cursor cursor = db.rawQuery(sql,args);
         Endereco endereco = null;
         if (cursor.moveToFirst()){
@@ -211,6 +209,6 @@ public class EnderecoDAO {
         cursor.close();
         db.close();
 
-        return null;
+        return enderecoArrayList;
     }
 }

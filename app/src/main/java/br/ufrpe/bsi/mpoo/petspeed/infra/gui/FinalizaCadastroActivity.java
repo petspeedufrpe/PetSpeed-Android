@@ -37,8 +37,8 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_finaliza_cadastro);
 
-        btnCadastrar = (Button) findViewById(R.id.finaliza_cadastro);
-        btnCancelar = (Button) findViewById(R.id.cancela_cadastro);
+        btnCadastrar = findViewById(R.id.finaliza_cadastro);
+        btnCancelar = findViewById(R.id.cancela_cadastro);
 
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +68,7 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            String enderecoF = getEnderecoFormated();
+            String enderecoF = registerTask.getEnderecoFormated();
             ApiRequestService geocodeReq = new ApiRequestService();
             geocodeReq.geocodeRequest(enderecoF, new GeocodeRequestCallbackListener<Map<Enum, Object>>() {
                 @Override
@@ -106,45 +106,46 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
             endereco.setLongitude(lng);
             return endereco;
         }
-    }
 
-    private String getEnderecoFormated() {
-        Endereco endereco = SessaoCadastro.instance.getEndereco();
-        StringBuilder parserEndereco = new StringBuilder();
-        parserEndereco.append(endereco.getLogradouro());
-        parserEndereco.append(", ");
-        parserEndereco.append(endereco.getNumero());
-        parserEndereco.append(" ");
-        parserEndereco.append(endereco.getBairro());
-        return parserEndereco.toString();
-    }
-
-    private void cadastrar(Endereco endereco) throws AppException {
-        ContasDeUsuario tipo = SessaoCadastro.instance.getTipo();
-        if (tipo == ContasDeUsuario.CLIENTE) {
-            Cliente cliente = SessaoCadastro.instance.getCliente();
-            cliente.getDadosPessoais().setEndereco(endereco);
-            cadastraCliente(cliente);
-        } else if (tipo == ContasDeUsuario.MEDICO) {
-            Medico medico = SessaoCadastro.instance.getMedico();
-            medico.getDadosPessoais().setEndereco(endereco);
-            cadastraMedico(medico);
-        } else if (tipo == ContasDeUsuario.CLINICA) {
-        } else {
-            throw new AppException("Erro");
+        private String getEnderecoFormated() {
+            Endereco endereco = SessaoCadastro.instance.getEndereco();
+            StringBuilder parserEndereco = new StringBuilder();
+            parserEndereco.append(endereco.getLogradouro());
+            parserEndereco.append(", ");
+            parserEndereco.append(endereco.getNumero());
+            parserEndereco.append(" ");
+            parserEndereco.append(endereco.getBairro());
+            return parserEndereco.toString();
         }
-    }
 
+        private void cadastrar(Endereco endereco) throws AppException {
+            ContasDeUsuario tipo = SessaoCadastro.instance.getTipo();
+            if (tipo == ContasDeUsuario.CLIENTE) {
+                Cliente cliente = SessaoCadastro.instance.getCliente();
+                cliente.getDadosPessoais().setEndereco(endereco);
+                cadastraCliente(cliente);
+            } else if (tipo == ContasDeUsuario.MEDICO) {
+                Medico medico = SessaoCadastro.instance.getMedico();
+                medico.getDadosPessoais().setEndereco(endereco);
+                cadastraMedico(medico);
+            } else {
+                throw new AppException("Erro");
+            }
+        }
+
+
+    }
 
     private void cadastraCliente(Cliente cliente) throws AppException {
         ClienteServices clienteServices = new ClienteServices();
         clienteServices.cadastraCliente(cliente, cliente.getUsuario());
-        Toast.makeText(FinalizaCadastroActivity.this, "Cadastro realizado.", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Cadastro realizado.", Toast.LENGTH_LONG).show();
     }
+
 
     private void cadastraMedico(Medico medico) throws AppException {
         MedicoServices medicoServices = new MedicoServices();
         medicoServices.cadastraMedico(medico, medico.getUsuario());
-        Toast.makeText(FinalizaCadastroActivity.this, "Cadastro realizado.", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Cadastro realizado.", Toast.LENGTH_LONG).show();
     }
 }

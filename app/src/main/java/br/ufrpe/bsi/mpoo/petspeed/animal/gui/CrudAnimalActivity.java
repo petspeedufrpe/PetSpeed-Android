@@ -19,6 +19,7 @@ import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 
 public class CrudAnimalActivity extends AppCompatActivity {
+    public static final String ERR_MSG_CAMPO_VAZIO = "Campo vazio";
     AnimalServices animalServices = new AnimalServices();
     EditText mNome, mRaca, mIdade, mPeso;
     String nome, raca, idade, peso;
@@ -29,7 +30,7 @@ public class CrudAnimalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_crud_animal);
-        btnCadastrar = (Button) findViewById(R.id.btn_cadastrar_animal);
+        btnCadastrar = findViewById(R.id.btn_cadastrar_animal);
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,10 +44,10 @@ public class CrudAnimalActivity extends AppCompatActivity {
     }
 
     public void findEditTexts() {
-        mNome = (EditText) findViewById(R.id.edt_nome_animal);
-        mRaca = (EditText) findViewById(R.id.edt_raca_animal);
-        mPeso = (EditText) findViewById(R.id.edt_peso_animal);
-        mIdade = (EditText) findViewById(R.id.edt_idade_animal);
+        mNome = findViewById(R.id.edt_nome_animal);
+        mRaca = findViewById(R.id.edt_raca_animal);
+        mPeso = findViewById(R.id.edt_peso_animal);
+        mIdade = findViewById(R.id.edt_idade_animal);
 
     }
 
@@ -84,8 +85,7 @@ public class CrudAnimalActivity extends AppCompatActivity {
     }
 
     private boolean isCampoVazio(String valor) {
-        boolean resultado = TextUtils.isEmpty(valor) || valor.trim().isEmpty();
-        return resultado;
+        return TextUtils.isEmpty(valor) || valor.trim().isEmpty();
     }
 
     private boolean isCamposValidos() {
@@ -98,19 +98,19 @@ public class CrudAnimalActivity extends AppCompatActivity {
         mPeso.setError(null);
 
         if (isCampoVazio(nome)) {
-            mNome.setError("Campo vazio");
+            mNome.setError(ERR_MSG_CAMPO_VAZIO);
             focusView = mNome;
             res = false;
         } else if (isCampoVazio(raca)) {
-            mRaca.setError("Campo vazio");
+            mRaca.setError(ERR_MSG_CAMPO_VAZIO);
             focusView = mRaca;
             res = false;
         } else if (isCampoVazio(idade)) {
-            mIdade.setError("Campo vazio");
+            mIdade.setError(ERR_MSG_CAMPO_VAZIO);
             focusView = mIdade;
             res = false;
         } else if (isCampoVazio(peso)) {
-            mPeso.setError("Campo vazio");
+            mPeso.setError(ERR_MSG_CAMPO_VAZIO);
             focusView = mPeso;
             res = false;
 

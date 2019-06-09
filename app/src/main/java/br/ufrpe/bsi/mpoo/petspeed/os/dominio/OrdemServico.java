@@ -28,6 +28,30 @@ public class OrdemServico {
 
     private long fkAnimal;
 
+    public long getFkMedico() {
+        return fkMedico;
+    }
+
+    public void setFkMedico(long fkMedico) {
+        this.fkMedico = fkMedico;
+    }
+
+    public long getFkCliente() {
+        return fkCliente;
+    }
+
+    public void setFkCliente(long fkCliente) {
+        this.fkCliente = fkCliente;
+    }
+
+    public long getFkAnimal() {
+        return fkAnimal;
+    }
+
+    public void setFkAnimal(long fkAnimal) {
+        this.fkAnimal = fkAnimal;
+    }
+
     public boolean isPendente() {
         return pendente;
     }

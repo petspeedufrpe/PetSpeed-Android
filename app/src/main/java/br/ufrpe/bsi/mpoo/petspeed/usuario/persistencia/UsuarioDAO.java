@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import br.ufrpe.bsi.mpoo.petspeed.infra.Persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 
 public class UsuarioDAO {

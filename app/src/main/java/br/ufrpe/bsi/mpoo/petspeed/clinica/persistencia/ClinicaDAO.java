@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import br.ufrpe.bsi.mpoo.petspeed.clinica.dominio.Clinica;
-import br.ufrpe.bsi.mpoo.petspeed.infra.Persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.DBHelper;
 
 public class ClinicaDAO {
 

@@ -8,12 +8,14 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.LinkedList;
 import java.util.List;
 
-import br.ufrpe.bsi.mpoo.petspeed.infra.Persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Prioridade;
 
 public class OrdemServicoDAO {
 
+    private static final String SQL_SELECT_FROM = "SELECT * FROM ";
+    private static final String SQL_WHERE = " WHERE ";
     private DBHelper dbHelper = new DBHelper();
 
     public long cadastraOS(OrdemServico ordemServico) {
@@ -41,7 +43,7 @@ public class OrdemServicoDAO {
     }
 
     public OrdemServico getOSbyId(long idOs) {
-        String sql = "SELECT * FROM "+DBHelper.TABELA_OS+" WHERE "+DBHelper.COL_OS_ID+ " =?";
+        String sql = SQL_SELECT_FROM +DBHelper.TABELA_OS+ SQL_WHERE +DBHelper.COL_OS_ID+ " =?";
         String[] args = {String.valueOf(idOs)};
         return this.loadObject(sql,args);
     }
@@ -58,7 +60,7 @@ public class OrdemServicoDAO {
     }
 
     public List<OrdemServico> getOsByProridade (Prioridade p){
-        String sql = "SELECT * FROM "+DBHelper.TABELA_OS+" WHERE "+DBHelper.COL_OS_PRIORIDADE+ " =?";
+        String sql = SQL_SELECT_FROM +DBHelper.TABELA_OS+ SQL_WHERE +DBHelper.COL_OS_PRIORIDADE+ " =?";
         String[] args = {String.valueOf(p)};
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql,args);
@@ -77,7 +79,7 @@ public class OrdemServicoDAO {
     }
 
     public List<OrdemServico> getOsByAnimal (long id){
-        String sql = "SELECT * FROM "+DBHelper.TABELA_OS+" WHERE "+DBHelper.COL_OS_FK_ANIMAL+ " =?";
+        String sql = SQL_SELECT_FROM +DBHelper.TABELA_OS+ SQL_WHERE +DBHelper.COL_OS_FK_ANIMAL+ " =?";
         String[] args = {String.valueOf(id)};
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql,args);

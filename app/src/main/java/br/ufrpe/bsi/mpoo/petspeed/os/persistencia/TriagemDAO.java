@@ -4,10 +4,12 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import br.ufrpe.bsi.mpoo.petspeed.infra.Persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
 
 public class TriagemDAO {
+    private static final String SQL_SELECT_FROM = "SELECT * FROM ";
+    private static final String SQL_WHERE = " WHERE ";
     private DBHelper dbHelper = new DBHelper();
 
     public long cadastraTriagem(Triagem triagem) {
@@ -28,8 +30,8 @@ public class TriagemDAO {
         db.close();
     }
 
-    public Triagem GetTriagembyId(long idOs) {
-        String sql = "SELECT * FROM "+DBHelper.TABELA_TRIAGEM+" WHERE "+DBHelper.COL_TRIAGEM_ID+ " =?";
+    public Triagem getTriagembyId(long idOs) {
+        String sql = SQL_SELECT_FROM +DBHelper.TABELA_TRIAGEM+ SQL_WHERE +DBHelper.COL_TRIAGEM_ID+ " =?";
         String[] args = {String.valueOf(idOs)};
         return this.loadObject(sql,args);
     }

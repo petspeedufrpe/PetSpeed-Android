@@ -3,7 +3,6 @@ package br.ufrpe.bsi.mpoo.petspeed.medico.negocio;
 import java.util.LinkedList;
 import java.util.List;
 
-import br.ufrpe.bsi.mpoo.petspeed.clinica.persistencia.ClinicaDAO;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.AppException;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
@@ -12,7 +11,6 @@ import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petspeed.pessoa.negocio.PessoaServices;
 import br.ufrpe.bsi.mpoo.petspeed.pessoa.persistencia.EnderecoDAO;
-import br.ufrpe.bsi.mpoo.petspeed.pessoa.persistencia.PessoaDAO;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.persistencia.UsuarioDAO;
 
@@ -22,10 +20,8 @@ public class MedicoServices {
 
     private EnderecoDAO enderecoDAO = new EnderecoDAO();
 
-    private ClinicaDAO clinicaDAO = new ClinicaDAO();
 
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
-    private PessoaDAO pessoaDAO = new PessoaDAO();
 
 
     public Medico cadastraMedico(Medico medico, Usuario usuario) throws AppException {
@@ -151,26 +147,4 @@ public class MedicoServices {
         Medico medico = medicoDAO.getMedicoByFkPessoa(idPessoa);
         return medico.getAvaliacao();
     }
-
-
-    public void alteraAvaliacao() {
-
-    }
-
-    public void alteraClinica() {
-
-    }
-
-    public void alteraEndereco() {
-
-    }
-
-    public void alteraCrmv() {
-
-    }
-
-    public Endereco getEnderecoById() {
-        return null;
-    }
-
 }

@@ -47,10 +47,10 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(Color.parseColor("#AFDF59"));
         setContentView(R.layout.activity_login);
 
-        mEmail = (EditText) findViewById(R.id.LoginEmailTxBx);
-        mSenha = (EditText) findViewById(R.id.LoginPswrdTxBx);
-        loginbtn = (Button) findViewById(R.id.loginActLoginBtn);
-        cadastrarBtn = (Button) findViewById(R.id.LoginActCadastrarBtn);
+        mEmail = findViewById(R.id.LoginEmailTxBx);
+        mSenha = findViewById(R.id.LoginPswrdTxBx);
+        loginbtn = findViewById(R.id.loginActLoginBtn);
+        cadastrarBtn = findViewById(R.id.LoginActCadastrarBtn);
 
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,8 +164,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean camposValidos() {
         boolean result = true;
-        String email = mEmail.getText().toString();
-        String senha = mSenha.getText().toString();
+        email = mEmail.getText().toString();
+        senha = mSenha.getText().toString();
         View focusView = null;
         //validando senha
         if (TextUtils.isEmpty(senha) || !validaSenha(senha)) {
@@ -200,7 +200,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isCampoVazio(String valor) {
-        boolean resultado = TextUtils.isEmpty(valor) || valor.trim().isEmpty();
-        return resultado;
+       return  TextUtils.isEmpty(valor) || valor.trim().isEmpty();
     }
 }

@@ -1,5 +1,6 @@
-package br.ufrpe.bsi.mpoo.petspeed.infra.Persistencia;
+package br.ufrpe.bsi.mpoo.petspeed.infra.persistencia;
 
+import android.util.Log;
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
@@ -60,7 +61,7 @@ public class PreencherBanco {
         try {
             mServices.cadastraMedico(medico, usuario);
         } catch (AppException e) {
-            e.printStackTrace();
+            Log.getStackTraceString(e);
         }
 
         //MEDICO 2 ####################################
@@ -96,7 +97,7 @@ public class PreencherBanco {
         try {
             mServices.cadastraMedico(medico, usuario);
         } catch (AppException e) {
-            e.printStackTrace();
+            Log.getStackTraceString(e);
         }
 
 
@@ -133,7 +134,7 @@ public class PreencherBanco {
         try {
             mServices.cadastraMedico(medico, usuario);
         } catch (AppException e) {
-            e.printStackTrace();
+            Log.getStackTraceString(e);
         }
 
         //MEDICO 4 ####################################
@@ -169,7 +170,7 @@ public class PreencherBanco {
         try {
             mServices.cadastraMedico(medico, usuario);
         } catch (AppException e) {
-            e.printStackTrace();
+            Log.getStackTraceString(e);
         }
 
         //MEDICO 5 ####################################
@@ -205,7 +206,7 @@ public class PreencherBanco {
         try {
             mServices.cadastraMedico(medico, usuario);
         } catch (AppException e) {
-            e.printStackTrace();
+            Log.getStackTraceString(e);
         }
 
         //MEDICO 6 ####################################
@@ -241,7 +242,8 @@ public class PreencherBanco {
         try {
             mServices.cadastraMedico(medico, usuario);
         } catch (AppException e) {
-            e.printStackTrace();
+            Log.getStackTraceString(e);
+
         }
 
         //MEDICO 7 ####################################
@@ -277,7 +279,8 @@ public class PreencherBanco {
         try {
             mServices.cadastraMedico(medico, usuario);
         } catch (AppException e) {
-            e.printStackTrace();
+            Log.getStackTraceString(e);
+
         }
     }
 
@@ -324,7 +327,8 @@ public class PreencherBanco {
             cliente = cService.cadastraCliente(cliente,usuario);
             Sessao.instance.setCliente(cliente);
         } catch (AppException e) {
-            e.printStackTrace();
+            Log.getStackTraceString(e);
+
         }
         cliente = Sessao.instance.getCliente();
 
@@ -416,7 +420,8 @@ public class PreencherBanco {
             cliente = cService.cadastraCliente(cliente,usuario);
             Sessao.instance.setCliente(cliente);
         } catch (AppException e) {
-            e.printStackTrace();
+            Log.getStackTraceString(e);
+
         }
         cliente = Sessao.instance.getCliente();
 
@@ -488,7 +493,7 @@ public class PreencherBanco {
             cliente = cService.cadastraCliente(cliente,usuario);
             Sessao.instance.setCliente(cliente);
         } catch (AppException e) {
-            e.printStackTrace();
+            Log.getStackTraceString(e);
         }
         cliente = Sessao.instance.getCliente();
 

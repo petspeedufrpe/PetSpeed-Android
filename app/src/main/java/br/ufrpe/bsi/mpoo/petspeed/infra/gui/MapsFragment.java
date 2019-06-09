@@ -56,8 +56,8 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     private Context mContext;
     private LocationManager mLocationManager;
     Cliente cliente = Sessao.instance.getCliente();
-    double lat = cliente.getDadosPessoais().getEndereco().getLatitude();
-    double lng = cliente.getDadosPessoais().getEndereco().getLongitude();
+    double clientLatitude = cliente.getDadosPessoais().getEndereco().getLatitude();
+    double clientLongitude = cliente.getDadosPessoais().getEndereco().getLongitude();
     private Location mLocation = new Location(LocationManager.GPS_PROVIDER);
     private LocationRequest locationRequest;
     private GoogleApiClient mGoogleApiClient;
@@ -68,8 +68,8 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         super.onCreate(savedInstanceState);
         getMapAsync(this);
         mContext = getActivity().getBaseContext();
-        mLocation.setLatitude(lat);
-        mLocation.setLongitude(lng);
+        mLocation.setLatitude(clientLatitude);
+        mLocation.setLongitude(clientLongitude);
         callConnections();
     }
 
@@ -96,9 +96,8 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         mMap = googleMap;
         mLocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         createNoGpsDialog();
-        InitalizeMap();
+        initalizeMap();
         setTypeOfSearch();
-        ArrayList<Marker> markers = addMutilpeMarkersOnMap(listMedicos);
         mMap.setOnMarkerClickListener(this);
         mMap.setOnMyLocationClickListener(this);
         mMap.setOnMyLocationButtonClickListener(this);
@@ -108,7 +107,6 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     @Override
     public boolean onMarkerClick(Marker marker) {
         Medico medico;
-        Cliente cliente;
         Map markerMap = (Map<ContasDeUsuario, Object>) marker.getTag();
         if (markerMap.containsKey(ContasDeUsuario.MEDICO)) {
             medico = (Medico) markerMap.get(ContasDeUsuario.MEDICO);
@@ -120,35 +118,32 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         Sessao.instance.setValue("HostActivity",hCliente);
         ViewMedicosFragment viewPinMedico = new ViewMedicosFragment();
         viewPinMedico.show(getFragmentManager(), "ViewMedicosFragment");
-        LatLng location = marker.getPosition();
         return false;
     }
 
 
-    public ArrayList<Marker> addMutilpeMarkersOnMap(List<Medico> listMedicos) {
+    public List<Marker> addMutilpeMarkersOnMap(List<Medico> listMedicos) {
         int i = 0;
-        ArrayList<Marker> list = new ArrayList<>();
+        List<Marker> list = new ArrayList<>();
         listMedicos.size();
         while (i < listMedicos.size()) {
-            double lat = listMedicos.get(i).getDadosPessoais().getEndereco().getLatitude();
-            double lng = listMedicos.get(i).getDadosPessoais().getEndereco().getLongitude();
-            LatLng latLng = new LatLng(lat, lng);
+            double medLat = listMedicos.get(i).getDadosPessoais().getEndereco().getLatitude();
+            double mmedLng = listMedicos.get(i).getDadosPessoais().getEndereco().getLongitude();
+            LatLng latLng = new LatLng(medLat, mmedLng);
             Medico medico = listMedicos.get(i);
             String nome = medico.getDadosPessoais().getNome();
             String aval = String.valueOf(medico.getAvaliacao());
             Map<ContasDeUsuario, Object> mapSessao = new HashMap<>();
-            mapSessao.put(ContasDeUsuario.MEDICO, (Object) medico);
+            mapSessao.put(ContasDeUsuario.MEDICO, medico);
             list.add(addMarkerOnMap(latLng, nome, aval, mapSessao));
             i++;
         }
         Map<ContasDeUsuario, Object> mapSessao = new HashMap<>();
-        mapSessao.put(ContasDeUsuario.CLIENTE, (Object) Sessao.instance.getCliente());
+        mapSessao.put(ContasDeUsuario.CLIENTE, Sessao.instance.getCliente());
         String nome = "Meu Endereço";
         Endereco endereco = Sessao.instance.getCliente().getDadosPessoais().getEndereco();
-        String aval = endereco.getLogradouro() +" N° "+String.valueOf(endereco.getNumero());
-        double lat = Sessao.instance.getCliente().getDadosPessoais().getEndereco().getLatitude();
-        double lng = Sessao.instance.getCliente().getDadosPessoais().getEndereco().getLongitude();
-        LatLng latLng = new LatLng(lat, lng);
+        String aval = endereco.getLogradouro() +" N° "+ endereco.getNumero();
+        LatLng latLng = new LatLng(clientLatitude, clientLongitude);
         list.add(addMarkerOnMap(latLng, nome, aval, mapSessao));
 
         return list;
@@ -175,40 +170,32 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         return marker;
     }
 
-    public ArrayList<Endereco> getAllAddressByBairro(String bairro) {
-        ArrayList<Endereco> enderecoArrayList = new ArrayList<>();
+    public List<Endereco> getAllAddressByBairro(String bairro) {
+        List<Endereco> enderecoArrayList;
         EnderecoDAO enderecoDAO = new EnderecoDAO();
         enderecoArrayList = enderecoDAO.getAllAddressByBairro(bairro);
-
-        if (enderecoArrayList.isEmpty()) {
-            return null;
-        }
         return enderecoArrayList;
+        //A fazer
     }
 
     public void setTypeOfSearch() {
 
-        Cliente cliente = Sessao.instance.getCliente();
-        double lat = cliente.getDadosPessoais().getEndereco().getLatitude();
-        double lng = cliente.getDadosPessoais().getEndereco().getLongitude();
         if (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             listMedicos = medicoServices.getMedicosInRaio(raio, mLocation.getLatitude(), mLocation.getLongitude());
         } else {
-            listMedicos = medicoServices.getMedicosInRaio(raio, lat, lng);
+            listMedicos = medicoServices.getMedicosInRaio(raio, clientLatitude, clientLongitude);
         }
     }
 
     public String getBairroCliente() {
-        Cliente cliente = Sessao.instance.getCliente();
         return cliente.getDadosPessoais().getEndereco().getBairro();
     }
 
     public LatLng defaultLocationCLient() {
-        Cliente cliente = Sessao.instance.getCliente();
         return new LatLng(cliente.getDadosPessoais().getEndereco().getLatitude(), cliente.getDadosPessoais().getEndereco().getLongitude());
     }
 
-    public void InitalizeMap() {
+    public void initalizeMap() {
 
         UiSettings mapSettings;
         mapSettings = mMap.getUiSettings();
@@ -249,7 +236,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
     @Override
     public void onMyLocationClick(@NonNull Location location) {
-
+        //a fazer
     }
 
     @Override
@@ -265,6 +252,9 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                         Toast.makeText(mContext, "This app requires Location permissions to be granted", Toast.LENGTH_LONG).show();
                     }
                 }
+                break;
+            default:
+                break;
         }
     }
     public void setNovoRaio(Double novoRaio) {
@@ -284,6 +274,8 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                         Intent callGPSSettingIntent = new Intent(
                                 android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                         startActivity(callGPSSettingIntent);
+                        break;
+                    default:
                         break;
                 }
             }
@@ -330,12 +322,12 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
     @Override
     public void onConnectionSuspended(int i) {
-
+//a fazer
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        //a fazer
     }
 
     @Override

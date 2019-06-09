@@ -2,13 +2,13 @@ package br.ufrpe.bsi.mpoo.petspeed.cliente.negocio;
 
 import android.database.Cursor;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petspeed.animal.persistencia.AnimalDAO;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.persistencia.ClienteDAO;
-import br.ufrpe.bsi.mpoo.petspeed.infra.Persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.AppException;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Pessoa;
@@ -64,6 +64,7 @@ public class ClienteServices {
     }
 
     public void deletaCliente(Cliente cliente) throws AppException {
+        //Medodo a ser utilizado por funcionalidade ainda não implementada.
         if (clienteDAO.getClienteById(cliente.getId()) != null) {
             clienteDAO.deletaCliente(cliente);
         }
@@ -114,9 +115,6 @@ public class ClienteServices {
     }
 
     public String getEmailByCliente(Long idCliente) {
-        Cliente cliente;
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        cliente = clienteDAO.getClienteById(idCliente);
         Cursor data = clienteDAO.getIdObjectByCliente(idCliente);
         if (data != null && data.moveToFirst()) {
             int indexUsuario = data.getColumnIndex(DBHelper.COL_CLIENTE_FK_USUARIO);
@@ -129,7 +127,6 @@ public class ClienteServices {
     //monta o objeto completo(com todos os atributos setados, usando o cursor para navegar entre os dados do banco.
     public Cliente getClienteCompleto(long idCliente) {
         Cliente cliente;
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
         cliente = clienteDAO.getClienteById(idCliente);
         Cursor data = clienteDAO.getIdObjectByCliente(idCliente);
 
@@ -137,8 +134,6 @@ public class ClienteServices {
             PessoaServices pessoaServices = new PessoaServices();
             int indexPessoa = data.getColumnIndex(DBHelper.COL_CLIENTE_FK_PESSOA);
             int indexUsuario = data.getColumnIndex(DBHelper.COL_CLIENTE_FK_USUARIO);
-            // int indexAnimal = data.getColumnIndex(DBHelper.COL_ANIMAL_FK_CLIENTE);
-//            long idAnimal = data.getLong(indexAnimal);
             long idPessoa = data.getLong(indexPessoa);
             long idUsuario = data.getLong(indexUsuario);
 
@@ -166,8 +161,7 @@ public class ClienteServices {
 
     public long cadastraAnimal(Animal animal) {
 
-        long res = animalDAO.cadastraAnimal(animal);
-        return res;
+        return animalDAO.cadastraAnimal(animal);
     }
 
     public void alteraSenha(Cliente cliente) {
@@ -184,18 +178,8 @@ public class ClienteServices {
     public void alteraFotoCliente(Cliente cliente){
         clienteDAO.alteraFotoCliente(cliente);
     }
-    public ArrayList<Animal> getAllAnimalByIdCliente(long idCliente) {
-        boolean result;
-        ArrayList<Animal> listAnimals = animalDAO.getAllAnimalByIdCliente(idCliente);
-        if (listAnimals != null) {
-            result = true;
-        } else {
-            result = false;
-        }
 
-        if (result) {
-            return listAnimals;
-        }
-        return null;
+    public List<Animal> getAllAnimalByIdCliente(long idCliente) {
+        return animalDAO.getAllAnimalByIdCliente(idCliente);
     }
 }

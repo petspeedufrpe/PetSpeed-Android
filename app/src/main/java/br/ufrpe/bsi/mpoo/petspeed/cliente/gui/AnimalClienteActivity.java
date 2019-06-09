@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
@@ -27,7 +28,7 @@ import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 public class AnimalClienteActivity extends AppCompatActivity {
 
     private ClienteServices clienteServices = new ClienteServices();
-    private ArrayList<Animal> animalArrayList = new ArrayList<>();
+    private List<Animal> animalArrayList = new ArrayList<>();
     private Usuario usuario = Sessao.instance.getUsuario();
     private ClienteDAO clienteDAO = new ClienteDAO();
     private Cliente cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
@@ -52,14 +53,14 @@ public class AnimalClienteActivity extends AppCompatActivity {
         });
     }
 
-
     private void preencherArray() {
+        //método pertencente à uma funcionalidade que ainda está sendo implementada.
         long idCliente = Sessao.instance.getCliente().getId();
-        ArrayList<Animal> petsCliente = clienteServices.getAllAnimalByIdCliente(idCliente);
+        List<Animal> petsCliente = clienteServices.getAllAnimalByIdCliente(idCliente);
         final AdapterMeuPet adapter = new AdapterMeuPet(this, petsCliente);
         listaAnimal.setAdapter(adapter);
+    }
 
-    }//a fazer
 
 
     public void createAllAnimals(){
@@ -72,7 +73,9 @@ public class AnimalClienteActivity extends AppCompatActivity {
         RecyclerViewClickListener listener = new RecyclerViewClickListener() {
             @Override
             public void onClick(View v, int position) {
-            }//a fazer
+                //listagem dos pets com imagens
+            }
+
         };
         RecyclerView recyclerView = findViewById(R.id.recycler_view_animal_cliente);
         if (animalArrayList != null){

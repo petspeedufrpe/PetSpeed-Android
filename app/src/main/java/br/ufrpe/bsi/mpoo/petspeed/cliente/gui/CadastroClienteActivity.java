@@ -12,8 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
@@ -27,7 +25,7 @@ import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 
 public class CadastroClienteActivity extends AppCompatActivity {
 
-    private final Map<String, Object> values = new HashMap<>();
+    public static final String CAMPO_VAZIO = "Campo vazio";
     EditText mNome, mCpf, mEmail, mSenha, mcmfSenha, mTelefone;
     String nome, cpf, email, senha, cmfSenha, telefone;
     Button mButtoRegister;
@@ -92,13 +90,13 @@ public class CadastroClienteActivity extends AppCompatActivity {
 
     public void findEditTexts() {
 
-        mNome = (EditText) findViewById(R.id.username);
-        mTelefone = (EditText) findViewById(R.id.clienteTelefone);
-        mCpf = (EditText) findViewById(R.id.cpf);
-        mEmail = (EditText) findViewById(R.id.email);
-        mSenha = (EditText) findViewById(R.id.passwd);
-        mcmfSenha = (EditText) findViewById(R.id.cnfpasswd);
-        mTextBkHome = (TextView) findViewById(R.id.ActCadastroTxVwBackHome);
+        mNome = findViewById(R.id.username);
+        mTelefone = findViewById(R.id.clienteTelefone);
+        mCpf = findViewById(R.id.cpf);
+        mEmail = findViewById(R.id.email);
+        mSenha = findViewById(R.id.passwd);
+        mcmfSenha = findViewById(R.id.cnfpasswd);
+        mTextBkHome = findViewById(R.id.ActCadastroTxVwBackHome);
 
     }
 
@@ -114,11 +112,11 @@ public class CadastroClienteActivity extends AppCompatActivity {
         mcmfSenha.setError(null);
 
         if (isCampoVazio(nome)) {
-            mNome.setError("Campo vazio");
+            mNome.setError(CAMPO_VAZIO);
             focusView = mNome;
             res = false;
         } else if (isCampoVazio(telefone)) {
-            mTelefone.setError("Campo vazio");
+            mTelefone.setError(CAMPO_VAZIO);
             focusView = mTelefone;
             res = false;
         } if (telefone.length()!=10) {
@@ -126,7 +124,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
             focusView = mTelefone;
             res = false;
         } else if (isCampoVazio(cpf)) {
-            mCpf.setError("Campo vazio");
+            mCpf.setError(CAMPO_VAZIO);
             focusView = mCpf;
             res = false;
         } else if (!isEmailValido(email)) {
@@ -134,12 +132,12 @@ public class CadastroClienteActivity extends AppCompatActivity {
             focusView = mEmail;
             res = false;
         } else if (isCampoVazio(senha)) {
-            mSenha.setError("Campo vazio");
+            mSenha.setError(CAMPO_VAZIO);
             focusView = mSenha;
             res = false;
         } else if (isCampoVazio(cmfSenha)) {
             focusView = mcmfSenha;
-            mcmfSenha.setError("Campo vazio");
+            mcmfSenha.setError(CAMPO_VAZIO);
             res = false;
         }
         if (!isSenhasIguais(senha, cmfSenha)) {
@@ -156,17 +154,15 @@ public class CadastroClienteActivity extends AppCompatActivity {
 
 
     private boolean isCampoVazio(String valor) {
-        boolean resultado = TextUtils.isEmpty(valor) || valor.trim().isEmpty();
-        return resultado;
+        return TextUtils.isEmpty(valor) || valor.trim().isEmpty();
     }
 
     private boolean isEmailValido(String email) {
-        boolean resultado = (!isCampoVazio(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
-        return resultado;
+        return (!isCampoVazio(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
     }
 
     private boolean isSenhasIguais(String senha, String cmfSenha) {
-        return ((senha.equals(cmfSenha)));
+        return (senha.equals(cmfSenha));
     }
 
     private Cliente criarCliente() {

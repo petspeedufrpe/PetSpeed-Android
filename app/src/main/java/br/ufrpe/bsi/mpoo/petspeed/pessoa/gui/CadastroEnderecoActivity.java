@@ -15,10 +15,10 @@ import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoCadastro;
 import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Endereco;
 
 public class CadastroEnderecoActivity extends AppCompatActivity {
+    public static final String ERR_MSG_CAMPO_VAZIO = "Campo vazio";
     Button mBtnCadastro;
-    private EditText mLogradouro, mNumero, mCep, mUf, mBairro, mCidade, mComplemento,mLatitude,mLongitude;
+    private EditText mLogradouro, mNumero, mCep, mUf, mBairro, mCidade, mComplemento;
     private String logradouro, numero, cep, uf, bairro, cidade, complemento;
-    private Double latitude,longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_cadastro_endereco);
 
-        mBtnCadastro = (Button) findViewById(R.id.cad_end);
+        mBtnCadastro = findViewById(R.id.cad_end);
         mBtnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,15 +48,13 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
 
     public void findEditTexts() {
 
-        mLogradouro = (EditText) findViewById(R.id.logradouro);
-        mNumero = (EditText) findViewById(R.id.numero);
-        mCep = (EditText) findViewById(R.id.cep);
-        mUf = (EditText) findViewById(R.id.uf);
-        mBairro = (EditText) findViewById(R.id.bairro);
-        mCidade = (EditText) findViewById(R.id.cidade);
-        mComplemento = (EditText) findViewById(R.id.complemento);
-        //mLatitude = (EditText) findViewById(R.id.latitude);
-        //mLongitude = (EditText) findViewById(R.id.longitude);
+        mLogradouro = findViewById(R.id.logradouro);
+        mNumero = findViewById(R.id.numero);
+        mCep = findViewById(R.id.cep);
+        mUf = findViewById(R.id.uf);
+        mBairro = findViewById(R.id.bairro);
+        mCidade = findViewById(R.id.cidade);
+        mComplemento = findViewById(R.id.complemento);
     }
 
     public void capturaTextos() {
@@ -83,32 +81,32 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
         mComplemento.setError(null);
 
         if (isCampoVazio(logradouro)) {
-            mLogradouro.setError("Campo vazio");
+            mLogradouro.setError(ERR_MSG_CAMPO_VAZIO);
             focusView = mLogradouro;
             res = false;
         } else if (isCampoVazio(numero)) {
-            mNumero.setError("Campo vazio");
+            mNumero.setError(ERR_MSG_CAMPO_VAZIO);
             focusView = mNumero;
             res = false;
         } else if (isCampoVazio(cep)) {
-            mCep.setError("Campo Vazio");
+            mCep.setError(ERR_MSG_CAMPO_VAZIO);
             focusView = mCep;
             res = false;
         } else if (isCampoVazio(uf)) {
-            mUf.setError("Campo vazio");
+            mUf.setError(ERR_MSG_CAMPO_VAZIO);
             focusView = mUf;
             res = false;
         } else if (isCampoVazio(bairro)) {
             focusView = mBairro;
-            mBairro.setError("Campo vazio");
+            mBairro.setError(ERR_MSG_CAMPO_VAZIO);
             res = false;
         } else if (isCampoVazio(cidade)) {
             focusView = mCidade;
-            mCidade.setError("Campo Vazio");
+            mCidade.setError(ERR_MSG_CAMPO_VAZIO);
             res = false;
         } else if (isCampoVazio(complemento)) {
             focusView = mComplemento;
-            mComplemento.setError("Campo Vazio");
+            mComplemento.setError(ERR_MSG_CAMPO_VAZIO);
         }
         if (!res) {
             focusView.requestFocus();
@@ -118,8 +116,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
     }
 
     private boolean isCampoVazio(String valor) {
-        boolean resultado = TextUtils.isEmpty(valor) || valor.trim().isEmpty();
-        return resultado;
+        return TextUtils.isEmpty(valor) || valor.trim().isEmpty();
     }
 
     public Endereco criarEndereco() {

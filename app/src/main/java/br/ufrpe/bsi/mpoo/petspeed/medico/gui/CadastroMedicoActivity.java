@@ -23,6 +23,7 @@ import br.ufrpe.bsi.mpoo.petspeed.pessoa.gui.CadastroEnderecoActivity;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 
 public class CadastroMedicoActivity extends AppCompatActivity {
+    public static final String ERR_MSG_CAMPO_VAZIO = "Campo vazio";
     EditText mNome, mCpf, mEmail, mSenha, mcmfSenha, mCrmv, mTelefone;
     String nome, cpf, email, senha, cmfSenha, crmv, telefone;
     Button mButtoRegister;
@@ -74,6 +75,7 @@ public class CadastroMedicoActivity extends AppCompatActivity {
             }
         } else {
             Toast.makeText(CadastroMedicoActivity.this, "Ops! Algo parece estar errado. Verifique seus dados.", Toast.LENGTH_SHORT).show();
+            limparCampos();
         }
     }
 
@@ -89,14 +91,14 @@ public class CadastroMedicoActivity extends AppCompatActivity {
     }
 
     public void findEditTexts() {
-        mCrmv = (EditText) findViewById(R.id.crmv);
-        mNome = (EditText) findViewById(R.id.username);
-        mTelefone = (EditText) findViewById(R.id.medicoTelefone);
-        mCpf = (EditText) findViewById(R.id.cpf);
-        mEmail = (EditText) findViewById(R.id.email);
-        mSenha = (EditText) findViewById(R.id.passwd);
-        mcmfSenha = (EditText) findViewById(R.id.cnfpasswd);
-        mTextHome = (TextView) findViewById(R.id.cdstrMedicoHome);
+        mCrmv = findViewById(R.id.crmv);
+        mNome = findViewById(R.id.username);
+        mTelefone = findViewById(R.id.medicoTelefone);
+        mCpf = findViewById(R.id.cpf);
+        mEmail = findViewById(R.id.email);
+        mSenha = findViewById(R.id.passwd);
+        mcmfSenha = findViewById(R.id.cnfpasswd);
+        mTextHome = findViewById(R.id.cdstrMedicoHome);
 
     }
 
@@ -113,23 +115,23 @@ public class CadastroMedicoActivity extends AppCompatActivity {
         mCrmv.setError(null);
 
         if (isCampoVazio(nome)) {
-            mNome.setError("Campo vazio");
+            mNome.setError(ERR_MSG_CAMPO_VAZIO);
             focusView = mNome;
             res = false;
-        }if (isCampoVazio(telefone)) {
-            mTelefone.setError("Campo vazio");
+        }else if (isCampoVazio(telefone)) {
+            mTelefone.setError(ERR_MSG_CAMPO_VAZIO);
             focusView = mTelefone;
             res = false;
-        }if (telefone.length()!=10) {
-            mTelefone.setError("telefone inválido");
+        }else if (telefone.length()!=10) {
+            mTelefone.setError("Telefone inválido");
             focusView = mTelefone;
             res = false;
         } else if (isCampoVazio(cpf)) {
-            mCpf.setError("Campo vazio");
+            mCpf.setError(ERR_MSG_CAMPO_VAZIO);
             focusView = mCpf;
             res = false;
         } else if (isCampoVazio(crmv)) {
-            mCrmv.setError("Campo vazio");
+            mCrmv.setError(ERR_MSG_CAMPO_VAZIO);
             focusView = mCrmv;
             res = false;
         } else if (!isEmailValido(email)) {
@@ -137,12 +139,12 @@ public class CadastroMedicoActivity extends AppCompatActivity {
             focusView = mEmail;
             res = false;
         } else if (isCampoVazio(senha)) {
-            mSenha.setError("Campo vazio");
+            mSenha.setError(ERR_MSG_CAMPO_VAZIO);
             focusView = mSenha;
             res = false;
         } else if (isCampoVazio(cmfSenha)) {
             focusView = mcmfSenha;
-            mcmfSenha.setError("Campo vazio");
+            mcmfSenha.setError(ERR_MSG_CAMPO_VAZIO);
             res = false;
         }
         if (!isSenhasIguais(senha, cmfSenha)) {
@@ -159,17 +161,15 @@ public class CadastroMedicoActivity extends AppCompatActivity {
 
 
     private boolean isCampoVazio(String valor) {
-        boolean resultado = TextUtils.isEmpty(valor) || valor.trim().isEmpty();
-        return resultado;
+        return TextUtils.isEmpty(valor) || valor.trim().isEmpty();
     }
 
     private boolean isEmailValido(String email) {
-        boolean resultado = (!isCampoVazio(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
-        return resultado;
+        return (!isCampoVazio(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
     }
 
     private boolean isSenhasIguais(String senha, String cmfSenha) {
-        return ((senha.equals(cmfSenha)));
+        return (senha.equals(cmfSenha));
     }
 
     private Medico criarMedico() {

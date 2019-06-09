@@ -1,5 +1,7 @@
 package br.ufrpe.bsi.mpoo.petspeed.infra.negocio;
 
+import android.util.Log;
+
 import com.android.volley.Cache;
 import com.android.volley.Network;
 import com.android.volley.Request;
@@ -15,7 +17,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public class ApiRequestService {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Map<Enum, Object> latLng = new HashMap<Enum, Object>();
+                    Map<Enum, Object> latLng = new HashMap<>();
 
                     JSONArray jsonResults = response.getJSONArray("results");
                     JSONObject jsonData = jsonResults.getJSONObject(0);
@@ -61,7 +62,7 @@ public class ApiRequestService {
                     listener.onGeocodeCallback(latLng);
 
                 } catch (JSONException e) {
-                    Map<Enum, Object> latLng = new HashMap<Enum, Object>();
+                    Map<Enum, Object> latLng = new HashMap<>();
                     latLng.put(GeoCodeCoord.RESULT, GeoCodeCoord.FAIL);
                     listener.onGeocodeCallback(latLng);
                 }
@@ -70,7 +71,7 @@ public class ApiRequestService {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
+                Log.getStackTraceString(error);
             }
         });
         mQueue.add(request);
@@ -78,12 +79,7 @@ public class ApiRequestService {
 
     private String getGeocodeUrl(String address) {
         return "https://maps.googleapis.com/maps/api/geocode/json?address=" + address +
-                    "&key=" + getApiKey();
-    }
-
-    private String getApiKey() {
-        String key = "AIzaSyBhntuU8NDLx8ZoIIfxnNRXaziGPvtEB6s";
-        return key;
+                    "&key=" + "AIzaSyBhntuU8NDLx8ZoIIfxnNRXaziGPvtEB6s";
     }
 
     public enum GeoCodeCoord {

@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.LinkedList;
 import java.util.List;
 
-import br.ufrpe.bsi.mpoo.petspeed.infra.Persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petspeed.pessoa.persistencia.PessoaDAO;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
@@ -16,6 +16,8 @@ import br.ufrpe.bsi.mpoo.petspeed.usuario.persistencia.UsuarioDAO;
 
 public class MedicoDAO {
 
+    private static final String SQL_SELECT_ALL_FROM = "SELECT * FROM ";
+    private static final String SQL_WHERE = " WHERE ";
     private DBHelper helperDb = new DBHelper();
 
 
@@ -58,7 +60,7 @@ public class MedicoDAO {
     public Medico getMedicoByFkUsuario(Long fkUsuario) {
         SQLiteDatabase db = helperDb.getReadableDatabase();
         Medico medico = null;
-        String sql = "SELECT * FROM " + DBHelper.TABELA_MEDICO + " WHERE " + DBHelper.COL_MEDICO_FK_USUARIO + " LIKE ?;";
+        String sql = SQL_SELECT_ALL_FROM + DBHelper.TABELA_MEDICO + SQL_WHERE + DBHelper.COL_MEDICO_FK_USUARIO + " LIKE ?;";
         Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(fkUsuario)});
         if (cursor.moveToFirst()) {
             medico = createMedico(cursor);
@@ -73,7 +75,7 @@ public class MedicoDAO {
     public Medico getMedicoById(long idMedico) {
         SQLiteDatabase db = helperDb.getReadableDatabase();
         Medico medico = null;
-        String sql = "SELECT * FROM " + DBHelper.TABELA_MEDICO + " WHERE " + DBHelper.COL_MEDICO_ID + " LIKE ?;";
+        String sql = SQL_SELECT_ALL_FROM + DBHelper.TABELA_MEDICO + SQL_WHERE + DBHelper.COL_MEDICO_ID + " LIKE ?;";
         Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(idMedico)});
         if (cursor.moveToFirst()) {
             medico = createMedico(cursor);
@@ -95,8 +97,8 @@ public class MedicoDAO {
 
     public Medico getMedicoByFkPessoa(long idPessoa) {
         SQLiteDatabase db = helperDb.getReadableDatabase();
-        String sql = "SELECT * FROM " + DBHelper.TABELA_MEDICO +
-                " WHERE " + DBHelper.COL_MEDICO_FK_PESSOA + " = ?";
+        String sql = SQL_SELECT_ALL_FROM + DBHelper.TABELA_MEDICO +
+                SQL_WHERE + DBHelper.COL_MEDICO_FK_PESSOA + " = ?";
         String[] args = {String.valueOf(idPessoa)};
         Cursor cursor = db.rawQuery(sql, args);
         if (cursor.moveToFirst()) {
@@ -107,21 +109,18 @@ public class MedicoDAO {
     }
 
     String makePlaceholders(int len) {
-        if (len < 1) {
-            throw new RuntimeException("No placeholders");
-        } else {
-            StringBuilder sb = new StringBuilder(len * 2 - 1);
-            sb.append("?");
-            for (int i = 1; i < len; i++) {
-                sb.append(",?");
-            }
-            return sb.toString();
+
+        StringBuilder sb = new StringBuilder(len * 2 - 1);
+        sb.append("?");
+        for (int i = 1; i < len; i++) {
+            sb.append(",?");
         }
+        return sb.toString();
     }
 
     public List<Medico> getMultipleMedicoById(List<Long> indicesPessoas) {
         // NÃO USAR! precisa de implementar o String[] args que seja de tamanho genérico.
-        String sql = "SELECT * FROM " + DBHelper.TABELA_MEDICO + " WHERE " + DBHelper.COL_MEDICO_FK_PESSOA + " IN (" + makePlaceholders(indicesPessoas.size()) + ");";
+        String sql = SQL_SELECT_ALL_FROM + DBHelper.TABELA_MEDICO + SQL_WHERE + DBHelper.COL_MEDICO_FK_PESSOA + " IN (" + makePlaceholders(indicesPessoas.size()) + ");";
         String[] args = {};
         SQLiteDatabase db = helperDb.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, args);
@@ -136,23 +135,6 @@ public class MedicoDAO {
         cursor.close();
         db.close();
         return medicos;
-    }
-
-
-    public void alteraAvaliacao() {
-
-    }
-
-    public void alteraClinica() {
-
-    }
-
-    public void alteraEndereco() {
-
-    }
-
-    public void alteraCrmv() {
-
     }
 }
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 
+
 public class Animal {
 
     private long id;
@@ -17,6 +18,7 @@ public class Animal {
     private int nascimento;
 
     private long fkCliente;
+
 
     private List<OrdemServico> historico;
 

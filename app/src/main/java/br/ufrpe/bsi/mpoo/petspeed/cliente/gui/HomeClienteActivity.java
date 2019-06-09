@@ -47,9 +47,9 @@ public class HomeClienteActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
-        mNomeCliente = (TextView) headerView.findViewById(R.id.NomeCliente);
-        mEmailCliente = (TextView) headerView.findViewById(R.id.textViewEmailCliente);
-        mAlternaRaio = (Button) findViewById(R.id.buttonRaio);
+        mNomeCliente = headerView.findViewById(R.id.NomeCliente);
+        mEmailCliente = headerView.findViewById(R.id.textViewEmailCliente);
+        mAlternaRaio = findViewById(R.id.buttonRaio);
         mAlternaRaio.setText("Raio atual: 5km");
 
         mAlternaRaio.setOnClickListener(new View.OnClickListener() {
@@ -59,8 +59,6 @@ public class HomeClienteActivity extends AppCompatActivity
                         getSupportFragmentManager().findFragmentById(R.id.fragment);
                 if (mapsFrag != null) {
                     alternaFaseRaio(mapsFrag);
-                } else {
-                    return;
                 }
             }
         });
@@ -71,26 +69,26 @@ public class HomeClienteActivity extends AppCompatActivity
     }
 
     private void alternaFaseRaio(MapsFragment mapsFrag) {
-        if(faseRaio==1){
+        if (faseRaio == 1) {
             mapsFrag.setNovoRaio(novoRaio);
             mAlternaRaio.setText("Raio atual: 5Km");
-            Toast.makeText(HomeClienteActivity.this,"Visualizando medicos em um raio de 5km",Toast.LENGTH_SHORT).show();
-            novoRaio=10.0;
-            faseRaio=2;
-        }else if(faseRaio==2){
+            Toast.makeText(HomeClienteActivity.this, "Visualizando medicos em um raio de 5km", Toast.LENGTH_SHORT).show();
+            novoRaio = 10.0;
+            faseRaio = 2;
+        } else if (faseRaio == 2) {
             mapsFrag.setNovoRaio(novoRaio);
             mAlternaRaio.setText("Raio atual: 10Km");
-            Toast.makeText(HomeClienteActivity.this,"Visualizando medicos em um raio de 10km",Toast.LENGTH_SHORT).show();
+            Toast.makeText(HomeClienteActivity.this, "Visualizando medicos em um raio de 10km", Toast.LENGTH_SHORT).show();
 
-            novoRaio=20.0;
-            faseRaio=3;
-        }else if(faseRaio==3){
+            novoRaio = 20.0;
+            faseRaio = 3;
+        } else if (faseRaio == 3) {
             mapsFrag.setNovoRaio(novoRaio);
             mAlternaRaio.setText("Raio atual: 20Km");
-            Toast.makeText(HomeClienteActivity.this,"Visualizando medicos em um raio de 20km",Toast.LENGTH_SHORT).show();
+            Toast.makeText(HomeClienteActivity.this, "Visualizando medicos em um raio de 20km", Toast.LENGTH_SHORT).show();
 
-            novoRaio=5.0;
-            faseRaio=1;
+            novoRaio = 5.0;
+            faseRaio = 1;
         }
     }
 
@@ -140,24 +138,12 @@ public class HomeClienteActivity extends AppCompatActivity
         } else if (id == R.id.nav_meus_pets) {
             startActivity(new Intent(HomeClienteActivity.this, AnimalClienteActivity.class));
 
-        } else if (id == R.id.nav_historico_cliente) {
-
-        } else if (id == R.id.nav_atendimento) {
-
-        } else if (id == R.id.nav_atendimento_emergencial) {
-
         } else if (id == R.id.nav_sair_cliente) {
             ClienteServices clienteServices = new ClienteServices();
             clienteServices.logout();
             startActivity(new Intent(HomeClienteActivity.this, LoginActivity.class)
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-
-        } else if (id == R.id.nav_configuracao) {
-
-        } else if (id == R.id.nav_send) {
-
         }
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

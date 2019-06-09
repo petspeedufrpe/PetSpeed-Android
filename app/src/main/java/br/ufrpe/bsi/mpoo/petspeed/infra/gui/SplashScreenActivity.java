@@ -8,7 +8,7 @@ import android.view.WindowManager;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
-import br.ufrpe.bsi.mpoo.petspeed.infra.Persistencia.PreencherBanco;
+import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.PreencherBanco;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

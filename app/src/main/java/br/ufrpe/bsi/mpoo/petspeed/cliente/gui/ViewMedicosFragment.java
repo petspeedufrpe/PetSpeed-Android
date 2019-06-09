@@ -17,7 +17,6 @@ import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 
 
 public class ViewMedicosFragment extends DialogFragment {
-    private static final String TAG = "ViewMedicosFragment";
 
 
     private TextView mNome, mAvaliacao, mFone, mRuaNumero, mCompl, mCidadeUF, mActionVoltar, mActionAgendar;
@@ -37,17 +36,17 @@ public class ViewMedicosFragment extends DialogFragment {
         mActionVoltar = view.findViewById(R.id.fragPopUpMedVoltar);
         mActionAgendar = view.findViewById(R.id.fragPopUpMedBtnAgendar);
 
-        if(Sessao.instance.getValue(ContasDeUsuario.MEDICO.getDescricao())!=null){
+        if (Sessao.instance.getValue(ContasDeUsuario.MEDICO.getDescricao()) != null) {
             mNome.setTextColor(Color.parseColor("#357A01"));
             showMedico();
             mActionAgendar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Todo
+                    //a fazer
                 }
             });
 
-        }else{
+        } else {
             mNome.setTextColor(Color.parseColor("#FF0299AC"));
             mActionAgendar.setText("MEU PERFIL");
             mActionAgendar.setTextColor(Color.parseColor("#FF0299AC"));
@@ -64,7 +63,6 @@ public class ViewMedicosFragment extends DialogFragment {
         }
 
 
-
         mActionVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,31 +77,31 @@ public class ViewMedicosFragment extends DialogFragment {
     private void showMedico() {
         medico = (Medico) Sessao.instance.getValue(ContasDeUsuario.MEDICO.getDescricao());
         mNome.setText(medico.getDadosPessoais().getNome());
-        mAvaliacao.setText("Avaliação: " + String.valueOf(medico.getAvaliacao()));
+        mAvaliacao.setText("Avaliação: " + medico.getAvaliacao());
         mFone.setText("Telefone: " + medico.getTelefone());
         mRuaNumero.setText(
                 medico.getDadosPessoais().getEndereco().getLogradouro() + " N° "
-                        + String.valueOf(medico.getDadosPessoais().getEndereco().getNumero()) + ", "
+                        + medico.getDadosPessoais().getEndereco().getNumero() + ", "
                         + medico.getDadosPessoais().getEndereco().getBairro());
         mCompl.setText(String.valueOf(medico.getDadosPessoais().getEndereco().getComplemento()));
         mCidadeUF.setText(
-                "Cidade: " + String.valueOf(medico.getDadosPessoais().getEndereco().getCidade()) + " - "
-                        + String.valueOf(medico.getDadosPessoais().getEndereco().getUf()));
+                "Cidade: " + medico.getDadosPessoais().getEndereco().getCidade() + " - "
+                        + medico.getDadosPessoais().getEndereco().getUf());
 
         Sessao.instance.setValue(ContasDeUsuario.MEDICO.getDescricao(), null);
     }
 
     private void showCliente() {
         mNome.setText(Sessao.instance.getCliente().getDadosPessoais().getNome());
-        mAvaliacao.setText("Avaliação: " + String.valueOf(Sessao.instance.getCliente().getAvaliacao()));
+        mAvaliacao.setText("Avaliação: " + Sessao.instance.getCliente().getAvaliacao());
         mFone.setText("Telefone: " + Sessao.instance.getCliente().getTelefone());
         mRuaNumero.setText(
                 Sessao.instance.getCliente().getDadosPessoais().getEndereco().getLogradouro() + " N° "
-                        + String.valueOf(Sessao.instance.getCliente().getDadosPessoais().getEndereco().getNumero()) + ", "
+                        + Sessao.instance.getCliente().getDadosPessoais().getEndereco().getNumero() + ", "
                         + Sessao.instance.getCliente().getDadosPessoais().getEndereco().getBairro());
         mCompl.setText(String.valueOf(Sessao.instance.getCliente().getDadosPessoais().getEndereco().getComplemento()));
         mCidadeUF.setText(
-                "Cidade: " + String.valueOf(Sessao.instance.getCliente().getDadosPessoais().getEndereco().getCidade()) + " - "
-                        + String.valueOf(Sessao.instance.getCliente().getDadosPessoais().getEndereco().getUf()));
+                "Cidade: " + Sessao.instance.getCliente().getDadosPessoais().getEndereco().getCidade() + " - "
+                        + Sessao.instance.getCliente().getDadosPessoais().getEndereco().getUf());
     }
 }
