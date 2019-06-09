@@ -28,8 +28,6 @@ public class ApiRequestService {
 
         String url = getGeocodeUrl(address);
 
-        final ArrayList<Double> latlong = new ArrayList<>();
-
         Cache cache = new DiskBasedCache(PetSpeedApp.getContext().getCacheDir(), 1024 * 1024); // 1MB cap
 
         Network network = new BasicNetwork(new HurlStack());

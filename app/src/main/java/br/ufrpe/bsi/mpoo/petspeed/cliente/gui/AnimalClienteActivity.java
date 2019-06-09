@@ -20,21 +20,18 @@ import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.persistencia.ClienteDAO;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.RecyclerViewAdapterAnimalCliente;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.adapter.AdapterMeuPet;
-//import br.ufrpe.bsi.mpoo.petSpeed.infra.negocio.AnimalClienteService;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.RecyclerViewClickListener;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 
 public class AnimalClienteActivity extends AppCompatActivity {
 
-    private RecyclerView.LayoutManager mLayoutManager;
     private ClienteServices clienteServices = new ClienteServices();
     private ArrayList<Animal> animalArrayList = new ArrayList<>();
     private Usuario usuario = Sessao.instance.getUsuario();
     private ClienteDAO clienteDAO = new ClienteDAO();
     private Cliente cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
     private ListView listaAnimal;
-    //private AnimalClienteService animalClienteService;
 
 
     @Override
@@ -57,13 +54,12 @@ public class AnimalClienteActivity extends AppCompatActivity {
 
 
     private void preencherArray() {
-        ClienteServices clienteServices = new ClienteServices();
         long idCliente = Sessao.instance.getCliente().getId();
         ArrayList<Animal> petsCliente = clienteServices.getAllAnimalByIdCliente(idCliente);
         final AdapterMeuPet adapter = new AdapterMeuPet(this, petsCliente);
         listaAnimal.setAdapter(adapter);
 
-    }
+    }//a fazer
 
 
     public void createAllAnimals(){
@@ -76,9 +72,9 @@ public class AnimalClienteActivity extends AppCompatActivity {
         RecyclerViewClickListener listener = new RecyclerViewClickListener() {
             @Override
             public void onClick(View v, int position) {
-            }
+            }//a fazer
         };
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_animal_cliente);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_animal_cliente);
         if (animalArrayList != null){
             RecyclerViewAdapterAnimalCliente adapterAnimalCliente = new RecyclerViewAdapterAnimalCliente(this,animalArrayList,listener);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -80,6 +80,8 @@
     <string name="peso_kg">Peso kg</string>
     <string name="nome">Nome</string>
     <string name="todo">TODO</string>
+    <string name="SQL_SELECT_ALL_FROM">SELECT * FROM</string>
+    <string name="SQL_WHERE">WHERE</string>
 
 
 </resources>

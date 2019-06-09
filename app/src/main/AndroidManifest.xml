@@ -49,7 +49,6 @@
         <activity android:name="br.ufrpe.bsi.mpoo.petspeed.medico.gui.CadastroMedicoActivity" />
         <activity android:name="br.ufrpe.bsi.mpoo.petspeed.animal.gui.CrudAnimalActivity"
             android:noHistory="true" />
-        <activity android:name="br.ufrpe.bsi.mpoo.petspeed.infra.gui.MainActivity" />
         <activity android:name="br.ufrpe.bsi.mpoo.petspeed.infra.gui.LoginActivity" />
         <activity android:name="br.ufrpe.bsi.mpoo.petspeed.infra.gui.SplashScreenActivity">
             <intent-filter>

@@ -3,7 +3,6 @@ package br.ufrpe.bsi.mpoo.petspeed.animal.dominio;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
-//import java.awt.image;
 
 public class Animal {
 
@@ -18,7 +17,6 @@ public class Animal {
     private int nascimento;
 
     private long fkCliente;
-    //private BufferedImage foto;
 
     private List<OrdemServico> historico;
 
