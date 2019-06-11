@@ -44,10 +44,12 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
 public class EditDadosClienteActivity extends AppCompatActivity {
 
 
-    private EditText mNome, mEmail, mTelefone;
-    private String nome, email, telefone;
-    private Button btnMudarSenha;
-    private android.support.v7.widget.Toolbar toolbar;
+    private EditText mNome;
+    private EditText mEmail;
+    private EditText mTelefone;
+    private String nome;
+    private String email;
+    private String telefone;
     private Cliente cliente = Sessao.instance.getCliente();
     private ClienteServices clienteServices = new ClienteServices();
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -61,7 +63,7 @@ public class EditDadosClienteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_dados_cliente);
-        toolbar = findViewById(R.id.toolbar_altera_dados);
+        Toolbar toolbar = findViewById(R.id.toolbar_altera_dados);
         setSupportActionBar(toolbar);
         mImagemCliente = findViewById(R.id.campo_imagem);
         cameraAlteraFoto = findViewById(R.id.camera_alterar_foto_cliente);
@@ -72,7 +74,7 @@ public class EditDadosClienteActivity extends AppCompatActivity {
                 takePhoto();
             }
         });
-        btnMudarSenha = findViewById(R.id.btn_alterar_senha);
+        Button btnMudarSenha = findViewById(R.id.btn_alterar_senha);
         btnMudarSenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -223,16 +225,6 @@ public class EditDadosClienteActivity extends AppCompatActivity {
         } else {
             abrirGaleriaIntent();
         }
-    }
-
-    private void getPermissionsCamera() {
-        //a fazer
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-        } else
-            takePhoto();
     }
 
     private void abrirGaleriaIntent() {

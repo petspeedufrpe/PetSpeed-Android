@@ -28,8 +28,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText mEmail;
     private EditText mSenha;
-    private Button loginbtn;
-    private Button cadastrarBtn;
     private String email;
     private String senha;
     private ContasDeUsuario contaSelecionada;
@@ -49,8 +47,8 @@ public class LoginActivity extends AppCompatActivity {
 
         mEmail = findViewById(R.id.LoginEmailTxBx);
         mSenha = findViewById(R.id.LoginPswrdTxBx);
-        loginbtn = findViewById(R.id.loginActLoginBtn);
-        cadastrarBtn = findViewById(R.id.LoginActCadastrarBtn);
+        Button loginbtn = findViewById(R.id.loginActLoginBtn);
+        Button cadastrarBtn = findViewById(R.id.LoginActCadastrarBtn);
 
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override

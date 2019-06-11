@@ -28,8 +28,9 @@ import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 public class HomeClienteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextView mNomeCliente, mEmailCliente;
-    Button mAlternaRaio;
+    private TextView mNomeCliente;
+    private TextView mEmailCliente;
+    private Button mAlternaRaio;
     private Double novoRaio = 5.0;
     private int faseRaio = 1;
 
