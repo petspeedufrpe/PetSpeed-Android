@@ -1,14 +1,19 @@
 package br.ufrpe.bsi.mpoo.petspeed.cliente.gui;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,18 +26,21 @@ import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.persistencia.ClienteDAO;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.RecyclerViewAdapterAnimalCliente;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.adapter.AdapterMeuPet;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SwipeContoller;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.RecyclerVIewTouchHelperListener;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.RecyclerViewClickListener;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 
-public class AnimalClienteActivity extends AppCompatActivity {
+public class AnimalClienteActivity extends AppCompatActivity implements RecyclerVIewTouchHelperListener {
 
     private ClienteServices clienteServices = new ClienteServices();
     private List<Animal> animalArrayList = new ArrayList<>();
     private Usuario usuario = Sessao.instance.getUsuario();
     private ClienteDAO clienteDAO = new ClienteDAO();
     private Cliente cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
-    private ListView listaAnimal;
+    private RecyclerViewAdapterAnimalCliente adapterAnimalCliente;
+    private CoordinatorLayout rootLayout;
 
 
     @Override
@@ -58,7 +66,7 @@ public class AnimalClienteActivity extends AppCompatActivity {
         long idCliente = Sessao.instance.getCliente().getId();
         List<Animal> petsCliente = clienteServices.getAllAnimalByIdCliente(idCliente);
         final AdapterMeuPet adapter = new AdapterMeuPet(this, petsCliente);
-        listaAnimal.setAdapter(adapter);
+        //listaAnimal.setAdapter(adapter);
     }
 
 
@@ -75,16 +83,51 @@ public class AnimalClienteActivity extends AppCompatActivity {
             public void onClick(View v, int position) {
                 //listagem dos pets com imagens
             }
-
         };
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_animal_cliente);
         if (animalArrayList != null){
+            RecyclerView recyclerView = findViewById(R.id.recycler_view_animal_cliente);
+            rootLayout = findViewById(R.id.rootLayout);
+            adapterAnimalCliente = new RecyclerViewAdapterAnimalCliente(this,animalArrayList,listener);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+            recyclerView.setAdapter(adapterAnimalCliente);
+            ItemTouchHelper.SimpleCallback callback =
+                    new SwipeContoller(0,ItemTouchHelper.LEFT,this);
+            new ItemTouchHelper(callback).attachToRecyclerView(recyclerView);
+
+            /*
+            RecyclerView recyclerView = findViewById(R.id.recycler_view_animal_cliente);
             RecyclerViewAdapterAnimalCliente adapterAnimalCliente = new RecyclerViewAdapterAnimalCliente(this,animalArrayList,listener);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.hasFixedSize();
             recyclerView.setAdapter(adapterAnimalCliente);
+            recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+            ItemTouchHelper.SimpleCallback itemTouchHelperCallback =
+                    new SwipeContoller(0,ItemTouchHelper.LEFT,this);
+            new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+            */
         }
 
+
+    }
+
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, final int position) {
+
+        String name = animalArrayList.get(viewHolder.getAdapterPosition()).getNome();
+        final Animal itemDeletado = animalArrayList.get(viewHolder.getAdapterPosition());
+        final int deletIndex = viewHolder.getAdapterPosition();
+        adapterAnimalCliente.removeItem(deletIndex);
+        Snackbar snackbar = Snackbar.make(rootLayout,name+"removed",Snackbar.LENGTH_SHORT);
+        snackbar.setAction("UNDO", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapterAnimalCliente.restoreItem(itemDeletado,deletIndex);
+
+            }
+        });
+        snackbar.setActionTextColor(Color.YELLOW);
 
     }
 }
