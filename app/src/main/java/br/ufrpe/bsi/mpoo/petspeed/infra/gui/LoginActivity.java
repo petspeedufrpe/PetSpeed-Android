@@ -195,8 +195,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean validaEmail(String email) {
-        boolean resultado = (!isCampoVazio(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
-        return resultado;
+        return (!isCampoVazio(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
     }
 
     private boolean isCampoVazio(String valor) {

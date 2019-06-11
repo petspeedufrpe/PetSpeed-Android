@@ -61,10 +61,10 @@ public class EditDadosClienteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_dados_cliente);
-        toolbar = (Toolbar) findViewById(R.id.toolbar_altera_dados);
+        toolbar = findViewById(R.id.toolbar_altera_dados);
         setSupportActionBar(toolbar);
-        mImagemCliente = (ImageView) findViewById(R.id.campo_imagem);
-        cameraAlteraFoto = (ImageView) findViewById(R.id.camera_alterar_foto_cliente);
+        mImagemCliente = findViewById(R.id.campo_imagem);
+        cameraAlteraFoto = findViewById(R.id.camera_alterar_foto_cliente);
         cameraAlteraFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +72,7 @@ public class EditDadosClienteActivity extends AppCompatActivity {
                 takePhoto();
             }
         });
-        btnMudarSenha = (Button) findViewById(R.id.btn_alterar_senha);
+        btnMudarSenha = findViewById(R.id.btn_alterar_senha);
         btnMudarSenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,9 +104,9 @@ public class EditDadosClienteActivity extends AppCompatActivity {
 
     public void findEditTexts() {
 
-        mNome = (EditText) findViewById(R.id.campo_altera_nome_cliente);
-        mTelefone = (EditText) findViewById(R.id.campo_altera_telefone_cliente);
-        mEmail = (EditText) findViewById(R.id.campo_altera_email_cliente);
+        mNome = findViewById(R.id.campo_altera_nome_cliente);
+        mTelefone = findViewById(R.id.campo_altera_telefone_cliente);
+        mEmail = findViewById(R.id.campo_altera_email_cliente);
     }
 
     public void capturaTextos() {
@@ -141,7 +141,6 @@ public class EditDadosClienteActivity extends AppCompatActivity {
     }
 
     public boolean setNovosDados() {
-        boolean result;
         if (validaCampos()) {
             cliente.getDadosPessoais().setNome(nome);
             cliente.setTelefone(telefone);
@@ -152,9 +151,7 @@ public class EditDadosClienteActivity extends AppCompatActivity {
 
             }
         }
-        result = false;
-
-        return result;
+        return false;
     }
 
     public void setNovoNome(String nome) {
