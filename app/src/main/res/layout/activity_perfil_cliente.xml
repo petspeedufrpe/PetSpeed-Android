@@ -110,7 +110,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_below="@+id/ic_email"
-                        android:background="@color/lightgreen"
+                        android:background="#00A759"
                         android:orientation="vertical"></LinearLayout>
 
                     <ImageView
@@ -143,7 +143,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_below="@id/campo_altera_telefone_cliente"
-                        android:background="@color/lightgreen"
+                        android:background="#00A759"
                         android:orientation="vertical"></LinearLayout>
 
                     <ImageView
@@ -176,7 +176,7 @@
                         android:id="@+id/linha3"
                         android:orientation="vertical"
                         android:layout_below="@id/campo_altera_email_cliente"
-                        android:background="@color/lightgreen">
+                        android:background="#00A759">
                     </LinearLayout>
                 </RelativeLayout>
 
