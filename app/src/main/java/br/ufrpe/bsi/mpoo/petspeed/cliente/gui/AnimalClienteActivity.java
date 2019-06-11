@@ -119,6 +119,11 @@ public class AnimalClienteActivity extends AppCompatActivity implements Recycler
         final Animal itemDeletado = animalArrayList.get(viewHolder.getAdapterPosition());
         final int deletIndex = viewHolder.getAdapterPosition();
         adapterAnimalCliente.removeItem(deletIndex);
+        SnackBarUndoDelete(name, itemDeletado, deletIndex);
+
+    }
+
+    private void SnackBarUndoDelete(String name, final Animal itemDeletado, final int deletIndex) {
         Snackbar snackbar = Snackbar.make(rootLayout,name+"removed",Snackbar.LENGTH_SHORT);
         snackbar.setAction("UNDO", new View.OnClickListener() {
             @Override
@@ -128,6 +133,6 @@ public class AnimalClienteActivity extends AppCompatActivity implements Recycler
             }
         });
         snackbar.setActionTextColor(Color.YELLOW);
-
+        snackbar.show();
     }
 }
