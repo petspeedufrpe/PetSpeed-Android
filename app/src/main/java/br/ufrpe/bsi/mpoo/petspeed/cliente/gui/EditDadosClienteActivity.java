@@ -56,8 +56,7 @@ public class EditDadosClienteActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST = 0;
     private static final int REQUEST_GALLERY = 2;
     private static final int REQUEST_CAPTURE = 1;
-    ImageView mImagemCliente;
-    ImageView cameraAlteraFoto;
+    private ImageView mImagemCliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +65,7 @@ public class EditDadosClienteActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar_altera_dados);
         setSupportActionBar(toolbar);
         mImagemCliente = findViewById(R.id.campo_imagem);
-        cameraAlteraFoto = findViewById(R.id.camera_alterar_foto_cliente);
+        ImageView cameraAlteraFoto = findViewById(R.id.camera_alterar_foto_cliente);
         cameraAlteraFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -25,12 +25,21 @@ import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 
 public class CadastroClienteActivity extends AppCompatActivity {
 
-    public static final String CAMPO_VAZIO = "Campo vazio";
-    EditText mNome, mCpf, mEmail, mSenha, mcmfSenha, mTelefone;
-    String nome, cpf, email, senha, cmfSenha, telefone;
-    Button mButtoRegister;
-    TextView mTextBkHome;
-    ClienteServices clienteServices = new ClienteServices();
+    private static final String CAMPO_VAZIO = "Campo vazio";
+    private EditText mNome;
+    private EditText mEmail;
+    private EditText mSenha;
+    private EditText mcmfSenha;
+    private EditText mTelefone;
+    private EditText mCpf;
+    private String nome;
+    private String cpf;
+    private String email;
+    private String senha;
+    private String cmfSenha;
+    private String telefone;
+    private TextView mTextBkHome;
+    private ClienteServices clienteServices = new ClienteServices();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +57,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
             }
         });
 
-        mButtoRegister = findViewById(R.id.register);
+        Button mButtoRegister = findViewById(R.id.register);
 
         mButtoRegister.setOnClickListener(new View.OnClickListener() {
             @Override

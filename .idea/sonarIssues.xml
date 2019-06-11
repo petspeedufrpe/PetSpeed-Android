@@ -18,6 +18,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/animal/gui/CrudAnimalActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/cliente/gui/CadastroClienteActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/cliente/gui/EditDadosClienteActivity.java">
           <value>
             <set />
@@ -28,7 +38,32 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/cliente/gui/MudarSenhaAcitivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/cliente/gui/PerfilClienteActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/cliente/gui/ViewMedicosFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/Persistencia/DBHelper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/app/PetSpeedApp.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/gui/FinalizaCadastroActivity.java">
           <value>
             <set />
           </value>
@@ -38,7 +73,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/gui/MapsFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/gui/RecyclerViewAdapterAnimalCliente.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/persistencia/TriagemDAO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/medico/gui/CadastroMedicoActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/pessoa/gui/CadastroEnderecoActivity.java">
           <value>
             <set />
           </value>

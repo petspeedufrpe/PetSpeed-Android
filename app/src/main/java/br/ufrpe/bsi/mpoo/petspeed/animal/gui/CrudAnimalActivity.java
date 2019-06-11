@@ -21,16 +21,21 @@ import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 public class CrudAnimalActivity extends AppCompatActivity {
     public static final String ERR_MSG_CAMPO_VAZIO = "Campo vazio";
     AnimalServices animalServices = new AnimalServices();
-    EditText mNome, mRaca, mIdade, mPeso;
-    String nome, raca, idade, peso;
-    Button btnCadastrar;
+    private EditText mNome;
+    private EditText mRaca;
+    private EditText mIdade;
+    private EditText mPeso;
+    private String nome;
+    private String raca;
+    private String idade;
+    private String peso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_crud_animal);
-        btnCadastrar = findViewById(R.id.btn_cadastrar_animal);
+        Button btnCadastrar = findViewById(R.id.btn_cadastrar_animal);
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

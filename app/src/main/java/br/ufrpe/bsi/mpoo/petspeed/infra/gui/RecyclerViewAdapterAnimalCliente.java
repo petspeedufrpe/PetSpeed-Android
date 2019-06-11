@@ -59,7 +59,10 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
 
         private RecyclerViewClickListener mListener;
 
-        TextView nomeAnimal,racaAnimal,pesoAnimal,idadeAnimal;
+        private TextView nomeAnimal;
+        private TextView racaAnimal;
+        private TextView pesoAnimal;
+        private TextView idadeAnimal;
         ImageView imageAnimal;
 
         public MyViewHolder(@NonNull View itemView, RecyclerViewClickListener listener) {

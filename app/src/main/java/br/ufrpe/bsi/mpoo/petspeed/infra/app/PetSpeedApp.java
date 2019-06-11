@@ -5,9 +5,9 @@ import android.content.Context;
 
 public class PetSpeedApp extends Application {
 
-    private static Context mContext;
+    private Context mContext;
 
-    public static Context getContext() {
+    public Context getContext() {
         return mContext;
     }
 

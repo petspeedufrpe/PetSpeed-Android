@@ -29,7 +29,6 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
 
     boolean isRegisterTaskRunning = false;
 
-    Button btnCancelar, btnCadastrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +36,8 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_finaliza_cadastro);
 
-        btnCadastrar = findViewById(R.id.finaliza_cadastro);
-        btnCancelar = findViewById(R.id.cancela_cadastro);
+        Button btnCadastrar = findViewById(R.id.finaliza_cadastro);
+        Button btnCancelar = findViewById(R.id.cancela_cadastro);
 
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +76,7 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
                         Endereco endereco = setCoordinates(latLng);
                         try {
                             cadastrar(endereco);
+                            Toast.makeText(FinalizaCadastroActivity.this, "Cadastro realizado.", Toast.LENGTH_LONG).show();
                             startActivity(new Intent(FinalizaCadastroActivity.this, LoginActivity.class));
                             finish();
                             resetTask();
@@ -133,19 +133,20 @@ public class FinalizaCadastroActivity extends AppCompatActivity {
             }
         }
 
+        private void cadastraCliente(Cliente cliente) throws AppException {
+            ClienteServices clienteServices = new ClienteServices();
+            clienteServices.cadastraCliente(cliente, cliente.getUsuario());
+        }
+
+
+        private void cadastraMedico(Medico medico) throws AppException {
+            MedicoServices medicoServices = new MedicoServices();
+            medicoServices.cadastraMedico(medico, medico.getUsuario());
+
+        }
+
 
     }
 
-    private void cadastraCliente(Cliente cliente) throws AppException {
-        ClienteServices clienteServices = new ClienteServices();
-        clienteServices.cadastraCliente(cliente, cliente.getUsuario());
-        Toast.makeText(this, "Cadastro realizado.", Toast.LENGTH_LONG).show();
-    }
 
-
-    private void cadastraMedico(Medico medico) throws AppException {
-        MedicoServices medicoServices = new MedicoServices();
-        medicoServices.cadastraMedico(medico, medico.getUsuario());
-        Toast.makeText(this, "Cadastro realizado.", Toast.LENGTH_LONG).show();
-    }
 }

@@ -46,7 +46,7 @@ import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petspeed.pessoa.persistencia.EnderecoDAO;
 
 public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMyLocationButtonClickListener,
-        GoogleMap.OnMyLocationClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
+        GoogleMap.OnMyLocationClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
 
     private double raio = 5.0;
@@ -110,12 +110,12 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         Map markerMap = (Map<ContasDeUsuario, Object>) marker.getTag();
         if (markerMap.containsKey(ContasDeUsuario.MEDICO)) {
             medico = (Medico) markerMap.get(ContasDeUsuario.MEDICO);
-            Sessao.instance.setValue(ContasDeUsuario.MEDICO.getDescricao(),medico);
+            Sessao.instance.setValue(ContasDeUsuario.MEDICO.getDescricao(), medico);
 
         }
         HomeClienteActivity hCliente = (HomeClienteActivity) getActivity();
 
-        Sessao.instance.setValue("HostActivity",hCliente);
+        Sessao.instance.setValue("HostActivity", hCliente);
         ViewMedicosFragment viewPinMedico = new ViewMedicosFragment();
         viewPinMedico.show(getFragmentManager(), "ViewMedicosFragment");
         return false;
@@ -142,7 +142,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         mapSessao.put(ContasDeUsuario.CLIENTE, Sessao.instance.getCliente());
         String nome = "Meu Endereço";
         Endereco endereco = Sessao.instance.getCliente().getDadosPessoais().getEndereco();
-        String aval = endereco.getLogradouro() +" N° "+ endereco.getNumero();
+        String aval = endereco.getLogradouro() + " N° " + endereco.getNumero();
         LatLng latLng = new LatLng(clientLatitude, clientLongitude);
         list.add(addMarkerOnMap(latLng, nome, aval, mapSessao));
 
@@ -155,7 +155,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title(title);
-        if(mapConta.containsKey(ContasDeUsuario.MEDICO)){
+        if (mapConta.containsKey(ContasDeUsuario.MEDICO)) {
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
             markerOptions.snippet("média: " + snippetInfo);
 
@@ -242,21 +242,18 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case LOCATION_PERMISSION_REQUEST_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
-                            ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                        mMap.setMyLocationEnabled(true);
-                    } else {
-                        Toast.makeText(mContext, "This app requires Location permissions to be granted", Toast.LENGTH_LONG).show();
-                    }
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+                        ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    mMap.setMyLocationEnabled(true);
+                } else {
+                    Toast.makeText(mContext, "This app requires Location permissions to be granted", Toast.LENGTH_LONG).show();
                 }
-                break;
-            default:
-                break;
+            }
         }
     }
+
     public void setNovoRaio(Double novoRaio) {
         this.raio = novoRaio;
         setTypeOfSearch();
@@ -269,14 +266,10 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        Intent callGPSSettingIntent = new Intent(
-                                android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        startActivity(callGPSSettingIntent);
-                        break;
-                    default:
-                        break;
+                if (which == DialogInterface.BUTTON_POSITIVE) {
+                    Intent callGPSSettingIntent = new Intent(
+                            android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(callGPSSettingIntent);
                 }
             }
         };

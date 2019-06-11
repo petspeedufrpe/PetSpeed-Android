@@ -23,11 +23,22 @@ import br.ufrpe.bsi.mpoo.petspeed.pessoa.gui.CadastroEnderecoActivity;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 
 public class CadastroMedicoActivity extends AppCompatActivity {
-    public static final String ERR_MSG_CAMPO_VAZIO = "Campo vazio";
-    EditText mNome, mCpf, mEmail, mSenha, mcmfSenha, mCrmv, mTelefone;
-    String nome, cpf, email, senha, cmfSenha, crmv, telefone;
-    Button mButtoRegister;
-    TextView mTextHome;
+    private static final String ERR_MSG_CAMPO_VAZIO = "Campo vazio";
+    private EditText mNome;
+    private EditText mCpf;
+    private EditText mEmail;
+    private EditText mSenha;
+    private EditText mcmfSenha;
+    private EditText mCrmv;
+    private EditText mTelefone;
+    private String nome;
+    private String cpf;
+    private String email;
+    private String senha;
+    private String cmfSenha;
+    private String crmv;
+    private String telefone;
+    private TextView mTextHome;
 
 
     MedicoServices medicoServices = new MedicoServices();
@@ -49,7 +60,7 @@ public class CadastroMedicoActivity extends AppCompatActivity {
             }
         });
 
-        mButtoRegister = findViewById(R.id.register);
+        Button mButtoRegister = findViewById(R.id.register);
 
         mButtoRegister.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -17,8 +17,20 @@ import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Endereco;
 public class CadastroEnderecoActivity extends AppCompatActivity {
     public static final String ERR_MSG_CAMPO_VAZIO = "Campo vazio";
     Button mBtnCadastro;
-    private EditText mLogradouro, mNumero, mCep, mUf, mBairro, mCidade, mComplemento;
-    private String logradouro, numero, cep, uf, bairro, cidade, complemento;
+    private EditText mLogradouro;
+    private EditText mNumero;
+    private EditText mCep;
+    private EditText mUf;
+    private EditText mBairro;
+    private EditText mCidade;
+    private EditText mComplemento;
+    private String logradouro;
+    private String numero;
+    private String cep;
+    private String uf;
+    private String bairro;
+    private String cidade;
+    private String complemento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

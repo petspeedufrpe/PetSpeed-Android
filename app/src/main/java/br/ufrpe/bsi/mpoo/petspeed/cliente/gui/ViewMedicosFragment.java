@@ -19,8 +19,14 @@ import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 public class ViewMedicosFragment extends DialogFragment {
 
 
-    private TextView mNome, mAvaliacao, mFone, mRuaNumero, mCompl, mCidadeUF, mActionVoltar, mActionAgendar;
-    private Medico medico;
+    private TextView mNome;
+    private TextView mAvaliacao;
+    private TextView mFone;
+    private TextView mRuaNumero;
+    private TextView mCompl;
+    private TextView mCidadeUF;
+    private TextView mActionVoltar;
+    private TextView mActionAgendar;
 
     @Nullable
     @Override
@@ -75,7 +81,7 @@ public class ViewMedicosFragment extends DialogFragment {
     }
 
     private void showMedico() {
-        medico = (Medico) Sessao.instance.getValue(ContasDeUsuario.MEDICO.getDescricao());
+        Medico medico = (Medico) Sessao.instance.getValue(ContasDeUsuario.MEDICO.getDescricao());
         mNome.setText(medico.getDadosPessoais().getNome());
         mAvaliacao.setText("Avaliação: " + medico.getAvaliacao());
         mFone.setText("Telefone: " + medico.getTelefone());

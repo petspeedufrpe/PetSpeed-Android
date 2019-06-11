@@ -17,7 +17,10 @@ import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 
 public class PerfilClienteActivity extends AppCompatActivity {
-    private TextView mEmail, mTelefone, mCidade, mEndereco;
+    private TextView mEmail;
+    private TextView mTelefone;
+    private TextView mCidade;
+    private TextView mEndereco;
     private android.support.v7.widget.Toolbar mNomeUsuario;
     private ImageView mFoto;
     private FloatingActionButton editDados;
@@ -54,45 +57,45 @@ public class PerfilClienteActivity extends AppCompatActivity {
     }
 
 
-        public void findTexts () {
-            editDados = findViewById(R.id.fab_edit);
-            mEmail = findViewById(R.id.campo_altera_nome_cliente);
-            mTelefone = findViewById(R.id.campo_altera_telefone_cliente);
-            mCidade = findViewById(R.id.campo_altera_email_cliente);
-            mFoto = findViewById(R.id.campo_imagem);
-            mEndereco = findViewById(R.id.lbl_show_endereco);
-            mNomeUsuario = findViewById(R.id.toolbar_nome_do_usuario);
-        }
-
-        public void showTexts (Bitmap bitmap){
-            mEmail.setText(cliente.getUsuario().getEmail());
-            mCidade.setText(cliente.getDadosPessoais().getEndereco().getCidade());
-            mEndereco.setText(formatEndereco());
-            mNomeUsuario.setTitle(cliente.getDadosPessoais().getNome());
-            mTelefone.setText(cliente.getTelefone());
-            mFoto.setImageBitmap(bitmap);
-        }
-
-        public StringBuilder formatEndereco () {
-            StringBuilder endFormatted = new StringBuilder();
-            String rua = cliente.getDadosPessoais().getEndereco().getLogradouro();
-            int numero = (int) cliente.getDadosPessoais().getEndereco().getNumero();
-            String compl = cliente.getDadosPessoais().getEndereco().getComplemento();
-            String bairro = cliente.getDadosPessoais().getEndereco().getBairro();
-            String cidade = cliente.getDadosPessoais().getEndereco().getCidade();
-            String uf = cliente.getDadosPessoais().getEndereco().getUf();
-            endFormatted.append(rua);
-            endFormatted.append(", ");
-            endFormatted.append(numero);
-            endFormatted.append(", ");
-            endFormatted.append(compl);
-            endFormatted.append(", ");
-            endFormatted.append(bairro);
-            endFormatted.append(", ");
-            endFormatted.append(cidade);
-            endFormatted.append(", ");
-            endFormatted.append(uf);
-
-            return endFormatted;
-        }
+    public void findTexts() {
+        editDados = findViewById(R.id.fab_edit);
+        mEmail = findViewById(R.id.campo_altera_nome_cliente);
+        mTelefone = findViewById(R.id.campo_altera_telefone_cliente);
+        mCidade = findViewById(R.id.campo_altera_email_cliente);
+        mFoto = findViewById(R.id.campo_imagem);
+        mEndereco = findViewById(R.id.lbl_show_endereco);
+        mNomeUsuario = findViewById(R.id.toolbar_nome_do_usuario);
     }
+
+    public void showTexts(Bitmap bitmap) {
+        mEmail.setText(cliente.getUsuario().getEmail());
+        mCidade.setText(cliente.getDadosPessoais().getEndereco().getCidade());
+        mEndereco.setText(formatEndereco());
+        mNomeUsuario.setTitle(cliente.getDadosPessoais().getNome());
+        mTelefone.setText(cliente.getTelefone());
+        mFoto.setImageBitmap(bitmap);
+    }
+
+    public StringBuilder formatEndereco() {
+        StringBuilder endFormatted = new StringBuilder();
+        String rua = cliente.getDadosPessoais().getEndereco().getLogradouro();
+        int numero = (int) cliente.getDadosPessoais().getEndereco().getNumero();
+        String compl = cliente.getDadosPessoais().getEndereco().getComplemento();
+        String bairro = cliente.getDadosPessoais().getEndereco().getBairro();
+        String cidade = cliente.getDadosPessoais().getEndereco().getCidade();
+        String uf = cliente.getDadosPessoais().getEndereco().getUf();
+        endFormatted.append(rua);
+        endFormatted.append(", ");
+        endFormatted.append(numero);
+        endFormatted.append(", ");
+        endFormatted.append(compl);
+        endFormatted.append(", ");
+        endFormatted.append(bairro);
+        endFormatted.append(", ");
+        endFormatted.append(cidade);
+        endFormatted.append(", ");
+        endFormatted.append(uf);
+
+        return endFormatted;
+    }
+}

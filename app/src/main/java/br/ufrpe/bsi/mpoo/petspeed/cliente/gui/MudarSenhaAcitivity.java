@@ -1,8 +1,8 @@
 package br.ufrpe.bsi.mpoo.petspeed.cliente.gui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,15 +17,18 @@ public class MudarSenhaAcitivity extends AppCompatActivity {
 
     private Cliente cliente = Sessao.instance.getCliente();
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
-    private EditText mSenhaAntiga,mNovaSenha,mConfirmarNovaSenha;
-    private Button mButtoCnfSenha;
-    private String senhaAntiga,novaSenha,confirmaSenha;
+    private EditText mSenhaAntiga;
+    private EditText mNovaSenha;
+    private EditText mConfirmarNovaSenha;
+    private String senhaAntiga;
+    private String novaSenha;
+    private String confirmaSenha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mudar_senha_acitivity);
-        mButtoCnfSenha = (Button) findViewById(R.id.btn_cnf_alterar_senha);
+        Button mButtoCnfSenha = (Button) findViewById(R.id.btn_cnf_alterar_senha);
         mButtoCnfSenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,7 +37,7 @@ public class MudarSenhaAcitivity extends AppCompatActivity {
         });
     }
 
-    public void findEditTexts(){
+    public void findEditTexts() {
 
         mSenhaAntiga = (EditText) findViewById(R.id.txt_senha_antiga_alterar_senha);
         mNovaSenha = (EditText) findViewById(R.id.txt_nova_senha_alterar_senha);
@@ -42,49 +45,50 @@ public class MudarSenhaAcitivity extends AppCompatActivity {
 
     }
 
-    public void capturaTextos(){
+    public void capturaTextos() {
         findEditTexts();
         senhaAntiga = mSenhaAntiga.getText().toString().trim();
         novaSenha = mNovaSenha.getText().toString().trim();
         confirmaSenha = mConfirmarNovaSenha.getText().toString().trim();
     }
 
-    public boolean isSenhaAntigaEquals(String senhaAntiga){
+    public boolean isSenhaAntigaEquals(String senhaAntiga) {
         String senhaCliente = cliente.getUsuario().getSenha();
         return senhaAntiga.equals(senhaCliente);
     }
-    public boolean isSenhaIguais(String novaSenha,String confirmaSenha) {
 
-            return novaSenha.equals(confirmaSenha);
-        }
+    public boolean isSenhaIguais(String novaSenha, String confirmaSenha) {
+
+        return novaSenha.equals(confirmaSenha);
+    }
 
 
-    public boolean validaCampos(){
+    public boolean validaCampos() {
         capturaTextos();
         boolean result = true;
         View focusView = null;
-        if (senhaAntiga.isEmpty()){
+        if (senhaAntiga.isEmpty()) {
             mSenhaAntiga.setError("Campo vazio");
             focusView = mSenhaAntiga;
             result = false;
-        }else if(novaSenha.isEmpty()){
+        } else if (novaSenha.isEmpty()) {
             mNovaSenha.setError("Campo vazio");
             focusView = mNovaSenha;
             result = false;
-        } else if (confirmaSenha.isEmpty()){
+        } else if (confirmaSenha.isEmpty()) {
             mConfirmarNovaSenha.setError("Campo Vazio");
             focusView = mConfirmarNovaSenha;
             result = false;
         }
 
-        if (!isSenhaIguais(novaSenha,confirmaSenha)){
-            Toast.makeText(this,"Senhas devem ser iguais",Toast.LENGTH_SHORT).show();
+        if (!isSenhaIguais(novaSenha, confirmaSenha)) {
+            Toast.makeText(this, "Senhas devem ser iguais", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (!isSenhaAntigaEquals(senhaAntiga)){
-            Toast.makeText(this,"Senha antiga incorreta",Toast.LENGTH_SHORT).show();
+        if (!isSenhaAntigaEquals(senhaAntiga)) {
+            Toast.makeText(this, "Senha antiga incorreta", Toast.LENGTH_SHORT).show();
         }
-        if (!result){
+        if (!result) {
 
             focusView.requestFocus();
 
@@ -92,15 +96,15 @@ public class MudarSenhaAcitivity extends AppCompatActivity {
         return result;
     }
 
-    public void alterarSenha(){
-        if (validaCampos()){
+    public void alterarSenha() {
+        if (validaCampos()) {
             cliente.getUsuario().setSenha(novaSenha);
             usuarioDAO.alterarSenha(cliente.getUsuario());
-            startActivity(new Intent(MudarSenhaAcitivity.this,PerfilClienteActivity.class));
-            Toast.makeText(this,"Senha Alterada com Sucesso",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(MudarSenhaAcitivity.this, PerfilClienteActivity.class));
+            Toast.makeText(this, "Senha Alterada com Sucesso", Toast.LENGTH_SHORT).show();
             finish();
-        } else{
-            Toast.makeText(this,"Verifique os dados",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Verifique os dados", Toast.LENGTH_SHORT).show();
         }
     }
 }
