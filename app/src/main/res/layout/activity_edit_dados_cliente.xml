@@ -8,13 +8,15 @@
     tools:context=".cliente.gui.PerfilClienteActivity">
 
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_altera_dados"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="Editar Perfil"
-            android:background="@color/lightgreen">
-            </android.support.v7.widget.Toolbar>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_altera_dados"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#000000"
+        android:backgroundTint="#00A759"
+        android:textColor="#000000"
+        app:title="Editar Perfil"
+        app:titleTextColor="#FFFFFF"></android.support.v7.widget.Toolbar>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -85,8 +87,8 @@
                         android:hint="Digite seu nome"
                         android:paddingTop="12dp"
                         android:paddingBottom="12dp"
-                        android:textColor="@color/lightgreen"
-                        android:textColorHint="@color/lightgreen"
+                        android:textColor="#00A759"
+                        android:textColorHint="#00A759"
                         android:textSize="16sp" />
 
 
@@ -102,8 +104,8 @@
                         android:hint="Digite seu telefone"
                         android:paddingTop="12dp"
                         android:paddingBottom="12dp"
-                        android:textColor="@color/lightgreen"
-                        android:textColorHint="@color/lightgreen"
+                        android:textColor="#00A759"
+                        android:textColorHint="#00A759"
                         android:textSize="16sp" />
 
 
@@ -118,9 +120,9 @@
                         android:hint="exemplo@gmail.com"
                         android:paddingTop="12dp"
                         android:paddingBottom="12dp"
-                        android:textColor="@color/lightgreen"
+                        android:textColor="#00A759"
 
-                        android:textColorHint="@color/lightgreen"
+                        android:textColorHint="#00A759"
                         android:textSize="16sp" />
 
 
@@ -137,7 +139,7 @@
                 android:layout_marginTop="62dp"
                 android:layout_marginEnd="27dp"
                 android:layout_marginBottom="186dp"
-                android:background="@color/lightgreen"
+                android:background="#00A759"
                 android:text="ALTERAR SENHA"
                 android:textColor="#FFFF"
                 android:textStyle="bold"

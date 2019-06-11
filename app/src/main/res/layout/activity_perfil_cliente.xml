@@ -102,7 +102,7 @@
                         android:layout_marginBottom="3dp"
                         android:paddingTop="12dp"
                         android:text="ExemploEmail@gmail.com"
-                        android:textColor="@color/lightgreen"
+                        android:textColor="#00A759"
                         android:textSize="20sp" />
 
                     <LinearLayout
@@ -135,7 +135,7 @@
                         android:paddingTop="12dp"
                         android:paddingBottom="12dp"
                         android:text="Telefone"
-                        android:textColor="@color/lightgreen"
+                        android:textColor="#00A759"
                         android:textSize="16sp" />
 
                     <LinearLayout
@@ -168,7 +168,7 @@
                         android:paddingTop="12dp"
                         android:paddingBottom="12dp"
                         android:text="Cidade Exemplo"
-                        android:textColor="@color/lightgreen"
+                        android:textColor="#00A759"
                         android:textSize="16sp" />
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -224,7 +224,7 @@
                             android:paddingStart="15dp"
                             android:paddingEnd="15dp"
                             android:singleLine="false"
-                            android:textColor="@color/lightgreen"
+                            android:textColor="#00A759"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </android.support.constraint.ConstraintLayout>
