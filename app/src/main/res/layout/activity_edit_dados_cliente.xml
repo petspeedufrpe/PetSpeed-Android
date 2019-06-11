@@ -12,7 +12,7 @@
         android:id="@+id/toolbar_altera_dados"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#00A759"
+        android:background="#000000"
         android:backgroundTint="#00A759"
         android:textColor="#000000"
         app:title="Editar Perfil"
