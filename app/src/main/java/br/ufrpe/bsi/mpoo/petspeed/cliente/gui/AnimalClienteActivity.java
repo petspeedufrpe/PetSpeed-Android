@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,17 +97,6 @@ public class AnimalClienteActivity extends AppCompatActivity implements Recycler
                     new SwipeContoller(0,ItemTouchHelper.LEFT,this);
             new ItemTouchHelper(callback).attachToRecyclerView(recyclerView);
 
-            /*
-            RecyclerView recyclerView = findViewById(R.id.recycler_view_animal_cliente);
-            RecyclerViewAdapterAnimalCliente adapterAnimalCliente = new RecyclerViewAdapterAnimalCliente(this,animalArrayList,listener);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            recyclerView.hasFixedSize();
-            recyclerView.setAdapter(adapterAnimalCliente);
-            recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
-            ItemTouchHelper.SimpleCallback itemTouchHelperCallback =
-                    new SwipeContoller(0,ItemTouchHelper.LEFT,this);
-            new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
-            */
         }
 
 

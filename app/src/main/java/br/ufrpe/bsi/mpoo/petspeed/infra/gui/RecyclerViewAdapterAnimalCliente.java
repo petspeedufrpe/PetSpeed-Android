@@ -92,7 +92,7 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
             mListener.onClick(v,getAdapterPosition());
         }
 
-        public void findTexts(){
+        private void findTexts(){
             nomeAnimal = itemView.findViewById(R.id.txt_nome_animal);
             racaAnimal = itemView.findViewById(R.id.txt_raca_animal);
             pesoAnimal = itemView.findViewById(R.id.txt_peso_animal);
@@ -104,6 +104,8 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
 
 
     }
+
+
 
 
 }
