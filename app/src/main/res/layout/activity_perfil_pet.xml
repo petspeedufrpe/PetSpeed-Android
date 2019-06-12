@@ -93,7 +93,7 @@
                             android:src="@drawable/ic_info_black_24dp"/>
 
                         <TextView
-                            android:id="@+id/campo_altera_nome_cliente"
+                            android:id="@+id/campo_altera_nome_animal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="90dp"
@@ -125,11 +125,11 @@
                             android:src="@drawable/ic_info_black_24dp" />
 
                         <TextView
-                            android:id="@+id/campo_altera_telefone_cliente"
+                            android:id="@+id/campo_altera_raca_animal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/linha"
-                            android:layout_alignStart="@+id/campo_altera_nome_cliente"
+                            android:layout_alignStart="@+id/campo_altera_nome_animal"
                             android:layout_marginTop="0dp"
                             android:layout_marginEnd="16dp"
                             android:paddingTop="12dp"
@@ -142,7 +142,7 @@
                             android:id="@+id/linha2"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_below="@id/campo_altera_telefone_cliente"
+                            android:layout_below="@id/campo_altera_raca_animal"
                             android:background="#00A759"
                             android:orientation="vertical"></LinearLayout>
 
@@ -158,11 +158,11 @@
                             android:src="@drawable/ic_info_black_24dp" />
 
                         <TextView
-                            android:id="@+id/campo_altera_email_cliente"
+                            android:id="@+id/campo_altera_peso_animal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/linha2"
-                            android:layout_alignStart="@+id/campo_altera_nome_cliente"
+                            android:layout_alignStart="@+id/campo_altera_nome_animal"
                             android:layout_marginTop="0dp"
                             android:layout_marginEnd="16dp"
                             android:paddingTop="12dp"
@@ -175,7 +175,7 @@
                             android:layout_height="4dp"
                             android:id="@+id/linha3"
                             android:orientation="vertical"
-                            android:layout_below="@id/campo_altera_email_cliente"
+                            android:layout_below="@id/campo_altera_peso_animal"
                             android:background="#00A759">
                         </LinearLayout>
                     </RelativeLayout>

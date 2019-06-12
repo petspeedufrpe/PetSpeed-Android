@@ -19,6 +19,7 @@ import br.ufrpe.bsi.mpoo.petspeed.animal.gui.CrudAnimalActivity;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.persistencia.ClienteDAO;
+import br.ufrpe.bsi.mpoo.petspeed.infra.gui.LoginActivity;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.RecyclerViewAdapterAnimalCliente;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.adapter.AdapterMeuPet;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.RecyclerViewClickListener;
@@ -73,7 +74,8 @@ public class AnimalClienteActivity extends AppCompatActivity {
         RecyclerViewClickListener listener = new RecyclerViewClickListener() {
             @Override
             public void onClick(View v, int position) {
-                //listagem dos pets com imagens
+                Intent perfil = new Intent(AnimalClienteActivity.this, PerfilClienteActivity.class);
+                startActivity(perfil);
             }
 
         };

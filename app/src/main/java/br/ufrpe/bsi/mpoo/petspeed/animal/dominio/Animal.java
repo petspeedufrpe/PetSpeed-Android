@@ -21,7 +21,6 @@ public class Animal {
 
     private long fkCliente;
 
-
     private List<OrdemServico> historico;
 
     public long getFkCliente() { return fkCliente; }
