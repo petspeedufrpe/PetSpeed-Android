@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.AppException;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.FiltroBuscaMedicos;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petspeed.medico.persistencia.MedicoDAO;
@@ -69,6 +70,8 @@ public class MedicoServices {
         }
     }
 
+
+
     public List<Medico> getMedicosInRaio(double radius, double userLat, double userLng) {
         final double kmInLatLng = 0.008983;
         double latDownRange = userLat - (radius * kmInLatLng);
@@ -119,6 +122,14 @@ public class MedicoServices {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public List<Medico> getMedicosByNome(FiltroBuscaMedicos.Estados estado){
+        return medicoDAO.getMedicosByNome(FiltroBuscaMedicos.Tipo.ESTADO.getDescricao(), estado.getDescricao());
+    }
+
+    public List<Medico> getMedicosByNome(FiltroBuscaMedicos.Cidades cidade){
+        return medicoDAO.getMedicosByNome(FiltroBuscaMedicos.Tipo.CIDADE.getDescricao(), cidade.getDescricao());
     }
 
     public void login(String email, String senha) throws AppException {

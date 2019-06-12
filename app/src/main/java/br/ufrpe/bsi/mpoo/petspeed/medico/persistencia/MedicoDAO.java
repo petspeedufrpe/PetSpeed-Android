@@ -89,7 +89,6 @@ public class MedicoDAO {
 
     public void deletaMedico(Medico medico) {
         SQLiteDatabase db = helperDb.getWritableDatabase();
-
         db.delete(DBHelper.TABELA_MEDICO, DBHelper.COL_MEDICO_ID + " = ?",
                 new String[]{String.valueOf(medico.getId())});
         db.close();
@@ -109,13 +108,33 @@ public class MedicoDAO {
     }
 
     String makePlaceholders(int len) {
-
         StringBuilder sb = new StringBuilder(len * 2 - 1);
         sb.append("?");
         for (int i = 1; i < len; i++) {
             sb.append(",?");
         }
         return sb.toString();
+    }
+
+    public List<Medico> getMedicosByNome(String tipoFiltro, String nomeFiltro) {
+        // NÃO USAR! precisa de implementar o String[] args que seja de tamanho genérico.
+        String sql = "" + SQL_SELECT_ALL_FROM + " " + DBHelper.TABELA_MEDICO + SQL_WHERE + DBHelper.COL_MEDICO_FK_PESSOA +
+                " IN ( SELECT " + DBHelper.COL_PESSOA_ID + " FROM " + DBHelper.TABELA_PESSOA + " WHERE " + DBHelper.COL_PESSOA_ID +
+                " IN (SELECT "+DBHelper.COL_ENDERECO_FK_PESSOA+" FROM "+DBHelper.TABELA_ENDERECO+" WHERE ? LIKE \"%?%\" ))";
+        String[] args = {tipoFiltro,nomeFiltro};
+        SQLiteDatabase db = helperDb.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, args);
+        Medico medico = null;
+        List<Medico> medicos = new LinkedList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                medico = createMedico(cursor);
+                medicos.add(medico);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return medicos;
     }
 
     public List<Medico> getMultipleMedicoById(List<Long> indicesPessoas) {

@@ -13,6 +13,11 @@
             <set />
           </value>
         </entry>
+        <entry key="/fragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petSpeed/infra/gui/adapter/AdapterMeuPet.java">
           <value>
             <set />
@@ -23,12 +28,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/cliente/gui/BuscaMedicosFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/cliente/gui/CadastroClienteActivity.java">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/cliente/gui/EditDadosClienteActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/cliente/gui/FiltroMedicosTabViewHostFragment.java">
           <value>
             <set />
           </value>
@@ -83,6 +98,31 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/negocio/EnumCidades.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/negocio/EnumEstados.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/negocio/FiltroBusca.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/negocio/FiltroBuscaMedicos.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/negocio/Haversine.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/persistencia/TriagemDAO.java">
           <value>
             <set />
@@ -93,7 +133,47 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/medico/negocio/EnumCidades.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/medico/negocio/EnumEstados.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/medico/negocio/MedicoServices.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/medico/persistencia/MedicoDAO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/pessoa/gui/CadastroEnderecoActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/pessoa/negocio/PessoaServices.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/pessoa/persistencia/EnderecoDAO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/pessoa/persistencia/PessoaDAO.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/rounded_corners_medico_search_fragment_box.xml">
           <value>
             <set />
           </value>
@@ -109,6 +189,21 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/layout/content_activity_cadastro_endereco.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/content_home_cliente_drawer.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/fragment_busca_medicos.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/fragment_filtro_medicos_tab_view_host.xml">
           <value>
             <set />
           </value>

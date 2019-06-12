@@ -20,12 +20,6 @@ public class PessoaServices {
         return idPessoa;
     }
 
-    public Endereco getEnderecoByIdPessoa(long idPessoa){
-        Endereco endereco;
-        endereco = enderecoDAO.getEnderecoById(idPessoa);
-        return endereco;
-    }
-
     public Pessoa getPessoaByFkUsuario(long fkUsuario){
         return pessoaDAO.getPessoaByFkUsuario(fkUsuario);
     }

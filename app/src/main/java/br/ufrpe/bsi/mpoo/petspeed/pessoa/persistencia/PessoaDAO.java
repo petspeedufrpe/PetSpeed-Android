@@ -27,7 +27,9 @@ public class PessoaDAO {
         db.close();
 
         return res;
-    }//Insere na tabela o nome e o cpf, o id é autoincrementado
+    }
+
+
 
     public void deletaPessoa(Pessoa pessoa) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -74,31 +76,6 @@ public class PessoaDAO {
          para criar a pessoa e assim retorna-la nessa funcao**/
     }
 
-    public List<Pessoa> getMultiplePessoaById(List<Long> indicesPessoas) {
-        StringBuilder strIndexes = new StringBuilder();
-        for (int i = 0; i < indicesPessoas.size() - 1; i++) {
-            strIndexes.append(indicesPessoas.get(i));
-            strIndexes.append(", ");
-        }
-        strIndexes.append(indicesPessoas.get(indicesPessoas.size() - 1));
-
-        String sql = SQL_SELECT_FROM + DBHelper.TABELA_PESSOA + SQL_WHERE + DBHelper.COL_PESSOA_ID + " IN (?);";
-        String[] args = {strIndexes.toString()};
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery(sql, args);
-        Pessoa pessoa = null;
-        List<Pessoa> pessoas = new LinkedList<>();
-        if (cursor.moveToFirst()) {
-            do {
-                pessoa = createPessoa(cursor);
-                pessoas.add(pessoa);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-        return pessoas;
-    }
-
     public Pessoa getPessoaByFkUsuario(Long id) {
         String sql = SQL_SELECT_FROM + DBHelper.TABELA_PESSOA + SQL_WHERE + DBHelper.COL_PESSOA_FK_USUARIO + SQL_LIKE;
         String[] args = {String.valueOf(id)};
@@ -122,13 +99,6 @@ public class PessoaDAO {
         }
         cursor.close();
         db.close();
-        return pessoa;//passa a query sql e uma array com os campos do banco de dados para criar a pessoa com esses dados
+        return pessoa;
     }
-    /**duvidas
-     * pq é preciso fazer o createPessoa?
-     * Posso recuperar a pessoa pelo id?
-     * preciso de mais getters de pessoa com overload dos metodos ?
-     * **/
-
-
 }

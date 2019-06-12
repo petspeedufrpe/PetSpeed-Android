@@ -26,7 +26,7 @@ import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 
 public class HomeClienteActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, BuscaMedicosFragment.OnFragmentInteractionListener {
 
     private TextView mNomeCliente;
     private TextView mEmailCliente;
@@ -67,6 +67,11 @@ public class HomeClienteActivity extends AppCompatActivity
         setTexts();
         initMapFragment();
 
+    }
+
+    @Override
+    public void onFragmentInteraction() {
+        //a fazer
     }
 
     private void alternaFaseRaio(MapsFragment mapsFrag) {

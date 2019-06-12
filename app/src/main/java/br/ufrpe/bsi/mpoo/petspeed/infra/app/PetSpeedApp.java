@@ -3,11 +3,11 @@ package br.ufrpe.bsi.mpoo.petspeed.infra.app;
 import android.app.Application;
 import android.content.Context;
 
-public class PetSpeedApp extends Application {
+public  class PetSpeedApp extends Application {
 
-    private Context mContext;
+    private static Context mContext;
 
-    public Context getContext() {
+    public static Context getContext() {
         return mContext;
     }
 
