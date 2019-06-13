@@ -40,7 +40,7 @@ public class FiltroByCidadeBuscaMedicoFragment extends Fragment {
         List<Medico> medicosList;
         String medicoNome = (String)Sessao.instance.getValue(FiltroBuscaMedicos.Tipo.NOME.getDescricao());
         MedicoServices medicoServices = new MedicoServices();
-        medicosList = medicoServices.getMedicosByNome(FiltroBuscaMedicos.Cidades.RECIFE);
+        medicosList = medicoServices.getMedicosByNome(FiltroBuscaMedicos.Cidades.RECIFE,medicoNome);
 
         medicosAdapter = new ListaMedicosAdapter(medicosList);
     }

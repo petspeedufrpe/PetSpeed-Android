@@ -116,12 +116,9 @@ public class MedicoDAO {
         return sb.toString();
     }
 
-    public List<Medico> getMedicosByNome(String tipoFiltro, String nomeFiltro) {
-        // NÃO USAR! precisa de implementar o String[] args que seja de tamanho genérico.
-        String sql = "" + SQL_SELECT_ALL_FROM + " " + DBHelper.TABELA_MEDICO + SQL_WHERE + DBHelper.COL_MEDICO_FK_PESSOA +
-                " IN ( SELECT " + DBHelper.COL_PESSOA_ID + " FROM " + DBHelper.TABELA_PESSOA + " WHERE " + DBHelper.COL_PESSOA_ID +
-                " IN (SELECT "+DBHelper.COL_ENDERECO_FK_PESSOA+" FROM "+DBHelper.TABELA_ENDERECO+" WHERE ? LIKE ? ))";
-        String[] args = {tipoFiltro,nomeFiltro};
+    public List<Medico> getMedicosByNome(String tipoFiltro, String nomeFiltro, String nomeMedico) {
+        String sql = "SELECT * FROM TB_MEDICO WHERE FK_PESSOA IN(SELECT ID FROM TB_PESSOA WHERE NOME LIKE \"%" + nomeMedico + "%\" AND ID IN (SELECT FK_PESSOA FROM TB_ENDERECO WHERE " + tipoFiltro + " LIKE \"%" + nomeFiltro + "%\"));";
+        String[] args = {};
         SQLiteDatabase db = helperDb.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, args);
         Medico medico = null;

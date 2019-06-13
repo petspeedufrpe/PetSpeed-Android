@@ -124,12 +124,12 @@ public class MedicoServices {
         }
     }
 
-    public List<Medico> getMedicosByNome(FiltroBuscaMedicos.Estados estado){
-        return medicoDAO.getMedicosByNome(FiltroBuscaMedicos.Tipo.ESTADO.getDescricao(), estado.getDescricao());
+    public List<Medico> getMedicosByNome(FiltroBuscaMedicos.Estados estado, String medico){
+        return medicoDAO.getMedicosByNome(FiltroBuscaMedicos.Tipo.ESTADO.getDescricao(), estado.getDescricao(),medico);
     }
 
-    public List<Medico> getMedicosByNome(FiltroBuscaMedicos.Cidades cidade){
-        return medicoDAO.getMedicosByNome(FiltroBuscaMedicos.Tipo.CIDADE.getDescricao(), cidade.getDescricao());
+    public List<Medico> getMedicosByNome(FiltroBuscaMedicos.Cidades cidade,String medico){
+        return medicoDAO.getMedicosByNome(FiltroBuscaMedicos.Tipo.CIDADE.getDescricao(), cidade.getDescricao(),medico);
     }
 
     public void login(String email, String senha) throws AppException {
