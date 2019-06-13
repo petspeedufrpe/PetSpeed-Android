@@ -1,5 +1,6 @@
 package br.ufrpe.bsi.mpoo.petspeed.cliente.gui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,10 +17,11 @@ import java.util.List;
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petspeed.animal.gui.CrudAnimalActivity;
+import br.ufrpe.bsi.mpoo.petspeed.animal.gui.EditDadosPetActivity;
+import br.ufrpe.bsi.mpoo.petspeed.animal.gui.PerfilPetActivity;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.persistencia.ClienteDAO;
-import br.ufrpe.bsi.mpoo.petspeed.infra.gui.LoginActivity;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.RecyclerViewAdapterAnimalCliente;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.adapter.AdapterMeuPet;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.RecyclerViewClickListener;
@@ -34,6 +36,11 @@ public class AnimalClienteActivity extends AppCompatActivity {
     private ClienteDAO clienteDAO = new ClienteDAO();
     private Cliente cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
     private ListView listaAnimal;
+    private final Context mContext;
+
+    public AnimalClienteActivity(Context mContext) {
+        this.mContext = mContext;
+    }
 
 
     @Override
@@ -74,8 +81,9 @@ public class AnimalClienteActivity extends AppCompatActivity {
         RecyclerViewClickListener listener = new RecyclerViewClickListener() {
             @Override
             public void onClick(View v, int position) {
-                Intent perfil = new Intent(AnimalClienteActivity.this, PerfilClienteActivity.class);
-                startActivity(perfil);
+                Intent it = new Intent(mContext, PerfilPetActivity.class);
+                PerfilPetActivity.animal = animalArrayList.get(position);
+                mContext.startActivity(it);
             }
 
         };
