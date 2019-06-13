@@ -120,7 +120,7 @@ public class MedicoDAO {
         // NÃO USAR! precisa de implementar o String[] args que seja de tamanho genérico.
         String sql = "" + SQL_SELECT_ALL_FROM + " " + DBHelper.TABELA_MEDICO + SQL_WHERE + DBHelper.COL_MEDICO_FK_PESSOA +
                 " IN ( SELECT " + DBHelper.COL_PESSOA_ID + " FROM " + DBHelper.TABELA_PESSOA + " WHERE " + DBHelper.COL_PESSOA_ID +
-                " IN (SELECT "+DBHelper.COL_ENDERECO_FK_PESSOA+" FROM "+DBHelper.TABELA_ENDERECO+" WHERE ? LIKE \"%?%\" ))";
+                " IN (SELECT "+DBHelper.COL_ENDERECO_FK_PESSOA+" FROM "+DBHelper.TABELA_ENDERECO+" WHERE ? LIKE ? ))";
         String[] args = {tipoFiltro,nomeFiltro};
         SQLiteDatabase db = helperDb.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, args);

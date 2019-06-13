@@ -1,9 +1,13 @@
 package br.ufrpe.bsi.mpoo.petspeed.cliente.gui;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
+import br.ufrpe.bsi.mpoo.petspeed.infra.gui.FiltroByCidadeBuscaMedicoFragment;
+import br.ufrpe.bsi.mpoo.petspeed.infra.gui.FiltroByEstadoBuscaMedicoFragment;
+import br.ufrpe.bsi.mpoo.petspeed.infra.gui.TabsAdapter;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.FiltroBuscaMedicos;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
+
 public class BuscaMedicosFragment extends Fragment {
 
     EditText txBxNomeMedico;
@@ -66,10 +76,11 @@ public class BuscaMedicosFragment extends Fragment {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
-
                     nomeMedico = txBxNomeMedico.getText().toString().trim();
+                    Sessao.instance.setValue(FiltroBuscaMedicos.Tipo.NOME.getDescricao(),nomeMedico);
+                    FiltroMedicosTabViewFragment viewPinMedico = new FiltroMedicosTabViewFragment();
+                    viewPinMedico.show(getChildFragmentManager(), "ViewMedicosFragment");
                     txBxNomeMedico.setText("");
-                    Toast.makeText(getContext(),"Hello",Toast.LENGTH_SHORT).show();
                     return true;
                 }
                 else{
@@ -81,6 +92,8 @@ public class BuscaMedicosFragment extends Fragment {
 
         return view;
     }
+
+
 
     @Override
     public void onAttach(Context context) {

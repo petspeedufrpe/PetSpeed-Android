@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/AppTheme"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    android:clickable="true"
+    android:contextClickable="true"
+    android:focusable="true"
+    android:animationCache="false"
+    app:cardCornerRadius="6dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/fragPopUpMedNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#585858"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/fragPopUpMedAval"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="10dp" />
+
+        <TextView
+            android:id="@+id/fragPopUpMedAval"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#585858"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/fragPopUpMedFone"
+            app:layout_constraintTop_toBottomOf="@+id/fragPopUpMedNome"
+            tools:layout_editor_absoluteX="10dp" />
+
+        <TextView
+            android:id="@+id/fragPopUpMedFone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#585858"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/fragPopUpMedRuaNumero"
+            app:layout_constraintTop_toBottomOf="@id/fragPopUpMedAval"
+            tools:layout_editor_absoluteX="10dp" />
+
+        <TextView
+            android:id="@+id/fragPopUpMedRuaNumero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#000"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/fragPopUpMedCompl"
+            app:layout_constraintTop_toBottomOf="@+id/fragPopUpMedFone"
+            tools:layout_editor_absoluteX="10dp" />
+
+        <TextView
+            android:id="@+id/fragPopUpMedCompl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#000"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/fragPopUpMedCidadeUF"
+            app:layout_constraintTop_toBottomOf="@+id/fragPopUpMedRuaNumero"
+            tools:layout_editor_absoluteX="9dp" />
+
+        <TextView
+            android:id="@+id/fragPopUpMedCidadeUF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text=""
+            android:textColor="#000"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragPopUpMedCompl"
+            tools:layout_editor_absoluteX="3dp" />
+
+
+        <TextView
+            android:id="@+id/cardMedBtnAgendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="20dp"
+            android:text="AGENDAR"
+            android:textColor="#357A01"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fragPopUpMedCidadeUF"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>
