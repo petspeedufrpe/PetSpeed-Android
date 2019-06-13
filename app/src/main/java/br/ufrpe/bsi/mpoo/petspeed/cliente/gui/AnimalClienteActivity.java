@@ -14,7 +14,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +21,7 @@ import java.util.List;
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petspeed.animal.gui.CrudAnimalActivity;
+import br.ufrpe.bsi.mpoo.petspeed.animal.gui.PerfilPetActivity;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.persistencia.ClienteDAO;
@@ -82,7 +82,9 @@ public class AnimalClienteActivity extends AppCompatActivity implements Recycler
         RecyclerViewClickListener listener = new RecyclerViewClickListener() {
             @Override
             public void onClick(View v, int position) {
-                //listagem dos pets com imagens
+                Intent it = new Intent(getBaseContext(), PerfilPetActivity.class);
+                PerfilPetActivity.animal = animalArrayList.get(position);
+                getBaseContext().startActivity(it);
             }
         };
         if (animalArrayList != null){

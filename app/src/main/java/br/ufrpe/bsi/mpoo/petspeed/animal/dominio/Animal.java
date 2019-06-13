@@ -17,8 +17,9 @@ public class Animal {
 
     private int nascimento;
 
-    private long fkCliente;
+    private byte[] foto;
 
+    private long fkCliente;
 
     private List<OrdemServico> historico;
 
@@ -65,6 +66,14 @@ public class Animal {
 
     public void setNascimento(int nascimento) {
         this.nascimento = nascimento;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 
     public List<OrdemServico> getHistorico() {
