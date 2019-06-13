@@ -20,7 +20,7 @@ public class FiltroBuscaMedicos {
     }
 
     public enum Estados {
-        PERNAMBUCO("Pernambuco"), PARAIBA("Paraíba");
+        PERNAMBUCO("PE"), PARAIBA("PB");
         private final String descricao;
 
         Estados(String descricao) {
