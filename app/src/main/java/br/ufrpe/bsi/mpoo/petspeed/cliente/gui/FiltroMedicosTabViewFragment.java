@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.FiltroByCidadeBuscaMedicoFragment;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.FiltroByEstadoBuscaMedicoFragment;
+import br.ufrpe.bsi.mpoo.petspeed.infra.gui.FiltroByBrasilBuscaMedicoFragment;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.TabsAdapter;
 
 public class FiltroMedicosTabViewFragment extends DialogFragment {
@@ -37,6 +38,7 @@ public class FiltroMedicosTabViewFragment extends DialogFragment {
         TabsAdapter adapter = new TabsAdapter(getChildFragmentManager());
         adapter.add(new FiltroByCidadeBuscaMedicoFragment(), "CIDADE");
         adapter.add(new FiltroByEstadoBuscaMedicoFragment(), "ESTADO");
+        adapter.add(new FiltroByBrasilBuscaMedicoFragment(), "BRASIL");
         return adapter;
     }
 

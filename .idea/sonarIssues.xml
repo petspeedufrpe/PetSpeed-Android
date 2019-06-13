@@ -88,12 +88,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/gui/FiltroByBrasilBuscaMedicoFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/gui/FiltroByCidadeBuscaMedicoFragment.java">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/gui/FiltroByEstadoBuscaMedicoFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/gui/FiltroByNacionalBuscaMedicoFragment.java">
           <value>
             <set />
           </value>
@@ -149,6 +159,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/negocio/Haversine.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/persistencia/PreencherBanco.java">
           <value>
             <set />
           </value>
@@ -254,6 +269,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/layout/fragment_filtro_by_estado_busca_medico.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/fragment_filtro_by_nacional_busca_medico.xml">
           <value>
             <set />
           </value>

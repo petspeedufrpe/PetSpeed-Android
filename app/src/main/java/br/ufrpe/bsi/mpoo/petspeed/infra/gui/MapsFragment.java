@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -37,7 +36,6 @@ import java.util.List;
 import java.util.Map;
 
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
-import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.BuscaMedicosFragment;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.HomeClienteActivity;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.ViewMedicosFragment;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.ContasDeUsuario;
@@ -78,7 +76,6 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     @Override
     public void onResume() {
         super.onResume();
-
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             startLocationUpdate();
         }
@@ -100,6 +97,10 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         createNoGpsDialog();
         initalizeMap();
         setTypeOfSearch();
+        setListeners();
+    }
+
+    private void setListeners() {
         mMap.setOnMarkerClickListener(this);
         mMap.setOnMyLocationClickListener(this);
         mMap.setOnMyLocationButtonClickListener(this);

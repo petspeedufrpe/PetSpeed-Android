@@ -1,6 +1,7 @@
 package br.ufrpe.bsi.mpoo.petspeed.infra.persistencia;
 
 import android.util.Log;
+
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
@@ -282,7 +283,154 @@ public class PreencherBanco {
             Log.getStackTraceString(e);
 
         }
+
+        //MEDICO 8 ####################################
+
+        usuario = new Usuario();
+        pessoa = new Pessoa();
+        endereco = new Endereco();
+        medico = new Medico();
+
+        usuario.setEmail("med8@med.com");
+        usuario.setSenha("12345");
+
+        endereco.setCep("2351236");
+        endereco.setNumero(270);
+        endereco.setComplemento("apt 707");
+        endereco.setUf("PB");
+        endereco.setBairro("Manaíra");
+        endereco.setLogradouro("R. Jacinto Dantas");
+        endereco.setCidade("João Pessoa");
+        endereco.setLatitude(-7.1041287);
+        endereco.setLongitude(-34.8322662);
+
+        pessoa.setNome("Joao miguel");
+        pessoa.setCpf("987456123");
+        pessoa.setEndereco(endereco);
+
+        medico.setAvaliacao(4.9);
+        medico.setCrmv("45869");
+        medico.setTelefone("1254785698");
+        medico.setUsuario(usuario);
+        medico.setDadosPessoais(pessoa);
+
+        try {
+            mServices.cadastraMedico(medico, usuario);
+        } catch (AppException e) {
+            Log.getStackTraceString(e);
+        }
+
+        //MEDICO 9 ####################################
+
+        usuario = new Usuario();
+        pessoa = new Pessoa();
+        endereco = new Endereco();
+        medico = new Medico();
+
+        usuario.setEmail("med9@med.com");
+        usuario.setSenha("12345");
+
+        endereco.setCep("9856325");
+        endereco.setNumero(317);
+        endereco.setComplemento("sala 8");
+        endereco.setUf("PB");
+        endereco.setBairro("Bessa");
+        endereco.setLogradouro("R. Ozorio Queiroga de Assis");
+        endereco.setCidade("João Pessoa");
+        endereco.setLatitude(-7.0732546);
+        endereco.setLongitude(-34.8387379);
+
+        pessoa.setNome("Joao Castiel");
+        pessoa.setCpf("47586968");
+        pessoa.setEndereco(endereco);
+
+        medico.setAvaliacao(4.9);
+        medico.setCrmv("75869");
+        medico.setTelefone("1256963580");
+        medico.setUsuario(usuario);
+        medico.setDadosPessoais(pessoa);
+
+        try {
+            mServices.cadastraMedico(medico, usuario);
+        } catch (AppException e) {
+            Log.getStackTraceString(e);
+        }
+
+
+        //MEDICO 10 ####################################
+
+        usuario = new Usuario();
+        pessoa = new Pessoa();
+        endereco = new Endereco();
+        medico = new Medico();
+
+        usuario.setEmail("med10@med.com");
+        usuario.setSenha("12345");
+
+        endereco.setCep("256936585");
+        endereco.setNumero(1212);
+        endereco.setComplemento("térreo");
+        endereco.setUf("RN");
+        endereco.setBairro("Areia Preta");
+        endereco.setLogradouro("R. Fabrício Pedroza");
+        endereco.setCidade("Natal");
+        endereco.setLatitude(-5.7856817);
+        endereco.setLongitude(-35.1928306);
+
+        pessoa.setNome("Joao Arlequino");
+        pessoa.setCpf("14758236");
+        pessoa.setEndereco(endereco);
+
+        medico.setAvaliacao(4.7);
+        medico.setCrmv("12522");
+        medico.setTelefone("1526398540");
+        medico.setUsuario(usuario);
+        medico.setDadosPessoais(pessoa);
+
+        try {
+            mServices.cadastraMedico(medico, usuario);
+        } catch (AppException e) {
+            Log.getStackTraceString(e);
+        }
+
+        //MEDICO 11 ####################################
+
+        usuario = new Usuario();
+        pessoa = new Pessoa();
+        endereco = new Endereco();
+        medico = new Medico();
+
+        usuario.setEmail("med11@med.com");
+        usuario.setSenha("12345");
+
+        endereco.setCep("7856955");
+        endereco.setNumero(185);
+        endereco.setComplemento("Bloco A");
+        endereco.setUf("PE");
+        endereco.setBairro("Casa Caiada");
+        endereco.setLogradouro("R. Carlos Pessoa Monteiro");
+        endereco.setCidade("Olinda");
+        endereco.setLatitude(-7.9899527);
+        endereco.setLongitude(-34.8431607);
+
+        pessoa.setNome("Joao Theodoro");
+        pessoa.setCpf("75848452");
+        pessoa.setEndereco(endereco);
+
+        medico.setAvaliacao(4.5);
+        medico.setCrmv("42522");
+        medico.setTelefone("8796585240");
+        medico.setUsuario(usuario);
+        medico.setDadosPessoais(pessoa);
+
+        try {
+            mServices.cadastraMedico(medico, usuario);
+        } catch (AppException e) {
+            Log.getStackTraceString(e);
+        }
+
     }
+
 
     private void cadastraClientes(ClienteServices cService) {
         Usuario usuario;
@@ -324,7 +472,7 @@ public class PreencherBanco {
 
 
         try {
-            cliente = cService.cadastraCliente(cliente,usuario);
+            cliente = cService.cadastraCliente(cliente, usuario);
             Sessao.instance.setCliente(cliente);
         } catch (AppException e) {
             Log.getStackTraceString(e);
@@ -417,7 +565,7 @@ public class PreencherBanco {
 
 
         try {
-            cliente = cService.cadastraCliente(cliente,usuario);
+            cliente = cService.cadastraCliente(cliente, usuario);
             Sessao.instance.setCliente(cliente);
         } catch (AppException e) {
             Log.getStackTraceString(e);
@@ -490,7 +638,7 @@ public class PreencherBanco {
 
 
         try {
-            cliente = cService.cadastraCliente(cliente,usuario);
+            cliente = cService.cadastraCliente(cliente, usuario);
             Sessao.instance.setCliente(cliente);
         } catch (AppException e) {
             Log.getStackTraceString(e);

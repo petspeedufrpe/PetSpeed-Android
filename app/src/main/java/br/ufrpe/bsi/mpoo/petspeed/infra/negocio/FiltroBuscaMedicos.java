@@ -20,7 +20,7 @@ public class FiltroBuscaMedicos {
     }
 
     public enum Estados {
-        PERNAMBUCO("PE"), PARAIBA("PB");
+        PERNAMBUCO("PE"), PARAIBA("PB"),RIO_GRANDE_DO_NORTE("RN");
         private final String descricao;
 
         Estados(String descricao) {
@@ -38,7 +38,7 @@ public class FiltroBuscaMedicos {
     }
 
     public enum Cidades {
-        RECIFE("Recife"), JOAO_PESSOA("João Pessoa");
+        RECIFE("Recife"), JOAO_PESSOA("João Pessoa"),NATAL("Natal"),OLINDA("Olinda");
         private final String descricao;
 
         Cidades(String descricao) {
