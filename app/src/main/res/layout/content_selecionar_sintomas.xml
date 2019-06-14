@@ -5,17 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".cliente.gui.AnimalClienteActivity"
-    tools:showIn="@layout/activity_animal_cliente">
+    tools:context=".cliente.gui.SelecionarSintomasActivity"
+    tools:showIn="@layout/activity_selecionar_sintomas">
+
 
     <android.support.v7.widget.RecyclerView
-    android:id="@+id/selecionar_sintomas_recycler_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="br.ufrpe.bsi.mpoo.petspeed.cliente.gui.SelecionarSintomasActivity"
-    tools:showIn="@layout/activity_selecionar_sintomas"
-    tools:listitem="@layout/relative_layout_selecionar_sintomas">
+        android:id="@+id/selecionar_sintomas_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="br.ufrpe.bsi.mpoo.petspeed.cliente.gui.SelecionarSintomasActivity"
+        tools:showIn="@layout/activity_selecionar_sintomas"
+        tools:listitem="@layout/relative_layout_selecionar_sintomas">
     </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
