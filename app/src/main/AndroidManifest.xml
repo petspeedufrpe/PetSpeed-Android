@@ -25,8 +25,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".animal.gui.EditDadosPetActivity"></activity>
-        <activity android:name=".animal.gui.PerfilPetActivity" />
+        <activity
+            android:name=".cliente.gui.SelecionarSintomasActivity"
+            android:label="@string/title_activity_selecionar_sintomas"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
         <activity android:name=".cliente.gui.MudarSenhaAcitivity" />
         <activity android:name=".cliente.gui.EditDadosClienteActivity" />
         <activity android:name=".cliente.gui.MeusPetsActivity" />
