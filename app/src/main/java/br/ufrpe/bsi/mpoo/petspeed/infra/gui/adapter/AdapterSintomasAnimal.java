@@ -9,10 +9,8 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
-import java.util.Map;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sintomas;
@@ -41,23 +39,21 @@ public class AdapterSintomasAnimal extends RecyclerView.Adapter<AdapterSintomasA
     @Override
     public void onBindViewHolder(@NonNull final AdapterSintomasAnimal.MyViewHolder myViewHolder, int i) {
         myViewHolder.title.setText(String.valueOf(sintomas.get(i).name()));
-
-        myViewHolder.checkBox.setChecked(sintomas.get(i).getDescricao());
-        myViewHolder.checkBox.setTag(i);
-        myViewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
+        final Sintomas mSintomas = sintomas.get(i);
+        myViewHolder.checkBox.setOnCheckedChangeListener(null);
+        myViewHolder.checkBox.setSelected(mSintomas.getDescricao());
+        myViewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                Integer pos = (Integer) myViewHolder.checkBox.getTag();
-                Toast.makeText(mContext,(sintomas.get(pos).name())+"Clicked",Toast.LENGTH_SHORT).show();
-
-                if (sintomas.get(pos).getDescricao()){
-                    sintomas.get(pos).setDescricao(false);
-                } else{
-                    sintomas.get(pos).setDescricao(true);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    mSintomas.setDescricao(true);
+                }else{
+                    mSintomas.setDescricao(false);
                 }
 
             }
         });
+        myViewHolder.checkBox.setChecked(mSintomas.getDescricao());
 
 
     }
