@@ -118,7 +118,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         SQL_INTEGER_AUTOINCREMENT +
                         "  %3$s TEXT NOT NULL, " +
                         "  %4$s TEXT NOT NULL, " +
-                        " %5$s TEXT, " +
+                        " %5$s BLOB, " +
                         "  %6$s TEXT NOT NULL, " +
                         "  %7$s TEXT NOT NULL, " +
                         "  %8$s TEXT NOT NULL " +

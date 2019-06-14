@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.DBHelper;
 
 public class AnimalDAO {
@@ -31,6 +32,7 @@ public class AnimalDAO {
         values.put(DBHelper.COL_ANIMAL_PESO, animal.getPeso());
         values.put(DBHelper.COL_ANIMAL_IDADE, animal.getNascimento());
         values.put(DBHelper.COL_ANIMAL_FK_CLIENTE, animal.getFkCliente());
+        values.put(DBHelper.COL_ANIMAL_FOTO,animal.getFoto());
         long res = dbWrite.insert(DBHelper.TABELA_ANIMAL, null, values);
         dbWrite.close();
         return res;
@@ -65,16 +67,19 @@ public class AnimalDAO {
         int indexRaca = cursor.getColumnIndex(DBHelper.COL_ANIMAL_RACA);
         int indexNome = cursor.getColumnIndex(DBHelper.COL_ANIMAL_NOME);
         int indexFkCliente = cursor.getColumnIndex(DBHelper.COL_ANIMAL_FK_CLIENTE);
+        int indexFoto = cursor.getColumnIndex(DBHelper.COL_ANIMAL_FOTO);
 
         int anoNascimento = cursor.getInt(indexIdade);
         int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
         int idade = anoAtual - anoNascimento;
+        byte[] foto = cursor.getBlob(indexFoto);
 
         animal.setNascimento(idade);
         animal.setId(cursor.getLong(indexId));
         animal.setPeso(cursor.getInt(indexPeso));
         animal.setRaca(cursor.getString(indexRaca));
         animal.setNome(cursor.getString(indexNome));
+        animal.setFoto(foto);
         animal.setFkCliente(cursor.getLong(indexFkCliente));
 
         return animal;
@@ -146,6 +151,15 @@ public class AnimalDAO {
         cursor.close();
         db.close();
         return animalArrayList;
+    }
+
+    public void alteraFotoAnimal(Animal animal){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.COL_ANIMAL_FOTO,animal.getFoto());
+        db.update(DBHelper.TABELA_ANIMAL,values,DBHelper.COL_ANIMAL_ID + " = ?",
+                new String[]{String.valueOf(animal.getId())});
+        db.close();
     }
 
 }
