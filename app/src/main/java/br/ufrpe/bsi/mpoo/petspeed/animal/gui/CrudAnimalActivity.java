@@ -55,6 +55,7 @@ public class CrudAnimalActivity extends AppCompatActivity {
     private String raca;
     private String idade;
     private String peso;
+    private Animal animal = new Animal();
     private static final int PERMISSION_REQUEST = 0;
     private static final int REQUEST_GALLERY = 2;
     private static final int REQUEST_CAPTURE = 1;
@@ -66,8 +67,8 @@ public class CrudAnimalActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_crud_animal);
         Button btnCadastrar = findViewById(R.id.btn_cadastrar_animal);
-        mImagem = findViewById(R.id.campo_imagem);
-        ImageView btnAddFoto = findViewById(R.id.img_view_animal_cadastro);
+        mImagem = findViewById(R.id.img_view_animal_cadastro);
+        ImageView btnAddFoto = findViewById(R.id.floatingActionButton);
         btnAddFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,21 +111,21 @@ public class CrudAnimalActivity extends AppCompatActivity {
         Usuario usuario = Sessao.instance.getUsuario();
         ClienteDAO clienteDAO = new ClienteDAO();
         Cliente cliente = clienteDAO.getIdClienteByUsuario(usuario.getId());
-        Animal animal = createAnimal();
+        animal = createAnimal();
         animal.setFkCliente(cliente.getId());
         long res = animalServices.cadastraAnimal(animal);
         animal.setId(res);
+        startActivity(new Intent(CrudAnimalActivity.this, AnimalClienteActivity.class));
 
     }
 
 
     public Animal createAnimal() {
-        Animal animal = new Animal();
         animal.setNome(nome);
         animal.setRaca(raca);
         animal.setPeso(Double.parseDouble(peso));
         animal.setNascimento(Integer.parseInt(idade));
-        //salvarFoto();
+
 
         return animal;
     }
@@ -222,8 +223,12 @@ public class CrudAnimalActivity extends AppCompatActivity {
 
     private void salvarFoto() {
         byte[] foto = conveterImageViewToByte();
-        createAnimal().setFoto(foto);
-        //clienteServices.alteraFotoCliente(cliente);
+        animal.setFoto(foto);
+        capturaTextos();
+        if (isCamposValidos()) {
+            cadastrar();
+        }
+        //animalServices.alteraFotoAnimal(animal);
     }
 
     private byte[] conveterImageViewToByte() {
