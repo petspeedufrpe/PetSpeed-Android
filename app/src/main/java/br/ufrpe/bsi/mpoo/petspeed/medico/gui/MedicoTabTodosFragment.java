@@ -34,8 +34,8 @@ public class MedicoTabTodosFragment extends Fragment {
     }
 
     public void setMedicosAdapter() {
-        List<OrdemServico> OS = new OrdemServicoServices().getOSbyPrioridade(OrdemServico.Prioridade.ALTA);
-        osAdapter = new OSAdapter(OS);
+        List<OrdemServico> os = new ArrayList<>();
+        osAdapter = new OSAdapter(os);
     }
 
     private void initRecyclerView() {

@@ -15,7 +15,6 @@ public class TriagemDAO {
     public long cadastraTriagem(Triagem triagem) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DBHelper.COL_TRIAGEM_ID, triagem.getId());
         values.put(DBHelper.COL_TRIAGEM_SINTOMAS, triagem.getSintomas());
         values.put(DBHelper.COL_TRIAGEM_OUTROS, triagem.getOutros());
         long id = db.insert(DBHelper.TABELA_TRIAGEM, null, values);
@@ -41,9 +40,10 @@ public class TriagemDAO {
         int indexId = cursor.getColumnIndex(DBHelper.COL_TRIAGEM_ID);
         int indexOutros = cursor.getColumnIndex(DBHelper.COL_TRIAGEM_OUTROS);
         int indexSintomas = cursor.getColumnIndex(DBHelper.COL_TRIAGEM_SINTOMAS);
-        triagem.setSintomas(cursor.getColumnName(indexSintomas));
-        triagem.setOutros(cursor.getColumnName(indexOutros));
-        triagem.setId(Long.parseLong(cursor.getColumnName(indexId)));
+        triagem.setSintomas(cursor.getString(indexSintomas));
+        triagem.setOutros(cursor.getString(indexOutros));
+        triagem.setId(cursor.getLong(indexId))
+        ;
         return triagem;
     }
 

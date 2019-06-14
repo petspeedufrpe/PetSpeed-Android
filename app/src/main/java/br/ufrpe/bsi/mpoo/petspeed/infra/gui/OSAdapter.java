@@ -1,5 +1,6 @@
 package br.ufrpe.bsi.mpoo.petspeed.infra.gui;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,7 +77,12 @@ public class OSAdapter extends RecyclerView.Adapter<OSAdapter.OSViewHolder>{
                         + os.getCliente().getDadosPessoais().getEndereco().getBairro());
         holder.mAnimNome.setText("Nome: " +os.getAnimal().getNome());
         holder.mAnimRaca.setText("Raca: " +os.getAnimal().getRaca());
+        if(os.getPrioridade()== OrdemServico.Prioridade.ALTA){
+            holder.mPrioridade.setTextColor(Color.parseColor("#FFFF0000"));
+        }else{
+            holder.mPrioridade.setTextColor(Color.parseColor("#24B403"));
 
+        }
     }
 
     @Override

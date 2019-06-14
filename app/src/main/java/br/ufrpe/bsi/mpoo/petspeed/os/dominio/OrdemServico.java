@@ -118,7 +118,7 @@ public class OrdemServico {
     }
 
     public enum Status{
-        AGUARDANDO_ATENDIMENTO("Medico"), EM_ATENDIMENTO("Cliente"), FINALIZADA("Clinica");
+        AGUARDANDO_ATENDIMENTO("AGUARDANDO_ATENDIMENTO"), EM_ATENDIMENTO("EM_ANDAMENTO"), FINALIZADA("FINALIZADA");
         private final String descricao;
 
         Status(String descricao) {
@@ -138,9 +138,9 @@ public class OrdemServico {
 
     public enum Prioridade {
 
-        ALTA("Alta"),
+        ALTA("ALTA"),
 
-        BAIXA("Baixa");
+        BAIXA("BAIXA");
 
         private final String descricao;
 

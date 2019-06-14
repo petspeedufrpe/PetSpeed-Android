@@ -3,6 +3,7 @@ package br.ufrpe.bsi.mpoo.petspeed.infra.persistencia;
 import android.util.Log;
 
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
+import br.ufrpe.bsi.mpoo.petspeed.animal.persistencia.AnimalDAO;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.AppException;
@@ -24,6 +25,7 @@ public class PreencherBanco {
     public void start() {
         cadastraMedicos(mServices);
         cadastraClientes(cServices);
+        cadastraOSs();
     }
 
     private void cadastraMedicos(MedicoServices mServices) {
@@ -698,10 +700,11 @@ public class PreencherBanco {
         triagem.setSintomas("Lorem, ipsum, dolor, sit, amet");
         triagem.setOutros("Lorem ipsum dolor sit amet");
         os.setCliente(cliente);
-        os.setAnimal(cliente.getAnimais().get(0));
+        os.setAnimal(new AnimalDAO().getAnimalById(1));
         os.setDescricao("Lorem ipsum dolor sit amet");
         os.setPrioridade(OrdemServico.Prioridade.ALTA);
         os.setStatus(OrdemServico.Status.AGUARDANDO_ATENDIMENTO);
+        os.setTriagem(triagem);
         servicoServices.cadastraOS(os, os.getTriagem());
     }
 

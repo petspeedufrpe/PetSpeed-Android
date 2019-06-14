@@ -14,6 +14,7 @@ import java.util.List;
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.OSAdapter;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
+import br.ufrpe.bsi.mpoo.petspeed.os.negocio.OrdemServicoServices;
 
 public class MedicoTabPrioridadeFragment extends Fragment {
     private OSAdapter osAdapter;
@@ -32,7 +33,7 @@ public class MedicoTabPrioridadeFragment extends Fragment {
     }
 
     public void setMedicosAdapter() {
-        List<OrdemServico> OS = new ArrayList<>();
+        List<OrdemServico> OS = new OrdemServicoServices().getOSbyPrioridade(OrdemServico.Prioridade.ALTA);
         osAdapter = new OSAdapter(OS);
     }
 

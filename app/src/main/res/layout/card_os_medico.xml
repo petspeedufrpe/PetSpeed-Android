@@ -14,7 +14,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:padding="10dp">
 
         <TextView
@@ -85,6 +85,7 @@
             android:id="@+id/fragPopUpPrioridade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:text="prioridade"
             android:textColor="#000"
             android:textSize="18sp"
@@ -97,10 +98,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="15dp"
             android:text="ACEITAR"
             android:textColor="#357A01"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/fragPopUpPrioridade"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -110,10 +113,12 @@
             android:id="@+id/fragPopSintomas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:text="VER SINTOMAS"
             android:textColor="#585858"
             android:textSize="19sp"
             android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/fragPopUpPrioridade"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

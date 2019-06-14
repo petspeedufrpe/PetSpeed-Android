@@ -104,6 +104,7 @@ public class MedicoDAO {
             return createMedico(cursor);
         }
         cursor.close();
+        db.close();
         return null;
     }
 

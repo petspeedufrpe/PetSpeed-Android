@@ -66,7 +66,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // TABELA OS:
     public static final String TABELA_OS = "TB_OS";
     public static final String COL_OS_ID = "ID";
-    public static final String COL_OS_PENDENTE = "PENDENTE";
+    public static final String COL_OS_STATUS = "PENDENTE";
     public static final String COL_OS_DESCRICAO = "DESCRICAO";
     public static final String COL_OS_PRIORIDADE = "PRIORIDADE";
     public static final String COL_OS_FK_MEDICO = "FK_MEDICO";
@@ -242,7 +242,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         " %9$s TEXT NOT NULL " +
                         ");";
         sqlTbOS = String.format(sqlTbOS,
-                TABELA_OS, COL_OS_ID, COL_OS_DESCRICAO, COL_OS_PENDENTE, COL_OS_PRIORIDADE,
+                TABELA_OS, COL_OS_ID, COL_OS_DESCRICAO, COL_OS_STATUS, COL_OS_PRIORIDADE,
                 COL_OS_FK_MEDICO, COL_OS_FK_TRIAGEM, COL_OS_FK_CLIENTE, COL_OS_FK_ANIMAL);
         db.execSQL(sqlTbOS);
     }
