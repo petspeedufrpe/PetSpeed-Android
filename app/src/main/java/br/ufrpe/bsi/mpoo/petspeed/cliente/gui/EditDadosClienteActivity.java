@@ -265,6 +265,7 @@ public class EditDadosClienteActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         switch (requestCode) {
             case REQUEST_GALLERY:
+                Toast.makeText(this, "e ai", Toast.LENGTH_SHORT).show();
                 if (resultCode == RESULT_OK) {
                     try {
                         Uri img = data.getData();

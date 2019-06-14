@@ -2,6 +2,7 @@ package br.ufrpe.bsi.mpoo.petspeed.animal.negocio;
 
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petspeed.animal.persistencia.AnimalDAO;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 
 public class AnimalServices {
 
@@ -20,4 +21,9 @@ public class AnimalServices {
             animalDAO.deletaAnimal(animal);
         }
     }
+
+    public void alteraFotoAnimal(Animal animal){
+        animalDAO.alteraFotoAnimal(animal);
+    }
+
 }
