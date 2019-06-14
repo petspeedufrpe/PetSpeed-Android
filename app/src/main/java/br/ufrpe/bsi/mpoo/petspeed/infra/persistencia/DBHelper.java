@@ -236,7 +236,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         "  %3$s TEXT NOT NULL, " +
                         "  %4$s TEXT NOT NULL, " +
                         " %5$s TEXT NOT NULL, " +
-                        " %6$s TEXT NOT NULL, " +
+                        " %6$s TEXT, " +
                         " %7$s TEXT NOT NULL, " +
                         " %8$s TEXT NOT NULL, " +
                         " %9$s TEXT NOT NULL " +

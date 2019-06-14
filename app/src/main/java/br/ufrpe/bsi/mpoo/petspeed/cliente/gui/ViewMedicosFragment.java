@@ -35,10 +35,10 @@ public class ViewMedicosFragment extends DialogFragment {
 
         mNome = view.findViewById(R.id.fragPopUpMedNome);
         mAvaliacao = view.findViewById(R.id.fragPopUpMedAval);
-        mFone = view.findViewById(R.id.fragPopUpMedFone);
-        mRuaNumero = view.findViewById(R.id.fragPopUpMedRuaNumero);
+        mFone = view.findViewById(R.id.fragPopSintomas);
+        mRuaNumero = view.findViewById(R.id.fragPopUpPrioridade);
         mCompl = view.findViewById(R.id.fragPopUpMedCompl);
-        mCidadeUF = view.findViewById(R.id.fragPopUpMedCidadeUF);
+        mCidadeUF = view.findViewById(R.id.fragPopUpStatus);
         mActionVoltar = view.findViewById(R.id.fragPopUpMedVoltar);
         mActionAgendar = view.findViewById(R.id.fragPopUpMedBtnAgendar);
 

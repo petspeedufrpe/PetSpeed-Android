@@ -9,18 +9,21 @@ import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.AppException;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petspeed.medico.negocio.MedicoServices;
+import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
+import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
+import br.ufrpe.bsi.mpoo.petspeed.os.negocio.OrdemServicoServices;
 import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 
 public class PreencherBanco {
+    MedicoServices mServices = new MedicoServices();
+    ClienteServices cServices = new ClienteServices();
+    OrdemServicoServices servicoServices = new OrdemServicoServices();
+
     public void start() {
-        MedicoServices mServices = new MedicoServices();
-        ClienteServices clienteServices = new ClienteServices();
-
         cadastraMedicos(mServices);
-        cadastraClientes(clienteServices);
-
+        cadastraClientes(cServices);
     }
 
     private void cadastraMedicos(MedicoServices mServices) {
@@ -677,6 +680,29 @@ public class PreencherBanco {
 
 
         Sessao.instance.reset();
+    }
+
+    private void cadastraOSs() {
+        Medico medico;
+        Cliente cliente;
+        Triagem triagem;
+        OrdemServico os;
+
+        // OS 1 ############################################
+
+        os = new OrdemServico();
+
+        medico = mServices.getMedicoById(1);
+        cliente = cServices.getClienteCompleto(1);
+        triagem = new Triagem();
+        triagem.setSintomas("Lorem, ipsum, dolor, sit, amet");
+        triagem.setOutros("Lorem ipsum dolor sit amet");
+        os.setCliente(cliente);
+        os.setAnimal(cliente.getAnimais().get(0));
+        os.setDescricao("Lorem ipsum dolor sit amet");
+        os.setPrioridade(OrdemServico.Prioridade.ALTA);
+        os.setStatus(OrdemServico.Status.AGUARDANDO_ATENDIMENTO);
+        servicoServices.cadastraOS(os, os.getTriagem());
     }
 
 

@@ -5,21 +5,17 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_pets" />
+            android:id="@+id/nav_perfil_medico"
+            android:icon="@drawable/profile"
+            android:title="Meu Perfil" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_historico" />
+            android:id="@+id/nav_minhas_ordens"
+                android:icon="@drawable/outline_calendar_today_24"
+            android:title="Minhas Ordens" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_atendimento_emergencial" />
-        <item
-            android:id="@+id/nav_tools"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_atendimento" />
+            android:id="@+id/nav_sair"
+            android:icon="@drawable/common_google_signin_btn_icon_dark_normal"
+            android:title="Sair" />
     </group>
 
     <item android:title="Communicate">
@@ -31,7 +27,7 @@
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="@string/menu_send" />
+                android:title="Fale conosco" />
         </menu>
     </item>
 

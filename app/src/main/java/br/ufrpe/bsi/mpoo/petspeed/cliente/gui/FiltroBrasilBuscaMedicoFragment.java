@@ -1,4 +1,4 @@
-package br.ufrpe.bsi.mpoo.petspeed.infra.gui;
+package br.ufrpe.bsi.mpoo.petspeed.cliente.gui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,19 +12,19 @@ import android.widget.Toast;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
+import br.ufrpe.bsi.mpoo.petspeed.infra.gui.ListaMedicosAdapter;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.FiltroBuscaMedicos;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petspeed.medico.negocio.MedicoServices;
 
-public class FiltroByBrasilBuscaMedicoFragment extends Fragment {
+public class FiltroBrasilBuscaMedicoFragment extends Fragment {
 
     private ListaMedicosAdapter medicosAdapter;
-    FiltroBuscaMedicos.Cidades cidadeSelecionada;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_filtro_by_nacional_busca_medico, container, false);
+        return inflater.inflate(R.layout.fragment_filtro_brasil_busca_medico, container, false);
     }
 
     @Override

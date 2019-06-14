@@ -32,31 +32,31 @@
             android:textColor="#585858"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/fragPopUpMedFone"
+            app:layout_constraintBottom_toTopOf="@id/fragPopSintomas"
             app:layout_constraintTop_toBottomOf="@+id/fragPopUpMedNome"
             tools:layout_editor_absoluteX="10dp" />
 
         <TextView
-            android:id="@+id/fragPopUpMedFone"
+            android:id="@+id/fragPopSintomas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
             android:textColor="#585858"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/fragPopUpMedRuaNumero"
+            app:layout_constraintBottom_toTopOf="@+id/fragPopUpPrioridade"
             app:layout_constraintTop_toBottomOf="@id/fragPopUpMedAval"
             tools:layout_editor_absoluteX="10dp" />
 
         <TextView
-            android:id="@+id/fragPopUpMedRuaNumero"
+            android:id="@+id/fragPopUpPrioridade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
             android:textColor="#000"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/fragPopUpMedCompl"
-            app:layout_constraintTop_toBottomOf="@+id/fragPopUpMedFone"
+            app:layout_constraintTop_toBottomOf="@+id/fragPopSintomas"
             tools:layout_editor_absoluteX="10dp" />
 
         <TextView
@@ -66,12 +66,12 @@
             android:text=""
             android:textColor="#000"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/fragPopUpMedCidadeUF"
-            app:layout_constraintTop_toBottomOf="@+id/fragPopUpMedRuaNumero"
+            app:layout_constraintBottom_toTopOf="@+id/fragPopUpStatus"
+            app:layout_constraintTop_toBottomOf="@+id/fragPopUpPrioridade"
             tools:layout_editor_absoluteX="9dp" />
 
         <TextView
-            android:id="@+id/fragPopUpMedCidadeUF"
+            android:id="@+id/fragPopUpStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
@@ -112,7 +112,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragPopUpMedCidadeUF" />
+            app:layout_constraintTop_toBottomOf="@+id/fragPopUpStatus" />
 
     </android.support.constraint.ConstraintLayout>
 

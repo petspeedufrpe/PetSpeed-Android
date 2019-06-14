@@ -93,6 +93,7 @@ public class MedicoServices {
     }
 
     public boolean usuarioPossuiMedico(Medico medico) {
+
         Usuario usuarioReferencia = usuarioDAO.getUsuario(medico.getUsuario().getEmail());
         try {
             usuarioReferencia.getId();
@@ -122,6 +123,10 @@ public class MedicoServices {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public Medico getMedicoById(long mID){
+        return medicoDAO.getMedicoById(mID);
     }
 
     public List<Medico> getMedicosByNome(FiltroBuscaMedicos.Estados estado, String medico){

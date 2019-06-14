@@ -8,7 +8,7 @@ public class OrdemServico {
 
     private long id;
 
-    private boolean pendente;
+    private Status status;
 
     private Medico medico;
 
@@ -27,6 +27,7 @@ public class OrdemServico {
     private long fkCliente;
 
     private long fkAnimal;
+
 
     public long getFkMedico() {
         return fkMedico;
@@ -52,12 +53,12 @@ public class OrdemServico {
         this.fkAnimal = fkAnimal;
     }
 
-    public boolean isPendente() {
-        return pendente;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setPendente(boolean pendente) {
-        this.pendente = pendente;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public long getId() {
@@ -114,5 +115,48 @@ public class OrdemServico {
 
     public void setPrioridade(Prioridade prioridade) {
         this.prioridade = prioridade;
+    }
+
+    public enum Status{
+        AGUARDANDO_ATENDIMENTO("Medico"), EM_ATENDIMENTO("Cliente"), FINALIZADA("Clinica");
+        private final String descricao;
+
+        Status(String descricao) {
+            this.descricao = descricao;
+        }
+
+        public String getDescricao() {
+            return descricao;
+        }
+
+        @Override
+        public String toString() {
+            return this.descricao;
+        }
+
+    }
+
+    public enum Prioridade {
+
+        ALTA("Alta"),
+
+        BAIXA("Baixa");
+
+        private final String descricao;
+
+        Prioridade(String descricao) {
+            this.descricao = descricao;
+        }
+
+        public String getDescricao() {
+            return descricao;
+        }
+
+        @Override
+        public String toString() {
+            return this.descricao;
+        }
+
+
     }
 }

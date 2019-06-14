@@ -9,8 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
-import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Prioridade;
 
 public class OrdemServicoDAO {
 
@@ -22,12 +22,11 @@ public class OrdemServicoDAO {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DBHelper.COL_OS_ID, ordemServico.getId());
-        values.put(DBHelper.COL_OS_PENDENTE, ordemServico.isPendente());
+        values.put(DBHelper.COL_OS_PENDENTE, ordemServico.getStatus().getDescricao());
         values.put(DBHelper.COL_OS_DESCRICAO, ordemServico.getDescricao());
         values.put(DBHelper.COL_OS_PRIORIDADE, String.valueOf(ordemServico.getPrioridade()));
         values.put(DBHelper.COL_OS_FK_ANIMAL, ordemServico.getAnimal().getId());
         values.put(DBHelper.COL_OS_FK_CLIENTE, ordemServico.getCliente().getId());
-        values.put(DBHelper.COL_OS_FK_MEDICO, ordemServico.getMedico().getId());
         values.put(DBHelper.COL_OS_FK_TRIAGEM, ordemServico.getTriagem().getId());
         long id = db.insert(DBHelper.TABELA_OS, null, values);
         db.close();
@@ -42,6 +41,15 @@ public class OrdemServicoDAO {
 
     }
 
+    public void insereMedico(Medico medico, long osId){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.COL_OS_FK_MEDICO,medico.getId());
+        db.update(DBHelper.TABELA_OS,values,DBHelper.COL_OS_ID + " = ?",
+                new String[]{String.valueOf(medico.getId())});
+        db.close();
+    }
+
     public OrdemServico getOSbyId(long idOs) {
         String sql = SQL_SELECT_FROM +DBHelper.TABELA_OS+ SQL_WHERE +DBHelper.COL_OS_ID+ " =?";
         String[] args = {String.valueOf(idOs)};
@@ -54,14 +62,14 @@ public class OrdemServicoDAO {
         int indexPendente = cursor.getColumnIndex(DBHelper.COL_OS_PENDENTE);
         int indexDescricao = cursor.getColumnIndex(DBHelper.COL_OS_DESCRICAO);
         ordemServico.setDescricao(cursor.getColumnName(indexDescricao));
-        ordemServico.setPendente(Boolean.parseBoolean(cursor.getColumnName(indexPendente)));
+        ordemServico.setStatus(OrdemServico.Status.valueOf(cursor.getColumnName(indexPendente)));
         ordemServico.setId(Long.parseLong(cursor.getColumnName(indexId)));
         return ordemServico;
     }
 
-    public List<OrdemServico> getOsByProridade (Prioridade p){
+    public List<OrdemServico> getOsByProridade (OrdemServico.Prioridade p){
         String sql = SQL_SELECT_FROM +DBHelper.TABELA_OS+ SQL_WHERE +DBHelper.COL_OS_PRIORIDADE+ " =?";
-        String[] args = {String.valueOf(p)};
+        String[] args = {p.getDescricao()};
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql,args);
         OrdemServico ordemServico = null;

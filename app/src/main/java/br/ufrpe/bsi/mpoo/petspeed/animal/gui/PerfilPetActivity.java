@@ -26,7 +26,6 @@ public class PerfilPetActivity extends AppCompatActivity {
     private final Context mContext;
     private Cliente cliente = Sessao.instance.getCliente();
     private TextView mNome, mRaca, mPeso;
-    private android.support.v7.widget.Toolbar mNomeUsuario;
     private ImageView mFoto;
     private FloatingActionButton editDados;
     private Bitmap bitmap;

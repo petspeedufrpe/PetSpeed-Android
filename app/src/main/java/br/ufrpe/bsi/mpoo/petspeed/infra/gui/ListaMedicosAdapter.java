@@ -11,7 +11,7 @@ import java.util.List;
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 
-class ListaMedicosAdapter extends RecyclerView.Adapter<ListaMedicosAdapter.MedicoViewHolder> {
+public class ListaMedicosAdapter extends RecyclerView.Adapter<ListaMedicosAdapter.MedicoViewHolder> {
     private List<Medico> medicos;
     private TextView mActionAgendar;
 
@@ -28,10 +28,10 @@ class ListaMedicosAdapter extends RecyclerView.Adapter<ListaMedicosAdapter.Medic
             super(view);
             mNome = view.findViewById(R.id.fragPopUpMedNome);
             mAvaliacao = view.findViewById(R.id.fragPopUpMedAval);
-            mFone = view.findViewById(R.id.fragPopUpMedFone);
-            mRuaNumero = view.findViewById(R.id.fragPopUpMedRuaNumero);
+            mFone = view.findViewById(R.id.fragPopSintomas);
+            mRuaNumero = view.findViewById(R.id.fragPopUpPrioridade);
             mCompl = view.findViewById(R.id.fragPopUpMedCompl);
-            mCidadeUF = view.findViewById(R.id.fragPopUpMedCidadeUF);
+            mCidadeUF = view.findViewById(R.id.fragPopUpStatus);
             mActionAgendar = view.findViewById(R.id.fragPopUpMedBtnAgendar);
         }
     }
@@ -44,7 +44,7 @@ class ListaMedicosAdapter extends RecyclerView.Adapter<ListaMedicosAdapter.Medic
     public MedicoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_medico, parent, false);
-        mActionAgendar = itemView.findViewById(R.id.cardMedBtnAgendar);
+        mActionAgendar = itemView.findViewById(R.id.fragPopUpMedAceitar);
         mActionAgendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

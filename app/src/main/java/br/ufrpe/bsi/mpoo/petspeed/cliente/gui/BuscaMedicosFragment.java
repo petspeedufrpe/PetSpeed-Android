@@ -1,13 +1,8 @@
 package br.ufrpe.bsi.mpoo.petspeed.cliente.gui;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +10,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
-import br.ufrpe.bsi.mpoo.petspeed.infra.gui.FiltroByCidadeBuscaMedicoFragment;
-import br.ufrpe.bsi.mpoo.petspeed.infra.gui.FiltroByEstadoBuscaMedicoFragment;
-import br.ufrpe.bsi.mpoo.petspeed.infra.gui.TabsAdapter;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.FiltroBuscaMedicos;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 

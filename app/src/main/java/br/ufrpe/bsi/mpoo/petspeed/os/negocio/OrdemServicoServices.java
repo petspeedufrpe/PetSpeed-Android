@@ -5,21 +5,20 @@ import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
-import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Prioridade;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
 import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.OrdemServicoDAO;
 import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.TriagemDAO;
 
 public class OrdemServicoServices {
 
-    private OrdemServicoDAO ordemServicoDAO;
+    private OrdemServicoDAO ordemServicoDAO = new OrdemServicoDAO();
 
-    private TriagemDAO triagemDAO;
+    private TriagemDAO triagemDAO = new TriagemDAO();
 
-    public void cadastraOS(OrdemServico os, Triagem triagem) {
+    public long cadastraOS(OrdemServico os, Triagem triagem) {
         long idTriagem = triagemDAO.cadastraTriagem(triagem);
         os.getTriagem().setId(idTriagem);
-        ordemServicoDAO.cadastraOS(os);
+        return ordemServicoDAO.cadastraOS(os);
     }
 
     public void deletaOS(OrdemServico os) {
@@ -30,7 +29,7 @@ public class OrdemServicoServices {
         return ordemServicoDAO.getOSbyId(id);
     }
 
-    public List<OrdemServico> getOSbyPrioridade(Prioridade prioridade) {
+    public List<OrdemServico> getOSbyPrioridade(OrdemServico.Prioridade prioridade) {
         return ordemServicoDAO.getOsByProridade(prioridade);
     }
 
