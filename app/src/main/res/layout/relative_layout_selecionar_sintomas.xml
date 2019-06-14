@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+
+    <TextView
+        android:id="@+id/txt_sintoma_animal"
+        android:layout_width="344dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="38dp"
+        android:gravity="center_vertical"
+        android:text="Example"
+        android:textSize="25dp" />
+
+    <CheckBox
+        android:id="@+id/check_sintoma_animal"
+        android:layout_width="69dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:gravity="center_vertical"
+        android:layout_marginEnd="0dp" />
+
+
+
+
+</RelativeLayout>
+
+
+

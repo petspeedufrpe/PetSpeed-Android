@@ -18,24 +18,28 @@
         android:maxSdkVersion="28" />
 
     <application
-        android:name="br.ufrpe.bsi.mpoo.petspeed.infra.app.PetSpeedApp"
+        android:name=".infra.app.PetSpeedApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name="br.ufrpe.bsi.mpoo.petspeed.cliente.gui.MudarSenhaAcitivity"></activity>
-        <activity android:name="br.ufrpe.bsi.mpoo.petspeed.cliente.gui.EditDadosClienteActivity" />
-        <activity android:name="br.ufrpe.bsi.mpoo.petspeed.cliente.gui.MeusPetsActivity" />
         <activity
-            android:name="br.ufrpe.bsi.mpoo.petspeed.cliente.gui.AnimalClienteActivity"
+            android:name=".cliente.gui.SelecionarSintomasActivity"
+            android:label="@string/title_activity_selecionar_sintomas"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+        <activity android:name=".cliente.gui.MudarSenhaAcitivity" />
+        <activity android:name=".cliente.gui.EditDadosClienteActivity" />
+        <activity android:name=".cliente.gui.MeusPetsActivity" />
+        <activity
+            android:name=".cliente.gui.AnimalClienteActivity"
             android:label="Meus Pets"
             android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="br.ufrpe.bsi.mpoo.petspeed.cliente.gui.PerfilClienteActivity" />
+        <activity android:name=".cliente.gui.PerfilClienteActivity" />
         <activity
-            android:name="br.ufrpe.bsi.mpoo.petspeed.cliente.gui.HomeClienteActivity"
+            android:name=".cliente.gui.HomeClienteActivity"
             android:label="Home"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -44,32 +48,34 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name="br.ufrpe.bsi.mpoo.petspeed.medico.gui.HomeMedicoActivity"
+            android:name=".medico.gui.HomeMedicoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="br.ufrpe.bsi.mpoo.petspeed.medico.gui.CadastroMedicoActivity" />
-        <activity android:name="br.ufrpe.bsi.mpoo.petspeed.animal.gui.CrudAnimalActivity"
+        <activity android:name=".medico.gui.CadastroMedicoActivity" />
+        <activity
+            android:name=".animal.gui.CrudAnimalActivity"
             android:noHistory="true" />
-        <activity android:name="br.ufrpe.bsi.mpoo.petspeed.infra.gui.LoginActivity" />
-        <activity android:name="br.ufrpe.bsi.mpoo.petspeed.infra.gui.SplashScreenActivity">
+        <activity android:name=".infra.gui.LoginActivity" />
+        <activity android:name=".infra.gui.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="br.ufrpe.bsi.mpoo.petspeed.infra.gui.FinalizaCadastroActivity" />
+        <activity android:name=".infra.gui.FinalizaCadastroActivity" />
         <activity
-            android:name="br.ufrpe.bsi.mpoo.petspeed.pessoa.gui.CadastroEnderecoActivity"
+            android:name=".pessoa.gui.CadastroEnderecoActivity"
             android:label="endereco" />
-        <activity android:name="br.ufrpe.bsi.mpoo.petspeed.cliente.gui.CadastroClienteActivity" />
-        
+        <activity android:name=".cliente.gui.CadastroClienteActivity" />
+
         <provider
-            android:authorities="br.ufrpe.bsi.mpoo.petspeed"
             android:name="android.support.v4.content.FileProvider"
+            android:authorities="br.ufrpe.bsi.mpoo.petspeed"
             android:exported="false"
             android:grantUriPermissions="true">
-            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/paths"/>
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/paths" />
         </provider>
     </application>
 

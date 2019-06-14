@@ -125,7 +125,6 @@ public class HomeClienteActivity extends AppCompatActivity
     }
 
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -143,6 +142,8 @@ public class HomeClienteActivity extends AppCompatActivity
             clienteServices.logout();
             startActivity(new Intent(HomeClienteActivity.this, LoginActivity.class)
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+        } else if (id == R.id.nav_historico_cliente){
+            startActivity(new Intent(HomeClienteActivity.this,SelecionarSintomasActivity.class));
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
