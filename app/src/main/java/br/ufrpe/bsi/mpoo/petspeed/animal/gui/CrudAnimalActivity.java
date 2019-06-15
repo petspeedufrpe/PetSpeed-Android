@@ -82,7 +82,8 @@ public class CrudAnimalActivity extends AppCompatActivity {
                 capturaTextos();
                 if (isCamposValidos()) {
                     cadastrar();
-                    startActivity(new Intent(CrudAnimalActivity.this, AnimalClienteActivity.class));
+                    finish();
+                    finishAndRemoveTask();
                 }
             }
         });
