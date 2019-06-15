@@ -68,7 +68,7 @@ public class CrudAnimalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_crud_animal);
         Button btnCadastrar = findViewById(R.id.btn_cadastrar_animal);
         mImagem = findViewById(R.id.img_view_animal_cadastro);
-        ImageView btnAddFoto = findViewById(R.id.floatingActionButton);
+        ImageView btnAddFoto = findViewById(R.id.crud_animal_add_foto);
         btnAddFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

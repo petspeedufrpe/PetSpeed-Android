@@ -19,6 +19,7 @@ public class AdapterSintomasAnimal extends RecyclerView.Adapter<AdapterSintomasA
 
     private Context mContext;
     private List<Sintomas> sintomas;
+    private List<Sintomas> checked;
 
     public AdapterSintomasAnimal(Context context,List<Sintomas> sintomas){
         this.mContext = context;
@@ -46,6 +47,7 @@ public class AdapterSintomasAnimal extends RecyclerView.Adapter<AdapterSintomasA
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
+                    checked.add(mSintomas);
                     mSintomas.setDescricao(true);
                 }else{
                     mSintomas.setDescricao(false);

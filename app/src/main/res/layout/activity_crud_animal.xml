@@ -102,7 +102,7 @@
         app:layout_constraintGuide_begin="20dp" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/crud_animal_add_foto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

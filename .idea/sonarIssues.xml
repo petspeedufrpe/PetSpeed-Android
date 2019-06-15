@@ -28,6 +28,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/animal/dominio/Animal.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/animal/gui/CrudAnimalActivity.java">
           <value>
             <set />
@@ -103,6 +108,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/cliente/gui/SelecionarSintomasActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/cliente/gui/ViewMedicosFragment.java">
           <value>
             <set />
@@ -174,6 +184,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/gui/TabsAdapter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/gui/adapter/AdapterSintomasAnimal.java">
           <value>
             <set />
           </value>
@@ -309,6 +324,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/drawable/rounded_corners_medico_search_fragment_box.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/activity_crud_animal.xml">
           <value>
             <set />
           </value>

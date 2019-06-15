@@ -33,14 +33,7 @@ public class ViewMedicosFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_view_medicos, container, false);
 
-        mNome = view.findViewById(R.id.fragPopUpMedNome);
-        mAvaliacao = view.findViewById(R.id.fragPopUpMedAval);
-        mFone = view.findViewById(R.id.fragPopSintomas);
-        mRuaNumero = view.findViewById(R.id.fragPopUpPrioridade);
-        mCompl = view.findViewById(R.id.fragPopUpMedCompl);
-        mCidadeUF = view.findViewById(R.id.fragPopUpStatus);
-        mActionVoltar = view.findViewById(R.id.fragPopUpMedVoltar);
-        mActionAgendar = view.findViewById(R.id.fragPopUpMedBtnAgendar);
+        findViews(view);
 
         if (Sessao.instance.getValue(ContasDeUsuario.MEDICO.getDescricao()) != null) {
             mNome.setTextColor(Color.parseColor("#357A01"));
@@ -48,7 +41,9 @@ public class ViewMedicosFragment extends DialogFragment {
             mActionAgendar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //a fazer
+                    HomeClienteActivity hCliente = (HomeClienteActivity) getActivity();
+                    startActivity(new Intent(hCliente.getBaseContext(), SelecionarSintomasActivity.class)
+                            .addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
                 }
             });
 
@@ -78,6 +73,17 @@ public class ViewMedicosFragment extends DialogFragment {
 
 
         return view;
+    }
+
+    private void findViews(View view) {
+        mNome = view.findViewById(R.id.fragPopUpMedNome);
+        mAvaliacao = view.findViewById(R.id.fragPopUpMedAval);
+        mFone = view.findViewById(R.id.fragPopSintomas);
+        mRuaNumero = view.findViewById(R.id.fragPopUpPrioridade);
+        mCompl = view.findViewById(R.id.fragPopUpMedCompl);
+        mCidadeUF = view.findViewById(R.id.fragPopUpStatus);
+        mActionVoltar = view.findViewById(R.id.fragPopUpMedVoltar);
+        mActionAgendar = view.findViewById(R.id.fragPopUpMedBtnAgendar);
     }
 
     private void showMedico() {
