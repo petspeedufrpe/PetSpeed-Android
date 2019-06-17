@@ -26,6 +26,21 @@
         android:id="@+id/include2"
         layout="@layout/content_selecionar_sintomas" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_confirmar_sintomas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="176dp"
+        android:layout_marginEnd="179dp"
+        android:layout_marginBottom="21dp"
+        android:clickable="true"
+        android:src="@drawable/ic_arrow_forward_black_24dp"
+        app:layout_anchor="@+id/include2"
+        app:layout_anchorGravity="bottom|center" />
+
 
 
 </android.support.design.widget.CoordinatorLayout>

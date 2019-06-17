@@ -6,15 +6,15 @@ import java.util.Hashtable;
 
 public enum  Sintomas {
 
-    Vomito(false),Diarreia(false), Desidratação(false),Febre(false),Letargia(false),
-    OlhosVermelhos(false),Tosse(false),DorAbdominal(false),Paralisia(false),ExcessoDeUrina(false),
-    MandibulaCaida(false),OlhosAmarelados(false);
-    public boolean descricao;
+    Vomito("Vomito"),Diarreia("Diarreia"), Desidratacao("Desidratação"),Febre("Febre"),Letargia("Letargia"),
+    OlhosVermelhos("Olhos Vermelhos"),Tosse("Tosse"),DorAbdominal("Dor Abdominal"),Paralisia("Paralisia"),ExcessoDeUrina("Excesso de Urina"),
+    MandibulaCaida("Mandibula Caida"),OlhosAmarelados("Olhos Amarelados");
+    public String descricao;
 
-    Sintomas(boolean descricao){this.descricao = descricao;}
+    Sintomas(String descricao){this.descricao = descricao;}
 
-    public boolean getDescricao(){return descricao;}
-    public void setDescricao(boolean descricao){this.descricao = true;}
+    public String getDescricao(){return descricao;}
+    public void setDescricao(String descricao){this.descricao = descricao;}
 
 
     @Override

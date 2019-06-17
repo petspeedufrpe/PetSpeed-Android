@@ -13,11 +13,11 @@ import android.widget.TextView;
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.ContasDeUsuario;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoAgendamento;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 
 
 public class ViewMedicosFragment extends DialogFragment {
-
 
     private TextView mNome;
     private TextView mAvaliacao;
@@ -42,7 +42,7 @@ public class ViewMedicosFragment extends DialogFragment {
                 @Override
                 public void onClick(View v) {
                     HomeClienteActivity hCliente = (HomeClienteActivity) getActivity();
-                    startActivity(new Intent(hCliente.getBaseContext(), SelecionarSintomasActivity.class)
+                    startActivity(new Intent(hCliente.getBaseContext(), SelecionarAnimalClienteActivity.class)
                             .addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
                 }
             });
@@ -67,12 +67,13 @@ public class ViewMedicosFragment extends DialogFragment {
         mActionVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SessaoAgendamento.instance.reset();
                 getDialog().dismiss();
             }
         });
 
 
-        return view;
+            return view;
     }
 
     private void findViews(View view) {
@@ -88,6 +89,7 @@ public class ViewMedicosFragment extends DialogFragment {
 
     private void showMedico() {
         Medico medico = (Medico) Sessao.instance.getValue(ContasDeUsuario.MEDICO.getDescricao());
+        SessaoAgendamento.instance.setMedico(medico);
         mNome.setText(medico.getDadosPessoais().getNome());
         mAvaliacao.setText("Avaliação: " + medico.getAvaliacao());
         mFone.setText("Telefone: " + medico.getTelefone());

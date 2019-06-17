@@ -69,6 +69,7 @@
             android:name=".pessoa.gui.CadastroEnderecoActivity"
             android:label="endereco" />
         <activity android:name=".cliente.gui.CadastroClienteActivity" />
+        <activity android:name=".cliente.gui.SelecionarAnimalClienteActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

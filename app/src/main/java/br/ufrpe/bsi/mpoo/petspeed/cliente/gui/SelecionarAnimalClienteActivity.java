@@ -30,10 +30,11 @@ import br.ufrpe.bsi.mpoo.petspeed.infra.gui.adapter.AdapterMeuPet;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.RecyclerVIewTouchHelperListener;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.RecyclerViewClickListener;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoAgendamento;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SwipeContoller;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 
-public class AnimalClienteActivity extends AppCompatActivity implements RecyclerVIewTouchHelperListener {
+public class SelecionarAnimalClienteActivity extends AppCompatActivity implements RecyclerVIewTouchHelperListener {
 
     private ClienteServices clienteServices = new ClienteServices();
     private List<Animal> animalArrayList = new ArrayList<>();
@@ -57,7 +58,7 @@ public class AnimalClienteActivity extends AppCompatActivity implements Recycler
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AnimalClienteActivity.this, CrudAnimalActivity.class));
+                startActivity(new Intent(SelecionarAnimalClienteActivity.this, CrudAnimalActivity.class));
                 finishAndRemoveTask();
             }
         });
@@ -82,9 +83,8 @@ public class AnimalClienteActivity extends AppCompatActivity implements Recycler
         RecyclerViewClickListener listener = new RecyclerViewClickListener() {
             @Override
             public void onClick(View v, int position) {
-                Intent it = new Intent(getBaseContext(), PerfilPetActivity.class);
-                PerfilPetActivity.animal = animalArrayList.get(position);
-                getBaseContext().startActivity(it);
+                startActivity(new Intent(SelecionarAnimalClienteActivity.this,SelecionarSintomasActivity.class));
+                SessaoAgendamento.instance.setAnimal(animalArrayList.get(position));
             }
         };
         if (animalArrayList != null) {
@@ -100,8 +100,6 @@ public class AnimalClienteActivity extends AppCompatActivity implements Recycler
             new ItemTouchHelper(callback).attachToRecyclerView(recyclerView);
 
         }
-
-
     }
 
     @Override
@@ -116,7 +114,7 @@ public class AnimalClienteActivity extends AppCompatActivity implements Recycler
     }
 
     private void SnackBarUndoDelete(String name, final Animal itemDeletado, final int deletIndex) {
-        Snackbar snackbar = Snackbar.make(rootLayout, name + " removed", Snackbar.LENGTH_SHORT);
+        Snackbar snackbar = Snackbar.make(rootLayout, name + " dremoved", Snackbar.LENGTH_SHORT);
         snackbar.setAction("UNDO", new View.OnClickListener() {
             @Override
             public void onClick(View v) {

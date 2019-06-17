@@ -21,9 +21,10 @@ public class AdapterSintomasAnimal extends RecyclerView.Adapter<AdapterSintomasA
     private List<Sintomas> sintomas;
     private List<Sintomas> checked;
 
-    public AdapterSintomasAnimal(Context context,List<Sintomas> sintomas){
+    public AdapterSintomasAnimal(Context context,List<Sintomas> sintomas,List<Sintomas> checked){
         this.mContext = context;
         this.sintomas = sintomas;
+        this.checked = checked;
     }
 
 
@@ -39,23 +40,20 @@ public class AdapterSintomasAnimal extends RecyclerView.Adapter<AdapterSintomasA
 
     @Override
     public void onBindViewHolder(@NonNull final AdapterSintomasAnimal.MyViewHolder myViewHolder, int i) {
-        myViewHolder.title.setText(String.valueOf(sintomas.get(i).name()));
+        myViewHolder.title.setText(String.valueOf(sintomas.get(i).getDescricao()));
         final Sintomas mSintomas = sintomas.get(i);
         myViewHolder.checkBox.setOnCheckedChangeListener(null);
-        myViewHolder.checkBox.setSelected(mSintomas.getDescricao());
         myViewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
                     checked.add(mSintomas);
-                    mSintomas.setDescricao(true);
                 }else{
-                    mSintomas.setDescricao(false);
+                    checked.remove(mSintomas);
                 }
 
             }
         });
-        myViewHolder.checkBox.setChecked(mSintomas.getDescricao());
 
 
     }
