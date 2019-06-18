@@ -84,6 +84,7 @@
     <string name="SQL_WHERE">WHERE</string>
     <string name="busque_um_medico">Busque um médico</string>
     <string name="title_activity_selecionar_sintomas">SelecionarSintomasActivity</string>
+    <string name="title_activity_status_os_cliente">StatusOsCliente</string>
 
 
 </resources>

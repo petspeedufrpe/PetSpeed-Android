@@ -21,7 +21,7 @@
             android:id="@+id/fragPopUpMed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CLIENTE"
+            android:text="MEDICO"
             android:textColor="#24B403"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -48,6 +48,14 @@
             android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@id/fragPopUpMedNome"
             tools:layout_editor_absoluteX="10dp" />
+        <TextView
+            android:id="@+id/fragPopUpAval"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Avaliacão"
+            android:textColor="#000"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/fragPopUpMedEnd"/>
 
         <TextView
             android:id="@+id/fragPopUpAnim"
@@ -59,7 +67,7 @@
             android:textSize="19sp"
             android:textStyle="bold"
             app:layout_constraintHorizontal_bias="0.23"
-            app:layout_constraintTop_toBottomOf="@id/fragPopUpMedEnd" />
+            app:layout_constraintTop_toBottomOf="@id/fragPopUpAval" />
 
         <TextView
             android:id="@+id/fragPopUpAnimNome"
@@ -99,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="15dp"
-            android:text="ACEITAR"
+            android:text="DATA"
             android:textColor="#357A01"
             android:textSize="18sp"
             android:textStyle="bold"

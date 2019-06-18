@@ -9,9 +9,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
-import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.BuscaMedicosFragment;
-import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.HomeClienteActivity;
-import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.SelecionarAnimalClienteActivity;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 
 public class ListaMedicosAdapter extends RecyclerView.Adapter<ListaMedicosAdapter.MedicoViewHolder> {
@@ -47,7 +44,7 @@ public class ListaMedicosAdapter extends RecyclerView.Adapter<ListaMedicosAdapte
     public MedicoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_medico, parent, false);
-        mActionAgendar = itemView.findViewById(R.id.fragPopUpMedAceitar);
+        mActionAgendar = itemView.findViewById(R.id.fragPopUpDate);
         mActionAgendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

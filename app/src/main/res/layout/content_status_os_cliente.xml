@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="br.ufrpe.bsi.mpoo.petspeed.cliente.gui.StatusOsCliente"
+    tools:layout_editor_absoluteY="56dp"
+    tools:showIn="@layout/activity_status_os_cliente">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
+        style="@style/AppTheme"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        android:animationCache="false"
+        android:clickable="true"
+        android:contextClickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="392dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/fragPopUpMed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="MEDICO"
+                android:textColor="#24B403"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="10dp" />
+
+            <TextView
+                android:id="@+id/fragPopUpMedNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="nome"
+                android:textColor="#000"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/fragPopUpMed"
+                tools:layout_editor_absoluteX="10dp" />
+
+            <TextView
+                android:id="@+id/fragPopUpMedEnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Endereco"
+                android:textColor="#000"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/fragPopUpMedNome"
+                tools:layout_editor_absoluteX="10dp" />
+
+            <TextView
+                android:id="@+id/fragPopUpAval"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Avaliacão"
+                android:textColor="#000"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/fragPopUpMedEnd" />
+
+            <TextView
+                android:id="@+id/fragPopUpAnim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="ANIMAL"
+                android:textColor="#26B405"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:layout_constraintHorizontal_bias="0.23"
+                app:layout_constraintTop_toBottomOf="@id/fragPopUpAval" />
+
+            <TextView
+                android:id="@+id/fragPopUpAnimNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="nome"
+                android:textColor="#000"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/fragPopUpAnim"
+                tools:layout_editor_absoluteX="10dp" />
+
+            <TextView
+                android:id="@+id/fragPopUpAnimRaca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="raca"
+                android:textColor="#000"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/fragPopUpAnimNome"
+                tools:layout_editor_absoluteX="10dp" />
+
+            <TextView
+                android:id="@+id/fragPopUpPrioridade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="prioridade"
+                android:textColor="#000"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/fragPopUpAnimRaca"
+                tools:layout_editor_absoluteX="10dp" />
+
+
+            <TextView
+                android:id="@+id/fragPopUpDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="15dp"
+                android:text="DATA"
+                android:textColor="#357A01"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragPopUpPrioridade" />
+
+            <TextView
+                android:id="@+id/fragPopSintomas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="VER SINTOMAS"
+                android:textColor="#585858"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragPopUpPrioridade" />
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="161dp"
+        android:layout_marginEnd="338dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="368dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="307dp"
+        android:layout_marginEnd="6dp"
+        android:background="#FFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/cardView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/StatusAtendimento"
+            android:layout_width="wrap_content"
+            android:layout_height="46dp"
+            android:layout_above="@+id/btnFinalizarAtendimento"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="76dp"
+            android:layout_marginTop="155dp"
+            android:layout_marginBottom="89dp"
+            android:gravity="center"
+            android:text="STATUS: "
+            android:textColor="#24B403"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnFinalizarAtendimento"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="90dp"
+            android:layout_marginEnd="67dp"
+            android:layout_marginBottom="52dp"
+            android:text="FINALIZAR ATENDIMENTO" />
+
+        <TextView
+            android:id="@+id/StatusDescricao"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_above="@+id/btnFinalizarAtendimento"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="155dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="85dp"
+            android:layout_toEndOf="@+id/StatusAtendimento"
+            android:gravity="start|center"
+            android:lines="@android:integer/config_longAnimTime"
+            android:maxLines="1"
+            android:text="CONFIRMADO"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

@@ -28,13 +28,13 @@ public class OSAdapter extends RecyclerView.Adapter<OSAdapter.OSViewHolder>{
 
         public OSViewHolder(View view) {
             super(view);
-            mClienteNome = view.findViewById(R.id.fragPopUpClieNome);
-            mClienteEndereco = view.findViewById(R.id.fragPopUpClieEnd);
+            mClienteNome = view.findViewById(R.id.fragPopUpMedNome);
+            mClienteEndereco = view.findViewById(R.id.fragPopUpMedEnd);
             mAnimNome = view.findViewById(R.id.fragPopUpAnimNome);
             mAnimRaca = view.findViewById(R.id.fragPopUpAnimRaca);
             mPrioridade = view.findViewById(R.id.fragPopUpPrioridade);
             btSintomas = view.findViewById(R.id.fragPopSintomas);
-            btActionAceitar = view.findViewById(R.id.fragPopUpMedAceitar);
+            btActionAceitar = view.findViewById(R.id.fragPopUpDate);
         }
     }
 
@@ -46,7 +46,7 @@ public class OSAdapter extends RecyclerView.Adapter<OSAdapter.OSViewHolder>{
     public OSViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_os_medico, parent, false);
-        btActionAceitar = itemView.findViewById(R.id.fragPopUpMedAceitar);
+        btActionAceitar = itemView.findViewById(R.id.fragPopUpDate);
         btActionAceitar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

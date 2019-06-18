@@ -26,9 +26,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:name=".cliente.gui.StatusOsCliente"
+            android:label="@string/title_activity_status_os_cliente"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+        <activity
             android:name=".cliente.gui.SelecionarSintomasActivity"
             android:label="@string/title_activity_selecionar_sintomas"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".cliente.gui.MudarSenhaAcitivity" />
         <activity android:name=".cliente.gui.EditDadosClienteActivity" />
         <activity android:name=".cliente.gui.MeusPetsActivity" />
@@ -39,7 +43,6 @@
         <activity android:name=".cliente.gui.PerfilClienteActivity" />
         <activity android:name=".animal.gui.PerfilPetActivity" />
         <activity android:name=".animal.gui.EditDadosPetActivity" />
-
         <activity
             android:name=".cliente.gui.HomeClienteActivity"
             android:label="Home"
@@ -54,8 +57,7 @@
             android:label="Home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".medico.gui.CadastroMedicoActivity" />
-        <activity
-            android:name=".animal.gui.CrudAnimalActivity"/>
+        <activity android:name=".animal.gui.CrudAnimalActivity" />
         <activity android:name=".infra.gui.LoginActivity" />
         <activity android:name=".infra.gui.SplashScreenActivity">
             <intent-filter>

@@ -36,7 +36,7 @@ public class SelecionarSintomasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_selecionar_sintomas);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        fabConfirmarSintomas = (FloatingActionButton) findViewById(R.id.fab_confirmar_sintomas);
+        fabConfirmarSintomas = findViewById(R.id.fab_confirmar_sintomas);
         setTitle("Selecione os Sintomas do Animal");
         checked = new ArrayList<>();
         createAllSintomas();
@@ -46,7 +46,7 @@ public class SelecionarSintomasActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SessaoAgendamento.instance.setSintomas(checked);
-                startActivity(new Intent(SelecionarSintomasActivity.this,HomeClienteActivity.class));
+                startActivity(new Intent(SelecionarSintomasActivity.this,StatusOsCliente.class));
                 Toast.makeText(getBaseContext(),SessaoAgendamento.instance.getMedico().getDadosPessoais().getNome(),
                         Toast.LENGTH_SHORT).show();
             }

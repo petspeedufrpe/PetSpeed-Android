@@ -118,7 +118,8 @@ public class OrdemServico {
     }
 
     public enum Status{
-        AGUARDANDO_ATENDIMENTO("AGUARDANDO_ATENDIMENTO"), EM_ATENDIMENTO("EM_ANDAMENTO"), FINALIZADA("FINALIZADA");
+        AGUARDANDO_ATENDIMENTO("AGUARDANDO ATENDIMENTO"), EM_ATENDIMENTO("EM ANDAMENTO"), FINALIZADA("FINALIZADA"),
+        CANCELADA("CANCELADA");
         private final String descricao;
 
         Status(String descricao) {
