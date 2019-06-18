@@ -87,6 +87,7 @@ public class AnimalClienteActivity extends AppCompatActivity implements Recycler
                 getBaseContext().startActivity(it);
             }
         };
+
         if (animalArrayList != null) {
             RecyclerView recyclerView = findViewById(R.id.recycler_view_animal_cliente);
             rootLayout = findViewById(R.id.rootLayout);
@@ -100,7 +101,6 @@ public class AnimalClienteActivity extends AppCompatActivity implements Recycler
             new ItemTouchHelper(callback).attachToRecyclerView(recyclerView);
 
         }
-
 
     }
 

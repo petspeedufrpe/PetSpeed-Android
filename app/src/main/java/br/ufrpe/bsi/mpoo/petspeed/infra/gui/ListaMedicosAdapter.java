@@ -9,6 +9,9 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.BuscaMedicosFragment;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.HomeClienteActivity;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.SelecionarAnimalClienteActivity;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 
 public class ListaMedicosAdapter extends RecyclerView.Adapter<ListaMedicosAdapter.MedicoViewHolder> {
@@ -48,7 +51,7 @@ public class ListaMedicosAdapter extends RecyclerView.Adapter<ListaMedicosAdapte
         mActionAgendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //a fazer
+
             }
         });
 

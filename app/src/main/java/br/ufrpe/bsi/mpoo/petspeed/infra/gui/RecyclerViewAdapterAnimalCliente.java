@@ -5,19 +5,27 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petspeed.animal.persistencia.AnimalDAO;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.RecyclerViewClickListener;
 
 
@@ -27,7 +35,40 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
     private Context mContext;
     private List<Animal> mAnimals;
     private AnimalDAO animalDAO = new AnimalDAO();
+    private boolean mSelect = false;
+    private ArrayList<Animal> selectedItems = new ArrayList<Animal>();
+    private ActionMode.Callback actionModeCallbacks = new ActionMode.Callback() {
+        @Override
+        public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+            mSelect = true;
+            menu.add("Delete");
+            return  true;
+        }
 
+        @Override
+        public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+            for (Animal animal:selectedItems){
+                animalDAO.deletaAnimal(animal);
+                mAnimals.remove(animal);
+            }
+
+            actionMode.finish();
+            return true;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode actionMode) {
+            mSelect = false;
+            selectedItems.clear();
+            notifyDataSetChanged();
+
+        }
+    };
 
     public RecyclerViewAdapterAnimalCliente(Context mContext, List<Animal> mAnimals, RecyclerViewClickListener listener) {
         this.mContext = mContext;
@@ -74,6 +115,10 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
         } catch (Exception e) {
             Log.d("Minha Tag", e.toString());
         }
+
+        holder.update(mAnimals.get(i));
+
+
     }
 
     @Override
@@ -94,17 +139,17 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
         animalDAO.cadastraAnimal(animal);
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private RecyclerViewClickListener mListener;
-
+        private  RelativeLayout relativeLayout;
         private TextView nomeAnimal;
         private TextView racaAnimal;
         private TextView pesoAnimal;
         private TextView idadeAnimal;
         ImageView imageAnimal;
 
-        public MyViewHolder(@NonNull View itemView, RecyclerViewClickListener listener) {
+        public MyViewHolder(@NonNull final View itemView, RecyclerViewClickListener listener) {
             super(itemView);
             findTexts();
             mListener = listener;
@@ -124,6 +169,28 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
             imageAnimal = itemView.findViewById(R.id.image_animal);
 
         }
+
+        void  selectItem(Animal animal){
+            if (mSelect){
+                if (selectedItems.contains(animal)){
+                    selectedItems.remove(animal);
+                }else{
+                    selectedItems.add(animal);
+                }
+            }
+        }
+
+        void update(final Animal animal){
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    ((AppCompatActivity) v.getContext()).startSupportActionMode(actionModeCallbacks);
+                    selectItem(animal);
+                    return true;
+                }
+            });
+        }
+
     }
 }
 
