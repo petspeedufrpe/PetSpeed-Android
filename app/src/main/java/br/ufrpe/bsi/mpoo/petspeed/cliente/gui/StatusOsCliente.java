@@ -1,6 +1,5 @@
 package br.ufrpe.bsi.mpoo.petspeed.cliente.gui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,7 +17,6 @@ import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoAgendamento;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sintomas;
-import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.SintomasDAO;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
 import br.ufrpe.bsi.mpoo.petspeed.os.negocio.OrdemServicoServices;
@@ -30,7 +28,7 @@ public class StatusOsCliente extends AppCompatActivity {
     private Button finalizarAtendimento;
     private String mNome,mBairro,mRua,mNumero,mAvaliacao,mNomeAnimal,mRaca,mPrioridade,mData,mStatusDescricao;
     private OrdemServico ordemServico;
-    private Triagem triagem = new Triagem();
+    private Triagem triagem;
     private List<Sintomas> list;
     private TriagemDAO triagemDAO = new TriagemDAO();
     private OrdemServicoServices ordemServicoServices = new OrdemServicoServices();
@@ -42,6 +40,7 @@ public class StatusOsCliente extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initOS();
+        cadastrarOsAndTriagem();
         findTexts();
         getAllTexts();
         setTextsNome();
@@ -64,6 +63,7 @@ public class StatusOsCliente extends AppCompatActivity {
                 // a fazer
             }
         });
+
     }
 
 
@@ -104,7 +104,7 @@ public class StatusOsCliente extends AppCompatActivity {
         mRaca = ordemServico.getAnimal().getRaca();
         mAvaliacao = String.valueOf(ordemServico.getMedico().getAvaliacao());
         mPrioridade = String.valueOf(ordemServico.getPrioridade());
-        mStatusDescricao = ordemServico.getStatus().getDescricao();
+        mStatusDescricao = SessaoAgendamento.instance.getStatus().getDescricao();
     }
 
     private void initOS(){
@@ -115,13 +115,30 @@ public class StatusOsCliente extends AppCompatActivity {
         ordemServico.setCliente(Sessao.instance.getCliente());
         ordemServico.setStatus(OrdemServico.Status.AGUARDANDO_ATENDIMENTO);
         ordemServico.setPrioridade(OrdemServico.Prioridade.BAIXA);
+        ordemServico.setDescricao("Teste");
+        initTriagem();
+        ordemServico.setTriagem(triagem);
+    }
+
+    private void initTriagem(){
+        triagem  = new Triagem();
         triagem.setSintomas(SessaoAgendamento.instance.getSintomas().toString());
         triagem.setOutros("Outros SIntomas Digitados pelo Cliente");
-        ordemServico.setTriagem(triagem);
+    }
+
+    private void cadastrarOsAndTriagem(){
+        long idOs = ordemServicoServices.cadastraOS(ordemServico,triagem);
+        ordemServico.setId(idOs);
         list = SessaoAgendamento.instance.getSintomas();
-        long idTriagem = ordemServicoServices.cadastraOS(ordemServico,triagem);
-        triagem.setId(idTriagem);
+        triagem = triagemDAO.getTriagembyId(idOs);
         triagemXsintomaDAO.cadastrar(triagem,list);
+        inputSessao();
+    }
+
+    private void inputSessao(){
+        SessaoAgendamento.instance.setOs(ordemServico);
+        SessaoAgendamento.instance.setTriagem(triagem);
+
     }
 
     /*private void getAtualDate(){

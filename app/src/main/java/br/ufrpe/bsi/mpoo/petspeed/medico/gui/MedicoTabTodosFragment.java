@@ -13,12 +13,14 @@ import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.OSAdapter;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 import br.ufrpe.bsi.mpoo.petspeed.os.negocio.OrdemServicoServices;
 
 public class MedicoTabTodosFragment extends Fragment {
 
     private OSAdapter osAdapter;
+    private List<OrdemServico> os;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,8 +36,14 @@ public class MedicoTabTodosFragment extends Fragment {
     }
 
     public void setMedicosAdapter() {
-        List<OrdemServico> os = new ArrayList<>();
+        createAllOs();
         osAdapter = new OSAdapter(os);
+    }
+
+    public void createAllOs(){
+        OrdemServicoServices ordemServicoServices= new OrdemServicoServices();
+        os = ordemServicoServices.getOsbyIdMedico(Sessao.instance.getMedico().getId());
+
     }
 
     private void initRecyclerView() {

@@ -2,21 +2,16 @@ package br.ufrpe.bsi.mpoo.petspeed.medico.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.LoginActivity;
-import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petspeed.medico.negocio.MedicoServices;
 
 public class HomeMedicoActivity extends AppCompatActivity
@@ -61,8 +56,8 @@ public class HomeMedicoActivity extends AppCompatActivity
         }
 
         if (id == R.id.nav_sair) {
-            MedicoServices clienteServices = new MedicoServices();
-            clienteServices.logout();
+            MedicoServices medicoServices = new MedicoServices();
+            //medicoServices.logout();
             startActivity(new Intent(getBaseContext(), LoginActivity.class)
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
         }
@@ -71,7 +66,7 @@ public class HomeMedicoActivity extends AppCompatActivity
             // Handle the camera action
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_medico);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

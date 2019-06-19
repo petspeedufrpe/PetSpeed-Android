@@ -22,9 +22,9 @@ import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 
 public class PreencherBanco {
-    private MedicoServices mServices = new MedicoServices();
-    private ClienteServices cServices = new ClienteServices();
-    private OrdemServicoServices servicoServices = new OrdemServicoServices();
+    MedicoServices mServices = new MedicoServices();
+    ClienteServices cServices = new ClienteServices();
+    OrdemServicoServices servicoServices = new OrdemServicoServices();
 
     public void start() {
         cadastraMedicos(mServices);
@@ -696,7 +696,7 @@ public class PreencherBanco {
 
         // OS 1 ############################################
 
-        os = new OrdemServico();
+        /*os = new OrdemServico();
 
         medico = mServices.getMedicoById(1);
         cliente = cServices.getClienteCompleto(1);
@@ -711,6 +711,7 @@ public class PreencherBanco {
         os.setTriagem(triagem);
         os.setMedico(medico);
         servicoServices.cadastraOS(os, os.getTriagem());
+        */
     }
 
 

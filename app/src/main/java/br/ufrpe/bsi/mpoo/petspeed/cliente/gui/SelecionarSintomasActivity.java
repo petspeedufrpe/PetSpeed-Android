@@ -21,6 +21,7 @@ import br.ufrpe.bsi.mpoo.petspeed.infra.gui.adapter.AdapterSintomasAnimal;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoAgendamento;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sintomas;
+import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 
 public class SelecionarSintomasActivity extends AppCompatActivity {
 
@@ -46,6 +47,7 @@ public class SelecionarSintomasActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SessaoAgendamento.instance.setSintomas(checked);
+                SessaoAgendamento.instance.setStatus(OrdemServico.Status.AGUARDANDO_ATENDIMENTO);
                 startActivity(new Intent(SelecionarSintomasActivity.this,StatusOsCliente.class));
                 Toast.makeText(getBaseContext(),SessaoAgendamento.instance.getMedico().getDadosPessoais().getNome(),
                         Toast.LENGTH_SHORT).show();

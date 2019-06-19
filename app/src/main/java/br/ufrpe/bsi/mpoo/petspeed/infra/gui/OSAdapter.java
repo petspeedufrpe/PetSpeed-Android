@@ -1,19 +1,29 @@
 package br.ufrpe.bsi.mpoo.petspeed.infra.gui;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoAgendamento;
+import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
+import br.ufrpe.bsi.mpoo.petspeed.os.negocio.OrdemServicoServices;
 
 public class OSAdapter extends RecyclerView.Adapter<OSAdapter.OSViewHolder>{
+    private OrdemServicoServices ordemServicoServices = new OrdemServicoServices();
     private List<OrdemServico> OSs;
+    private Context mContext;
+
 
     private TextView btActionAceitar;
     private TextView btSintomas;
@@ -50,7 +60,12 @@ public class OSAdapter extends RecyclerView.Adapter<OSAdapter.OSViewHolder>{
         btActionAceitar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //a fazer
+                Medico medico = Sessao.instance.getMedico();
+                    OrdemServico os = ordemServicoServices.getOsByIdMedico(medico);
+                    os.setStatus(OrdemServico.Status.EM_ATENDIMENTO);
+                    ordemServicoServices.alteraStatusOs(os);
+                    SessaoAgendamento.instance.setOs(os);
+                    SessaoAgendamento.instance.setStatus(OrdemServico.Status.EM_ATENDIMENTO);
             }
         });
         btSintomas = itemView.findViewById(R.id.fragPopSintomas);

@@ -7,7 +7,9 @@ import java.util.Map;
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
+import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico.Prioridade;
+import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico.Status;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
 
 public class SessaoAgendamento {
@@ -44,11 +46,17 @@ public class SessaoAgendamento {
 
     public void setTriagem(Triagem triagem){setValue("sessao.Triagem",triagem);}
 
+    public void setOs(OrdemServico os){setValue("sessao.OS",os);}
+
+    public OrdemServico getOs(){ return (OrdemServico) values.get("sessao.OS");}
+
     public Prioridade getPrioridade(){return (Prioridade)values.get("sessao.Prioridade");}
 
     public void setPrioridade(Prioridade prioridade){setValue("sessao.Prioridade",prioridade);}
 
+    public Status getStatus(){ return (Status)(values.get("sessao.Status"));}
 
+    public void setStatus(Status status){ setValue("sessao.Status",status);}
 
     @SuppressWarnings(value = "WeakerAccess")
     public void setValue(String key, Object value) {

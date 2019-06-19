@@ -32,7 +32,7 @@ public class TriagemDAO {
     }
 
     public Triagem getTriagembyId(long idOs) {
-        String sql = SQL_SELECT_FROM +DBHelper.TABELA_TRIAGEM+ SQL_WHERE +DBHelper.COL_TRIAGEM_ID+ " =?";
+        String sql = SQL_SELECT_FROM +DBHelper.TABELA_TRIAGEM+ SQL_WHERE +DBHelper.COL_TRIAGEM_ID+ " = ?";
         String[] args = {String.valueOf(idOs)};
         return this.loadObject(sql,args);
     }

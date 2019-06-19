@@ -24,7 +24,6 @@ public class OrdemServicoDAO {
     public long cadastraOS(OrdemServico ordemServico) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DBHelper.COL_OS_ID, ordemServico.getId());
         values.put(DBHelper.COL_OS_STATUS, ordemServico.getStatus().getDescricao());
         values.put(DBHelper.COL_OS_DESCRICAO, ordemServico.getDescricao());
         values.put(DBHelper.COL_OS_PRIORIDADE, String.valueOf(ordemServico.getPrioridade()));
@@ -55,9 +54,16 @@ public class OrdemServicoDAO {
     }
 
     public OrdemServico getOSbyId(long idOs) {
-        String sql = SQL_SELECT_FROM + DBHelper.TABELA_OS + SQL_WHERE + DBHelper.COL_OS_ID + " =?";
+        String sql = SQL_SELECT_FROM + DBHelper.TABELA_OS + SQL_WHERE + DBHelper.COL_OS_ID + " = ?";
         String[] args = {String.valueOf(idOs)};
         return this.loadObject(sql, args);
+    }
+
+    public OrdemServico getOsByIdMedico(Medico medico){
+        String sql = SQL_SELECT_FROM+DBHelper.TABELA_OS + SQL_WHERE+ DBHelper.COL_OS_FK_MEDICO+ " = ?";
+        String[] args = {String.valueOf(medico.getId())};
+
+        return this.loadObject(sql,args);
     }
 
     private OrdemServico createOS(Cursor cursor) {
@@ -83,8 +89,16 @@ public class OrdemServicoDAO {
         return ordemServico;
     }
 
+    public void alterarStatus(OrdemServico ordemServico){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.COL_OS_STATUS,ordemServico.getStatus().getDescricao());
+        db.update(DBHelper.TABELA_OS, values, DBHelper.COL_OS_ID + " = ?", new String[]{String.valueOf(ordemServico.getId())});
+        db.close();
+    }
+
     public List<OrdemServico> getOsByProridade(OrdemServico.Prioridade p) {
-        String sql = SQL_SELECT_FROM + DBHelper.TABELA_OS + SQL_WHERE + DBHelper.COL_OS_PRIORIDADE + " =?";
+        String sql = SQL_SELECT_FROM + DBHelper.TABELA_OS + SQL_WHERE + DBHelper.COL_OS_PRIORIDADE + " = ?";
         String[] args = {p.getDescricao()};
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, args);
@@ -103,7 +117,7 @@ public class OrdemServicoDAO {
     }
 
     public List<OrdemServico> getOsByAnimal(long id) {
-        String sql = SQL_SELECT_FROM + DBHelper.TABELA_OS + SQL_WHERE + DBHelper.COL_OS_FK_ANIMAL + " =?";
+        String sql = SQL_SELECT_FROM + DBHelper.TABELA_OS + SQL_WHERE + DBHelper.COL_OS_FK_ANIMAL + " = ?";
         String[] args = {String.valueOf(id)};
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, args);
@@ -118,6 +132,24 @@ public class OrdemServicoDAO {
         cursor.close();
         db.close();
         return osByPriority;
+    }
+
+    public List<OrdemServico> getOsByIdMedico(long idMedico){
+        String sql = SQL_SELECT_FROM + DBHelper.TABELA_OS + SQL_WHERE + DBHelper.COL_OS_FK_MEDICO + " = ?";
+        String[] args = {String.valueOf(idMedico)};
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, args);
+        OrdemServico ordemServico;
+        List<OrdemServico> osByMedico = new LinkedList<>();
+        if (cursor.moveToFirst()){
+            do {
+                ordemServico = createOS(cursor);
+                osByMedico.add(ordemServico);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return osByMedico;
     }
 
     private OrdemServico loadObject(String sql, String[] args) {
