@@ -12,18 +12,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import java.util.List;
+
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoAgendamento;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sintomas;
+import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.SintomasDAO;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
+import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
+import br.ufrpe.bsi.mpoo.petspeed.os.negocio.OrdemServicoServices;
+import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.TriagemDAO;
+import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.TriagemXsintomaDAO;
 
 public class StatusOsCliente extends AppCompatActivity {
-    private TextView nome,endereco,avaliacao,nomeAnimal,raca,prioridade,data,statusDescricao;
-    private Button finalizarAtendimento,verSintomas;
+    private TextView nome,endereco,avaliacao,nomeAnimal,raca,prioridade,data,statusDescricao,verSintomas;
+    private Button finalizarAtendimento;
     private String mNome,mBairro,mRua,mNumero,mAvaliacao,mNomeAnimal,mRaca,mPrioridade,mData,mStatusDescricao;
     private OrdemServico ordemServico;
-    private Context mContext = getBaseContext();
-
+    private Triagem triagem = new Triagem();
+    private List<Sintomas> list;
+    private TriagemDAO triagemDAO = new TriagemDAO();
+    private OrdemServicoServices ordemServicoServices = new OrdemServicoServices();
+    private TriagemXsintomaDAO triagemXsintomaDAO = new TriagemXsintomaDAO();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,16 +45,23 @@ public class StatusOsCliente extends AppCompatActivity {
         findTexts();
         getAllTexts();
         setTextsNome();
-
         finalizarAtendimento = findViewById(R.id.btnFinalizarAtendimento);
         finalizarAtendimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mStatusDescricao.equals(OrdemServico.Status.AGUARDANDO_ATENDIMENTO.getDescricao())){
-                    Toast.makeText(mContext,"Favor aguardar a confirmação do Médico",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StatusOsCliente.this,"Favor aguardar a confirmação do Médico",Toast.LENGTH_SHORT).show();
                 }else{
                     startActivity(new Intent(StatusOsCliente.this,null));
                 }
+            }
+        });
+
+        verSintomas = findViewById(R.id.fragPopSintomas);
+        verSintomas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // a fazer
             }
         });
     }
@@ -97,6 +115,13 @@ public class StatusOsCliente extends AppCompatActivity {
         ordemServico.setCliente(Sessao.instance.getCliente());
         ordemServico.setStatus(OrdemServico.Status.AGUARDANDO_ATENDIMENTO);
         ordemServico.setPrioridade(OrdemServico.Prioridade.BAIXA);
+        triagem.setSintomas(SessaoAgendamento.instance.getSintomas().toString());
+        triagem.setOutros("Outros SIntomas Digitados pelo Cliente");
+        ordemServico.setTriagem(triagem);
+        list = SessaoAgendamento.instance.getSintomas();
+        long idTriagem = ordemServicoServices.cadastraOS(ordemServico,triagem);
+        triagem.setId(idTriagem);
+        triagemXsintomaDAO.cadastrar(triagem,list);
     }
 
     /*private void getAtualDate(){

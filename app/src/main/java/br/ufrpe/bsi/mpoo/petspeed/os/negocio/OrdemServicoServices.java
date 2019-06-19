@@ -18,7 +18,7 @@ public class OrdemServicoServices {
     public long cadastraOS(OrdemServico os, Triagem triagem) {
         long idTriagem = triagemDAO.cadastraTriagem(triagem);
         os.getTriagem().setId(idTriagem);
-        return ordemServicoDAO.cadastraOS(os);
+        return idTriagem;
     }
 
     public void deletaOS(OrdemServico os) {

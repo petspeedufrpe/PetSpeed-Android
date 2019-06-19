@@ -49,6 +49,7 @@ public class SelecionarSintomasActivity extends AppCompatActivity {
                 startActivity(new Intent(SelecionarSintomasActivity.this,StatusOsCliente.class));
                 Toast.makeText(getBaseContext(),SessaoAgendamento.instance.getMedico().getDadosPessoais().getNome(),
                         Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 

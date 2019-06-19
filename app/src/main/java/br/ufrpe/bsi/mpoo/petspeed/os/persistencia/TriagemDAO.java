@@ -5,11 +5,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.DBHelper;
+import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.SintomasDAO;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
 
 public class TriagemDAO {
     private static final String SQL_SELECT_FROM = "SELECT * FROM ";
     private static final String SQL_WHERE = " WHERE ";
+    private SintomasDAO sintomasDAO = new SintomasDAO();
     private DBHelper dbHelper = new DBHelper();
 
     public long cadastraTriagem(Triagem triagem) {

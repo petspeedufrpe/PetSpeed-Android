@@ -1,6 +1,5 @@
 package br.ufrpe.bsi.mpoo.petspeed.infra.negocio;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +8,7 @@ import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico.Prioridade;
+import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
 
 public class SessaoAgendamento {
 
@@ -36,9 +36,13 @@ public class SessaoAgendamento {
 
     public void setAnimal(Animal animal){ setValue("sessao.Animal",animal);}
 
-    public List<Sintomas> getSintomas(){return (List<Sintomas>)values.get("sessao.Sintomas");}
+    public List<Sintomas> getSintomas(){return (List<Sintomas>) values.get("sessao.Sintomas");}
 
-    public void setSintomas(List<Sintomas> sintomas){ setValue("sessao,Sintomas",sintomas);}
+    public void setSintomas(List<Sintomas> sintomas){ setValue("sessao.Sintomas",sintomas);}
+
+    public Triagem getTriagem(){ return (Triagem) values.get("sessao.Triagem"); }
+
+    public void setTriagem(Triagem triagem){setValue("sessao.Triagem",triagem);}
 
     public Prioridade getPrioridade(){return (Prioridade)values.get("sessao.Prioridade");}
 

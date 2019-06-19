@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import br.ufrpe.bsi.mpoo.petspeed.infra.app.PetSpeedApp;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sintomas;
 
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -83,11 +84,25 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_TRIAGEM_ID = "ID";
     public static final String COL_TRIAGEM_SINTOMAS = "SINTOMAS";
     public static final String COL_TRIAGEM_OUTROS = "OUTROS";
+
+    // TABELA SINTOMAS
+    public static final String TABELA_SINTOMAS = "TB_SINTOMAS";
+    public static final String COL_SINTOMAS_ID = "ID";
+    public static final String COL_SINTOMAS_DESCRICAO = "SINTOMA";
+    public static final String COL_SINTOMAS_FK_TRIAGEM = "FK_TRIAGEM";
+
+    //TABELA RELATION SINTOMASXTRIAGEM
+    public static final String TABELA_SINTOMAS_X_TRIAGEM = "TB_SINTOMAS_X_TRIAGEM";
+    public static final String COL_SINTOMAS_X_TRIAGEM_ID = "ID";
+    public static final String COL_FK_SINTOMAS = "FK_SINTOMA";
+    public static final String COL_FK_TRIAGEM = "FK_TRIAGEM";
+
     private static final String NOME_DB = "petspeed.db";
     private static final int VERSAO = 18;
     private static final String[] TABELAS = {
             TABELA_MEDICO, TABELA_ANIMAL, TABELA_CLIENTE, TABELA_CLINICA,
-            TABELA_ENDERECO, TABELA_OS, TABELA_PESSOA, TABELA_TRIAGEM, TABELA_USUARIO
+            TABELA_ENDERECO, TABELA_OS, TABELA_PESSOA, TABELA_TRIAGEM, TABELA_USUARIO,TABELA_SINTOMAS,
+            TABELA_SINTOMAS_X_TRIAGEM
     };
     private static final String SQL_CREATE_TABLE = "CREATE TABLE %1$s ";
     private static final String SQL_INTEGER_AUTOINCREMENT = "  %2$s INTEGER PRIMARY KEY AUTOINCREMENT, ";
@@ -108,7 +123,8 @@ public class DBHelper extends SQLiteOpenHelper {
         createTabelaOS(db);
         createTabelaTriagem(db);
         createTabelaUsuario(db);
-
+        createTabelaSintomas(db);
+        createTableSintomasXtriagem(db);
     }
 
 
@@ -257,6 +273,34 @@ public class DBHelper extends SQLiteOpenHelper {
         sqlTbTriagem = String.format(sqlTbTriagem,
                 TABELA_TRIAGEM, COL_TRIAGEM_ID, COL_TRIAGEM_SINTOMAS, COL_TRIAGEM_OUTROS);
         db.execSQL(sqlTbTriagem);
+    }
+
+    private void createTabelaSintomas(SQLiteDatabase db){
+        {
+            String sqlTbSintomas =
+                    SQL_CREATE_TABLE + "( " +
+                            SQL_INTEGER_AUTOINCREMENT +
+                            "  %3$s TEXT NOT NULL, " +
+                            "  %4$s TEXT " +
+                            ");";
+            sqlTbSintomas = String.format(sqlTbSintomas,
+                    TABELA_SINTOMAS, COL_SINTOMAS_ID, COL_SINTOMAS_DESCRICAO, COL_SINTOMAS_FK_TRIAGEM);
+            db.execSQL(sqlTbSintomas);
+        }
+    }
+
+    private void createTableSintomasXtriagem(SQLiteDatabase db){
+        {
+            String sqlTbSintomasTriagem =
+                    SQL_CREATE_TABLE + "( " +
+                            SQL_INTEGER_AUTOINCREMENT +
+                            "  %3$s TEXT NOT NULL, " +
+                            "  %4$s TEXT NOT NULL " +
+                            ");";
+            sqlTbSintomasTriagem = String.format(sqlTbSintomasTriagem,
+                    TABELA_SINTOMAS_X_TRIAGEM, COL_SINTOMAS_X_TRIAGEM_ID, COL_FK_SINTOMAS, COL_FK_TRIAGEM);
+            db.execSQL(sqlTbSintomasTriagem);
+        }
     }
 
 

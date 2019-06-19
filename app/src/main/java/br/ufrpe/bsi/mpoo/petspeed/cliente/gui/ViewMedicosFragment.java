@@ -3,6 +3,7 @@ package br.ufrpe.bsi.mpoo.petspeed.cliente.gui;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -30,7 +31,7 @@ public class ViewMedicosFragment extends DialogFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_view_medicos, container, false);
 
         findViews(view);
@@ -44,6 +45,7 @@ public class ViewMedicosFragment extends DialogFragment {
                     HomeClienteActivity hCliente = (HomeClienteActivity) getActivity();
                     startActivity(new Intent(hCliente.getBaseContext(), SelecionarAnimalClienteActivity.class)
                             .addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
+                    getDialog().dismiss();
                 }
             });
 

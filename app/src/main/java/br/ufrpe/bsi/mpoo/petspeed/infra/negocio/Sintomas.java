@@ -1,9 +1,5 @@
 package br.ufrpe.bsi.mpoo.petspeed.infra.negocio;
 
-
-import java.util.Dictionary;
-import java.util.Hashtable;
-
 public enum  Sintomas {
 
     Vomito("Vomito"),Diarreia("Diarreia"), Desidratacao("Desidratação"),Febre("Febre"),Letargia("Letargia"),

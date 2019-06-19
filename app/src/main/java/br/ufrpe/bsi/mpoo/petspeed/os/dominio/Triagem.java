@@ -32,4 +32,7 @@ public class Triagem {
     public void setOutros(String outros) {
         this.outros = outros;
     }
+
+    //Sintomas tem uma tabela que guarda o id da triagem
+    //todos os sintomas que tem aquele id da triagem, eu recupero numa lista de sintomas dentro da triagem
 }

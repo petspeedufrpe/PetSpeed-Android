@@ -2,12 +2,16 @@ package br.ufrpe.bsi.mpoo.petspeed.infra.persistencia;
 
 import android.util.Log;
 
+import java.util.Arrays;
+import java.util.List;
+
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petspeed.animal.persistencia.AnimalDAO;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.AppException;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sintomas;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petspeed.medico.negocio.MedicoServices;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
@@ -18,9 +22,9 @@ import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 
 public class PreencherBanco {
-    MedicoServices mServices = new MedicoServices();
-    ClienteServices cServices = new ClienteServices();
-    OrdemServicoServices servicoServices = new OrdemServicoServices();
+    private MedicoServices mServices = new MedicoServices();
+    private ClienteServices cServices = new ClienteServices();
+    private OrdemServicoServices servicoServices = new OrdemServicoServices();
 
     public void start() {
         cadastraMedicos(mServices);
@@ -705,6 +709,7 @@ public class PreencherBanco {
         os.setPrioridade(OrdemServico.Prioridade.ALTA);
         os.setStatus(OrdemServico.Status.AGUARDANDO_ATENDIMENTO);
         os.setTriagem(triagem);
+        os.setMedico(medico);
         servicoServices.cadastraOS(os, os.getTriagem());
     }
 
