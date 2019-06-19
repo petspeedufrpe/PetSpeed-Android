@@ -9,12 +9,13 @@ import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
 import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.OrdemServicoDAO;
 import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.TriagemDAO;
+import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.TriagemXsintomaDAO;
 
 public class OrdemServicoServices {
 
     private OrdemServicoDAO ordemServicoDAO = new OrdemServicoDAO();
-
     private TriagemDAO triagemDAO = new TriagemDAO();
+    private TriagemXsintomaDAO triagemXsintomaDAO = new TriagemXsintomaDAO();
 
     public long cadastraOS(OrdemServico os, Triagem triagem) {
         int idTriagem = (int) triagemDAO.cadastraTriagem(triagem);
@@ -36,6 +37,10 @@ public class OrdemServicoServices {
 
     public List<OrdemServico> getOsbyIdMedico(long idMedico){
         return ordemServicoDAO.getOsByIdMedico(idMedico);
+    }
+
+    public OrdemServico getOsByIdCliente(long idCliente){
+        return ordemServicoDAO.getOsByIdCliente(idCliente);
     }
 
     public OrdemServico getOsByIdMedico(Medico medico){

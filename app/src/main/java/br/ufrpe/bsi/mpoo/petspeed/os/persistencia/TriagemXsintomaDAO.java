@@ -1,8 +1,10 @@
 package br.ufrpe.bsi.mpoo.petspeed.os.persistencia;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sintomas;
@@ -23,5 +25,23 @@ public class TriagemXsintomaDAO {
 
         db.close();
 
+    }
+
+    public List<String> getAllSintomasByIdTriagem(long idTriagem){
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String sql = "SELECT * FROM "+DBHelper.TABELA_SINTOMAS_X_TRIAGEM + " WHERE "+
+                DBHelper.COL_FK_TRIAGEM + " = ?";
+        String[] args = {String.valueOf(idTriagem)};
+        Cursor cursor = db.rawQuery(sql,args);
+        List<String> sintomas = new ArrayList<>();
+        if (cursor.moveToFirst()){
+            do {
+                int indexString = cursor.getColumnIndex(DBHelper.COL_FK_SINTOMAS);
+                sintomas.add(cursor.getString(indexString));
+            }while (cursor.moveToNext());
+        }
+        db.close();
+        cursor.close();
+        return sintomas;
     }
 }

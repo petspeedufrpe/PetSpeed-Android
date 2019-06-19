@@ -26,9 +26,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:name=".infra.gui.ConfirmarOSActivity"
+            android:label="@string/title_activity_confirmar_osactiviry"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+        <activity
             android:name=".cliente.gui.StatusOsCliente"
             android:label="@string/title_activity_status_os_cliente"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".cliente.gui.SelecionarSintomasActivity"
             android:label="@string/title_activity_selecionar_sintomas"

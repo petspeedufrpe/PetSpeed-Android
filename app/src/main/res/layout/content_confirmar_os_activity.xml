@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="br.ufrpe.bsi.mpoo.petspeed.cliente.gui.StatusOsCliente"
-    tools:layout_editor_absoluteY="56dp"
-    tools:showIn="@layout/activity_status_os_cliente">
+    tools:context="br.ufrpe.bsi.mpoo.petspeed.infra.gui.ConfirmarOSActivity"
+    tools:showIn="@layout/activity_confirmar_os_activity">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
@@ -24,9 +24,7 @@
         android:contextClickable="true"
         android:focusable="true"
         app:cardCornerRadius="6dp"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -158,74 +156,38 @@
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 
-    <TextView
-        android:id="@+id/textView3"
+    <Button
+        android:id="@+id/btn_confirmar_os"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="161dp"
-        android:layout_marginEnd="338dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/cardView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="0dp"
-        android:layout_height="368dp"
-        android:layout_marginTop="307dp"
-        android:background="#FFFF"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/hintColor"
+        android:text="Confirmar Atentimento"
+        android:textColor="#FFFFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.041"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintVertical_bias="0.501" />
 
-        <TextView
-            android:id="@+id/StatusAtendimento"
-            android:layout_width="wrap_content"
-            android:layout_height="39dp"
-            android:layout_above="@+id/btnFinalizarAtendimento"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="76dp"
-            android:layout_marginTop="138dp"
-            android:layout_marginBottom="66dp"
-            android:gravity="center"
-            android:text="STATUS: "
-            android:textColor="#24B403"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+    <Button
+        android:id="@+id/btn_cancelar_os"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/hintColor"
+        android:text="Abortar"
+        android:textColor="#FFFFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/finaliza_cadastro"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintVertical_bias="0.501" />
 
-        <Button
-            android:id="@+id/btnFinalizarAtendimento"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="78dp"
-            android:layout_marginEnd="79dp"
-            android:layout_marginBottom="77dp"
-            android:text="FINALIZAR ATENDIMENTO"
-            android:textAlignment="center"/>
 
-        <TextView
-            android:id="@+id/StatusDescricao"
-            android:layout_width="wrap_content"
-            android:layout_height="56dp"
-            android:layout_above="@+id/btnFinalizarAtendimento"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="130dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="57dp"
-            android:layout_toEndOf="@+id/StatusAtendimento"
-            android:gravity="start|center"
-            android:lines="@android:integer/config_longAnimTime"
-            android:maxLines="1"
-            android:text="CONFIRMADO"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

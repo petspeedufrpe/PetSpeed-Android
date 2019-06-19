@@ -1,5 +1,6 @@
 package br.ufrpe.bsi.mpoo.petspeed.cliente.gui;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
+import br.ufrpe.bsi.mpoo.petspeed.infra.gui.ConfirmarOSActivity;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.adapter.AdapterSintomasAnimal;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoAgendamento;
@@ -30,6 +32,7 @@ public class SelecionarSintomasActivity extends AppCompatActivity {
     private List<Sintomas> checked;
     private AdapterSintomasAnimal adapterSintomasAnimal;
     private FloatingActionButton fabConfirmarSintomas;
+    private Context mContext = SelecionarSintomasActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +50,7 @@ public class SelecionarSintomasActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SessaoAgendamento.instance.setSintomas(checked);
-                SessaoAgendamento.instance.setStatus(OrdemServico.Status.AGUARDANDO_ATENDIMENTO);
-                startActivity(new Intent(SelecionarSintomasActivity.this,StatusOsCliente.class));
+                startActivity(new Intent(SelecionarSintomasActivity.this, ConfirmarOSActivity.class));
                 Toast.makeText(getBaseContext(),SessaoAgendamento.instance.getMedico().getDadosPessoais().getNome(),
                         Toast.LENGTH_SHORT).show();
                 finish();

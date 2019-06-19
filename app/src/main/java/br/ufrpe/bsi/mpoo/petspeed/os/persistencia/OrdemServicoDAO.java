@@ -14,6 +14,7 @@ import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petspeed.medico.persistencia.MedicoDAO;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
+import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
 
 public class OrdemServicoDAO {
 
@@ -75,6 +76,7 @@ public class OrdemServicoDAO {
         int indexFkAnimal = cursor.getColumnIndex(DBHelper.COL_OS_FK_ANIMAL);
         int indexFkCliente = cursor.getColumnIndex(DBHelper.COL_OS_FK_CLIENTE);
         int indexFkMedico = cursor.getColumnIndex(DBHelper.COL_OS_FK_MEDICO);
+        int indexFkTriagem = cursor.getColumnIndex(DBHelper.COL_OS_FK_TRIAGEM);
 
         ordemServico.setDescricao(cursor.getString(indexDescricao));
         String prioridade = cursor.getString(indexPrioridade);
@@ -85,7 +87,7 @@ public class OrdemServicoDAO {
         ordemServico.setAnimal(new AnimalDAO().getAnimalById(cursor.getLong(indexFkAnimal)));
         ordemServico.setCliente(new ClienteServices().getClienteCompleto(cursor.getLong(indexFkCliente)));
         ordemServico.setMedico(new MedicoDAO().getMedicoById(cursor.getLong(indexFkMedico)));
-
+        ordemServico.setTriagem(new TriagemDAO().getTriagembyId(cursor.getLong(indexFkTriagem)));
         return ordemServico;
     }
 
@@ -164,4 +166,13 @@ public class OrdemServicoDAO {
         return ordemServico;
     }
 
+    public OrdemServico getOsByIdCliente(long idCliente) {
+        String aguardando = OrdemServico.Status.AGUARDANDO_ATENDIMENTO.getDescricao();
+        String emAtendimento = OrdemServico.Status.EM_ATENDIMENTO.getDescricao();
+        String sql = SQL_SELECT_FROM + DBHelper.TABELA_OS + SQL_WHERE + DBHelper.COL_OS_FK_CLIENTE + " = ?"
+                + " AND "+DBHelper.COL_OS_STATUS + " = ?" + " OR "+ DBHelper.COL_OS_STATUS+ " = ?";
+        String[] args = {String.valueOf(idCliente),aguardando,emAtendimento};
+
+        return this.loadObject(sql,args);
+    }
 }
