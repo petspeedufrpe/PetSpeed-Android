@@ -94,7 +94,7 @@ public class StatusOsCliente extends AppCompatActivity {
             statusDescricao.setTextColor(Color.GREEN);
         }
     }
-
+    //Ajeitar para setar o OS na Sessao Agendamento.
     private void getAllTexts(){
         mNome = SessaoAgendamento.instance.getMedico().getDadosPessoais().getNome();
         mRua  = ordemServico.getMedico().getDadosPessoais().getEndereco().getLogradouro();

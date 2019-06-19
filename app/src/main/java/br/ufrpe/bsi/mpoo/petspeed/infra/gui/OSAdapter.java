@@ -22,7 +22,6 @@ import br.ufrpe.bsi.mpoo.petspeed.os.negocio.OrdemServicoServices;
 public class OSAdapter extends RecyclerView.Adapter<OSAdapter.OSViewHolder>{
     private OrdemServicoServices ordemServicoServices = new OrdemServicoServices();
     private List<OrdemServico> OSs;
-    private Context mContext;
 
 
     private TextView btActionAceitar;
