@@ -145,7 +145,7 @@ public class HomeClienteActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_sair_cliente) {
             ClienteServices clienteServices = new ClienteServices();
-            //clienteServices.logout();
+            clienteServices.logout();
             startActivity(new Intent(HomeClienteActivity.this, LoginActivity.class)
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
 

@@ -25,11 +25,13 @@ public class PreencherBanco {
     MedicoServices mServices = new MedicoServices();
     ClienteServices cServices = new ClienteServices();
     OrdemServicoServices servicoServices = new OrdemServicoServices();
+    SintomasDAO sintomasDAO = new SintomasDAO();
 
     public void start() {
         cadastraMedicos(mServices);
         cadastraClientes(cServices);
         cadastraOSs();
+        sintomasDAO.iterateSintomas();
     }
 
     private void cadastraMedicos(MedicoServices mServices) {

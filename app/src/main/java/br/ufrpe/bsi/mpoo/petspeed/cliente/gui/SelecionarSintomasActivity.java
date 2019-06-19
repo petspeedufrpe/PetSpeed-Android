@@ -32,7 +32,6 @@ public class SelecionarSintomasActivity extends AppCompatActivity {
     private List<Sintomas> checked;
     private AdapterSintomasAnimal adapterSintomasAnimal;
     private FloatingActionButton fabConfirmarSintomas;
-    private Context mContext = SelecionarSintomasActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +50,6 @@ public class SelecionarSintomasActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SessaoAgendamento.instance.setSintomas(checked);
                 startActivity(new Intent(SelecionarSintomasActivity.this, ConfirmarOSActivity.class));
-                Toast.makeText(getBaseContext(),SessaoAgendamento.instance.getMedico().getDadosPessoais().getNome(),
-                        Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

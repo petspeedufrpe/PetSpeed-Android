@@ -15,9 +15,9 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="br.ufrpe.bsi.mpoo.petspeed.cliente.gui.SelecionarSintomasActivity"
-        tools:showIn="@layout/activity_selecionar_sintomas"
-        tools:listitem="@layout/relative_layout_selecionar_sintomas">
-    </android.support.v7.widget.RecyclerView>
+        tools:listitem="@layout/relative_layout_selecionar_sintomas"
+        tools:showIn="@layout/activity_selecionar_sintomas"></android.support.v7.widget.RecyclerView>
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_confirmar_sintomas"
@@ -27,14 +27,13 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="180dp"
-        android:layout_marginEnd="175dp"
-        android:layout_marginBottom="11dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginEnd="167dp"
+        android:layout_marginBottom="21dp"
         android:clickable="true"
         android:src="@drawable/ic_arrow_forward_black_24dp"
         app:layout_anchor="@+id/include2"
-        app:layout_anchorGravity="bottom|center" />
-
+        app:layout_anchorGravity="end|bottom" />
 
 
 </RelativeLayout>

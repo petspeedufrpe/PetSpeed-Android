@@ -98,7 +98,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_FK_TRIAGEM = "FK_TRIAGEM";
 
     private static final String NOME_DB = "petspeed.db";
-    private static final int VERSAO = 18;
+    private static final int VERSAO = 22;
     private static final String[] TABELAS = {
             TABELA_MEDICO, TABELA_ANIMAL, TABELA_CLIENTE, TABELA_CLINICA,
             TABELA_ENDERECO, TABELA_OS, TABELA_PESSOA, TABELA_TRIAGEM, TABELA_USUARIO,TABELA_SINTOMAS,

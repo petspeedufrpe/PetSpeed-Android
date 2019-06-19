@@ -57,7 +57,7 @@ public class HomeMedicoActivity extends AppCompatActivity
 
         if (id == R.id.nav_sair) {
             MedicoServices medicoServices = new MedicoServices();
-            //medicoServices.logout();
+            medicoServices.logout();
             startActivity(new Intent(getBaseContext(), LoginActivity.class)
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
         }
