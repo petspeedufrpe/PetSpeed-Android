@@ -3,16 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="120dp"
     style="@style/AppTheme"
+    android:id="@+id/cardView_animal"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
-    android:clickable="true"
-    android:contextClickable="true"
+    android:background="?android:selectableItemBackground"
     android:animationCache="false"
     app:cardCornerRadius="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/relativeLayout_animal"
         android:orientation="vertical">
 
         <ImageView

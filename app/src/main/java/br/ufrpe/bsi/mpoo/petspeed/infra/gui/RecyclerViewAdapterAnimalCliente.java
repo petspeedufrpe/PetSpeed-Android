@@ -3,17 +3,22 @@ package br.ufrpe.bsi.mpoo.petspeed.infra.gui;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.ThumbnailUtils;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,7 +41,7 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
     private List<Animal> mAnimals;
     private AnimalDAO animalDAO = new AnimalDAO();
     private boolean mSelect = false;
-    private ArrayList<Animal> selectedItems = new ArrayList<Animal>();
+    private ArrayList<Animal> selectedItems = new ArrayList<>();
     private ActionMode.Callback actionModeCallbacks = new ActionMode.Callback() {
         @Override
         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
@@ -52,10 +57,10 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
 
         @Override
         public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-            for (Animal animal:selectedItems){
-                animalDAO.deletaAnimal(animal);
-                mAnimals.remove(animal);
-            }
+                for (Animal animal : selectedItems) {
+                    animalDAO.deletaAnimal(animal);
+                    mAnimals.remove(animal);
+                }
 
             actionMode.finish();
             return true;
@@ -64,7 +69,7 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
         @Override
         public void onDestroyActionMode(ActionMode actionMode) {
             mSelect = false;
-            selectedItems.clear();
+            //selectedItems.clear();
             notifyDataSetChanged();
 
         }
@@ -74,6 +79,7 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
         this.mContext = mContext;
         this.mAnimals = mAnimals;
         this.listener = listener;
+
     }
 
     @NonNull
@@ -142,7 +148,7 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private RecyclerViewClickListener mListener;
-        private  RelativeLayout relativeLayout;
+        private RelativeLayout relativeLayout;
         private TextView nomeAnimal;
         private TextView racaAnimal;
         private TextView pesoAnimal;
@@ -151,6 +157,7 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
 
         public MyViewHolder(@NonNull final View itemView, RecyclerViewClickListener listener) {
             super(itemView);
+            relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relativeLayout_animal);
             findTexts();
             mListener = listener;
             itemView.setOnClickListener(this);
@@ -174,13 +181,21 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
             if (mSelect){
                 if (selectedItems.contains(animal)){
                     selectedItems.remove(animal);
+                    relativeLayout.setBackgroundColor(Color.WHITE);
                 }else{
                     selectedItems.add(animal);
+                    relativeLayout.setBackgroundColor(Color.LTGRAY);
                 }
             }
         }
 
         void update(final Animal animal){
+            if (selectedItems.contains(animal)){
+                relativeLayout.setBackgroundColor(Color.LTGRAY);
+            } else{
+                relativeLayout.setBackgroundColor(Color.WHITE);
+            }
+
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
