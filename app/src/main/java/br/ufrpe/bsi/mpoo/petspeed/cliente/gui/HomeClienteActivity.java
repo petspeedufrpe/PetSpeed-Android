@@ -1,6 +1,8 @@
 package br.ufrpe.bsi.mpoo.petspeed.cliente.gui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -24,6 +26,7 @@ import br.ufrpe.bsi.mpoo.petspeed.infra.gui.LoginActivity;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.MapsFragment;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeClienteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BuscaMedicosFragment.OnFragmentInteractionListener {
@@ -33,6 +36,8 @@ public class HomeClienteActivity extends AppCompatActivity
     private Button mAlternaRaio;
     private Double novoRaio = 5.0;
     private int faseRaio = 1;
+    private CircleImageView imageView;
+    private Bitmap bmp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,9 @@ public class HomeClienteActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
+        imageView = headerView.findViewById(R.id.imageViewCliente);
+        convertToBitmap();
+        imageView.setImageBitmap(bmp);
         mNomeCliente = headerView.findViewById(R.id.NomeCliente);
         mEmailCliente = headerView.findViewById(R.id.textViewEmailCliente);
         mAlternaRaio = findViewById(R.id.buttonRaio);
@@ -67,6 +75,11 @@ public class HomeClienteActivity extends AppCompatActivity
         setTexts();
         initMapFragment();
 
+    }
+
+    private void convertToBitmap() {
+        bmp = BitmapFactory.decodeByteArray(Sessao.instance.getCliente().getFoto(),
+                0,Sessao.instance.getCliente().getFoto().length);
     }
 
     @Override
