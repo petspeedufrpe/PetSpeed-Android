@@ -153,6 +153,15 @@ public class MedicoDAO {
         db.close();
         return medicos;
     }
+
+    public void alteraAvaliacao(Medico medico) {
+        SQLiteDatabase db = helperDb.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.COL_MEDICO_AVALIACAO,medico.getAvaliacao());
+        db.update(DBHelper.TABELA_MEDICO,values,DBHelper.COL_MEDICO_ID+" = ?",
+                new String[]{String.valueOf(medico.getId())});
+        db.close();
+    }
 }
 
 

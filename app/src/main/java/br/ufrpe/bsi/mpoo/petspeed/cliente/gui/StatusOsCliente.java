@@ -12,11 +12,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoAgendamento;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
 import br.ufrpe.bsi.mpoo.petspeed.os.negocio.OrdemServicoServices;
@@ -26,7 +26,7 @@ import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.TriagemXsintomaDAO;
 public class StatusOsCliente extends AppCompatActivity {
     private CardView cardView;
     private RelativeLayout relativeLayout;
-    private TextView nome,endereco,avaliacao,nomeAnimal,raca,prioridade,data,statusDescricao,verSintomas,view,MEDICO,STATUS;
+    private TextView nome,endereco,avaliacao,nomeAnimal,raca,prioridade,data,statusDescricao,verSintomas,view;
     private Button finalizarAtendimento;
     private String mNome,mBairro,mRua,mNumero,mAvaliacao,mNomeAnimal,mRaca,mPrioridade,mData,mStatusDescricao;
     private OrdemServico ordemServico;
@@ -59,7 +59,9 @@ public class StatusOsCliente extends AppCompatActivity {
                 if (mStatusDescricao.equals(OrdemServico.Status.AGUARDANDO_ATENDIMENTO.getDescricao())){
                     Toast.makeText(StatusOsCliente.this,"Favor aguardar a confirmação do Médico",Toast.LENGTH_SHORT).show();
                 }else{
-                    startActivity(new Intent(StatusOsCliente.this,null));
+                    SessaoAgendamento.instance.setOs(ordemServico);
+                    startActivity(new Intent(StatusOsCliente.this,FinalizarAtendimentoActivity.class));
+                    finish();
                 }
             }
         });
