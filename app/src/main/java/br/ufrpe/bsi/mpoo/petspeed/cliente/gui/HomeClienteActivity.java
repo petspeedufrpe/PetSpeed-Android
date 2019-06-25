@@ -150,7 +150,13 @@ public class HomeClienteActivity extends AppCompatActivity
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
 
         } else if (id == R.id.nav_historico_cliente){
+            startActivity(new Intent(HomeClienteActivity.this,HistoricoOsClienteActivity.class));
+
+        } else if (id == R.id.nav_atendimento){
             startActivity(new Intent(HomeClienteActivity.this,StatusOsCliente.class));
+
+        } else if (id == R.id.nav_atendimento_emergencial){
+
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout_home_cliente);
         drawer.closeDrawer(GravityCompat.START);

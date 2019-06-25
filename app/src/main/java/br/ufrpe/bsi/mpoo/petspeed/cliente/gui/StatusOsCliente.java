@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,8 +17,6 @@ import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
-import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoAgendamento;
-import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sintomas;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
 import br.ufrpe.bsi.mpoo.petspeed.os.negocio.OrdemServicoServices;
@@ -24,7 +24,9 @@ import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.TriagemDAO;
 import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.TriagemXsintomaDAO;
 
 public class StatusOsCliente extends AppCompatActivity {
-    private TextView nome,endereco,avaliacao,nomeAnimal,raca,prioridade,data,statusDescricao,verSintomas;
+    private CardView cardView;
+    private RelativeLayout relativeLayout;
+    private TextView nome,endereco,avaliacao,nomeAnimal,raca,prioridade,data,statusDescricao,verSintomas,view,MEDICO,STATUS;
     private Button finalizarAtendimento;
     private String mNome,mBairro,mRua,mNumero,mAvaliacao,mNomeAnimal,mRaca,mPrioridade,mData,mStatusDescricao;
     private OrdemServico ordemServico;
@@ -39,11 +41,18 @@ public class StatusOsCliente extends AppCompatActivity {
         setContentView(R.layout.activity_status_os_cliente);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        initOS();
-        findTexts();
-        getAllTexts();
-        setTextsNome();
         finalizarAtendimento = findViewById(R.id.btnFinalizarAtendimento);
+        findTexts();
+        if (initOS()){
+            initTriagem();
+            getAllTexts();
+            setTextsNome();
+        } else{
+            view = findViewById(R.id.viewOsVazio);
+            view.setVisibility(View.VISIBLE);
+            setAllInvisible();
+
+        }
         finalizarAtendimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +74,11 @@ public class StatusOsCliente extends AppCompatActivity {
 
     }
 
+    private void setAllInvisible() {
+        cardView.setVisibility(View.INVISIBLE);
+        relativeLayout.setVisibility(View.INVISIBLE);
+    }
+
 
     private void findTexts(){
         nome = findViewById(R.id.fragPopUpMedNome);
@@ -75,6 +89,8 @@ public class StatusOsCliente extends AppCompatActivity {
         prioridade = findViewById(R.id.fragPopUpPrioridade);
         statusDescricao = findViewById(R.id.StatusDescricao);
         //data = findViewById(R.id.fragPopUpDate);
+        cardView = findViewById(R.id.cardView);
+        relativeLayout = findViewById(R.id.relativeLayoutClienteOs);
     }
 
     private void setTextsNome(){
@@ -106,11 +122,23 @@ public class StatusOsCliente extends AppCompatActivity {
         mStatusDescricao =ordemServico.getStatus().getDescricao();
     }
 
-    private void initOS(){
-        ordemServico = ordemServicoServices.getOsByIdCliente(Sessao.instance.getCliente().getId());
-        //getAtualDate();
-        initTriagem();
-        ordemServico.setTriagem(triagem);
+    private boolean initOS(){
+        boolean result;
+        try{
+            ordemServico = ordemServicoServices.getOsByIdCliente(Sessao.instance.getCliente().getId());
+            //getAtualDate();
+            if (ordemServico.getStatus() == OrdemServico.Status.AGUARDANDO_ATENDIMENTO ||
+                    ordemServico.getStatus() == OrdemServico.Status.EM_ATENDIMENTO) {
+                ordemServico.setTriagem(triagem);
+                result =  true;
+            } else {
+                result = false;
+            }
+        } catch (Exception e){
+            return false;
+        }
+
+        return result;
     }
 
     private void initTriagem(){

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.ufrpe.bsi.mpoo.petspeed.cliente.gui.StatusOsCliente">
+    tools:context="br.ufrpe.bsi.mpoo.petspeed.cliente.gui.HistoricoOsClienteActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -18,21 +18,9 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
 
-
     </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:id="@+id/viewOsVazio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Você não possui nenhum Atendimento em andamento."
-        android:textSize="35dp"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:visibility="invisible"/>
-
-    <include layout="@layout/content_status_os_cliente" />
+    <include layout="@layout/content_historico_os_cliente" />
 
 
 </android.support.design.widget.CoordinatorLayout>

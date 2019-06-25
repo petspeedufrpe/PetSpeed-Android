@@ -5,10 +5,12 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.animal.persistencia.AnimalDAO;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
@@ -174,5 +176,27 @@ public class OrdemServicoDAO {
         String[] args = {String.valueOf(idCliente),aguardando,emAtendimento};
 
         return this.loadObject(sql,args);
+    }
+
+    public List<OrdemServico> getOsByIdCliente(Cliente cliente){
+        String sql = SQL_SELECT_FROM + DBHelper.TABELA_OS + SQL_WHERE + DBHelper.COL_OS_FK_CLIENTE + " = ?";
+        String[] args = {String.valueOf(cliente.getId())};
+        return loadAllOs(sql,args);
+    }
+
+    public List<OrdemServico> loadAllOs(String sql,String[] args){
+        List<OrdemServico> ordemServicos = new ArrayList<>();
+        OrdemServico ordemServico= null;
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql,args);
+        if (cursor.moveToFirst()){
+            do {
+                ordemServico = createOS(cursor);
+                ordemServicos.add(ordemServico);
+            } while (cursor.moveToNext());
+            cursor.close();
+            db.close();
+        }
+        return ordemServicos;
     }
 }

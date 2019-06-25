@@ -86,6 +86,7 @@
     <string name="title_activity_selecionar_sintomas">SelecionarSintomasActivity</string>
     <string name="title_activity_status_os_cliente">StatusOsCliente</string>
     <string name="title_activity_confirmar_osactiviry">ConfirmarOSActiviry</string>
+    <string name="title_activity_historico_os_cliente">HistoricoOsClienteActivity</string>
 
 
 </resources>

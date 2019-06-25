@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class MedicoTabTodosFragment extends Fragment {
     private Triagem triagem;
     private TriagemDAO triagemDAO = new TriagemDAO();
     private TriagemXsintomaDAO triagemXsintomaDAO = new TriagemXsintomaDAO();
+    private TextView view;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -39,22 +41,32 @@ public class MedicoTabTodosFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        view = getActivity().findViewById(R.id.osVazio);
         setMedicosAdapter();
         initRecyclerView();
     }
 
     public void setMedicosAdapter() {
-        createAllOs();
-        osAdapter = new OSAdapter(os);
+        if (createAllOs()){
+            osAdapter = new OSAdapter(os);
+        } else {
+            view.setVisibility(View.VISIBLE);
+        }
     }
 
-    public void createAllOs(){
+    public boolean createAllOs(){
+        boolean result;
         OrdemServicoServices ordemServicoServices= new OrdemServicoServices();
-        os = ordemServicoServices.getOsbyIdMedico(Sessao.instance.getMedico().getId());
-        triagem = triagemDAO.getTriagembyId(os.get(0).getId());
-        List<String> strings = triagemXsintomaDAO.getAllSintomasByIdTriagem(triagem.getId());
-        Sintomas sintomas = Sintomas.valueOf(strings.get(0));
-
+        try{
+            os = ordemServicoServices.getOsbyIdMedico(Sessao.instance.getMedico().getId());
+            triagem = triagemDAO.getTriagembyId(os.get(0).getId());
+            List<String> strings = triagemXsintomaDAO.getAllSintomasByIdTriagem(triagem.getId());
+            Sintomas sintomas = Sintomas.valueOf(strings.get(0));
+            result = true;
+        }catch (Exception e){
+            return false;
+        }
+        return result;
     }
 
     private void initRecyclerView() {

@@ -4,6 +4,7 @@ package br.ufrpe.bsi.mpoo.petspeed.os.negocio;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
@@ -39,6 +40,10 @@ public class OrdemServicoServices {
         return ordemServicoDAO.getOsByIdMedico(idMedico);
     }
 
+    public List<OrdemServico> getAllOsByCliente(Cliente cliente){
+        return ordemServicoDAO.getOsByIdCliente(cliente);
+    }
+
     public OrdemServico getOsByIdCliente(long idCliente){
         return ordemServicoDAO.getOsByIdCliente(idCliente);
     }
@@ -59,5 +64,7 @@ public class OrdemServicoServices {
     public List<OrdemServico> getOSbyAnimal(Animal animal) {
         return ordemServicoDAO.getOsByAnimal(animal.getId());
     }
+
+
 
 }

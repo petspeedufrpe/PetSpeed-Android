@@ -24,7 +24,7 @@
         android:contextClickable="true"
         android:focusable="true"
         app:cardCornerRadius="6dp"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayoutClienteOs"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintStart_toStartOf="parent"
@@ -170,7 +170,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
-        android:id="@+id/relativeLayout"
+        android:id="@+id/relativeLayoutClienteOs"
         android:layout_width="0dp"
         android:layout_height="368dp"
         android:layout_marginTop="307dp"

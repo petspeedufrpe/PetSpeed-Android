@@ -4,6 +4,17 @@
     android:layout_height="match_parent"
     tools:context="br.ufrpe.bsi.mpoo.petspeed.medico.gui.MedicoTabTodosFragment">
 
+    <TextView
+        android:id="@+id/osVazio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Você não possui nenhuma OS."
+        android:textSize="40dp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:visibility="invisible"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
