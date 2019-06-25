@@ -18,6 +18,7 @@ import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.LoginActivity;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.ContasDeUsuario;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Criptografia;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoCadastro;
 import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petspeed.pessoa.gui.CadastroEnderecoActivity;
@@ -183,7 +184,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
 
     private Usuario criarUsuario() {
         Usuario usuario = new Usuario();
-        usuario.setSenha(senha);
+        usuario.setSenha(Criptografia.criptografar(senha));
         usuario.setEmail(email);
 
         return usuario;

@@ -20,6 +20,7 @@ import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.CadastroClienteActivity;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.HomeClienteActivity;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.ContasDeUsuario;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Criptografia;
 import br.ufrpe.bsi.mpoo.petspeed.medico.gui.CadastroMedicoActivity;
 import br.ufrpe.bsi.mpoo.petspeed.medico.gui.HomeMedicoActivity;
 import br.ufrpe.bsi.mpoo.petspeed.medico.negocio.MedicoServices;
@@ -116,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
         try {
             if(contaSelecionada == ContasDeUsuario.MEDICO) {
                 if(medicoServices.usuarioPossuiMedico(email)){
-                    medicoServices.login(email, senha);
+                    medicoServices.login(email, Criptografia.criptografar(senha));
                     home();
                 }else{
                     Toast.makeText(LoginActivity.this,"Credenciais inválidas.",Toast.LENGTH_SHORT).show();
@@ -124,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }else if(contaSelecionada == ContasDeUsuario.CLIENTE){
                 if(clienteServices.usuarioPossuiCliente(email)){
-                    clienteServices.login(email, senha);
+                    clienteServices.login(email, Criptografia.criptografar(senha));
                     home();
                 }else{
                     Toast.makeText(LoginActivity.this,"Credenciais inválidas.",Toast.LENGTH_SHORT).show();

@@ -2,16 +2,12 @@ package br.ufrpe.bsi.mpoo.petspeed.infra.persistencia;
 
 import android.util.Log;
 
-import java.util.Arrays;
-import java.util.List;
-
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
-import br.ufrpe.bsi.mpoo.petspeed.animal.persistencia.AnimalDAO;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.AppException;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Criptografia;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
-import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sintomas;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petspeed.medico.negocio.MedicoServices;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
@@ -48,7 +44,7 @@ public class PreencherBanco {
         medico = new Medico();
 
         usuario.setEmail("med1@med.com");
-        usuario.setSenha("12345");
+        usuario.setSenha(Criptografia.criptografar("12345"));
 
         endereco.setCep("52171011");
         endereco.setNumero(36);
@@ -84,7 +80,7 @@ public class PreencherBanco {
         medico = new Medico();
 
         usuario.setEmail("med2@med.com");
-        usuario.setSenha("12345");
+        usuario.setSenha(Criptografia.criptografar("12345"));
 
         endereco.setCep("52171348");
         endereco.setNumero(1082);
@@ -121,7 +117,7 @@ public class PreencherBanco {
         medico = new Medico();
 
         usuario.setEmail("med3@med.com");
-        usuario.setSenha("12345");
+        usuario.setSenha(Criptografia.criptografar("12345"));
 
         endereco.setCep("52171325");
         endereco.setNumero(16);
@@ -157,7 +153,7 @@ public class PreencherBanco {
         medico = new Medico();
 
         usuario.setEmail("med4@med.com");
-        usuario.setSenha("12345");
+        usuario.setSenha(Criptografia.criptografar("12345"));
 
         endereco.setCep("52171011");
         endereco.setNumero(579);
@@ -193,7 +189,7 @@ public class PreencherBanco {
         medico = new Medico();
 
         usuario.setEmail("med5@med.com");
-        usuario.setSenha("12345");
+        usuario.setSenha(Criptografia.criptografar("12345"));
 
         endereco.setCep("52071390");
         endereco.setNumero(423);
@@ -229,7 +225,7 @@ public class PreencherBanco {
         medico = new Medico();
 
         usuario.setEmail("med6@med.com");
-        usuario.setSenha("12345");
+        usuario.setSenha(Criptografia.criptografar("12345"));
 
         endereco.setCep("51160280");
         endereco.setNumero(330);
@@ -266,7 +262,7 @@ public class PreencherBanco {
         medico = new Medico();
 
         usuario.setEmail("med7@med.com");
-        usuario.setSenha("12345");
+        usuario.setSenha(Criptografia.criptografar("12345"));
 
         endereco.setCep("51150400");
         endereco.setNumero(100);
@@ -303,7 +299,7 @@ public class PreencherBanco {
         medico = new Medico();
 
         usuario.setEmail("med8@med.com");
-        usuario.setSenha("12345");
+        usuario.setSenha(Criptografia.criptografar("12345"));
 
         endereco.setCep("2351236");
         endereco.setNumero(270);
@@ -339,7 +335,7 @@ public class PreencherBanco {
         medico = new Medico();
 
         usuario.setEmail("med9@med.com");
-        usuario.setSenha("12345");
+        usuario.setSenha(Criptografia.criptografar("12345"));
 
         endereco.setCep("9856325");
         endereco.setNumero(317);
@@ -376,7 +372,7 @@ public class PreencherBanco {
         medico = new Medico();
 
         usuario.setEmail("med10@med.com");
-        usuario.setSenha("12345");
+        usuario.setSenha(Criptografia.criptografar("12345"));
 
         endereco.setCep("256936585");
         endereco.setNumero(1212);
@@ -412,7 +408,7 @@ public class PreencherBanco {
         medico = new Medico();
 
         usuario.setEmail("med11@med.com");
-        usuario.setSenha("12345");
+        usuario.setSenha(Criptografia.criptografar("12345"));
 
         endereco.setCep("7856955");
         endereco.setNumero(185);
@@ -460,7 +456,7 @@ public class PreencherBanco {
 
 
         usuario.setEmail("gabriel@alves.com");
-        usuario.setSenha("12345");
+        usuario.setSenha(Criptografia.criptografar("12345"));
 
         endereco.setCep("51020020");
         endereco.setNumero(2520);
@@ -553,7 +549,7 @@ public class PreencherBanco {
 
 
         usuario.setEmail("cl1@cl.com");
-        usuario.setSenha("12345");
+        usuario.setSenha(Criptografia.criptografar("12345"));
 
         endereco.setCep("520991092");
         endereco.setNumero(30);
@@ -626,7 +622,7 @@ public class PreencherBanco {
 
 
         usuario.setEmail("cl2@cl.com");
-        usuario.setSenha("12345");
+        usuario.setSenha(Criptografia.criptografar("12345"));
 
         endereco.setCep("52171011");
         endereco.setNumero(590);

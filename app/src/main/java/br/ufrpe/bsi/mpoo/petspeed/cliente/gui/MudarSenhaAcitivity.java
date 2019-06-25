@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Criptografia;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.persistencia.UsuarioDAO;
 
@@ -81,11 +82,11 @@ public class MudarSenhaAcitivity extends AppCompatActivity {
             result = false;
         }
 
-        if (!isSenhaIguais(novaSenha, confirmaSenha)) {
+        if (!isSenhaIguais(Criptografia.criptografar(novaSenha),Criptografia.criptografar(confirmaSenha))) {
             Toast.makeText(this, "Senhas devem ser iguais", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (!isSenhaAntigaEquals(senhaAntiga)) {
+        if (!isSenhaAntigaEquals(Criptografia.criptografar(senhaAntiga))) {
             Toast.makeText(this, "Senha antiga incorreta", Toast.LENGTH_SHORT).show();
         }
         if (!result) {
@@ -98,7 +99,7 @@ public class MudarSenhaAcitivity extends AppCompatActivity {
 
     public void alterarSenha() {
         if (validaCampos()) {
-            cliente.getUsuario().setSenha(novaSenha);
+            cliente.getUsuario().setSenha(Criptografia.criptografar(novaSenha));
             usuarioDAO.alterarSenha(cliente.getUsuario());
             startActivity(new Intent(MudarSenhaAcitivity.this, PerfilClienteActivity.class));
             Toast.makeText(this, "Senha Alterada com Sucesso", Toast.LENGTH_SHORT).show();

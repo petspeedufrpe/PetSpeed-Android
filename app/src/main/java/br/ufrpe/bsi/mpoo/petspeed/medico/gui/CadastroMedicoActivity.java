@@ -15,6 +15,7 @@ import android.widget.Toast;
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.LoginActivity;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.ContasDeUsuario;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Criptografia;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoCadastro;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petspeed.medico.negocio.MedicoServices;
@@ -193,7 +194,7 @@ public class CadastroMedicoActivity extends AppCompatActivity {
 
     private Usuario criarUsuario() {
         Usuario usuario = new Usuario();
-        usuario.setSenha(senha);
+        usuario.setSenha(Criptografia.criptografar(senha));
         usuario.setEmail(email);
 
         return usuario;
