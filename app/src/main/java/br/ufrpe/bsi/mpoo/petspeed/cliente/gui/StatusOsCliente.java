@@ -56,7 +56,7 @@ public class StatusOsCliente extends AppCompatActivity {
         finalizarAtendimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mStatusDescricao.equals(OrdemServico.Status.AGUARDANDO_ATENDIMENTO.getDescricao())){
+                if (mStatusDescricao.equals(OrdemServico.Status.AGUARDANDO_ATENDIMENTO.getDescricao().replace("_"," "))){
                     Toast.makeText(StatusOsCliente.this,"Favor aguardar a confirmação do Médico",Toast.LENGTH_SHORT).show();
                 }else{
                     SessaoAgendamento.instance.setOs(ordemServico);
@@ -103,15 +103,14 @@ public class StatusOsCliente extends AppCompatActivity {
         raca.setText("Raça: "+mRaca);
         prioridade.setText("PRIORIDADE: "+mPrioridade);
         statusDescricao.setText(mStatusDescricao);
-        if (mStatusDescricao.equals(OrdemServico.Status.AGUARDANDO_ATENDIMENTO.getDescricao())){
+        if (mStatusDescricao.equals(OrdemServico.Status.AGUARDANDO_ATENDIMENTO.getDescricao().replace("_"," "))){
             statusDescricao.setTextColor(Color.BLUE);
-        } else if(mStatusDescricao.equals(OrdemServico.Status.EM_ATENDIMENTO.getDescricao())){
+        } else if(mStatusDescricao.equals(OrdemServico.Status.EM_ATENDIMENTO.getDescricao().replace("_"," "))){
             statusDescricao.setTextColor(Color.MAGENTA);
         } else if(mStatusDescricao.equals(OrdemServico.Status.FINALIZADA.getDescricao())){
             statusDescricao.setTextColor(Color.GREEN);
         }
     }
-    //Ajeitar para setar o OS na Sessao Agendamento.
     private void getAllTexts(){
         mNome = ordemServico.getMedico().getDadosPessoais().getNome();
         mRua  = ordemServico.getMedico().getDadosPessoais().getEndereco().getLogradouro();
@@ -121,7 +120,7 @@ public class StatusOsCliente extends AppCompatActivity {
         mRaca = ordemServico.getAnimal().getRaca();
         mAvaliacao = String.valueOf(ordemServico.getMedico().getAvaliacao());
         mPrioridade = String.valueOf(ordemServico.getPrioridade());
-        mStatusDescricao =ordemServico.getStatus().getDescricao();
+        mStatusDescricao = ordemServico.getStatus().getDescricao().replace("_"," ");
     }
 
     private boolean initOS(){

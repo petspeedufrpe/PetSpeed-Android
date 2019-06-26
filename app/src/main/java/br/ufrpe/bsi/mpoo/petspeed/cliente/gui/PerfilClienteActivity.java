@@ -3,6 +3,7 @@ package br.ufrpe.bsi.mpoo.petspeed.cliente.gui;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_cliente);
+        getWindow().setStatusBarColor(Color.parseColor("#AFDF59"));
         findTexts();
         convertByteInBitMap();
         showTexts(bitmap);

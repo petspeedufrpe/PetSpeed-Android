@@ -16,7 +16,7 @@
         android:id="@+id/relativeLayout_animal"
         android:orientation="vertical">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image_animal"
             android:layout_width="95dp"
             android:layout_height="match_parent"

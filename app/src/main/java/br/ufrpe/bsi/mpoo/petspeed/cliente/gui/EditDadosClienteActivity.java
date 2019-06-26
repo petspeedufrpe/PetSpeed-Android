@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
@@ -64,6 +65,7 @@ public class EditDadosClienteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_dados_cliente);
         Toolbar toolbar = findViewById(R.id.toolbar_altera_dados);
         setSupportActionBar(toolbar);
+        getWindow().setStatusBarColor(Color.parseColor("#AFDF59"));
         mImagemCliente = findViewById(R.id.campo_imagem);
         ImageView cameraAlteraFoto = findViewById(R.id.camera_alterar_foto_cliente);
         cameraAlteraFoto.setOnClickListener(new View.OnClickListener() {

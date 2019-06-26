@@ -4,7 +4,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import br.ufrpe.bsi.mpoo.petspeed.infra.app.PetSpeedApp;
-import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sintomas;
 
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -70,6 +69,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_OS_STATUS = "PENDENTE";
     public static final String COL_OS_DESCRICAO = "DESCRICAO";
     public static final String COL_OS_PRIORIDADE = "PRIORIDADE";
+    //public static final String COL_OS_DATA = "DATA";
     public static final String COL_OS_FK_MEDICO = "FK_MEDICO";
     public static final String COL_OS_FK_TRIAGEM = "FK_TRIAGEM";
     public static final String COL_OS_FK_CLIENTE = "FK_CLIENTE";

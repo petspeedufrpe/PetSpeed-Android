@@ -1,6 +1,5 @@
 package br.ufrpe.bsi.mpoo.petspeed.cliente.gui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,7 +21,6 @@ import java.util.List;
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petspeed.animal.gui.CrudAnimalActivity;
-import br.ufrpe.bsi.mpoo.petspeed.animal.gui.PerfilPetActivity;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.persistencia.ClienteDAO;
@@ -52,6 +50,7 @@ public class SelecionarAnimalClienteActivity extends AppCompatActivity implement
         setContentView(R.layout.activity_animal_cliente);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getWindow().setStatusBarColor(Color.parseColor("#AFDF59"));
         createAllAnimals();
         initRecyclerView();
         setTitle("PetSpeed");
@@ -115,7 +114,7 @@ public class SelecionarAnimalClienteActivity extends AppCompatActivity implement
     }
 
     private void SnackBarUndoDelete(String name, final Animal itemDeletado, final int deletIndex) {
-        Snackbar snackbar = Snackbar.make(rootLayout, name + " dremoved", Snackbar.LENGTH_SHORT);
+        Snackbar snackbar = Snackbar.make(rootLayout, name + " removed", Snackbar.LENGTH_SHORT);
         snackbar.setAction("UNDO", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
