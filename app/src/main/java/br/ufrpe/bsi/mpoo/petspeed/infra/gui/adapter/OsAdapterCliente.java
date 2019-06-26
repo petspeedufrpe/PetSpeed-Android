@@ -40,10 +40,11 @@ public class OsAdapterCliente extends RecyclerView.Adapter<OsAdapterCliente.View
         viewHolder.mPrioridade.setText("Prioridade: "+os.getPrioridade().getDescricao());
         viewHolder.data.setText(getDateFormatted(os));
         if(os.getPrioridade()== OrdemServico.Prioridade.ALTA){
+
             viewHolder.mPrioridade.setTextColor(Color.parseColor("#FFFF0000"));
         }else{
-            viewHolder.mPrioridade.setTextColor(Color.parseColor("#24B403"));
 
+            viewHolder.mPrioridade.setTextColor(Color.parseColor("#24B403"));
         }
 
 
