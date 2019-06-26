@@ -1,5 +1,7 @@
 package br.ufrpe.bsi.mpoo.petspeed.os.dominio;
 
+import java.util.Date;
+
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
@@ -21,6 +23,16 @@ public class OrdemServico {
     private String descricao;
 
     private Prioridade prioridade;
+
+    private Date data;
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
 
     private long fkMedico;
 
@@ -116,6 +128,7 @@ public class OrdemServico {
     public void setPrioridade(Prioridade prioridade) {
         this.prioridade = prioridade;
     }
+
 
     public enum Status{
         AGUARDANDO_ATENDIMENTO("AGUARDANDO_ATENDIMENTO"), EM_ATENDIMENTO("EM_ATENDIMENTO"), FINALIZADA("FINALIZADA"),

@@ -12,6 +12,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
@@ -44,6 +47,7 @@ public class StatusOsCliente extends AppCompatActivity {
         finalizarAtendimento = findViewById(R.id.btnFinalizarAtendimento);
         findTexts();
         if (initOS()){
+            getAtualDate();
             initTriagem();
             getAllTexts();
             setTextsNome();
@@ -90,7 +94,7 @@ public class StatusOsCliente extends AppCompatActivity {
         raca = findViewById(R.id.fragPopUpAnimRaca);
         prioridade = findViewById(R.id.fragPopUpPrioridade);
         statusDescricao = findViewById(R.id.StatusDescricao);
-        //data = findViewById(R.id.fragPopUpDate);
+        data = findViewById(R.id.fragPopUpDate);
         cardView = findViewById(R.id.cardView);
         relativeLayout = findViewById(R.id.relativeLayoutClienteOs);
     }
@@ -102,6 +106,7 @@ public class StatusOsCliente extends AppCompatActivity {
         nomeAnimal.setText("Nome: "+mNomeAnimal);
         raca.setText("Raça: "+mRaca);
         prioridade.setText("PRIORIDADE: "+mPrioridade);
+        data.setText(mData);
         statusDescricao.setText(mStatusDescricao);
         if (mStatusDescricao.equals(OrdemServico.Status.AGUARDANDO_ATENDIMENTO.getDescricao().replace("_"," "))){
             statusDescricao.setTextColor(Color.BLUE);
@@ -127,7 +132,6 @@ public class StatusOsCliente extends AppCompatActivity {
         boolean result;
         try{
             ordemServico = ordemServicoServices.getOsByIdCliente(Sessao.instance.getCliente().getId());
-            //getAtualDate();
             if (ordemServico.getStatus() == OrdemServico.Status.AGUARDANDO_ATENDIMENTO ||
                     ordemServico.getStatus() == OrdemServico.Status.EM_ATENDIMENTO) {
                 ordemServico.setTriagem(triagem);
@@ -148,12 +152,10 @@ public class StatusOsCliente extends AppCompatActivity {
     }
 
 
-    /*private void getAtualDate(){
-        Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        mData = format.format(calendar);
-    }*/
+    private void getAtualDate(){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = ordemServico.getData();
+        mData = dateFormat.format(date);
+    }
 
 }

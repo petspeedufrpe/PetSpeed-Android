@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
@@ -36,6 +38,7 @@ public class OsAdapterCliente extends RecyclerView.Adapter<OsAdapterCliente.View
         viewHolder.mAnimNome.setText("Nome: "+os.getAnimal().getNome());
         viewHolder.mAnimRaca.setText("Raça: "+os.getAnimal().getRaca());
         viewHolder.mPrioridade.setText("Prioridade: "+os.getPrioridade().getDescricao());
+        viewHolder.data.setText(getDateFormatted(os));
         if(os.getPrioridade()== OrdemServico.Prioridade.ALTA){
             viewHolder.mPrioridade.setTextColor(Color.parseColor("#FFFF0000"));
         }else{
@@ -44,6 +47,12 @@ public class OsAdapterCliente extends RecyclerView.Adapter<OsAdapterCliente.View
         }
 
 
+    }
+
+    private String getDateFormatted(OrdemServico ordemServico){
+
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return dateFormat.format(ordemServico.getData());
     }
 
     @Override
@@ -63,6 +72,7 @@ public class OsAdapterCliente extends RecyclerView.Adapter<OsAdapterCliente.View
         private TextView mAnimRaca;
         private TextView mPrioridade;
         private TextView avaliacaoMedico;
+        private TextView data;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -73,6 +83,8 @@ public class OsAdapterCliente extends RecyclerView.Adapter<OsAdapterCliente.View
             mAnimNome = itemView.findViewById(R.id.fragPopUpAnimNome);
             mAnimRaca = itemView.findViewById(R.id.fragPopUpAnimRaca);
             mPrioridade = itemView.findViewById(R.id.fragPopUpPrioridade);
+            data = itemView.findViewById(R.id.fragPopUpDate);
         }
+
     }
 }

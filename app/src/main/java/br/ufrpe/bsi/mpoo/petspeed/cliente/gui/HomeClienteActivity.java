@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -78,8 +79,12 @@ public class HomeClienteActivity extends AppCompatActivity
     }
 
     private void convertToBitmap() {
-        bmp = BitmapFactory.decodeByteArray(Sessao.instance.getCliente().getFoto(),
-                0,Sessao.instance.getCliente().getFoto().length);
+        try {
+            bmp = BitmapFactory.decodeByteArray(Sessao.instance.getCliente().getFoto(),
+                    0, Sessao.instance.getCliente().getFoto().length);
+        } catch (Exception e){
+            Log.d("TAG","Erro sem foto");
+        }
     }
 
     @Override

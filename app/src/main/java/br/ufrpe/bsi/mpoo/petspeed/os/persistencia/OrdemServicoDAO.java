@@ -5,7 +5,10 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,7 +19,6 @@ import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.DBHelper;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petspeed.medico.persistencia.MedicoDAO;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
-import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
 
 public class OrdemServicoDAO {
 
@@ -34,6 +36,7 @@ public class OrdemServicoDAO {
         values.put(DBHelper.COL_OS_FK_CLIENTE, ordemServico.getCliente().getId());
         values.put(DBHelper.COL_OS_FK_TRIAGEM, ordemServico.getTriagem().getId());
         values.put(DBHelper.COL_OS_FK_MEDICO, ordemServico.getMedico().getId());
+        values.put(DBHelper.COL_OS_DATA,new SimpleDateFormat("hh/MM/yyyy HH:mm:ss").format(ordemServico.getData()));
         long id = db.insert(DBHelper.TABELA_OS, null, values);
         db.close();
         return id;
@@ -79,7 +82,7 @@ public class OrdemServicoDAO {
         int indexFkCliente = cursor.getColumnIndex(DBHelper.COL_OS_FK_CLIENTE);
         int indexFkMedico = cursor.getColumnIndex(DBHelper.COL_OS_FK_MEDICO);
         int indexFkTriagem = cursor.getColumnIndex(DBHelper.COL_OS_FK_TRIAGEM);
-
+        int indexData = cursor.getColumnIndex(DBHelper.COL_OS_DATA);
         ordemServico.setDescricao(cursor.getString(indexDescricao));
         String prioridade = cursor.getString(indexPrioridade);
         ordemServico.setPrioridade(OrdemServico.Prioridade.valueOf(prioridade));
@@ -90,6 +93,14 @@ public class OrdemServicoDAO {
         ordemServico.setCliente(new ClienteServices().getClienteCompleto(cursor.getLong(indexFkCliente)));
         ordemServico.setMedico(new MedicoDAO().getMedicoById(cursor.getLong(indexFkMedico)));
         ordemServico.setTriagem(new TriagemDAO().getTriagembyId(cursor.getLong(indexFkTriagem)));
+        String data = cursor.getString(indexData);
+        Date date = new Date();
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(data);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        ordemServico.setData(date);
         return ordemServico;
     }
 
@@ -199,4 +210,5 @@ public class OrdemServicoDAO {
         }
         return ordemServicos;
     }
+
 }

@@ -1,11 +1,8 @@
 package br.ufrpe.bsi.mpoo.petspeed.infra.gui;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,12 +10,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.HomeClienteActivity;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.StatusOsCliente;
-import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.AppException;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoAgendamento;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sintomas;
@@ -90,7 +89,7 @@ public class ConfirmarOSActivity extends AppCompatActivity {
         nomeAnimal = findViewById(R.id.fragPopUpAnimNome);
         raca = findViewById(R.id.fragPopUpAnimRaca);
         prioridade = findViewById(R.id.fragPopUpPrioridade);
-        //data = findViewById(R.id.fragPopUpDate);
+        data = findViewById(R.id.fragPopUpDate);
     }
 
     private void setTextsNome(){
@@ -100,6 +99,7 @@ public class ConfirmarOSActivity extends AppCompatActivity {
         nomeAnimal.setText("Nome: "+mNomeAnimal);
         raca.setText("Raça: "+mRaca);
         prioridade.setText("PRIORIDADE: "+mPrioridade);
+        data.setText(mData);
 
     }
     //Ajeitar para setar o OS na Sessao Agendamento.
@@ -116,7 +116,7 @@ public class ConfirmarOSActivity extends AppCompatActivity {
 
     private void initOS(){
         ordemServico = new OrdemServico();
-        //getAtualDate();
+        getAtualDate();
         ordemServico.setMedico(SessaoAgendamento.instance.getMedico());
         ordemServico.setAnimal(SessaoAgendamento.instance.getAnimal());
         ordemServico.setCliente(Sessao.instance.getCliente());
@@ -148,13 +148,12 @@ public class ConfirmarOSActivity extends AppCompatActivity {
 
     }
 
-    /*private void getAtualDate(){
+    private void getAtualDate(){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        mData = format.format(calendar);
-    }*/
+        ordemServico.setData(date);
+        mData = dateFormat.format(date);
+    }
 
     private class RegisterTask extends AsyncTask<Void,Void,Void>{
 
