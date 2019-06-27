@@ -20,8 +20,7 @@
             android:id="@+id/image_animal"
             android:layout_width="95dp"
             android:layout_height="match_parent"
-            android:background="#2d2d2d"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:scaleType="centerCrop" />
 
         <TextView
