@@ -55,9 +55,9 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
                     animalDAO.deletaAnimal(animal);
                     mAnimals.remove(animal);
                 }
-
-            actionMode.finish();
-            return true;
+                actionMode.finish();
+                selectedItems.clear();
+                return true;
         }
 
         @Override
@@ -104,7 +104,7 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
     public void onBindViewHolder(@NonNull MyViewHolder holder, int i) {
         holder.nomeAnimal.setText("Nome: " + mAnimals.get(i).getNome());
         holder.racaAnimal.setText("Raça: " + mAnimals.get(i).getRaca());
-        holder.pesoAnimal.setText("Peso: " + String.valueOf(mAnimals.get(i).getPeso()) + "Kg");
+        holder.pesoAnimal.setText("Peso: " + String.valueOf(mAnimals.get(i).getPeso()).replace(".",",") + "Kg");
         holder.idadeAnimal.setText("Idade: " + String.valueOf(mAnimals.get(i).getNascimento()));
         try {
             byte[] imagemEmBits = mAnimals.get(i).getFoto();

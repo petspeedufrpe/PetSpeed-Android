@@ -117,8 +117,8 @@ public class AnimalClienteActivity extends AppCompatActivity implements Recycler
     }
 
     private void SnackBarUndoDelete(String name, final Animal itemDeletado, final int deletIndex) {
-        Snackbar snackbar = Snackbar.make(rootLayout, name + " removed", Snackbar.LENGTH_SHORT);
-        snackbar.setAction("UNDO", new View.OnClickListener() {
+        Snackbar snackbar = Snackbar.make(rootLayout, name + " removido", Snackbar.LENGTH_SHORT);
+        snackbar.setAction("DESFAZER", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 adapterAnimalCliente.restoreItem(itemDeletado, deletIndex);
