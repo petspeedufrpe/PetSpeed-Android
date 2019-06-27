@@ -63,7 +63,9 @@ public class StatusOsCliente extends AppCompatActivity {
                 if (mStatusDescricao.equals(OrdemServico.Status.AGUARDANDO_ATENDIMENTO.getDescricao().replace("_"," "))){
                     Toast.makeText(StatusOsCliente.this,"Favor aguardar a confirmação do Médico",Toast.LENGTH_SHORT).show();
                 }else{
+                    ordemServico.setStatus(OrdemServico.Status.FINALIZADA);
                     SessaoAgendamento.instance.setOs(ordemServico);
+                    ordemServicoServices.alteraStatusOs(ordemServico);
                     startActivity(new Intent(StatusOsCliente.this,FinalizarAtendimentoActivity.class));
                     finish();
                 }
