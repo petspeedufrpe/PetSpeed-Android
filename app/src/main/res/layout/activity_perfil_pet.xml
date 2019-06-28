@@ -50,6 +50,14 @@
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:title="" />
 
+                <Button
+                    android:id="@+id/butt_historico"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#00A759"
+                    android:text="Histórico"
+                    android:textColor="#FFFFFF" />
+
             </android.support.design.widget.CollapsingToolbarLayout>
 
         </android.support.design.widget.AppBarLayout>

@@ -25,6 +25,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".animal.gui.HistoricoView"></activity>
+        <activity android:name=".animal.gui.HistoricoAnimalActivity" />
         <activity
             android:name=".cliente.gui.ViewSintomasAnimalAcitivity"
             android:label="@string/title_activity_view_sintomas_animal_acitivity"
