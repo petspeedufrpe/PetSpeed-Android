@@ -62,7 +62,7 @@ public class HistoricoAnimalActivity extends AppCompatActivity  {
             }
         };
 
-        if (osArrayList == null) {
+        if (osArrayList.size() == 0) {
             Toast.makeText(HistoricoAnimalActivity.this, "Nenhum antedimento registrado.", Toast.LENGTH_LONG).show();
 
         }

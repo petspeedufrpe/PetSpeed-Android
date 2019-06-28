@@ -67,7 +67,7 @@ public class OSAdapter extends RecyclerView.Adapter<OSAdapter.OSViewHolder>{
         btSintomas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //a fazer
+
             }
         });
 

@@ -136,7 +136,7 @@ public class StatusOsCliente extends AppCompatActivity {
             ordemServico = ordemServicoServices.getOsByIdCliente(Sessao.instance.getCliente().getId());
             if (ordemServico.getStatus() == OrdemServico.Status.AGUARDANDO_ATENDIMENTO ||
                     ordemServico.getStatus() == OrdemServico.Status.EM_ATENDIMENTO) {
-                ordemServico.setTriagem(triagem);
+
                 result =  true;
             } else {
                 result = false;
@@ -150,6 +150,7 @@ public class StatusOsCliente extends AppCompatActivity {
 
     private void initTriagem(){
         triagem  = triagemDAO.getTriagembyId(ordemServico.getId());
+        ordemServico.setTriagem(triagem);
         //list = triagemXsintomaDAO.getAllSintomasByIdTriagem(triagem.getId());
     }
 
