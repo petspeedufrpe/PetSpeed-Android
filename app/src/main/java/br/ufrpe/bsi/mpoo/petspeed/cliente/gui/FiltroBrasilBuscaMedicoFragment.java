@@ -43,7 +43,7 @@ public class FiltroBrasilBuscaMedicoFragment extends Fragment {
         if(medicosList.isEmpty()){
             Toast.makeText(getContext(),"Sua busca não retornou resultados.",Toast.LENGTH_SHORT).show();
         }
-        medicosAdapter = new ListaMedicosAdapter(medicosList);
+        medicosAdapter = new ListaMedicosAdapter(getContext(),medicosList);
     }
 
     private void initRecyclerView() {

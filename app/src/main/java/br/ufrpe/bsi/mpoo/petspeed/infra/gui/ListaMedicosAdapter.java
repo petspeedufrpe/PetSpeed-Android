@@ -1,5 +1,7 @@
 package br.ufrpe.bsi.mpoo.petspeed.infra.gui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +11,14 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.SelecionarAnimalClienteActivity;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoAgendamento;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 
 public class ListaMedicosAdapter extends RecyclerView.Adapter<ListaMedicosAdapter.MedicoViewHolder> {
     private List<Medico> medicos;
     private TextView mActionAgendar;
+    private Context mContext;
 
     public class MedicoViewHolder extends RecyclerView.ViewHolder {
         private TextView mNome;
@@ -32,23 +37,36 @@ public class ListaMedicosAdapter extends RecyclerView.Adapter<ListaMedicosAdapte
             mRuaNumero = view.findViewById(R.id.fragPopUpPrioridade);
             mCompl = view.findViewById(R.id.fragPopUpMedCompl);
             mCidadeUF = view.findViewById(R.id.fragPopUpStatus);
-            mActionAgendar = view.findViewById(R.id.fragPopUpMedBtnAgendar);
+            mActionAgendar = view.findViewById(R.id.fragPopUpDate);
+            mActionAgendar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION){
+                        SessaoAgendamento.instance.setMedico(medicos.get(position));
+                        mContext.startActivity(new Intent(mContext,SelecionarAnimalClienteActivity.class));
+                    }
+                }
+            });
         }
     }
 
-    public ListaMedicosAdapter(List<Medico> medicos) {
+    public ListaMedicosAdapter(Context context, List<Medico> medicos) {
         this.medicos = medicos;
+        this.mContext = context;
     }
 
     @Override
-    public MedicoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
+    public MedicoViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+        final View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_medico, parent, false);
         mActionAgendar = itemView.findViewById(R.id.fragPopUpDate);
         mActionAgendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(mContext, SelecionarAnimalClienteActivity.class);
+                mContext.startActivity(intent);
             }
         });
 
