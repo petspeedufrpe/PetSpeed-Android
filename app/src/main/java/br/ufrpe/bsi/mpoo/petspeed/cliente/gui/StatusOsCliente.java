@@ -15,7 +15,6 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
@@ -34,7 +33,6 @@ public class StatusOsCliente extends AppCompatActivity {
     private String mNome,mBairro,mRua,mNumero,mAvaliacao,mNomeAnimal,mRaca,mPrioridade,mData,mStatusDescricao;
     private OrdemServico ordemServico;
     private Triagem triagem;
-    private List<String> list;
     private TriagemDAO triagemDAO = new TriagemDAO();
     private OrdemServicoServices ordemServicoServices = new OrdemServicoServices();
     private TriagemXsintomaDAO triagemXsintomaDAO = new TriagemXsintomaDAO();
@@ -44,6 +42,7 @@ public class StatusOsCliente extends AppCompatActivity {
         setContentView(R.layout.activity_status_os_cliente);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle("Status de Atendimento");
         finalizarAtendimento = findViewById(R.id.btnFinalizarAtendimento);
         findTexts();
         if (initOS()){
@@ -76,6 +75,7 @@ public class StatusOsCliente extends AppCompatActivity {
         verSintomas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Sessao.instance.setOs(ordemServico);
                 startActivity(new Intent(StatusOsCliente.this,ViewSintomasAnimalAcitivity.class));
             }
         });
@@ -150,7 +150,7 @@ public class StatusOsCliente extends AppCompatActivity {
 
     private void initTriagem(){
         triagem  = triagemDAO.getTriagembyId(ordemServico.getId());
-        list = triagemXsintomaDAO.getAllSintomasByIdTriagem(triagem.getId());
+        //list = triagemXsintomaDAO.getAllSintomasByIdTriagem(triagem.getId());
     }
 
 

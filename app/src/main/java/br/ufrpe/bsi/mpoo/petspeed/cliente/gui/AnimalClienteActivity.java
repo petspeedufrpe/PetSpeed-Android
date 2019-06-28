@@ -50,10 +50,9 @@ public class AnimalClienteActivity extends AppCompatActivity implements Recycler
         setContentView(R.layout.activity_animal_cliente);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getWindow().setStatusBarColor(0);
         createAllAnimals();
         initRecyclerView();
-        setTitle("PetSpeed");
+        setTitle("Meus Pets");
         FloatingActionButton fab = findViewById(R.id.fab_add_animal);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

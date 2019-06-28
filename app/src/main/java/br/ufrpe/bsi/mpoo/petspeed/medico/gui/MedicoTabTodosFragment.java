@@ -10,13 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.OSAdapter;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
-import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sintomas;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
 import br.ufrpe.bsi.mpoo.petspeed.os.negocio.OrdemServicoServices;
@@ -60,8 +58,8 @@ public class MedicoTabTodosFragment extends Fragment {
         try{
             os = ordemServicoServices.getOsbyIdMedico(Sessao.instance.getMedico().getId());
             triagem = triagemDAO.getTriagembyId(os.get(0).getId());
-            List<String> strings = triagemXsintomaDAO.getAllSintomasByIdTriagem(triagem.getId());
-            Sintomas sintomas = Sintomas.valueOf(strings.get(0));
+            //List<String> strings = triagemXsintomaDAO.getAllSintomasByIdTriagem(triagem.getId());
+            //Sintomas sintomas = Sintomas.valueOf(strings.get(0));
             result = true;
         }catch (Exception e){
             return false;

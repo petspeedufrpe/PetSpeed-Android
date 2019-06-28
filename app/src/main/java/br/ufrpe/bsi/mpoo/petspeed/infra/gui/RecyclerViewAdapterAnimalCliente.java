@@ -108,10 +108,11 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
         holder.idadeAnimal.setText("Idade: " + String.valueOf(mAnimals.get(i).getNascimento()));
         try {
             byte[] imagemEmBits = mAnimals.get(i).getFoto();
-            Bitmap bitmap = BitmapFactory.decodeByteArray(imagemEmBits, 0, imagemEmBits.length);
-            holder.imageAnimal.setImageBitmap(
-                    getThumbnailFromBitmap(bitmap));
-
+            if (imagemEmBits != null){
+                Bitmap bitmap = BitmapFactory.decodeByteArray(imagemEmBits, 0, imagemEmBits.length);
+                holder.imageAnimal.setImageBitmap(
+                        getThumbnailFromBitmap(bitmap));
+            }
         } catch (Exception e) {
             Log.d("Minha Tag", e.toString());
         }

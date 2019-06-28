@@ -27,17 +27,17 @@ public class TriagemXsintomaDAO {
 
     }
 
-    public List<String> getAllSintomasByIdTriagem(long idTriagem){
+    public List<Sintomas> getAllSintomasByIdTriagem(long idTriagem){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String sql = "SELECT * FROM "+DBHelper.TABELA_SINTOMAS_X_TRIAGEM + " WHERE "+
                 DBHelper.COL_FK_TRIAGEM + " = ?";
         String[] args = {String.valueOf(idTriagem)};
         Cursor cursor = db.rawQuery(sql,args);
-        List<String> sintomas = new ArrayList<>();
+        List<Sintomas> sintomas = new ArrayList<>();
         if (cursor.moveToFirst()){
             do {
                 int indexString = cursor.getColumnIndex(DBHelper.COL_FK_SINTOMAS);
-                sintomas.add(cursor.getString(indexString));
+                sintomas.add(Sintomas.valueOf(cursor.getString(indexString)));
             }while (cursor.moveToNext());
         }
         db.close();

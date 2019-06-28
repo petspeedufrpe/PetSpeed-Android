@@ -29,6 +29,7 @@ public class HistoricoOsClienteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_historico_os_cliente);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle("Historico de Atendimento");
         createAllOsCliente();
         initRecyclerView();
 
@@ -41,7 +42,7 @@ public class HistoricoOsClienteActivity extends AppCompatActivity {
     private void initRecyclerView(){
         if (ordemServicos != null){
             RecyclerView recyclerView = findViewById(R.id.recycler_view_historico_os);
-            osAdapterCliente = new OsAdapterCliente(this,ordemServicos);
+            osAdapterCliente = new OsAdapterCliente(getBaseContext(),ordemServicos);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));

@@ -12,6 +12,7 @@ import java.util.Map;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.infra.app.PetSpeedApp;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
+import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 
 public class Sessao {
@@ -28,6 +29,10 @@ public class Sessao {
     }
 
     public Medico getMedico(){return (Medico)values.get("sessao.Medico");}
+
+    public OrdemServico getOs(){ return (OrdemServico)values.get("sessao.Os");}
+
+    public void setOs(OrdemServico os){ setValue("sessao.Os",os); }
 
     public void setUsuario(Usuario usuario) {
         setValue("sessao.Usuario", usuario);

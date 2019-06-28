@@ -15,6 +15,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.ViewSintomasAnimalAcitivity;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 
 public class OsAdapterCliente extends RecyclerView.Adapter<OsAdapterCliente.ViewHolder> {
@@ -78,7 +80,7 @@ public class OsAdapterCliente extends RecyclerView.Adapter<OsAdapterCliente.View
         private TextView data;
 
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
             mNomeMedico = itemView.findViewById(R.id.fragPopUpMedNome);
             mClienteEndereco = itemView.findViewById(R.id.fragPopUpMedEnd);
@@ -92,7 +94,8 @@ public class OsAdapterCliente extends RecyclerView.Adapter<OsAdapterCliente.View
             mSitomas.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mContext.startActivity(new Intent(mContext,null));
+                    Sessao.instance.setOs(OSs.get(getAdapterPosition()));
+                    mContext.startActivity(new Intent(mContext, ViewSintomasAnimalAcitivity.class));
                 }
             });
         }
