@@ -26,9 +26,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:name=".cliente.gui.ViewSintomasAnimalAcitivity"
+            android:label="@string/title_activity_view_sintomas_animal_acitivity"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+        <activity
             android:name=".cliente.gui.FinalizarAtendimentoActivity"
             android:label="@string/title_activity_finalizar_atendimento"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".cliente.gui.HistoricoOsClienteActivity"
             android:label="@string/title_activity_historico_os_cliente"

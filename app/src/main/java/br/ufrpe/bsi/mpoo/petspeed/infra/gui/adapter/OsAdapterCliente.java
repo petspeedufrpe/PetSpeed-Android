@@ -1,6 +1,7 @@
 package br.ufrpe.bsi.mpoo.petspeed.infra.gui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -73,6 +74,7 @@ public class OsAdapterCliente extends RecyclerView.Adapter<OsAdapterCliente.View
         private TextView mAnimRaca;
         private TextView mPrioridade;
         private TextView avaliacaoMedico;
+        private TextView mSitomas;
         private TextView data;
 
 
@@ -85,6 +87,14 @@ public class OsAdapterCliente extends RecyclerView.Adapter<OsAdapterCliente.View
             mAnimRaca = itemView.findViewById(R.id.fragPopUpAnimRaca);
             mPrioridade = itemView.findViewById(R.id.fragPopUpPrioridade);
             data = itemView.findViewById(R.id.fragPopUpDate);
+            mSitomas = itemView.findViewById(R.id.fragPopSintomas);
+
+            mSitomas.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mContext.startActivity(new Intent(mContext,null));
+                }
+            });
         }
 
     }

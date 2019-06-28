@@ -76,7 +76,7 @@ public class StatusOsCliente extends AppCompatActivity {
         verSintomas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // a fazer
+                startActivity(new Intent(StatusOsCliente.this,ViewSintomasAnimalAcitivity.class));
             }
         });
 

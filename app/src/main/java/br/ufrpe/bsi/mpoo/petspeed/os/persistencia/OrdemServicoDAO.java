@@ -112,9 +112,10 @@ public class OrdemServicoDAO {
         db.close();
     }
 
-    public List<OrdemServico> getOsByProridade(OrdemServico.Prioridade p) {
-        String sql = SQL_SELECT_FROM + DBHelper.TABELA_OS + SQL_WHERE + DBHelper.COL_OS_PRIORIDADE + " = ?";
-        String[] args = {p.getDescricao()};
+    public List<OrdemServico> getOsByProridade(long idMedico, OrdemServico.Prioridade p) {
+        String sql = SQL_SELECT_FROM + DBHelper.TABELA_OS + SQL_WHERE + DBHelper.COL_OS_FK_MEDICO + " = ?"+ " AND "+DBHelper.COL_OS_PRIORIDADE + " = ?"+
+                " ORDER BY "+ DBHelper.COL_OS_ID + " DESC";
+        String[] args = {String.valueOf(idMedico),p.getDescricao()};
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, args);
         OrdemServico ordemServico;
@@ -150,7 +151,7 @@ public class OrdemServicoDAO {
     }
 
     public List<OrdemServico> getOsByIdMedico(long idMedico){
-        String sql = SQL_SELECT_FROM + DBHelper.TABELA_OS + SQL_WHERE + DBHelper.COL_OS_FK_MEDICO + " = ?";
+        String sql = SQL_SELECT_FROM + DBHelper.TABELA_OS + SQL_WHERE + DBHelper.COL_OS_FK_MEDICO + " = ?"+" ORDER BY "+ DBHelper.COL_OS_ID+" DESC";
         String[] args = {String.valueOf(idMedico)};
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, args);

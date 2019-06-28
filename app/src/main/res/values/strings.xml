@@ -88,6 +88,8 @@
     <string name="title_activity_confirmar_osactiviry">ConfirmarOSActiviry</string>
     <string name="title_activity_historico_os_cliente">HistoricoOsClienteActivity</string>
     <string name="title_activity_finalizar_atendimento">FinalizarAtendimentoActivity</string>
+    <string name="title_activity_view_sintomas_animal_acitivity">ViewSintomasAnimalAcitivity
+    </string>
 
 
 </resources>

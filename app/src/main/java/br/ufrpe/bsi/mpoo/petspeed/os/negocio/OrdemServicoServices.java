@@ -32,8 +32,8 @@ public class OrdemServicoServices {
         return ordemServicoDAO.getOSbyId(id);
     }
 
-    public List<OrdemServico> getOSbyPrioridade(OrdemServico.Prioridade prioridade) {
-        return ordemServicoDAO.getOsByProridade(prioridade);
+    public List<OrdemServico> getOSbyPrioridade(long idMedico,OrdemServico.Prioridade prioridade) {
+        return ordemServicoDAO.getOsByProridade(idMedico,prioridade);
     }
 
     public List<OrdemServico> getOsbyIdMedico(long idMedico){

@@ -54,11 +54,7 @@ public class HomeClienteActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
-        imageView = headerView.findViewById(R.id.imageViewCliente);
-        convertToBitmap();
-        imageView.setImageBitmap(bmp);
-        mNomeCliente = headerView.findViewById(R.id.NomeCliente);
-        mEmailCliente = headerView.findViewById(R.id.textViewEmailCliente);
+        setHeaderTexts(headerView);
         mAlternaRaio = findViewById(R.id.buttonRaio);
         mAlternaRaio.setText("Raio atual: 5km");
 
@@ -76,6 +72,16 @@ public class HomeClienteActivity extends AppCompatActivity
         setTexts();
         initMapFragment();
 
+    }
+
+    private void setHeaderTexts(View headerView) {
+        imageView = headerView.findViewById(R.id.imageViewCliente);
+        convertToBitmap();
+        if (bmp != null){
+            imageView.setImageBitmap(bmp);
+        }
+        mNomeCliente = headerView.findViewById(R.id.NomeCliente);
+        mEmailCliente = headerView.findViewById(R.id.textViewEmailCliente);
     }
 
     private void convertToBitmap() {
@@ -103,14 +109,12 @@ public class HomeClienteActivity extends AppCompatActivity
             mapsFrag.setNovoRaio(novoRaio);
             mAlternaRaio.setText("Raio atual: 10Km");
             Toast.makeText(HomeClienteActivity.this, "Visualizando medicos em um raio de 10km", Toast.LENGTH_SHORT).show();
-
             novoRaio = 20.0;
             faseRaio = 3;
         } else if (faseRaio == 3) {
             mapsFrag.setNovoRaio(novoRaio);
             mAlternaRaio.setText("Raio atual: 20Km");
             Toast.makeText(HomeClienteActivity.this, "Visualizando medicos em um raio de 20km", Toast.LENGTH_SHORT).show();
-
             novoRaio = 5.0;
             faseRaio = 1;
         }
