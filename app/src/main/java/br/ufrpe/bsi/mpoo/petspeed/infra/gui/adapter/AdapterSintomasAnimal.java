@@ -57,6 +57,11 @@ public class AdapterSintomasAnimal extends RecyclerView.Adapter<AdapterSintomasA
             @Override
             public void onItemChecked(int position, boolean value) {
                 auxCheckedState.set(position,value);
+                if (auxCheckedState.get(position).equals(true)){
+                    checked.add(sintomas.get(position));
+                } else{
+                    checked.remove(sintomas.get(position));
+                }
             }
         });
 
