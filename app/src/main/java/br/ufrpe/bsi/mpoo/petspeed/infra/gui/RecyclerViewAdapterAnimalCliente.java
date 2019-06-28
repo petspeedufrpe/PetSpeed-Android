@@ -24,8 +24,6 @@ import java.util.List;
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petspeed.animal.persistencia.AnimalDAO;
-import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
-import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.RecyclerViewClickListener;
 
 

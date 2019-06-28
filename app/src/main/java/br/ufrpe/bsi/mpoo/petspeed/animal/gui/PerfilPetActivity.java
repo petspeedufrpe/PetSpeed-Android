@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +33,16 @@ public class PerfilPetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_perfil_pet);
         findTexts();
         showTexts(bitmap);
+        Button histBtn = findViewById(R.id.butt_historico);
         editDados = findViewById(R.id.fab_edit);
+        histBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(PerfilPetActivity.this, HistoricoAnimalActivity.class);
+                HistoricoAnimalActivity.animal = animal;
+                startActivity(it);
+            }
+        });
         editDados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,4 +83,5 @@ public class PerfilPetActivity extends AppCompatActivity {
         }
 
     }
+
 }
