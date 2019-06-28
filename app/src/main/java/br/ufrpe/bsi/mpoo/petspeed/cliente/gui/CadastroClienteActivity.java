@@ -129,7 +129,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
             mTelefone.setError(CAMPO_VAZIO);
             focusView = mTelefone;
             res = false;
-        } if (telefone.length()!=10) {
+        } if (telefone.length()!=11) {
             mTelefone.setError("telefone inválido");
             focusView = mTelefone;
             res = false;

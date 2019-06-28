@@ -74,7 +74,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
         mCidade.setText(cliente.getDadosPessoais().getEndereco().getCidade());
         mEndereco.setText(formatEndereco());
         mNomeUsuario.setTitle(cliente.getDadosPessoais().getNome());
-        mTelefone.setText(cliente.getTelefone());
+        mTelefone.setText("("+cliente.getTelefone().substring(0,2)+")"+cliente.getTelefone().substring(2));
         mFoto.setImageBitmap(bitmap);
     }
 

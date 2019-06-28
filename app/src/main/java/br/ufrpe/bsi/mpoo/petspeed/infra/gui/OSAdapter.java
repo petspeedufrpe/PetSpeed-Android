@@ -19,9 +19,8 @@ import br.ufrpe.bsi.mpoo.petspeed.os.negocio.OrdemServicoServices;
 public class OSAdapter extends RecyclerView.Adapter<OSAdapter.OSViewHolder>{
     private OrdemServicoServices ordemServicoServices = new OrdemServicoServices();
     private List<OrdemServico> OSs;
-
-
     private TextView btActionAceitar;
+
     private TextView btSintomas;
     public class OSViewHolder extends RecyclerView.ViewHolder {
         private TextView mClienteNome;
@@ -29,8 +28,6 @@ public class OSAdapter extends RecyclerView.Adapter<OSAdapter.OSViewHolder>{
         private TextView mAnimNome;
         private TextView mAnimRaca;
         private TextView mPrioridade;
-
-
 
         public OSViewHolder(View view) {
             super(view);
@@ -62,6 +59,8 @@ public class OSAdapter extends RecyclerView.Adapter<OSAdapter.OSViewHolder>{
                     ordemServicoServices.alteraStatusOs(os);
                     SessaoAgendamento.instance.setOs(os);
                     SessaoAgendamento.instance.setStatus(OrdemServico.Status.EM_ATENDIMENTO);
+                    btActionAceitar.setText("Confirmada");
+                    btActionAceitar.setClickable(false);
             }
         });
         btSintomas = itemView.findViewById(R.id.fragPopSintomas);
@@ -92,7 +91,17 @@ public class OSAdapter extends RecyclerView.Adapter<OSAdapter.OSViewHolder>{
             holder.mPrioridade.setTextColor(Color.parseColor("#FFFF0000"));
         }else{
             holder.mPrioridade.setTextColor(Color.parseColor("#24B403"));
+        }
 
+        if (os.getStatus() == OrdemServico.Status.EM_ATENDIMENTO) {
+            btActionAceitar.setText("Confirmada");
+            btActionAceitar.setClickable(false);
+        } else if(os.getStatus() == OrdemServico.Status.FINALIZADA){
+            btActionAceitar.setText("Finalizada");
+            btActionAceitar.setClickable(false);
+        } else if (os.getStatus() == OrdemServico.Status.CANCELADA){
+            btActionAceitar.setText("Cancelado");
+            btActionAceitar.setClickable(false);
         }
     }
 

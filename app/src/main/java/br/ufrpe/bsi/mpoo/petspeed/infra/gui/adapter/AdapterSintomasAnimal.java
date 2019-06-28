@@ -10,16 +10,19 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sintomas;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.iCheckedChangeListener;
 
 public class AdapterSintomasAnimal extends RecyclerView.Adapter<AdapterSintomasAnimal.MyViewHolder> {
 
     private Context mContext;
     private List<Sintomas> sintomas;
     private List<Sintomas> checked;
+    private List<Boolean> auxCheckedState = new ArrayList<>();
 
     public AdapterSintomasAnimal(Context context,List<Sintomas> sintomas,List<Sintomas> checked){
         this.mContext = context;
@@ -31,6 +34,7 @@ public class AdapterSintomasAnimal extends RecyclerView.Adapter<AdapterSintomasA
     @NonNull
     @Override
     public AdapterSintomasAnimal.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        fillCheckedState();
         View view;
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         view = layoutInflater.inflate(R.layout.relative_layout_selecionar_sintomas,viewGroup,false);
@@ -42,19 +46,19 @@ public class AdapterSintomasAnimal extends RecyclerView.Adapter<AdapterSintomasA
     public void onBindViewHolder(@NonNull final AdapterSintomasAnimal.MyViewHolder myViewHolder, int i) {
         myViewHolder.title.setText(String.valueOf(sintomas.get(i).getDescricao()));
         final Sintomas mSintomas = sintomas.get(i);
-        myViewHolder.checkBox.setOnCheckedChangeListener(null);
-        myViewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        if (auxCheckedState.get(i)){
+            myViewHolder.checkBox.setChecked(true);
+            checked.add(mSintomas);
+        }else{
+            myViewHolder.checkBox.setChecked(false);
+            checked.remove(mSintomas);
+        }
+        myViewHolder.setICheckedChangeListener(new iCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    checked.add(mSintomas);
-                }else{
-                    checked.remove(mSintomas);
-                }
-
+            public void onItemChecked(int position, boolean value) {
+                auxCheckedState.set(position,value);
             }
         });
-
 
     }
 
@@ -68,12 +72,29 @@ public class AdapterSintomasAnimal extends RecyclerView.Adapter<AdapterSintomasA
 
         private TextView title;
         private CheckBox checkBox;
+        private iCheckedChangeListener checkedChangeListener;
 
         private MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             title =  itemView.findViewById(R.id.txt_sintoma_animal);
             checkBox =  itemView.findViewById(R.id.check_sintoma_animal);
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    checkedChangeListener.onItemChecked(getAdapterPosition(),isChecked);
+                }
+            });
+        }
+
+        void setICheckedChangeListener(iCheckedChangeListener checkedChangeListener){
+            this.checkedChangeListener = checkedChangeListener;
+        }
+    }
+
+    private void fillCheckedState(){
+        for (int i=0;i<=sintomas.size();i++){
+            auxCheckedState.add(false);
         }
     }
 }
