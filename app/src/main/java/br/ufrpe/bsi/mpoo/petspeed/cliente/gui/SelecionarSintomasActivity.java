@@ -26,8 +26,6 @@ public class SelecionarSintomasActivity extends AppCompatActivity {
     RecyclerView recyclerViewSintomas;
     private List<Sintomas> sintomas;
     private List<Sintomas> checked;
-    private AdapterSintomasAnimal adapterSintomasAnimal;
-    private FloatingActionButton fabConfirmarSintomas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +34,7 @@ public class SelecionarSintomasActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getWindow().setStatusBarColor(Color.parseColor("#AFDF59"));
-        fabConfirmarSintomas = findViewById(R.id.fab_confirmar_sintomas);
+        FloatingActionButton fabConfirmarSintomas = findViewById(R.id.fab_confirmar_sintomas);
         setTitle("Selecione os Sintomas do Animal");
         checked = new ArrayList<>();
         createAllSintomas();
@@ -62,7 +60,7 @@ public class SelecionarSintomasActivity extends AppCompatActivity {
 
         if (sintomas!= null){
             recyclerViewSintomas = findViewById(R.id.selecionar_sintomas_recycler_view);
-            adapterSintomasAnimal = new AdapterSintomasAnimal(this,sintomas,checked);
+            AdapterSintomasAnimal adapterSintomasAnimal = new AdapterSintomasAnimal(this, sintomas, checked);
             recyclerViewSintomas.setLayoutManager(new LinearLayoutManager(this));
             recyclerViewSintomas.setAdapter(adapterSintomasAnimal);
             recyclerViewSintomas.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));

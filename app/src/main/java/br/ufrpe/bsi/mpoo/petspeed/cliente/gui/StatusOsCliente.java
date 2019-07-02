@@ -23,19 +23,31 @@ import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
 import br.ufrpe.bsi.mpoo.petspeed.os.negocio.OrdemServicoServices;
 import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.TriagemDAO;
-import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.TriagemXsintomaDAO;
 
 public class StatusOsCliente extends AppCompatActivity {
     private CardView cardView;
     private RelativeLayout relativeLayout;
-    private TextView nome,endereco,avaliacao,nomeAnimal,raca,prioridade,data,statusDescricao,verSintomas,view;
-    private Button finalizarAtendimento;
-    private String mNome,mBairro,mRua,mNumero,mAvaliacao,mNomeAnimal,mRaca,mPrioridade,mData,mStatusDescricao;
+    private TextView nome;
+    private TextView endereco;
+    private TextView avaliacao;
+    private TextView nomeAnimal;
+    private TextView raca;
+    private TextView prioridade;
+    private TextView data;
+    private TextView statusDescricao;
+    private String mNome;
+    private String mBairro;
+    private String mRua;
+    private String mNumero;
+    private String mAvaliacao;
+    private String mNomeAnimal;
+    private String mRaca;
+    private String mPrioridade;
+    private String mData;
+    private String mStatusDescricao;
     private OrdemServico ordemServico;
-    private Triagem triagem;
     private TriagemDAO triagemDAO = new TriagemDAO();
     private OrdemServicoServices ordemServicoServices = new OrdemServicoServices();
-    private TriagemXsintomaDAO triagemXsintomaDAO = new TriagemXsintomaDAO();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +55,7 @@ public class StatusOsCliente extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Status de Atendimento");
-        finalizarAtendimento = findViewById(R.id.btnFinalizarAtendimento);
+        Button finalizarAtendimento = findViewById(R.id.btnFinalizarAtendimento);
         findTexts();
         if (initOS()){
             getAtualDate();
@@ -51,7 +63,7 @@ public class StatusOsCliente extends AppCompatActivity {
             getAllTexts();
             setTextsNome();
         } else{
-            view = findViewById(R.id.viewOsVazio);
+            TextView view = findViewById(R.id.viewOsVazio);
             view.setVisibility(View.VISIBLE);
             setAllInvisible();
 
@@ -71,7 +83,7 @@ public class StatusOsCliente extends AppCompatActivity {
             }
         });
 
-        verSintomas = findViewById(R.id.fragPopSintomas);
+        TextView verSintomas = findViewById(R.id.fragPopSintomas);
         verSintomas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,13 +122,7 @@ public class StatusOsCliente extends AppCompatActivity {
         prioridade.setText("PRIORIDADE: "+mPrioridade);
         data.setText(mData);
         statusDescricao.setText(mStatusDescricao);
-        if (mStatusDescricao.equals(OrdemServico.Status.AGUARDANDO_ATENDIMENTO.getDescricao().replace("_"," "))){
-            statusDescricao.setTextColor(Color.BLUE);
-        } else if(mStatusDescricao.equals(OrdemServico.Status.EM_ATENDIMENTO.getDescricao().replace("_"," "))){
-            statusDescricao.setTextColor(Color.MAGENTA);
-        } else if(mStatusDescricao.equals(OrdemServico.Status.FINALIZADA.getDescricao())){
-            statusDescricao.setTextColor(Color.GREEN);
-        }
+        statusDescricao.setTextColor(Color.BLACK);
     }
     private void getAllTexts(){
         mNome = ordemServico.getMedico().getDadosPessoais().getNome();
@@ -149,9 +155,8 @@ public class StatusOsCliente extends AppCompatActivity {
     }
 
     private void initTriagem(){
-        triagem  = triagemDAO.getTriagembyId(ordemServico.getId());
+        Triagem triagem = triagemDAO.getTriagembyId(ordemServico.getId());
         ordemServico.setTriagem(triagem);
-        //list = triagemXsintomaDAO.getAllSintomasByIdTriagem(triagem.getId());
     }
 
 

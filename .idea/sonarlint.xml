@@ -2,5 +2,10 @@
 <project version="4">
   <component name="SonarLintProjectSettings">
     <option name="analysisLogsEnabled" value="true" />
+    <option name="fileExclusions">
+      <list>
+        <option value="DIRECTORY:app" />
+      </list>
+    </option>
   </component>
 </project>

@@ -22,7 +22,9 @@ public class PerfilPetActivity extends AppCompatActivity {
 
     public static Animal animal;
     private Cliente cliente = Sessao.instance.getCliente();
-    private TextView mNome, mRaca, mPeso;
+    private TextView mNome;
+    private TextView mRaca;
+    private TextView mPeso;
     private ImageView mFoto;
     private FloatingActionButton editDados;
     private Bitmap bitmap;

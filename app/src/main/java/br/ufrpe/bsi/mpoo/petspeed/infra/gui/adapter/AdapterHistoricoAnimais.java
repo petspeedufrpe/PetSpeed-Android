@@ -28,14 +28,10 @@ public class AdapterHistoricoAnimais extends ArrayAdapter<OrdemServico> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.activity_meus_pets, parent, false);
 
-        TextView atendimento_status = rowView.findViewById(R.id.campo_status);
-        TextView atendimento_medico = rowView.findViewById(R.id.campo_medico);
-        TextView atendimento_descricao = rowView.findViewById(R.id.campo_descricao);
+        TextView atendimentoDescricao = rowView.findViewById(R.id.campo_descricao);
 
 
-        //atendimento_status.setText(listaHistorico.get(position).getStatus());
-        //atendimento_medico.setText(listaHistorico.get(position).getMedico());
-        atendimento_descricao.setText(listaHistorico.get(position).getDescricao());
+        atendimentoDescricao.setText(listaHistorico.get(position).getDescricao());
 
         return rowView;
     }

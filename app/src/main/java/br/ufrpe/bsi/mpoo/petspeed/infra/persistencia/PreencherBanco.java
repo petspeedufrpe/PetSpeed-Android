@@ -10,9 +10,6 @@ import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Criptografia;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
 import br.ufrpe.bsi.mpoo.petspeed.medico.negocio.MedicoServices;
-import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
-import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
-import br.ufrpe.bsi.mpoo.petspeed.os.negocio.OrdemServicoServices;
 import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Endereco;
 import br.ufrpe.bsi.mpoo.petspeed.pessoa.dominio.Pessoa;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
@@ -20,13 +17,11 @@ import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
 public class PreencherBanco {
     MedicoServices mServices = new MedicoServices();
     ClienteServices cServices = new ClienteServices();
-    OrdemServicoServices servicoServices = new OrdemServicoServices();
     SintomasDAO sintomasDAO = new SintomasDAO();
 
     public void start() {
         cadastraMedicos(mServices);
         cadastraClientes(cServices);
-        cadastraOSs();
         sintomasDAO.iterateSintomas();
     }
 

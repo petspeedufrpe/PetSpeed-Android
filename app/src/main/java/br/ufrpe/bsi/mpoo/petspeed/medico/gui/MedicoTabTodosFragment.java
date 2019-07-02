@@ -17,13 +17,11 @@ import br.ufrpe.bsi.mpoo.petspeed.infra.gui.OSAdapter;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 import br.ufrpe.bsi.mpoo.petspeed.os.negocio.OrdemServicoServices;
-import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.TriagemDAO;
 
 public class MedicoTabTodosFragment extends Fragment {
 
     private OSAdapter osAdapter;
     private List<OrdemServico> os;
-    private TriagemDAO triagemDAO = new TriagemDAO();
     private TextView view;
 
     @Override

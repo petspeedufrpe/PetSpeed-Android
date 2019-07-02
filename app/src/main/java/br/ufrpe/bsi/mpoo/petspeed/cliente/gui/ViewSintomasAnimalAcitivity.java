@@ -1,11 +1,12 @@
 package br.ufrpe.bsi.mpoo.petspeed.cliente.gui;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import java.util.List;
 
@@ -20,17 +21,19 @@ import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.TriagemXsintomaDAO;
 public class ViewSintomasAnimalAcitivity extends AppCompatActivity {
 
     RecyclerView recyclerViewSintomas;
+    ConstraintLayout constraintLayout;
     private List<Sintomas> sintomas;
-    private Context mContext = getBaseContext();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_sintomas_animal_acitivity);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        constraintLayout = findViewById(R.id.constraintLayoutSintomas);
         setSupportActionBar(toolbar);
         createAllSintomas();
         initRecylerView();
+        changeViewByTypeOfAccount();
     }
 
     private void initRecylerView() {
@@ -52,6 +55,11 @@ public class ViewSintomasAnimalAcitivity extends AppCompatActivity {
     }
 
     private void changeViewByTypeOfAccount(){
+        if (Sessao.instance.getCliente() != null){
+         constraintLayout.setVisibility(View.INVISIBLE);
+         recyclerViewSintomas.setHasFixedSize(false);
+         recyclerViewSintomas.setMinimumHeight(400);
+        }
 
     }
     @Override

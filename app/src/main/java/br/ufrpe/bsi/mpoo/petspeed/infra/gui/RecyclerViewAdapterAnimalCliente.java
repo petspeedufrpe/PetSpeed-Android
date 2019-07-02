@@ -63,7 +63,6 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
         @Override
         public void onDestroyActionMode(ActionMode actionMode) {
             mSelect = false;
-            //selectedItems.clear();
             notifyDataSetChanged();
 
         }
@@ -105,7 +104,7 @@ public class RecyclerViewAdapterAnimalCliente extends RecyclerView.Adapter<Recyc
         holder.nomeAnimal.setText("Nome: " + mAnimals.get(i).getNome());
         holder.racaAnimal.setText("Raça: " + mAnimals.get(i).getRaca());
         holder.pesoAnimal.setText("Peso: " + String.valueOf(mAnimals.get(i).getPeso()).replace(".",",") + "Kg");
-        holder.idadeAnimal.setText("Idade: " + String.valueOf(mAnimals.get(i).getNascimento()));
+        holder.idadeAnimal.setText("Idade: " + mAnimals.get(i).getNascimento());
         try {
             byte[] imagemEmBits = mAnimals.get(i).getFoto();
             if (imagemEmBits != null){

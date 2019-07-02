@@ -60,8 +60,6 @@ public class ClienteDAO {
 
     }
 
-    //guarda o indice de cada coluna necessária para montar o obj, e depois passa em uma variavel o valor retornado do banco
-    //seta no objeto e retorna ele.
     private Cliente createCliente(Cursor cursor) {
         int indexId = cursor.getColumnIndex(DBHelper.COL_CLIENTE_ID);
         int indexAvaliacao = cursor.getColumnIndex(DBHelper.COL_CLIENTE_AVALIACAO);

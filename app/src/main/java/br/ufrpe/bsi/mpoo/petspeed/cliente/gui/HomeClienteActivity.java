@@ -37,7 +37,6 @@ public class HomeClienteActivity extends AppCompatActivity
     private Button mAlternaRaio;
     private Double novoRaio = 5.0;
     private int faseRaio = 1;
-    private CircleImageView imageView;
     private Bitmap bmp;
 
     @Override
@@ -75,7 +74,7 @@ public class HomeClienteActivity extends AppCompatActivity
     }
 
     private void setHeaderTexts(View headerView) {
-        imageView = headerView.findViewById(R.id.imageViewCliente);
+        CircleImageView imageView = headerView.findViewById(R.id.imageViewCliente);
         convertToBitmap();
         if (bmp != null){
             imageView.setImageBitmap(bmp);
@@ -178,7 +177,7 @@ public class HomeClienteActivity extends AppCompatActivity
             startActivity(new Intent(HomeClienteActivity.this,StatusOsCliente.class));
 
         } else if (id == R.id.nav_atendimento_emergencial){
-
+            startActivity(new Intent());
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout_home_cliente);
         drawer.closeDrawer(GravityCompat.START);

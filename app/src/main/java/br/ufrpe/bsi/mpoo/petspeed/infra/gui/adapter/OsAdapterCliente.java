@@ -19,19 +19,19 @@ import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.ViewSintomasAnimalAcitivity;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 
-public class OsAdapterCliente extends RecyclerView.Adapter<OsAdapterCliente.ViewHolder> {
-    private List<OrdemServico> OSs;
+public class OsAdapterCliente extends RecyclerView.Adapter<OsAdapterCliente.OsAdapterClienteViewHolder> {
+    private List<OrdemServico> ordemServicos;
     private Context mContext;
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public OsAdapterClienteViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_os_cliente,viewGroup,false);
-        return new ViewHolder(itemView);
+        return new OsAdapterClienteViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        OrdemServico os = this.OSs.get(i);
+    public void onBindViewHolder(@NonNull OsAdapterClienteViewHolder viewHolder, int i) {
+        OrdemServico os = this.ordemServicos.get(i);
         viewHolder.mNomeMedico.setText("Nome: "+os.getMedico().getDadosPessoais().getNome());
         viewHolder.mClienteEndereco.setText("Endereco: "+
                 os.getCliente().getDadosPessoais().getEndereco().getLogradouro() + " N° "
@@ -61,15 +61,15 @@ public class OsAdapterCliente extends RecyclerView.Adapter<OsAdapterCliente.View
 
     @Override
     public int getItemCount() {
-        return OSs.size();
+        return ordemServicos.size();
     }
 
     public OsAdapterCliente(Context context,List<OrdemServico> medicos) {
-        this.OSs = medicos;
+        this.ordemServicos = medicos;
         this.mContext = context;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class OsAdapterClienteViewHolder extends RecyclerView.ViewHolder {
         private TextView mNomeMedico;
         private TextView mClienteEndereco;
         private TextView mAnimNome;
@@ -80,7 +80,7 @@ public class OsAdapterCliente extends RecyclerView.Adapter<OsAdapterCliente.View
         private TextView data;
 
 
-        public ViewHolder(@NonNull final View itemView) {
+        public OsAdapterClienteViewHolder(@NonNull final View itemView) {
             super(itemView);
             mNomeMedico = itemView.findViewById(R.id.fragPopUpMedNome);
             mClienteEndereco = itemView.findViewById(R.id.fragPopUpMedEnd);
@@ -94,7 +94,7 @@ public class OsAdapterCliente extends RecyclerView.Adapter<OsAdapterCliente.View
             mSitomas.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Sessao.instance.setOs(OSs.get(getAdapterPosition()));
+                    Sessao.instance.setOs(ordemServicos.get(getAdapterPosition()));
                     mContext.startActivity(new Intent(mContext, ViewSintomasAnimalAcitivity.class));
                 }
             });

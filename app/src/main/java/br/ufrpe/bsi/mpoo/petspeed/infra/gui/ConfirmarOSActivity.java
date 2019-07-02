@@ -92,7 +92,6 @@ public class ConfirmarOSActivity extends AppCompatActivity {
             }
         });
 
-        verSintomas = findViewById(R.id.fragPopSintomas);
         verSintomas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,11 +156,6 @@ public class ConfirmarOSActivity extends AppCompatActivity {
     }
 
 
-    private void inputSessao(){
-        SessaoAgendamento.instance.setOs(ordemServico);
-        SessaoAgendamento.instance.setTriagem(triagem);
-
-    }
 
     private void getAtualDate(){
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -189,6 +183,12 @@ public class ConfirmarOSActivity extends AppCompatActivity {
             triagem = triagemDAO.getTriagembyId(idOs);
             triagemXsintomaDAO.cadastrar(triagem, list);
             inputSessao();
+        }
+
+        private void inputSessao(){
+            SessaoAgendamento.instance.setOs(ordemServico);
+            SessaoAgendamento.instance.setTriagem(triagem);
+
         }
 
 

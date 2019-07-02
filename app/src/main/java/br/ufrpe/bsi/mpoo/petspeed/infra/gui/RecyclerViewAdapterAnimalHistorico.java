@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -37,8 +36,7 @@ public class RecyclerViewAdapterAnimalHistorico  extends RecyclerView.Adapter<Re
     public void onBindViewHolder(@NonNull MyViewHolder holder, int i) {
         holder.status.setText("Status: " + mServico.get(i).getStatus().getDescricao().replace("_"," "));
         holder.nomeMedico.setText("Medico Atendimento: " + mServico.get(i).getMedico().getDadosPessoais().getNome());
-        holder.descricao.setText("Descrição: " + String.valueOf(mServico.get(i).getDescricao()));
-        //holder.idadeAnimal.setText("Idade: " + String.valueOf(mServico.get(i).getNascimento()));
+        holder.descricao.setText("Descrição: " + mServico.get(i).getDescricao());
 
 
 
@@ -50,11 +48,9 @@ public class RecyclerViewAdapterAnimalHistorico  extends RecyclerView.Adapter<Re
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private RelativeLayout relativeLayout;
         private TextView status;
         private TextView nomeMedico;
         private TextView descricao;
-        private TextView idadeAnimal;
 
         public MyViewHolder(@NonNull final View itemView) {
             super(itemView);
@@ -65,7 +61,6 @@ public class RecyclerViewAdapterAnimalHistorico  extends RecyclerView.Adapter<Re
             status = itemView.findViewById(R.id.txt_status);
             nomeMedico = itemView.findViewById(R.id.txt_nome_medico);
             descricao = itemView.findViewById(R.id.txt_descricao);
-            //idadeAnimal = itemView.findViewById(R.id.txt_idade_animal);
         }
     }
 }

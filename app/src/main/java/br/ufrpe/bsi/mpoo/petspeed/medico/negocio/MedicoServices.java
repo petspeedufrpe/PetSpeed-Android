@@ -167,10 +167,7 @@ public class MedicoServices {
         return medico.getAvaliacao();
     }
 
-    public void alteraAvaliacao(Medico medico) {
-        if (medico.getAvaliacao()>5 || medico.getAvaliacao()<=1) {
-        }
-
+    public void alteraAvaliacao(Medico medico){
         medicoDAO.alteraAvaliacao(medico);
     }
 }

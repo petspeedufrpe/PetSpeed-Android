@@ -45,7 +45,7 @@ public class AnimalDAO {
 
     }
 
-    public Animal loadObject(String sql, String[] args){
+    private Animal loadObject(String sql, String[] args){
         Animal animal = null;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql,args);
