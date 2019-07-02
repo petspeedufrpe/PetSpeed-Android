@@ -32,8 +32,8 @@ public class MedicoTabMinhasOSFragment extends Fragment {
     }
 
     public void setMedicosAdapter() {
-        List<OrdemServico> OS = new ArrayList<>();
-        osAdapter = new OSAdapter(OS);
+        List<OrdemServico> os = new ArrayList<>();
+        osAdapter = new OSAdapter(getContext(),os);
     }
 
     private void initRecyclerView() {

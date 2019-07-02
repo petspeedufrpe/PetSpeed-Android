@@ -37,7 +37,6 @@ import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
 import br.ufrpe.bsi.mpoo.petspeed.animal.negocio.AnimalServices;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.AnimalClienteActivity;
-import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.EditDadosClienteActivity;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.persistencia.ClienteDAO;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.usuario.dominio.Usuario;
@@ -73,7 +72,7 @@ public class CrudAnimalActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getPermissionsGaleria();
-                //takePhoto();
+                takePhoto();
             }
         });
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
@@ -229,7 +228,7 @@ public class CrudAnimalActivity extends AppCompatActivity {
         if (isCamposValidos()) {
             cadastrar();
         }
-        //animalServices.alteraFotoAnimal(animal);
+        animalServices.alteraFotoAnimal(animal);
     }
 
     private byte[] conveterImageViewToByte() {

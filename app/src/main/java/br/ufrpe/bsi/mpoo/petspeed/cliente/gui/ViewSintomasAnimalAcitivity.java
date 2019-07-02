@@ -12,6 +12,7 @@ import java.util.List;
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.adapter.AdapterSintomasOs;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoAgendamento;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sintomas;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.TriagemXsintomaDAO;
@@ -20,10 +21,7 @@ public class ViewSintomasAnimalAcitivity extends AppCompatActivity {
 
     RecyclerView recyclerViewSintomas;
     private List<Sintomas> sintomas;
-    private AdapterSintomasOs adapterSintomasOs;
     private Context mContext = getBaseContext();
-    private OrdemServico ordemServico;
-    private TriagemXsintomaDAO triagemXsintomaDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,17 +36,27 @@ public class ViewSintomasAnimalAcitivity extends AppCompatActivity {
     private void initRecylerView() {
         if (sintomas!= null){
             recyclerViewSintomas = findViewById(R.id.recyclerViewSintomasOs);
-            adapterSintomasOs = new AdapterSintomasOs(this,sintomas);
+            AdapterSintomasOs adapterSintomasOs = new AdapterSintomasOs(this, sintomas);
             recyclerViewSintomas.setLayoutManager(new GridLayoutManager(getBaseContext(),2));
             recyclerViewSintomas.setAdapter(adapterSintomasOs);
         }
     }
 
     private void createAllSintomas() {
-        ordemServico = Sessao.instance.getOs();
-        triagemXsintomaDAO = new TriagemXsintomaDAO();
+        OrdemServico ordemServico = Sessao.instance.getOs();
+        TriagemXsintomaDAO triagemXsintomaDAO = new TriagemXsintomaDAO();
         sintomas = triagemXsintomaDAO.getAllSintomasByIdTriagem(ordemServico.getTriagem().getId());
+        if (sintomas.isEmpty()) {
+            sintomas = SessaoAgendamento.instance.getSintomas();
+        }
     }
 
+    private void changeViewByTypeOfAccount(){
 
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Sessao.instance.setOs(null);
+    }
 }

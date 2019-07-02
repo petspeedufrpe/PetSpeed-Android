@@ -1,5 +1,7 @@
 package br.ufrpe.bsi.mpoo.petspeed.infra.negocio;
 
+import android.util.Log;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -7,11 +9,15 @@ public class Criptografia {
 
     private static MessageDigest messageDigest =null;
 
+    private Criptografia(){
+        throw  new IllegalStateException("Utility class");
+    }
+
     static {
         try {
             messageDigest = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            Log.d("Tag",e.toString());
         }
     }
 

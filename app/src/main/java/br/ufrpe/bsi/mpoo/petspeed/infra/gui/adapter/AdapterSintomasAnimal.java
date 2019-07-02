@@ -15,7 +15,7 @@ import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sintomas;
-import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.iCheckedChangeListener;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.ICheckedChangeListener;
 
 public class AdapterSintomasAnimal extends RecyclerView.Adapter<AdapterSintomasAnimal.MyViewHolder> {
 
@@ -53,7 +53,7 @@ public class AdapterSintomasAnimal extends RecyclerView.Adapter<AdapterSintomasA
             myViewHolder.checkBox.setChecked(false);
             checked.remove(mSintomas);
         }
-        myViewHolder.setICheckedChangeListener(new iCheckedChangeListener() {
+        myViewHolder.setICheckedChangeListener(new ICheckedChangeListener() {
             @Override
             public void onItemChecked(int position, boolean value) {
                 auxCheckedState.set(position,value);
@@ -77,7 +77,7 @@ public class AdapterSintomasAnimal extends RecyclerView.Adapter<AdapterSintomasA
 
         private TextView title;
         private CheckBox checkBox;
-        private iCheckedChangeListener checkedChangeListener;
+        private ICheckedChangeListener checkedChangeListener;
 
         private MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -92,7 +92,7 @@ public class AdapterSintomasAnimal extends RecyclerView.Adapter<AdapterSintomasA
             });
         }
 
-        void setICheckedChangeListener(iCheckedChangeListener checkedChangeListener){
+        void setICheckedChangeListener(ICheckedChangeListener checkedChangeListener){
             this.checkedChangeListener = checkedChangeListener;
         }
     }

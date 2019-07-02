@@ -4,6 +4,7 @@ package br.ufrpe.bsi.mpoo.petspeed.os.persistencia;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -36,7 +37,7 @@ public class OrdemServicoDAO {
         values.put(DBHelper.COL_OS_FK_CLIENTE, ordemServico.getCliente().getId());
         values.put(DBHelper.COL_OS_FK_TRIAGEM, ordemServico.getTriagem().getId());
         values.put(DBHelper.COL_OS_FK_MEDICO, ordemServico.getMedico().getId());
-        values.put(DBHelper.COL_OS_DATA,new SimpleDateFormat("hh/MM/yyyy HH:mm:ss").format(ordemServico.getData()));
+        values.put(DBHelper.COL_OS_DATA,new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(ordemServico.getData()));
         long id = db.insert(DBHelper.TABELA_OS, null, values);
         db.close();
         return id;
@@ -98,7 +99,7 @@ public class OrdemServicoDAO {
         try {
             date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(data);
         } catch (ParseException e) {
-            e.printStackTrace();
+            Log.d("TagOS",e.toString());
         }
         ordemServico.setData(date);
         return ordemServico;

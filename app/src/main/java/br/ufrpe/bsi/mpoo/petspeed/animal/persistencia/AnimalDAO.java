@@ -10,7 +10,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.animal.dominio.Animal;
-import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.DBHelper;
 
 public class AnimalDAO {
@@ -136,7 +135,7 @@ public class AnimalDAO {
         String sql = SELECT_ALL_FROM + DBHelper.TABELA_ANIMAL+ WHERE + DBHelper.COL_ANIMAL_FK_CLIENTE+ " = ?";
         String[] args = {String.valueOf(idCliente)};
         Cursor cursor = db.rawQuery(sql,args);
-        Animal animal = null;
+        Animal animal;
         if(cursor.moveToFirst()){
             do {
                 animal = createAnimal(cursor);

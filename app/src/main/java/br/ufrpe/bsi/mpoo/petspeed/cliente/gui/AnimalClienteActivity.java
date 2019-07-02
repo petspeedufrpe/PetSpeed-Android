@@ -26,7 +26,6 @@ import br.ufrpe.bsi.mpoo.petspeed.cliente.dominio.Cliente;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.negocio.ClienteServices;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.persistencia.ClienteDAO;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.RecyclerViewAdapterAnimalCliente;
-import br.ufrpe.bsi.mpoo.petspeed.infra.gui.adapter.AdapterMeuPet;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.RecyclerVIewTouchHelperListener;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.RecyclerViewClickListener;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
@@ -62,15 +61,6 @@ public class AnimalClienteActivity extends AppCompatActivity implements Recycler
             }
         });
     }
-
-    private void preencherArray() {
-        //método pertencente à uma funcionalidade que ainda está sendo implementada.
-        long idCliente = Sessao.instance.getCliente().getId();
-        List<Animal> petsCliente = clienteServices.getAllAnimalByIdCliente(idCliente);
-        final AdapterMeuPet adapter = new AdapterMeuPet(this, petsCliente);
-        //listaAnimal.setAdapter(adapter);
-    }
-
 
     public void createAllAnimals() {
         cliente = clienteServices.getClienteCompleto(cliente.getId());
@@ -111,11 +101,11 @@ public class AnimalClienteActivity extends AppCompatActivity implements Recycler
         final Animal itemDeletado = animalArrayList.get(viewHolder.getAdapterPosition());
         final int deletIndex = viewHolder.getAdapterPosition();
         adapterAnimalCliente.removeItem(deletIndex);
-        SnackBarUndoDelete(name, itemDeletado, deletIndex);
+        snackBarUndoDelete(name, itemDeletado, deletIndex);
 
     }
 
-    private void SnackBarUndoDelete(String name, final Animal itemDeletado, final int deletIndex) {
+    private void snackBarUndoDelete(String name, final Animal itemDeletado, final int deletIndex) {
         Snackbar snackbar = Snackbar.make(rootLayout, name + " removido", Snackbar.LENGTH_SHORT);
         snackbar.setAction("DESFAZER", new View.OnClickListener() {
             @Override

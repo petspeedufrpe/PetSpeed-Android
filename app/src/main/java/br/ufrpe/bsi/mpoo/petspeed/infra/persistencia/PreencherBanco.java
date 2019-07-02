@@ -487,6 +487,55 @@ public class PreencherBanco {
         }
         cliente = Sessao.instance.getCliente();
 
+        //ANIMAL 1 ##################################
+
+        animal = new Animal();
+        animal.setNome("Toto");
+        animal.setRaca("Labrador");
+        animal.setPeso(12.3);
+        animal.setNascimento(7);
+        animal.setFkCliente(cliente.getId());
+        cService.cadastraAnimal(animal);
+
+        //ANIMAL 2 ##################################
+
+        animal = new Animal();
+        animal.setNome("Zeus");
+        animal.setRaca("Poodle");
+        animal.setPeso(7.5);
+        animal.setNascimento(5);
+        animal.setFkCliente(cliente.getId());
+        cService.cadastraAnimal(animal);
+
+        //ANIMAL 3 ##################################
+
+        animal = new Animal();
+        animal.setNome("Tody");
+        animal.setRaca("Rottweiler");
+        animal.setPeso(15.9);
+        animal.setNascimento(8);
+        animal.setFkCliente(cliente.getId());
+        cService.cadastraAnimal(animal);
+
+        //ANIMAL 4 ##################################
+
+        animal = new Animal();
+        animal.setNome("Zeus");
+        animal.setRaca("labrador");
+        animal.setPeso(12.9);
+        animal.setNascimento(7);
+        animal.setFkCliente(cliente.getId());
+        cService.cadastraAnimal(animal);
+
+        //ANIMAL 5 ##################################
+
+        animal = new Animal();
+        animal.setNome("Bob");
+        animal.setRaca("golden retriver");
+        animal.setPeso(15.7);
+        animal.setNascimento(9);
+        animal.setFkCliente(cliente.getId());
+        cService.cadastraAnimal(animal);
 
 
         Sessao.instance.reset();
@@ -637,31 +686,6 @@ public class PreencherBanco {
         Sessao.instance.reset();
     }
 
-    private void cadastraOSs() {
-        Medico medico;
-        Cliente cliente;
-        Triagem triagem;
-        OrdemServico os;
-
-        // OS 1 ############################################
-
-        /*os = new OrdemServico();
-
-        medico = mServices.getMedicoById(1);
-        cliente = cServices.getClienteCompleto(1);
-        triagem = new Triagem();
-        triagem.setSintomas("Lorem, ipsum, dolor, sit, amet");
-        triagem.setOutros("Lorem ipsum dolor sit amet");
-        os.setCliente(cliente);
-        os.setAnimal(new AnimalDAO().getAnimalById(1));
-        os.setDescricao("Lorem ipsum dolor sit amet");
-        os.setPrioridade(OrdemServico.Prioridade.ALTA);
-        os.setStatus(OrdemServico.Status.AGUARDANDO_ATENDIMENTO);
-        os.setTriagem(triagem);
-        os.setMedico(medico);
-        servicoServices.cadastraOS(os, os.getTriagem());
-        */
-    }
 
 
 }

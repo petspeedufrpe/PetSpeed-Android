@@ -21,7 +21,6 @@ import br.ufrpe.bsi.mpoo.petspeed.os.negocio.OrdemServicoServices;
 public class HistoricoOsClienteActivity extends AppCompatActivity {
     private OrdemServicoServices ordemServicoServices = new OrdemServicoServices();
     private List<OrdemServico> ordemServicos = new ArrayList<>();
-    private OsAdapterCliente osAdapterCliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +41,7 @@ public class HistoricoOsClienteActivity extends AppCompatActivity {
     private void initRecyclerView(){
         if (ordemServicos != null){
             RecyclerView recyclerView = findViewById(R.id.recycler_view_historico_os);
-            osAdapterCliente = new OsAdapterCliente(getBaseContext(),ordemServicos);
+            OsAdapterCliente osAdapterCliente = new OsAdapterCliente(getBaseContext(), ordemServicos);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));

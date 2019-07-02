@@ -18,6 +18,7 @@ import java.util.List;
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.HomeClienteActivity;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.StatusOsCliente;
+import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.ViewSintomasAnimalAcitivity;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoAgendamento;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sintomas;
@@ -28,12 +29,24 @@ import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.TriagemDAO;
 import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.TriagemXsintomaDAO;
 
 public class ConfirmarOSActivity extends AppCompatActivity {
-    private TextView nome,endereco,avaliacao,nomeAnimal,raca,prioridade,data,verSintomas;
-    private Button confirmarAtendimento,abortar;
-    private String mNome,mBairro,mRua,mNumero,mAvaliacao,mNomeAnimal,mRaca,mPrioridade,mData;
+    private TextView nome;
+    private TextView endereco;
+    private TextView avaliacao;
+    private TextView nomeAnimal;
+    private TextView raca;
+    private TextView prioridade;
+    private TextView data;
+    private String mNome;
+    private String mBairro;
+    private String mRua;
+    private String mNumero;
+    private String mAvaliacao;
+    private String mNomeAnimal;
+    private String mRaca;
+    private String mPrioridade;
+    private String mData;
     private OrdemServico ordemServico;
     private Triagem triagem;
-    private List<Sintomas> list;
     private TriagemDAO triagemDAO = new TriagemDAO();
     private OrdemServicoServices ordemServicoServices = new OrdemServicoServices();
     private TriagemXsintomaDAO triagemXsintomaDAO = new TriagemXsintomaDAO();
@@ -50,8 +63,9 @@ public class ConfirmarOSActivity extends AppCompatActivity {
         getAllTexts();
         setTextsNome();
 
-        confirmarAtendimento = findViewById(R.id.btn_confirmar_os);
-        abortar = findViewById(R.id.btn_cancelar_os);
+        Button confirmarAtendimento = findViewById(R.id.btn_confirmar_os);
+        Button abortar = findViewById(R.id.btn_cancelar_os);
+        TextView verSintomas = findViewById(R.id.fragPopSintomas);
 
         confirmarAtendimento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +89,15 @@ public class ConfirmarOSActivity extends AppCompatActivity {
                 SessaoAgendamento.instance.reset();
                 startActivity(new Intent(ConfirmarOSActivity.this, HomeClienteActivity.class));
                 finish();
+            }
+        });
+
+        verSintomas = findViewById(R.id.fragPopSintomas);
+        verSintomas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Sessao.instance.setOs(ordemServico);
+                startActivity(new Intent(ConfirmarOSActivity.this,ViewSintomasAnimalAcitivity.class));
             }
         });
 
@@ -133,14 +156,6 @@ public class ConfirmarOSActivity extends AppCompatActivity {
         triagem.setOutros("Outros Sintomas Digitados pelo Cliente");
     }
 
-    private void cadastrarOsAndTriagem(){
-        long idOs = ordemServicoServices.cadastraOS(ordemServico,triagem);
-        ordemServico.setId(idOs);
-        list = SessaoAgendamento.instance.getSintomas();
-        triagem = triagemDAO.getTriagembyId(idOs);
-        triagemXsintomaDAO.cadastrar(triagem,list);
-        inputSessao();
-    }
 
     private void inputSessao(){
         SessaoAgendamento.instance.setOs(ordemServico);
@@ -166,6 +181,16 @@ public class ConfirmarOSActivity extends AppCompatActivity {
             resetTask();
             return null;
         }
+
+        private void cadastrarOsAndTriagem(){
+            long idOs = ordemServicoServices.cadastraOS(ordemServico,triagem);
+            ordemServico.setId(idOs);
+            List<Sintomas> list = SessaoAgendamento.instance.getSintomas();
+            triagem = triagemDAO.getTriagembyId(idOs);
+            triagemXsintomaDAO.cadastrar(triagem, list);
+            inputSessao();
+        }
+
 
         private void resetTask() {
             registerTask =  null;

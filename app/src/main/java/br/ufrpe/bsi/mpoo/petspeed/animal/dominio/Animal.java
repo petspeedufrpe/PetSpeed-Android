@@ -70,7 +70,7 @@ public class Animal {
     }
 
     public byte[] getFoto(){
-        return this.foto = foto;
+        return foto;
     }
     public void setFoto(byte[] foto){
         this.foto = foto;

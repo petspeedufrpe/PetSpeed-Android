@@ -15,18 +15,11 @@ import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.infra.gui.OSAdapter;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
-import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
 import br.ufrpe.bsi.mpoo.petspeed.os.negocio.OrdemServicoServices;
-import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.TriagemDAO;
-import br.ufrpe.bsi.mpoo.petspeed.os.persistencia.TriagemXsintomaDAO;
 
 public class MedicoTabPrioridadeFragment extends Fragment {
     private OSAdapter osAdapter;
     private List<OrdemServico> os;
-    private List<OrdemServico> osBaixa;
-    private Triagem triagem;
-    private TriagemDAO triagemDAO = new TriagemDAO();
-    private TriagemXsintomaDAO triagemXsintomaDAO = new TriagemXsintomaDAO();
     private TextView view;
 
     @Override
@@ -45,7 +38,7 @@ public class MedicoTabPrioridadeFragment extends Fragment {
 
     public void setMedicosAdapter() {
         if (createAllOs()){
-            osAdapter = new OSAdapter(os);
+            osAdapter = new OSAdapter(getContext(),os);
         } else {
             view.setVisibility(View.VISIBLE);
         }
@@ -57,11 +50,8 @@ public class MedicoTabPrioridadeFragment extends Fragment {
         OrdemServicoServices ordemServicoServices= new OrdemServicoServices();
         try{
             os = ordemServicoServices.getOSbyPrioridade(Sessao.instance.getMedico().getId(),OrdemServico.Prioridade.ALTA);
-            osBaixa = ordemServicoServices.getOSbyPrioridade(Sessao.instance.getMedico().getId(),OrdemServico.Prioridade.BAIXA);
+            List<OrdemServico> osBaixa = ordemServicoServices.getOSbyPrioridade(Sessao.instance.getMedico().getId(), OrdemServico.Prioridade.BAIXA);
             os.addAll(osBaixa);
-            triagem = triagemDAO.getTriagembyId(os.get(0).getId());
-            //List<String> strings = triagemXsintomaDAO.getAllSintomasByIdTriagem(triagem.getId());
-            //Sintomas sintomas = Sintomas.valueOf(strings.get(0));
             result = true;
         }catch (Exception e){
             return false;
