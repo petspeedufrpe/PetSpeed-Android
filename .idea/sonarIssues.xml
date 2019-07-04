@@ -348,6 +348,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/negocio/RequestServiceBayesNet.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/br/ufrpe/bsi/mpoo/petspeed/infra/negocio/Sintomas.java">
           <value>
             <set />

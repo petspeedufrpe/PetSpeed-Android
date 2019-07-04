@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
@@ -42,20 +43,26 @@ public class ViewMedicosFragment extends DialogFragment {
 
         findViews(view);
         final List<OrdemServico> os = services.getAllOsByCliente(Sessao.instance.getCliente());
+        final List<OrdemServico> osPendente = new ArrayList<>();
         if (Sessao.instance.getValue(ContasDeUsuario.MEDICO.getDescricao()) != null) {
             mNome.setTextColor(Color.parseColor("#357A01"));
             showMedico();
             mActionAgendar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (os.iterator().next().getStatus() == OrdemServico.Status.AGUARDANDO_ATENDIMENTO || os.iterator().next().getStatus() == OrdemServico.Status.EM_ATENDIMENTO){
-                        Toast.makeText(getContext(),"Favor finalize o atendimento pendente",Toast.LENGTH_SHORT).show();
-                    } else{
-                        HomeClienteActivity hCliente = (HomeClienteActivity) getActivity();
-                        startActivity(new Intent(hCliente.getBaseContext(), SelecionarAnimalClienteActivity.class)
-                                .addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
-                        getDialog().dismiss();
+                    for (int i=0;i<os.size();i++) {
+                        if (os.get(i).getStatus() == OrdemServico.Status.EM_ATENDIMENTO || os.get(i).getStatus() == OrdemServico.Status.AGUARDANDO_ATENDIMENTO) {
+                            osPendente.add(os.get(i));
+                        }
                     }
+                        if(!osPendente.isEmpty()){
+                            Toast.makeText(getContext(),"Favor finalize o atendimento pendente",Toast.LENGTH_SHORT).show();
+                        } else{
+                            HomeClienteActivity hCliente = (HomeClienteActivity) getActivity();
+                            startActivity(new Intent(hCliente.getBaseContext(), SelecionarAnimalClienteActivity.class)
+                                    .addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
+                            getDialog().dismiss();
+                        }
 
                 }
             });
