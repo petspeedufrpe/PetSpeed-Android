@@ -10,17 +10,26 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class RequestServiceBayesNet {
 
 
-    RequestServiceBayesNet(Context context){
-        this.context = context;
-    }
+    private ArrayList<Sintomas> sintomas;
     private Context context;
 
-    public void getDisesaseProb(){
+    RequestServiceBayesNet(Context context, ArrayList<Sintomas> sintomasArrayList) {
+        this.context = context;
+        this.sintomas = sintomasArrayList;
+    }
+
+
+    public void getDisesaseProb() {
         AsyncTask asyncTask = new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] objects) {
@@ -31,7 +40,7 @@ public class RequestServiceBayesNet {
                 try {
                     response = client.newCall(request).execute();
                     return response.body().string();
-                }catch (IOException e){
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
 
@@ -40,18 +49,18 @@ public class RequestServiceBayesNet {
 
             @Override
             protected void onPostExecute(Object o) {
-                Toast.makeText(context,o.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, o.toString(), Toast.LENGTH_SHORT).show();
             }
         };
     }
 
-    public String setSymptoms(String json){
+    public String setSymptoms(String json) {
         String jsonResp = "";
         OkHttpClient client = new OkHttpClient();
         Request.Builder builder = new Request.Builder();
         builder.url("http://localhost:8080/rest-petspeed/rest/bayesnetwork/getprobdata");
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
-        RequestBody requestBody = RequestBody.create(mediaType,json);
+        RequestBody requestBody = RequestBody.create(mediaType, json);
         builder.post(requestBody);
 
         Request request = builder.build();
@@ -63,5 +72,21 @@ public class RequestServiceBayesNet {
         }
 
         return jsonResp;
+    }
+
+    private void toJSON() {
+        final String JSON_ARRAY_NAME = "symptomsList";
+        //logar();
+        JSONObject postData = new JSONObject();
+        try {
+            JSONObject object = new JSONObject();
+            JSONArray array = new JSONArray();
+            for (int i = 0; i < sintomas.size(); i++) {
+                array.put(sintomas.get(i));
+            }
+            object.put(JSON_ARRAY_NAME, array);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
