@@ -10,16 +10,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
 
 import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.ContasDeUsuario;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoAgendamento;
 import br.ufrpe.bsi.mpoo.petspeed.medico.dominio.Medico;
+import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
+import br.ufrpe.bsi.mpoo.petspeed.os.negocio.OrdemServicoServices;
 
 
 public class ViewMedicosFragment extends DialogFragment {
 
+    private OrdemServicoServices services = new OrdemServicoServices();
     private TextView mNome;
     private TextView mAvaliacao;
     private TextView mFone;
@@ -35,17 +41,22 @@ public class ViewMedicosFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_view_medicos, container, false);
 
         findViews(view);
-
+        final List<OrdemServico> os = services.getAllOsByCliente(Sessao.instance.getCliente());
         if (Sessao.instance.getValue(ContasDeUsuario.MEDICO.getDescricao()) != null) {
             mNome.setTextColor(Color.parseColor("#357A01"));
             showMedico();
             mActionAgendar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    HomeClienteActivity hCliente = (HomeClienteActivity) getActivity();
-                    startActivity(new Intent(hCliente.getBaseContext(), SelecionarAnimalClienteActivity.class)
-                            .addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
-                    getDialog().dismiss();
+                    if (os.iterator().next().getStatus() == OrdemServico.Status.AGUARDANDO_ATENDIMENTO || os.iterator().next().getStatus() == OrdemServico.Status.EM_ATENDIMENTO){
+                        Toast.makeText(getContext(),"Favor finalize o atendimento pendente",Toast.LENGTH_SHORT).show();
+                    } else{
+                        HomeClienteActivity hCliente = (HomeClienteActivity) getActivity();
+                        startActivity(new Intent(hCliente.getBaseContext(), SelecionarAnimalClienteActivity.class)
+                                .addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
+                        getDialog().dismiss();
+                    }
+
                 }
             });
 
