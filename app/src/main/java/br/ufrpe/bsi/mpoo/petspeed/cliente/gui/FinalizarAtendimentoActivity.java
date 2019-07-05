@@ -27,6 +27,7 @@ public class FinalizarAtendimentoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_finalizar_atendimento);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("Finalizar Atendimento");
         findViews();
         addListenerOnRatingBar();
         addListenerOnButton();
@@ -43,7 +44,7 @@ public class FinalizarAtendimentoActivity extends AppCompatActivity {
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                textViewAvaliacao.setText(String.valueOf(rating));
+                textViewAvaliacao.setText(String.valueOf(rating).replace(".",","));
             }
         });
     }

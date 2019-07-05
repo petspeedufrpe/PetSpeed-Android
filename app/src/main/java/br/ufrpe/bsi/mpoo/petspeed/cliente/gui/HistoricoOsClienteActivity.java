@@ -28,7 +28,7 @@ public class HistoricoOsClienteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_historico_os_cliente);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Historico de Atendimento");
+        setTitle("Historico de Atendimento");
         createAllOsCliente();
         initRecyclerView();
 

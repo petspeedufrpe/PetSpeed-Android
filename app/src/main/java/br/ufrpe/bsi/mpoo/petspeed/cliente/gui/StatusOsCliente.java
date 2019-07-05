@@ -116,7 +116,7 @@ public class StatusOsCliente extends AppCompatActivity {
     private void setTextsNome(){
         nome.setText("Nome: "+mNome);
         endereco.setText("Endereço: "+mRua+", "+mNumero+", "+mBairro);
-        avaliacao.setText("Avaliação: "+mAvaliacao);
+        avaliacao.setText("Avaliação: "+mAvaliacao.replace(".",","));
         nomeAnimal.setText("Nome: "+mNomeAnimal);
         raca.setText("Raça: "+mRaca);
         prioridade.setText("PRIORIDADE: "+mPrioridade);

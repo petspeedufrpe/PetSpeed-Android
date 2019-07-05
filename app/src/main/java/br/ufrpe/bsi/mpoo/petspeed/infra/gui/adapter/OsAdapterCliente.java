@@ -32,12 +32,13 @@ public class OsAdapterCliente extends RecyclerView.Adapter<OsAdapterCliente.OsAd
     @Override
     public void onBindViewHolder(@NonNull OsAdapterClienteViewHolder viewHolder, int i) {
         OrdemServico os = this.ordemServicos.get(i);
+        String avaFormatted = String.valueOf(os.getMedico().getAvaliacao()).replace(".",",");
         viewHolder.mNomeMedico.setText("Nome: "+os.getMedico().getDadosPessoais().getNome());
         viewHolder.mClienteEndereco.setText("Endereco: "+
                 os.getCliente().getDadosPessoais().getEndereco().getLogradouro() + " N° "
                 + os.getCliente().getDadosPessoais().getEndereco().getNumero() + ", "
                 + os.getCliente().getDadosPessoais().getEndereco().getBairro());
-        viewHolder.avaliacaoMedico.setText("Avaliação: "+os.getMedico().getAvaliacao());
+        viewHolder.avaliacaoMedico.setText("Avaliação: "+avaFormatted);
         viewHolder.mAnimNome.setText("Nome: "+os.getAnimal().getNome());
         viewHolder.mAnimRaca.setText("Raça: "+os.getAnimal().getRaca());
         viewHolder.mPrioridade.setText("Prioridade: "+os.getPrioridade().getDescricao());

@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,9 +21,12 @@ import br.ufrpe.bsi.mpoo.petspeed.R;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.HomeClienteActivity;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.StatusOsCliente;
 import br.ufrpe.bsi.mpoo.petspeed.cliente.gui.ViewSintomasAnimalAcitivity;
+import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.RequestServiceBayesNet;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sessao;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.SessaoAgendamento;
 import br.ufrpe.bsi.mpoo.petspeed.infra.negocio.Sintomas;
+import br.ufrpe.bsi.mpoo.petspeed.infra.persistencia.DiseasesService;
+import br.ufrpe.bsi.mpoo.petspeed.os.dominio.DiseaseProb;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.OrdemServico;
 import br.ufrpe.bsi.mpoo.petspeed.os.dominio.Triagem;
 import br.ufrpe.bsi.mpoo.petspeed.os.negocio.OrdemServicoServices;
@@ -50,8 +55,11 @@ public class ConfirmarOSActivity extends AppCompatActivity {
     private TriagemDAO triagemDAO = new TriagemDAO();
     private OrdemServicoServices ordemServicoServices = new OrdemServicoServices();
     private TriagemXsintomaDAO triagemXsintomaDAO = new TriagemXsintomaDAO();
+    private DiseasesService diseasesService = new DiseasesService();
     private RegisterTask registerTask = null;
     private boolean isTaskRunning;
+    private String res = "";
+    private ArrayList<DiseaseProb> diseases = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +83,7 @@ public class ConfirmarOSActivity extends AppCompatActivity {
                     return;
                 }
                 if (registerTask == null){
+                    Log.e("REQUEST",res);
                     isTaskRunning = true;
                     registerTask = new RegisterTask();
                     registerTask.execute((Void)null);
@@ -168,7 +177,10 @@ public class ConfirmarOSActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            cadastrarOsAndTriagem();
+            ArrayList<Sintomas> sintomasList = (ArrayList<Sintomas>) SessaoAgendamento.instance.getSintomas();
+            //RequestBayesNetwork(sintomasList);
+            long idOs = cadastrarOsAndTriagem();
+            //insertAllDiseasesOsId(diseases,idOs);
             startActivity(new Intent(ConfirmarOSActivity.this, StatusOsCliente.class));
             finish();
             SessaoAgendamento.instance.reset();
@@ -176,13 +188,26 @@ public class ConfirmarOSActivity extends AppCompatActivity {
             return null;
         }
 
-        private void cadastrarOsAndTriagem(){
+        private void RequestBayesNetwork(ArrayList<Sintomas> sintomasList) {
+            RequestServiceBayesNet bayesNet = new RequestServiceBayesNet(getBaseContext(),sintomasList);
+            String c = bayesNet.toArrayJson(sintomasList);
+            res = bayesNet.RequestService(c);
+            diseases = bayesNet.JsontoString(res);
+        }
+
+        private void insertAllDiseasesOsId(ArrayList<DiseaseProb> diseaseProbs,long idOs){
+            diseasesService.insertAllDiseases(diseaseProbs,idOs);
+        }
+
+        private long cadastrarOsAndTriagem(){
             long idOs = ordemServicoServices.cadastraOS(ordemServico,triagem);
             ordemServico.setId(idOs);
             List<Sintomas> list = SessaoAgendamento.instance.getSintomas();
             triagem = triagemDAO.getTriagembyId(idOs);
             triagemXsintomaDAO.cadastrar(triagem, list);
             inputSessao();
+
+            return idOs;
         }
 
         private void inputSessao(){

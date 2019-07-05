@@ -1,5 +1,6 @@
 package br.ufrpe.bsi.mpoo.petspeed.cliente.gui;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -59,6 +60,7 @@ public class ViewSintomasAnimalAcitivity extends AppCompatActivity {
          constraintLayout.setVisibility(View.INVISIBLE);
          recyclerViewSintomas.setHasFixedSize(false);
          recyclerViewSintomas.setMinimumHeight(400);
+         recyclerViewSintomas.setBackgroundColor(Color.WHITE);
         }
 
     }

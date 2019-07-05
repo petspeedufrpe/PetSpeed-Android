@@ -97,12 +97,21 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_FK_SINTOMAS = "FK_SINTOMA";
     public static final String COL_FK_TRIAGEM = "FK_TRIAGEM";
 
+    //TABELA DISEASE PROBS
+    public static final String TABELA_DISEASES = "TB_DOENÇAS";
+    public static final String COL_DISEASES_ID = "ID";
+    public static final String COL_NOME = "NOME";
+    public static final String COL_PROB = "PROB";
+    public static final String COL_DISEASE_FK_OS = "FK_OS";
+
+
+
     private static final String NOME_DB = "petspeed.db";
     private static final int VERSAO = 23;
     private static final String[] TABELAS = {
             TABELA_MEDICO, TABELA_ANIMAL, TABELA_CLIENTE, TABELA_CLINICA,
             TABELA_ENDERECO, TABELA_OS, TABELA_PESSOA, TABELA_TRIAGEM, TABELA_USUARIO,TABELA_SINTOMAS,
-            TABELA_SINTOMAS_X_TRIAGEM
+            TABELA_SINTOMAS_X_TRIAGEM,TABELA_DISEASES
     };
     private static final String SQL_CREATE_TABLE = "CREATE TABLE %1$s ";
     private static final String SQL_INTEGER_AUTOINCREMENT = "  %2$s INTEGER PRIMARY KEY AUTOINCREMENT, ";
@@ -125,6 +134,21 @@ public class DBHelper extends SQLiteOpenHelper {
         createTabelaUsuario(db);
         createTabelaSintomas(db);
         createTableSintomasXtriagem(db);
+        createTableDiseases(db);
+    }
+
+    private void createTableDiseases(SQLiteDatabase db) {
+
+        String sqlTbDisease =
+                SQL_CREATE_TABLE + "( " +
+                        SQL_INTEGER_AUTOINCREMENT +
+                        "  %3$s TEXT NOT NULL, " +
+                        "  %4$s REAL NOT NULL, "+
+                        "  %5$s TEXT NOT NULL "+
+                        ");";
+        sqlTbDisease = String.format(sqlTbDisease,
+                TABELA_DISEASES,COL_DISEASES_ID,COL_NOME,COL_PROB,COL_DISEASE_FK_OS);
+        db.execSQL(sqlTbDisease);
     }
 
 

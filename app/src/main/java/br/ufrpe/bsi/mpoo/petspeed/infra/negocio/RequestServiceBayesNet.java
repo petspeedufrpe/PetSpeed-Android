@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -17,17 +18,66 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import br.ufrpe.bsi.mpoo.petspeed.os.dominio.DiseaseProb;
+
 public class RequestServiceBayesNet {
 
 
     private ArrayList<Sintomas> sintomas;
     private Context context;
 
-    RequestServiceBayesNet(Context context, ArrayList<Sintomas> sintomasArrayList) {
+    public RequestServiceBayesNet(Context context, ArrayList<Sintomas> sintomasArrayList) {
         this.context = context;
         this.sintomas = sintomasArrayList;
     }
 
+    public String RequestService(String json) {
+        String jsonResp = "";
+        OkHttpClient client = new OkHttpClient();
+        Request.Builder builder = new Request.Builder();
+        builder.url("http://192.168.232.2/rest-petspeed/rest/bayesnetwork/getprobdata");
+        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+        RequestBody requestBody = RequestBody.create(mediaType, json);
+        builder.post(requestBody);
+
+        Request request = builder.build();
+        try {
+            Response response = client.newCall(request).execute();
+            jsonResp = response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return jsonResp;
+    }
+
+    public String toArrayJson(ArrayList<Sintomas> sintomasArrayList) {
+        final String JSON_ARRAY_NAME = "symptomsList";
+        JSONObject postData = new JSONObject();
+        try {
+            JSONObject object = new JSONObject();
+            JSONArray array = new JSONArray();
+            for (int i = 0; i < sintomas.size(); i++) {
+                array.put(sintomas.get(i));
+            }
+            object.put(JSON_ARRAY_NAME, array);
+            return array.toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<DiseaseProb> JsontoString(String json){
+        ArrayList<DiseaseProb> diseaseProbs = new ArrayList<>();
+        Gson gson = new Gson();
+        String[] teste = json.split(",");
+        for (int i=0;i<=json.length();i++){
+            diseaseProbs.add(gson.fromJson(json, DiseaseProb.class));
+        }
+
+        return diseaseProbs;
+    }
 
     public void getDisesaseProb() {
         AsyncTask asyncTask = new AsyncTask() {
@@ -54,39 +104,4 @@ public class RequestServiceBayesNet {
         };
     }
 
-    public String setSymptoms(String json) {
-        String jsonResp = "";
-        OkHttpClient client = new OkHttpClient();
-        Request.Builder builder = new Request.Builder();
-        builder.url("http://localhost:8080/rest-petspeed/rest/bayesnetwork/getprobdata");
-        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
-        RequestBody requestBody = RequestBody.create(mediaType, json);
-        builder.post(requestBody);
-
-        Request request = builder.build();
-        try {
-            Response response = client.newCall(request).execute();
-            jsonResp = response.body().string();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return jsonResp;
-    }
-
-    private void toJSON() {
-        final String JSON_ARRAY_NAME = "symptomsList";
-        //logar();
-        JSONObject postData = new JSONObject();
-        try {
-            JSONObject object = new JSONObject();
-            JSONArray array = new JSONArray();
-            for (int i = 0; i < sintomas.size(); i++) {
-                array.put(sintomas.get(i));
-            }
-            object.put(JSON_ARRAY_NAME, array);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
 }
