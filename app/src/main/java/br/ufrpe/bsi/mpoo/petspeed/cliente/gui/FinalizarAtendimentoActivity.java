@@ -44,7 +44,7 @@ public class FinalizarAtendimentoActivity extends AppCompatActivity {
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                textViewAvaliacao.setText(String.valueOf(rating).replace(".",","));
+                textViewAvaliacao.setText(String.valueOf(rating));
             }
         });
     }

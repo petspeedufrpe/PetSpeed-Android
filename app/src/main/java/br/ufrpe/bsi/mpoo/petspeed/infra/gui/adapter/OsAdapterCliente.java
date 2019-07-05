@@ -32,7 +32,7 @@ public class OsAdapterCliente extends RecyclerView.Adapter<OsAdapterCliente.OsAd
     @Override
     public void onBindViewHolder(@NonNull OsAdapterClienteViewHolder viewHolder, int i) {
         OrdemServico os = this.ordemServicos.get(i);
-        String avaFormatted = String.valueOf(os.getMedico().getAvaliacao()).replace(".",",");
+        String avaFormatted = String.valueOf(os.getMedico().getAvaliacao());
         viewHolder.mNomeMedico.setText("Nome: "+os.getMedico().getDadosPessoais().getNome());
         viewHolder.mClienteEndereco.setText("Endereco: "+
                 os.getCliente().getDadosPessoais().getEndereco().getLogradouro() + " N° "

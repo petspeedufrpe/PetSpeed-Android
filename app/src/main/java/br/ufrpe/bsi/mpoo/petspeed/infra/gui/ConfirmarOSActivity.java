@@ -178,7 +178,7 @@ public class ConfirmarOSActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             ArrayList<Sintomas> sintomasList = (ArrayList<Sintomas>) SessaoAgendamento.instance.getSintomas();
-            //RequestBayesNetwork(sintomasList);
+            RequestBayesNetwork(sintomasList);
             long idOs = cadastrarOsAndTriagem();
             //insertAllDiseasesOsId(diseases,idOs);
             startActivity(new Intent(ConfirmarOSActivity.this, StatusOsCliente.class));

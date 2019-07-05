@@ -35,7 +35,7 @@ public class RequestServiceBayesNet {
         String jsonResp = "";
         OkHttpClient client = new OkHttpClient();
         Request.Builder builder = new Request.Builder();
-        builder.url("http://192.168.232.2/rest-petspeed/rest/bayesnetwork/getprobdata");
+        builder.url("http://10.0.2.2:80/rest-petspeed/rest/bayesnetwork/getprobdata");
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, json);
         builder.post(requestBody);
