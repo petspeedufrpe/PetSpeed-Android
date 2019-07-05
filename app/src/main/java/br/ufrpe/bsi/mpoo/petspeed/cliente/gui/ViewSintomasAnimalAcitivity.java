@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import java.util.List;
 
@@ -57,10 +56,9 @@ public class ViewSintomasAnimalAcitivity extends AppCompatActivity {
 
     private void changeViewByTypeOfAccount(){
         if (Sessao.instance.getCliente() != null){
-         constraintLayout.setVisibility(View.INVISIBLE);
+         constraintLayout.setBackgroundColor(Color.WHITE);
          recyclerViewSintomas.setHasFixedSize(false);
          recyclerViewSintomas.setMinimumHeight(400);
-         recyclerViewSintomas.setBackgroundColor(Color.WHITE);
         }
 
     }
